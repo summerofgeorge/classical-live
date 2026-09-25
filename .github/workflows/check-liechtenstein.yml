@@ -9,21 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Read public official source pages
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Check each public academy stream page
         shell: bash
         run: |
           node --input-type=module <<'NODE'
-          const urls = [
-            'https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',
-            'https://kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',
-            'https://www.kulmag.live/de/Konzerte/221/streichquintette-von-beethoven-und-mozart',
-            'https://www.musikakademie.li/de/veranstaltungen'
-          ];
-          for (const url of urls) {
-            try {
-              const r = await fetch(url, {signal: AbortSignal.timeout(20000), headers: {'User-Agent':'ClassicalLive/1.0 (+https://github.com/summerofgeorge/classical-live)', 'Accept':'text/html'}});
-              const body = await r.text();
-              console.log(JSON.stringify({url, status:r.status, finalUrl:r.url, length:body.length, errorPreview:r.ok?undefined:body.slice(0,800)}));
-            } catch (e) {console.log(JSON.stringify({url,error:e.message}));}
-          }
+          import {sources,collect,makeFetcher} from './scripts/ingest.mjs';
+          const get = makeFetcher();
+          const logged = async(url,json) => {
+            console.log('Checking',url);
+            try {const result = await get(url,json); console.log('OK',url); return result;}
+            catch(e) {console.log('FAILED',url,e.message); throw e;}
+          };
+          const result=await collect({},new Date(),sources.filter(s=>s.id==='liechtenstein'),logged);
+          console.log(JSON.stringify({count:result.events.length,sources:result.sources}));
           NODE

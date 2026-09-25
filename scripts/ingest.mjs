@@ -41,13 +41,17 @@ export function normalize(raw,source,now){
  return event;
 }
 const allowedHosts=new Set(['www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu','www.hfm-weimar.de','hfm-weimar.de','www.kulmag.live','kulmag.live']);
-export function makeFetcher(){let requests=0;return async function get(url,json=false){
+export function makeFetcher(){let requests=0,lastKulmagRequest=0;return async function get(url,json=false){
  if(++requests>280)throw new Error('Request budget exceeded');
  if(!safeUrl(url)||!allowedHosts.has(new URL(url).hostname))throw new Error('Source URL is outside the allowlist');
  for(let attempt=0;attempt<2;attempt++){
   try{let current=url,r;
    for(let redirects=0;redirects<4;redirects++){
     if(!safeUrl(current)||!allowedHosts.has(new URL(current).hostname))throw new Error('Redirect outside source allowlist');
+    // Pace this small provider's pages; rapid hosted requests can receive transient denials.
+    if(['kulmag.live','www.kulmag.live'].includes(new URL(current).hostname)){
+     const delay=1000-(Date.now()-lastKulmagRequest);if(delay>0)await new Promise(resolve=>setTimeout(resolve,delay));lastKulmagRequest=Date.now();
+    }
     r=await fetch(current,{signal:AbortSignal.timeout(20000),redirect:'manual',headers:{'User-Agent':'ClassicalLive/1.0 (+https://github.com/summerofgeorge/classical-live)','Accept':json?'application/json':'text/html'}});
     if(r.status>=300&&r.status<400&&r.headers.get('location')){current=new URL(r.headers.get('location'),current).href;continue;}
     break;

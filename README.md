@@ -69,6 +69,7 @@ References: [GitHub Pages availability](https://docs.github.com/en/pages/getting
 - Eastman's visible list omits years: the adapter resolves the nearby year using both the month/day and printed weekday and rejects an unresolved date.
 - Rice labels local wall times as UTC in its HTML datetime attributes; the adapter uses the printed date and Central clock. SFCM calendar metadata supplies verified start and end times. Its month views are scanned across the entire look-ahead window, including year changes.
 - European dates use Europe/Vaduz and Europe/Berlin; conversion tests cover the weeks when US and European daylight-saving transitions differ. Source titles are retained in their published language. Kulmag's general purchase dialog is also present as hidden markup on free pages; admission relies on the event's explicit Gratis label in the academy's upcoming-stream section, not generic site-wide text.
+- Kulmag returned HTTP 403 during the first hosted refresh, then answered successfully in a separate GitHub runner check. Requests to that provider are spaced at least one second apart; access failures still use the same visible stale-listing and expiry rules as other sources.
 - The interface inserts text safely and never renders source HTML.
 
 The `.ics` download is a snapshot, not a calendar subscription. Re-importing it is not a reliable way to remove canceled events. Stable event UIDs reduce duplicate imports, but each calendar app controls import behavior. The calendar does not probe video playback; “Scheduled now” refers to the published schedule.

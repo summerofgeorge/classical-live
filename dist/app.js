@@ -54,8 +54,8 @@ async function load(){
       li.append(link(source.name,source.url),el('span',` — ${label}${source.last_success?'; last successful check '+format(source.last_success,{month:'short',day:'numeric'}):''}.`));$('source-status').append(li);
     }
     for(const type of [...new Set(data.events.map(e=>e.type))].sort()){const option=el('option',type);option.value=type;$('type').append(option);}
-    const old=Date.now()-Date.parse(data.generated_at)>8*86400000, failed=data.sources.some(s=>!['ok','manual'].includes(s.status));
-    if(old||failed){$('notice').hidden=false;$('notice').textContent=old?'This calendar has not been refreshed in over a week. Check each school’s event page before making plans.':'Some sources could not be refreshed. Previously verified listings are marked; check the source before watching.';}
+    const old=Date.now()-Date.parse(data.generated_at)>2*86400000, failed=data.sources.some(s=>!['ok','manual'].includes(s.status));
+    if(old||failed){$('notice').hidden=false;$('notice').textContent=old?'This calendar has not been refreshed in over two days. Check each school’s event page before making plans.':'Some sources could not be refreshed. Previously verified listings are marked; check the source before watching.';}
     $('events').setAttribute('aria-busy','false');render();setInterval(render,60000);
   }catch(error){$('events').setAttribute('aria-busy','false');$('events').replaceChildren(el('p','The calendar could not be loaded. Please reload the page, or use the school links below.','empty'));$('updated').textContent='Calendar unavailable';$('source-status').append(el('li','Sources: Curtis Institute of Music and Cleveland Institute of Music.'));}
 }

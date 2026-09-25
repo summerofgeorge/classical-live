@@ -12,7 +12,10 @@ export const sources=[
  {id:'northwestern',name:'Northwestern Bienen School of Music',url:'https://www.music.northwestern.edu/live',timezone:'America/Chicago'},
  {id:'rice',name:'Rice Shepherd School of Music',url:'https://music.rice.edu/events',timezone:'America/Chicago'},
  {id:'sfcm',name:'San Francisco Conservatory of Music',url:'https://www.sfcm.edu/experience/performance-calendar',timezone:'America/Los_Angeles'},
- {id:'weimar',name:'Franz Liszt University of Music Weimar',url:'https://www.hfm-weimar.de/en/visiting/events/calendar',timezone:'Europe/Berlin'}
+ {id:'weimar',name:'Franz Liszt University of Music Weimar',url:'https://www.hfm-weimar.de/en/visiting/events/calendar',timezone:'Europe/Berlin'},
+ {id:'lawrence',name:'Lawrence University Conservatory of Music',url:'https://www.lawrence.edu/academics/ensembles-performances/performances/webcasts/',timezone:'America/Chicago'},
+ {id:'boston',name:'Boston Conservatory at Berklee',url:'https://bostonconservatory.berklee.edu/events',timezone:'America/New_York'},
+ {id:'oberlin',name:'Oberlin Conservatory of Music',url:'https://www.oberlin.edu/conservatory/on-stage/live-webcasts',timezone:'America/New_York'}
 ];
 // Prototype only: Kulmag access varies between GitHub runners. Excluded from scheduled collection.
 export const candidateSources=[{id:'liechtenstein',name:'Music Academy in Liechtenstein',url:'https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',timezone:'Europe/Vaduz'}];
@@ -41,17 +44,18 @@ export function normalize(raw,source,now){
  if(event.end && (!Number.isFinite(Date.parse(event.end))||new Date(event.end)<=new Date(event.start)))throw new Error('Invalid end time');
  return event;
 }
-const allowedHosts=new Set(['www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu','www.hfm-weimar.de','hfm-weimar.de','www.kulmag.live','kulmag.live']);
-export function makeFetcher(){let requests=0,lastKulmagRequest=0;return async function get(url,json=false){
- if(++requests>280)throw new Error('Request budget exceeded');
+const allowedHosts=new Set(['www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu','www.hfm-weimar.de','hfm-weimar.de','www.kulmag.live','kulmag.live','www.lawrence.edu','bostonconservatory.berklee.edu','calendar.oberlin.edu','www.oberlin.edu']);
+export function makeFetcher(){let requests=0;const lastRequest=new Map();return async function get(url,json=false){
+ if(++requests>360)throw new Error('Request budget exceeded');
  if(!safeUrl(url)||!allowedHosts.has(new URL(url).hostname))throw new Error('Source URL is outside the allowlist');
  for(let attempt=0;attempt<2;attempt++){
   try{let current=url,r;
    for(let redirects=0;redirects<4;redirects++){
     if(!safeUrl(current)||!allowedHosts.has(new URL(current).hostname))throw new Error('Redirect outside source allowlist');
-    // Keep requests to this small provider at most once per second.
-    if(['kulmag.live','www.kulmag.live'].includes(new URL(current).hostname)){
-     const delay=1000-(Date.now()-lastKulmagRequest);if(delay>0)await new Promise(resolve=>setTimeout(resolve,delay));lastKulmagRequest=Date.now();
+    // Pace providers with rate-sensitive calendars; never retry access-denied or rate-limit responses.
+    const host=new URL(current).hostname;
+    if(['kulmag.live','www.kulmag.live','calendar.oberlin.edu','bostonconservatory.berklee.edu'].includes(host)){
+     const delay=1000-(Date.now()-(lastRequest.get(host)||0));if(delay>0)await new Promise(resolve=>setTimeout(resolve,delay));lastRequest.set(host,Date.now());
     }
     r=await fetch(current,{signal:AbortSignal.timeout(20000),redirect:'manual',headers:{'User-Agent':'ClassicalLive/1.0 (+https://github.com/summerofgeorge/classical-live)','Accept':json?'application/json':'text/html'}});
     if(r.status>=300&&r.status<400&&r.headers.get('location')){current=new URL(r.headers.get('location'),current).href;continue;}
@@ -236,6 +240,116 @@ async function sfcm(get,now){
  }
  return events;
 }
+const occurrenceId=(source,url,start,title='')=>`${source}-${createHash('sha256').update([url,start,title].join('|')).digest('hex').slice(0,16)}`;
+const lawrenceIndex='https://www.lawrence.edu/academics/ensembles-performances/performances/webcasts/';
+export function parseLawrence(html){
+ const $=load(html),headings=$('h2').filter((i,h)=>/Term\s+20\d\d\s+Events/i.test($(h).text())),events=[];
+ if(!headings.length)throw new Error('Lawrence term schedule missing');
+ const watch=$('a[href]').filter((i,a)=>/Watch a live webcast/i.test($(a).text())).first();
+ const stream=streamLink(watch.attr('href'),lawrenceIndex);
+ if(!stream||!['vimeo.com','www.vimeo.com'].includes(new URL(stream).hostname))throw new Error('Lawrence webcast link missing');
+ for(const heading of headings.toArray()){
+  const year=clean($(heading).text()).match(/\b(20\d\d)\b/)[1];
+  for(const p of $(heading).nextUntil('h2','p').toArray()){
+   const item=$(p).clone();item.find('s,del').remove();
+   for(const chunk of (item.html()||'').split(/(?:<br\s*\/?>\s*){2,}/i)){
+    const block=load(chunk),date=clean(block('strong').first().text());if(!date)continue;
+    // Parse each double-break-delimited entry independently so one cancellation cannot erase the term.
+    const titleBlock=load(chunk);titleBlock('strong').first().remove();const name=clean(titleBlock('body').html());
+    if(cancelled(name+' '+date)||!name)continue;
+    if(!/\bC[DS]T\b/.test(date))throw new Error('Lawrence time zone missing');
+    const localDate=namedDate(date,year),weekday=new Intl.DateTimeFormat('en-US',{weekday:'long',timeZone:'UTC'}).format(new Date(localDate+'T12:00:00Z'));
+    if(!date.startsWith(weekday))throw new Error('Lawrence weekday disagrees with term year');
+    const start=zonedTime(localDate+'T'+clock24(date),'America/Chicago');
+    events.push({id:occurrenceId('lawrence',lawrenceIndex,start,name),title:name,start,end:null,program:'',event_url:lawrenceIndex,stream_url:stream,watch_kind:'channel',evidence_url:lawrenceIndex,evidence:'Listed in the official term webcast schedule; canceled and struck-through entries excluded.'});
+   }
+  }
+ }
+ return events;
+}
+function schemaEvents($){
+ return $('script[type="application/ld+json"]').toArray().flatMap(s=>{
+  const data=JSON.parse($(s).text());return (Array.isArray(data)?data:data['@graph']||[data]).filter(e=>[e['@type']].flat().includes('Event'));
+ });
+}
+function easternStart(value){
+ if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/.test(value||''))throw new Error('Eastern event start is missing an explicit offset');
+ const start=zonedTime(value.slice(0,19),'America/New_York');
+ if(Date.parse(start)!==Date.parse(value))throw new Error('Event offset disagrees with New York time');
+ return start;
+}
+const bostonIndex='https://bostonconservatory.berklee.edu/events';
+export function parseBoston(html,url){
+ const $=load(html),area=$('article.node--type-event'),title=clean(area.find('h1').text());
+ if(!area.length||!title)throw new Error('Boston event layout changed');
+ if(cancelled(title+' '+area.find('.field--name-field-event-instance-status').text()))return null;
+ if(!area.find('.field--name-field-event-types .field__item').toArray().some(e=>clean($(e).text())==='Music'))return null;
+ const stream=streamLink(area.find('[id*="-field-event-live-stream-link-"] a').first().attr('href'),url);
+ if(!stream||new URL(stream).hostname!=='bostonconservatory.berklee.edu')return null;
+ const records=schemaEvents($),times=area.find('.field--name-field-event-instance-date time');
+ // Multi-performance pages can stream only one date. Omit them until date-specific evidence is available.
+ if(records.length!==1||times.length!==1)return null;
+ const record=records[0];if(/Cancelled|Canceled|Postponed/i.test(record.eventStatus||''))return null;
+ if(record.isAccessibleForFree!==true)return null;
+ const virtual=[record.location].flat().find(l=>l?.['@type']==='VirtualLocation');
+ if(!virtual||streamLink(virtual.url,url)!==stream)return null;
+ const start=easternStart(record.startDate);
+ if(start!==easternStart(times.attr('datetime')))throw new Error('Boston displayed date disagrees with event metadata');
+ const body=clean(area.find('.field--name-body').text());
+ if(/(?:not|no longer)\s+(?:be\s+)?(?:livestreamed|streamed)|no\s+livestream/i.test(body))return null;
+ return {id:occurrenceId('boston',url,start),title,start,end:null,program:record.description||'',event_url:url,stream_url:stream,watch_kind:'venue',evidence_url:url,evidence:'Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.'};
+}
+async function boston(get,now){
+ let next=bostonIndex;const pages=new Set(),seen=new Set(),events=[];
+ while(next){
+  if(pages.size>=15||pages.has(next))throw new Error('Boston pagination exceeded safety limit');pages.add(next);
+  const $=load(await get(next)),area=$('.view-events.view-display-id-page'),cards=area.find('.views-row .event.teaser');
+  if(!area.length||(!cards.length&&!area.find('.view-empty').length))throw new Error('Boston calendar layout changed');
+  let allBeyond=cards.length>0;
+  for(const card of cards.toArray()){
+   const item=$(card),times=item.find('.field--name-field-event-instance-date time').toArray().map(t=>Date.parse(easternStart($(t).attr('datetime'))));
+   if(!times.length)throw new Error('Boston calendar date missing');
+   if(times.some(t=>t<+now+45*DAY))allBeyond=false;
+   if(!times.some(t=>t>=+now-DAY&&t<+now+45*DAY)||cancelled(item.find('.title,.field--name-field-event-instance-status').text()))continue;
+   const url=streamLink(item.find('.title a').attr('href'),bostonIndex);
+   if(!url||new URL(url).hostname!=='bostonconservatory.berklee.edu')throw new Error('Boston event URL changed');
+   if(seen.has(url))continue;seen.add(url);if(seen.size>80)throw new Error('Boston event budget exceeded');
+   const event=parseBoston(await get(url),url);if(event)events.push(event);
+  }
+  const href=area.find('a[rel="next"]').attr('href');next=href&&!allBeyond?new URL(href,next).href:null;
+ }
+ return events;
+}
+const oberlinIndex='https://calendar.oberlin.edu/search/events?event_types%5B%5D=19263%2C17936&search=webcast';
+export function parseOberlin(html,url){
+ const $=load(html),area=$('.em-about_description'),records=schemaEvents($).filter(e=>e.url===url);
+ if(!area.length||records.length!==1)throw new Error('Oberlin event layout changed');
+ const record=records[0];if(cancelled(record.name+' '+(record.eventStatus||''))||/EventCancelled|EventPostponed/i.test(record.eventStatus||''))return null;
+ const link=area.find('a[href]').filter((i,a)=>/^Watch the webcast$/i.test(clean($(a).text()))).first();
+ if(!link.length||/\bnot\b|\bno longer\b/i.test(link.closest('p').text()))return null;
+ const stream=streamLink(link.attr('href'),url);
+ if(!stream||new URL(stream).hostname!=='www.oberlin.edu'||!new URL(stream).pathname.startsWith('/livestream/'))return null;
+ const start=easternStart(record.startDate);
+ return {id:occurrenceId('oberlin',url,start),title:record.name,start,end:null,program:(record.description||'').split(/Program:\s*/i)[1]?.split(/-----|View the .* program/)[0]||'',event_url:url,stream_url:stream,watch_kind:'venue',evidence_url:url,evidence:'Official event provides an affirmative Watch the webcast link to an Oberlin venue player. Date-only end metadata is not treated as an end time.'};
+}
+async function oberlin(get,now){
+ let next=oberlinIndex;const pages=new Set(),seen=new Set(),events=[];
+ while(next){
+  if(pages.size>=15||pages.has(next))throw new Error('Oberlin pagination exceeded safety limit');pages.add(next);
+  const $=load(await get(next)),records=schemaEvents($);
+  if(!$('.em-search-pagination').length&&!/no (events|results)/i.test($('main').text()))throw new Error('Oberlin search layout changed');
+  for(const record of records){
+   const start=Date.parse(easternStart(record.startDate));if(start<+now-DAY||start>=+now+45*DAY)continue;
+   const url=streamLink(record.url,next);if(!url||new URL(url).hostname!=='calendar.oberlin.edu'||!new URL(url).pathname.startsWith('/event/'))throw new Error('Oberlin event URL changed');
+   if(seen.has(url))continue;seen.add(url);if(seen.size>80)throw new Error('Oberlin event budget exceeded');
+   const event=parseOberlin(await get(url),url);if(event)events.push(event);
+  }
+  // Search is relevance-ordered: do not stop at an old event or one beyond the horizon.
+  const href=$('.em-search-pagination a').filter((i,a)=>$(a).find('.em-pagination-right-arrow').length||/next page/i.test($(a).text()+' '+($(a).attr('aria-label')||''))).first().attr('href');
+  next=href?new URL(href,next).href:null;
+ }
+ return events;
+}
 const cancelledEuropean=text=>cancelled(text)||/\babgesagt\b|\bentfällt\b|\bverschoben\b/i.test(text);
 function europeanDate(text){
  const m=text.match(/\b(\d{1,2})\.(\d{1,2})\.(\d{4})\b/);
@@ -320,7 +434,7 @@ async function weimar(get,now){
  }
  return events;
 }
-export const adapters={curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar};
+export const adapters={curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar,lawrence:async get=>parseLawrence(await get(lawrenceIndex)),boston,oberlin};
 export async function collect(previous={events:[],sources:[]},now=new Date(),registry=sources,get=makeFetcher(),handlers=adapters){
  const events=[],statuses=[];
  for(const source of registry){

@@ -12,9 +12,10 @@ export const sources=[
  {id:'northwestern',name:'Northwestern Bienen School of Music',url:'https://www.music.northwestern.edu/live',timezone:'America/Chicago'},
  {id:'rice',name:'Rice Shepherd School of Music',url:'https://music.rice.edu/events',timezone:'America/Chicago'},
  {id:'sfcm',name:'San Francisco Conservatory of Music',url:'https://www.sfcm.edu/experience/performance-calendar',timezone:'America/Los_Angeles'},
- {id:'liechtenstein',name:'Music Academy in Liechtenstein',url:'https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',timezone:'Europe/Vaduz'},
  {id:'weimar',name:'Franz Liszt University of Music Weimar',url:'https://www.hfm-weimar.de/en/visiting/events/calendar',timezone:'Europe/Berlin'}
 ];
+// Prototype only: Kulmag access varies between GitHub runners. Excluded from scheduled collection.
+export const candidateSources=[{id:'liechtenstein',name:'Music Academy in Liechtenstein',url:'https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',timezone:'Europe/Vaduz'}];
 export function zonedTime(local,zone){
  const m=local?.trim().match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?$/);
  if(!m)throw new Error(`Missing or ambiguous date: ${local}`);
@@ -48,7 +49,7 @@ export function makeFetcher(){let requests=0,lastKulmagRequest=0;return async fu
   try{let current=url,r;
    for(let redirects=0;redirects<4;redirects++){
     if(!safeUrl(current)||!allowedHosts.has(new URL(current).hostname))throw new Error('Redirect outside source allowlist');
-    // Pace this small provider's pages; rapid hosted requests can receive transient denials.
+    // Keep requests to this small provider at most once per second.
     if(['kulmag.live','www.kulmag.live'].includes(new URL(current).hostname)){
      const delay=1000-(Date.now()-lastKulmagRequest);if(delay>0)await new Promise(resolve=>setTimeout(resolve,delay));lastKulmagRequest=Date.now();
     }

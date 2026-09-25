@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {liechtensteinCandidates,parseLiechtenstein,parseWeimar,adapters,sources,normalize,collect,zonedTime} from '../scripts/ingest.mjs';
+import {liechtensteinCandidates,parseLiechtenstein,parseWeimar,adapters,sources,candidateSources,normalize,collect,zonedTime} from '../scripts/ingest.mjs';
 import {calendar,matches} from '../dist/core.js';
 const fixture=name=>readFile(new URL(`./fixtures/${name}.html`,import.meta.url),'utf8');
 const [list,detail,weimar]=await Promise.all(['liechtenstein-list','liechtenstein-event','weimar-event'].map(fixture));
@@ -42,7 +42,7 @@ test('Europe and Eastern dates convert correctly through the different autumn cl
  assert.throws(()=>zonedTime('2026-10-25T02:30','Europe/Berlin'));
  assert.throws(()=>zonedTime('2026-03-29T02:30','Europe/Vaduz'));
  for(const [id,raw,stamp] of [['weimar',parseWeimar(weimar,weimarUrl),'20261105T170000Z'],['liechtenstein',parseLiechtenstein(detail,liechtensteinCandidates(list)[0]),'20261006T170000Z']]){
-  const event=normalize(raw,sources.find(s=>s.id===id),now);
+  const event=normalize(raw,[...sources,...candidateSources].find(s=>s.id===id),now);
   assert.ok(matches(event,{source:id,timeZone:'America/New_York'},now));
   assert.ok(calendar([event],now).includes('DTSTART:'+stamp));
  }
@@ -67,7 +67,7 @@ test('Weimar follows official month links, deduplicates cards, and ignores conce
 });
 
 test('a changed European source retains only previously verified, flagged listings',async()=>{
- const source=sources.find(s=>s.id==='liechtenstein'),event=normalize(parseLiechtenstein(detail,liechtensteinCandidates(list)[0]),source,now);
+ const source=candidateSources.find(s=>s.id==='liechtenstein'),event=normalize(parseLiechtenstein(detail,liechtensteinCandidates(list)[0]),source,now);
  const result=await collect({events:[event],sources:[]},new Date('2026-09-26T12:00:00Z'),[source],async()=>'<html>Changed site</html>');
  assert.equal(result.sources[0].status,'error');assert.equal(result.events.length,1);assert.equal(result.events[0].stale,true);
 });

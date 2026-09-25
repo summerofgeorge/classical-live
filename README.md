@@ -26,10 +26,14 @@ No visitor accounts, database server, API keys, analytics, paid services, or fro
 | [Northwestern Bienen](https://www.music.northwestern.edu/live) | Dedicated livestream schedule | Explicit Watch Live link; uses the printed Central Time with seasonal daylight-saving offsets. |
 | [Rice Shepherd](https://music.rice.edu/events) | Paginated calendar plus event details | Both a Livestream Available label and an event-specific View Livestream link. Grouped festival/season landing pages are skipped. |
 | [San Francisco Conservatory](https://www.sfcm.edu/experience/performance-calendar) | Monthly calendar plus event details | Public video Livestream link; displayed Pacific time must agree with event calendar metadata. Partner ticket-sales pages are excluded. |
+| [Music Academy in Liechtenstein](https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein) | Dedicated upcoming-stream section on Kulmag, linked by [the academy](https://www.musikakademie.li/), plus event details | Only the academy's Live-Streams cards marked Gratis (free); date, title, and academy partner checked on the event page. The replay archive and other Kulmag partners are excluded. |
+| [Franz Liszt University of Music Weimar](https://www.hfm-weimar.de/en/visiting/events/calendar) | Official monthly calendar navigation plus individual event pages | Explicit affirmative livestream announcement with a public viewing link. Ordinary in-person concerts and unstreamed competition rounds are excluded. The homepage player destination is explained beside the Watch button. |
 
 Oberlin was evaluated on September 25, 2026. Its public information page was readable, but its separate calendar API and embedded widget both returned HTTP 403 from the build environment. It is not counted as an automated source. Juilliard also blocked direct retrieval. Neither is silently filled with guessed or search-cached events. Their adapters can be added when a dependable public source is available.
 
 The look-ahead window is 45 days, limited by what each school has actually published. Some sources show only the next few performances. This is selective coverage, not every concert at every school. A weekly refresh can miss late additions or cancellations; always check the linked official event page.
+
+European source review on September 25, 2026: RCM's general live page mentioned autumn broadcasts, but the inspected current event details did not identify upcoming streams. Sibelius Academy's Finnish concert calendar was accessible, but the inspected concerts in the look-ahead window did not publish explicit broadcast links; its WordPress API exposes publication dates, not concert dates. Vienna's mdwStream filter returned an empty schedule. These three remain candidates rather than active collectors. Weimar and Liechtenstein supplied verifiable future broadcasts and were added first.
 
 ## Run locally
 
@@ -64,6 +68,7 @@ References: [GitHub Pages availability](https://docs.github.com/en/pages/getting
 - Wall-clock source dates are converted using IANA time zones. Invalid and ambiguous daylight-saving times are rejected. CIM's dedicated calendar metadata is used instead of unrelated sidebar dates. MSM prints “EST” year-round; its New York wall-clock time is interpreted with the correct seasonal offset.
 - Eastman's visible list omits years: the adapter resolves the nearby year using both the month/day and printed weekday and rejects an unresolved date.
 - Rice labels local wall times as UTC in its HTML datetime attributes; the adapter uses the printed date and Central clock. SFCM calendar metadata supplies verified start and end times. Its month views are scanned across the entire look-ahead window, including year changes.
+- European dates use Europe/Vaduz and Europe/Berlin; conversion tests cover the weeks when US and European daylight-saving transitions differ. Source titles are retained in their published language. Kulmag's general purchase dialog is also present as hidden markup on free pages; admission relies on the event's explicit Gratis label in the academy's upcoming-stream section, not generic site-wide text.
 - The interface inserts text safely and never renders source HTML.
 
 The `.ics` download is a snapshot, not a calendar subscription. Re-importing it is not a reliable way to remove canceled events. Stable event UIDs reduce duplicate imports, but each calendar app controls import behavior. The calendar does not probe video playback; “Scheduled now” refers to the published schedule.
@@ -76,4 +81,4 @@ The `.ics` download is a snapshot, not a calendar subscription. Re-importing it 
 4. Require affirmative livestream evidence. Do not infer streaming just because admission to the in-person concert is free. Throw on a structural source change; return an empty array only for a genuinely empty schedule.
 5. Add parser fixtures and tests for dates, canceled records, and missing stream links. Run a real refresh, inspect the resulting listings, and then publish.
 
-The test suite covers time zones, DST ambiguity, date filters, `.ics` escaping and UTF-8 folding, parser rules for all eight schools, pagination, and failed-source retention.
+The test suite covers time zones, DST ambiguity, date filters, `.ics` escaping and UTF-8 folding, parser rules for all ten schools, pagination, and failed-source retention. European parser fixtures preserve small relevant excerpts of the official HTML observed on September 25, 2026.

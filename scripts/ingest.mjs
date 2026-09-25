@@ -11,7 +11,9 @@ export const sources=[
  {id:'msm',name:'Manhattan School of Music',url:'https://www.msmnyc.edu/livestream/',timezone:'America/New_York'},
  {id:'northwestern',name:'Northwestern Bienen School of Music',url:'https://www.music.northwestern.edu/live',timezone:'America/Chicago'},
  {id:'rice',name:'Rice Shepherd School of Music',url:'https://music.rice.edu/events',timezone:'America/Chicago'},
- {id:'sfcm',name:'San Francisco Conservatory of Music',url:'https://www.sfcm.edu/experience/performance-calendar',timezone:'America/Los_Angeles'}
+ {id:'sfcm',name:'San Francisco Conservatory of Music',url:'https://www.sfcm.edu/experience/performance-calendar',timezone:'America/Los_Angeles'},
+ {id:'liechtenstein',name:'Music Academy in Liechtenstein',url:'https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',timezone:'Europe/Vaduz'},
+ {id:'weimar',name:'Franz Liszt University of Music Weimar',url:'https://www.hfm-weimar.de/en/visiting/events/calendar',timezone:'Europe/Berlin'}
 ];
 export function zonedTime(local,zone){
  const m=local?.trim().match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?$/);
@@ -38,9 +40,9 @@ export function normalize(raw,source,now){
  if(event.end && (!Number.isFinite(Date.parse(event.end))||new Date(event.end)<=new Date(event.start)))throw new Error('Invalid end time');
  return event;
 }
-const allowedHosts=new Set(['www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu']);
+const allowedHosts=new Set(['www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu','www.hfm-weimar.de','hfm-weimar.de','www.kulmag.live','kulmag.live']);
 export function makeFetcher(){let requests=0;return async function get(url,json=false){
- if(++requests>180)throw new Error('Request budget exceeded');
+ if(++requests>280)throw new Error('Request budget exceeded');
  if(!safeUrl(url)||!allowedHosts.has(new URL(url).hostname))throw new Error('Source URL is outside the allowlist');
  for(let attempt=0;attempt<2;attempt++){
   try{let current=url,r;
@@ -229,7 +231,91 @@ async function sfcm(get,now){
  }
  return events;
 }
-export const adapters={curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm};
+const cancelledEuropean=text=>cancelled(text)||/\babgesagt\b|\bentfällt\b|\bverschoben\b/i.test(text);
+function europeanDate(text){
+ const m=text.match(/\b(\d{1,2})\.(\d{1,2})\.(\d{4})\b/);
+ if(!m)throw new Error('European event date missing');
+ return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;
+}
+function europeanClock(text){const m=text.match(/\b([01]?\d|2[0-3]):([0-5]\d)\b/);if(!m)throw new Error('European event time missing');return `${m[1].padStart(2,'0')}:${m[2]}:00`;}
+const liechtensteinIndex='https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein';
+export function liechtensteinCandidates(html){
+ const $=load(html),area=$('#body_konzerte_divKonzerte');
+ if(!area.length||clean(area.find('#body_konzerte_hTitle').text())!=='Live-Streams')throw new Error('Liechtenstein livestream section missing');
+ const cards=area.find('a[id*="_repKonzerte_aLink_"]');
+ const germanMonths=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+ return cards.toArray().flatMap(card=>{
+  const item=$(card),title=clean(item.find('.titel').text());
+  if(cancelledEuropean(title)||clean(item.find('[id*="_spanFree_"]').text())!=='Gratis')return [];
+  const date=clean(item.find('.datum').text()),m=date.match(/^(\d{1,2})\.\s*([A-Za-zÄä]+)\s+(\d{4})/),month=m&&germanMonths.indexOf(m[2])+1;
+  if(!title||!month)throw new Error('Liechtenstein event fields missing');
+  const url=streamLink(item.attr('href'),liechtensteinIndex);
+  if(!url||!['kulmag.live','www.kulmag.live'].includes(new URL(url).hostname)||!/^\/de\/Konzerte\/\d+\//.test(new URL(url).pathname))throw new Error('Liechtenstein event URL changed');
+  return [{title,url,start:zonedTime(`${m[3]}-${String(month).padStart(2,'0')}-${m[1].padStart(2,'0')}T${europeanClock(date)}`,'Europe/Vaduz')}];
+ });
+}
+export function parseLiechtenstein(html,candidate){
+ const $=load(html),title=clean($('#body_divTitel').text());
+ if(!title||!$('#body_divKonzert').length)throw new Error('Liechtenstein event layout changed');
+ if(cancelledEuropean(title))return null;
+ // Verify the event belongs to the academy; other Kulmag partners have separate schedules.
+ const partner=$('#body_aPartner').attr('href');
+ if(!partner||!/^\/de\/partner\/2\//i.test(new URL(partner,candidate.url).pathname))throw new Error('Liechtenstein event partner changed');
+ const date=clean($('#body_divZeit').text());
+ const start=zonedTime(europeanDate(date)+'T'+europeanClock(date),'Europe/Vaduz');
+ if(start!==candidate.start||title!==candidate.title)throw new Error('Liechtenstein schedule disagrees with event details');
+ const program=$('#body_divKapitel h3,#body_divKapitel h4').toArray().map(e=>clean($(e).text())).filter(t=>t!=='Programm').join('; ');
+ return {id:`liechtenstein-${new URL(candidate.url).pathname.split('/')[3]}`,title,type:/quintett|quartett|trio/i.test(title)?'Chamber':kind(title),start,end:null,program,event_url:candidate.url,stream_url:candidate.url,watch_kind:'direct',evidence_url:liechtensteinIndex,evidence:'Listed in the academy’s official broadcast partner’s Live-Streams section and explicitly marked Gratis (free); date checked against event details.'};
+}
+async function liechtenstein(get,now){
+ const candidates=liechtensteinCandidates(await get(liechtensteinIndex)).filter(c=>Date.parse(c.start)>=+now-DAY&&Date.parse(c.start)<+now+45*DAY),events=[];
+ if(candidates.length>60)throw new Error('Liechtenstein event budget exceeded');
+ for(const candidate of candidates){const event=parseLiechtenstein(await get(candidate.url),candidate);if(event)events.push(event);}
+ return events;
+}
+const weimarIndex='https://www.hfm-weimar.de/en/visiting/events/calendar';
+export function parseWeimar(html,url){
+ const $=load(html),area=$('.eventlist.event-id'),title=clean(area.find('.joVeranstaltungsTeaserHeadline').text());
+ if(!area.length||!title)throw new Error('Weimar event layout changed');
+ if(cancelledEuropean(title+' '+area.find('.description').text()))return null;
+ // Only explicit broadcast announcements qualify; ordinary free concerts are excluded.
+ const broadcast=area.find('p').filter((i,p)=>/\b(?:auch\s+)?im\s+livestream\b/i.test(clean($(p).text()))&&!/\bkein\w*\b|\bnicht\b/i.test(clean($(p).text()))).first();
+ const href=broadcast.find('a[href]').first().attr('href');if(!href)return null;
+ const declared=new URL(href,url);if(!['hfm-weimar.de','www.hfm-weimar.de','youtube.com','www.youtube.com','youtu.be'].includes(declared.hostname))return null;
+ // Official announcements direct viewers to the homepage, which hosts the player when live.
+ if(declared.protocol==='http:')declared.protocol='https:';
+ const stream=safeUrl(declared.href);if(!stream)return null;
+ const start=zonedTime(europeanDate(clean(area.find('.day').text()))+'T'+europeanClock(clean(area.find('.time').text())),'Europe/Berlin');
+ const paragraphs=area.find('.joVeranstaltungsTeaserinnenabstand p').toArray(),at=paragraphs.findIndex(p=>/^Repertoire:$/i.test(clean($(p).text())));
+ const program=at<0?'':paragraphs.slice(at+1).map(p=>clean($(p).text())).filter(Boolean).join('; ');
+ return {title,type:/Competition/i.test(title)?'Competition':kind(title),start,end:null,program,event_url:url,stream_url:stream,watch_kind:'venue',watch_note:declared.hostname.endsWith('hfm-weimar.de')?'The school hosts the live player on its homepage when broadcasting.':'',evidence_url:url,evidence:'Official event explicitly announces a livestream and links the public viewing destination.'};
+}
+async function weimar(get,now){
+ const first=dayKey(now,'Europe/Berlin'),last=dayKey(new Date(+now+45*DAY),'Europe/Berlin'),html=await get(weimarIndex),$=load(html),pages=[{url:weimarIndex,html}],monthsSeen=new Set([first.slice(0,7)]);
+ if(!$('.joEventJahr').length||!$('.eventlist').length)throw new Error('Weimar calendar layout changed');
+ for(const a of $('a.nextmonth').toArray()){
+  const url=new URL($(a).attr('href'),weimarIndex),stamp=Number(url.searchParams.get('tx_jobase_pi5[loadDate]'));
+  if(!Number.isFinite(stamp)||stamp<=0)throw new Error('Weimar month navigation changed');
+  const month=dayKey(new Date(stamp*1000),'Europe/Berlin').slice(0,7);
+  if(month<=first.slice(0,7)||month>last.slice(0,7)||monthsSeen.has(month))continue;
+  monthsSeen.add(month);pages.push({url:url.href,html:await get(url.href)});
+ }
+ const expected=new Date(first.slice(0,7)+'-01T12:00:00Z');
+ while(expected.toISOString().slice(0,7)<=last.slice(0,7)){if(!monthsSeen.has(expected.toISOString().slice(0,7)))throw new Error('Weimar calendar is missing a month');expected.setUTCMonth(expected.getUTCMonth()+1);}
+ const seen=new Set(),events=[];
+ for(const page of pages){
+  const p=load(page.html);if(!p('.eventlist').length)throw new Error('Weimar month layout changed');
+  for(const a of p('.eventlist a[href*="/detail/"]').toArray()){
+   const item=p(a),date=europeanDate(clean(item.find('.joVeranstaltungsTeaserAdresse').text()));
+   if(date<first||date>last||cancelledEuropean(item.find('.joVeranstaltungsTeaserHeadline').text()))continue;
+   const url=new URL(item.attr('href'),page.url).href;if(seen.has(url))continue;seen.add(url);
+   if(seen.size>80)throw new Error('Weimar event budget exceeded');
+   const event=parseWeimar(await get(url),url);if(event)events.push(event);
+  }
+ }
+ return events;
+}
+export const adapters={curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar};
 export async function collect(previous={events:[],sources:[]},now=new Date(),registry=sources,get=makeFetcher(),handlers=adapters){
  const events=[],statuses=[];
  for(const source of registry){

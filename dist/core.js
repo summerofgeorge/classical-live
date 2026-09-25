@@ -8,6 +8,7 @@ export function dayKey(date, timeZone) {
 export function matches(event, {period='upcoming',source='',type='',query='',timeZone}, now=new Date()) {
   const start = new Date(event.start);
   if (endTime(event) <= now) return false;
+  if (event.valid_until && (!Number.isFinite(Date.parse(event.valid_until)) || new Date(event.valid_until) <= now)) return false;
   if (source && event.source !== source || type && event.type !== type) return false;
   if (query && !`${event.title} ${event.institution} ${event.program}`.toLowerCase().includes(query.toLowerCase())) return false;
   const today = dayKey(now,timeZone), day = dayKey(start,timeZone);
@@ -44,7 +45,9 @@ export function calendar(events, now=new Date()) {
   const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Classical Live//Calendar//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
   for (const event of events) {
     const notes=[event.program,`Watch: ${event.stream_url}`,`Event details: ${event.event_url}`,
-      `Times originate in ${event.timezone}.`, !event.end ? 'End time is an estimate (90 minutes); check the source for updates.' : '',
+      `Times originate in ${event.timezone}.`, event.watch_note,
+      event.verification_method==='browser' ? `Browser-checked ${event.last_verified_at.slice(0,10)}; not automatically rechecked. Confirm the official event page.` : '',
+      !event.end ? 'End time is an estimate (90 minutes); check the source for updates.' : '',
       'This is a saved calendar copy, not a subscription. Check the source for changes.'].filter(Boolean).join('\n\n');
     lines.push('BEGIN:VEVENT',`UID:${escapeIcs(event.id)}@classical-live`,
       `DTSTAMP:${stamp(now)}`,`DTSTART:${stamp(event.start)}`,`DTEND:${stamp(endTime(event))}`,

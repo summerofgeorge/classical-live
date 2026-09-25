@@ -28,6 +28,6 @@ jobs:
             try {const result = await get(url,json); console.log('OK',url); return result;}
             catch(e) {console.log('FAILED',url,e.message); throw e;}
           };
-          const result=await collect({},new Date(),sources.filter(s=>s.id==='liechtenstein'),logged);
+          const result=await collect(undefined,new Date(),sources.filter(s=>s.id==='liechtenstein'),logged);
           console.log(JSON.stringify({count:result.events.length,sources:result.sources}));
           NODE

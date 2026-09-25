@@ -1,0 +1,61 @@
+name: Refresh and publish calendar
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
+      timezone: America/New_York
+permissions:
+  contents: read
+concurrency:
+  group: classical-live-production
+  cancel-in-progress: false
+jobs:
+  calendar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Test parsers and calendar behavior
+        run: node --test
+      - name: Refresh from official sources
+        id: refresh
+        run: node scripts/refresh.mjs
+      - name: Save refreshed event file
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add dist/events.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh conservatory livestream calendar'
+            git push
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+          retention-days: 1
+      - name: Publish website
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Report source failures after publishing available events
+        if: steps.refresh.outputs.degraded == 'true'
+        run: |
+          echo 'One or more source adapters need attention. See the refresh summary.'
+          exit 1

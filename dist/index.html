@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Classical Live — Conservatory livestream calendar</title>
+  <meta name="description" content="Find free conservatory livestreams, see times in your time zone, and save concerts to your calendar.">
+  <meta name="theme-color" content="#1f2120">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#events">Skip to concerts</a>
+  <header class="masthead"><div class="wrap masthead-inner"><a class="wordmark" href="./">Classical <em>Live</em></a><span>THE CONSERVATORY CALENDAR</span></div></header>
+  <main class="wrap">
+    <div class="intro"><div><p class="eyebrow">A seat at the next concert.</p><h1>What’s playing?</h1><p>Free classical livestreams from the next generation of musicians.</p></div><div class="time-note"><span>Your concert times</span><strong id="timezone">Local time</strong><span id="updated">Loading calendar…</span></div></div>
+    <section class="controls" aria-label="Find concerts">
+      <div class="periods" role="group" aria-label="Date range">
+        <button type="button" data-period="upcoming" aria-pressed="true">Upcoming</button>
+        <button type="button" data-period="tonight" aria-pressed="false">Tonight</button>
+        <button type="button" data-period="week" aria-pressed="false">Next 7 days</button>
+        <button type="button" data-period="weekend" aria-pressed="false">This weekend</button>
+      </div>
+      <div class="filter-row"><label>Conservatory<select id="source"><option value="">All conservatories</option></select></label><label>Performance<select id="type"><option value="">All performances</option></select></label><label class="search-label">Search<input id="query" type="search" placeholder="Composer, artist, or program" autocomplete="off"></label></div>
+    </section>
+    <p id="notice" class="notice" hidden></p>
+    <div class="list-heading"><h2 id="result-count" aria-live="polite">Upcoming concerts</h2><button id="download-all" class="text-button" type="button" disabled>Save these concerts (.ics)</button></div>
+    <div id="events" aria-busy="true"><p class="empty">Loading concerts…</p></div>
+    <noscript><p>This calendar needs JavaScript to show local times. Visit the <a href="https://www.curtis.edu/curtis-performances/watch-listen/">Curtis broadcasts</a> or <a href="https://www.cim.edu/concerts-events">CIM calendar</a> directly.</p></noscript>
+    <details class="about"><summary>About this calendar &amp; sources</summary><div class="about-content"><p>A small, independent guide to free conservatory livestreams. Only events with an explicit broadcast label or a working stream link are included. Coverage is selective; more concerts may be available on each school’s website.</p><ul id="source-status"></ul><p>Scheduled refresh: Mondays around 3 a.m. Eastern. Programs, stream links, and performance times can change. “Scheduled now” follows the published timetable; it does not detect whether a video is live.</p><p>Calendar downloads are saved copies, not subscriptions. Where an end time is unavailable, the calendar reserves 90 minutes and labels that estimate.</p></div></details>
+  </main>
+  <footer class="wrap"><span>Classical Live</span><span>Good music. Open to everyone.</span></footer>
+</body>
+</html>

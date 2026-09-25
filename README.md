@@ -1,8 +1,8 @@
-# Classical Live
+# Classical Watch
 
 A small, free calendar of conservatory livestreams, built for personal use and easy public sharing.
 
-**Website:** https://summerofgeorge.github.io/classical-live/
+**Website:** https://classicalwatch.stringfestanalytics.com/
 
 ## What it does
 

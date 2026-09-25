@@ -23,6 +23,9 @@ No visitor accounts, database server, API keys, analytics, paid services, or fro
 | [Eastman](https://www.esm.rochester.edu/live/) | Dedicated structured upcoming-stream list | Only listed livestreams, with the venue player linked by the school. |
 | [Colburn](https://colburnschool.edu/livestream/) | Dedicated livestream schedule | Only events listed on that page; dates use Los Angeles time. |
 | [Manhattan School of Music](https://www.msmnyc.edu/livestream/) | Dedicated upcoming-stream list | Only the Upcoming Events section, excluding the replay archive. |
+| [Northwestern Bienen](https://www.music.northwestern.edu/live) | Dedicated livestream schedule | Explicit Watch Live link; uses the printed Central Time with seasonal daylight-saving offsets. |
+| [Rice Shepherd](https://music.rice.edu/events) | Paginated calendar plus event details | Both a Livestream Available label and an event-specific View Livestream link. Grouped festival/season landing pages are skipped. |
+| [San Francisco Conservatory](https://www.sfcm.edu/experience/performance-calendar) | Monthly calendar plus event details | Public video Livestream link; displayed Pacific time must agree with event calendar metadata. Partner ticket-sales pages are excluded. |
 
 Oberlin was evaluated on September 25, 2026. Its public information page was readable, but its separate calendar API and embedded widget both returned HTTP 403 from the build environment. It is not counted as an automated source. Juilliard also blocked direct retrieval. Neither is silently filled with guessed or search-cached events. Their adapters can be added when a dependable public source is available.
 
@@ -60,6 +63,7 @@ References: [GitHub Pages availability](https://docs.github.com/en/pages/getting
 - Events are deduplicated, sorted, and filtered by date. Expired events disappear in the browser even between refreshes. Unknown end times use a clearly disclosed 90-minute estimate.
 - Wall-clock source dates are converted using IANA time zones. Invalid and ambiguous daylight-saving times are rejected. CIM's dedicated calendar metadata is used instead of unrelated sidebar dates. MSM prints “EST” year-round; its New York wall-clock time is interpreted with the correct seasonal offset.
 - Eastman's visible list omits years: the adapter resolves the nearby year using both the month/day and printed weekday and rejects an unresolved date.
+- Rice labels local wall times as UTC in its HTML datetime attributes; the adapter uses the printed date and Central clock. SFCM calendar metadata supplies verified start and end times. Its month views are scanned across the entire look-ahead window, including year changes.
 - The interface inserts text safely and never renders source HTML.
 
 The `.ics` download is a snapshot, not a calendar subscription. Re-importing it is not a reliable way to remove canceled events. Stable event UIDs reduce duplicate imports, but each calendar app controls import behavior. The calendar does not probe video playback; “Scheduled now” refers to the published schedule.
@@ -72,4 +76,4 @@ The `.ics` download is a snapshot, not a calendar subscription. Re-importing it 
 4. Require affirmative livestream evidence. Do not infer streaming just because admission to the in-person concert is free. Throw on a structural source change; return an empty array only for a genuinely empty schedule.
 5. Add parser fixtures and tests for dates, canceled records, and missing stream links. Run a real refresh, inspect the resulting listings, and then publish.
 
-The test suite covers time zones, DST ambiguity, date filters, `.ics` escaping and UTF-8 folding, parser rules for all five schools, and failed-source retention.
+The test suite covers time zones, DST ambiguity, date filters, `.ics` escaping and UTF-8 folding, parser rules for all eight schools, pagination, and failed-source retention.

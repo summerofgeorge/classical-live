@@ -14,6 +14,26 @@
   <header class="masthead"><div class="wrap masthead-inner"><a class="wordmark" href="./">Classical <em>Live</em></a><span>THE CONSERVATORY CALENDAR</span></div></header>
   <main class="wrap">
     <div class="intro"><div><p class="eyebrow">A seat at the next concert.</p><h1>What’s playing?</h1><p>Free classical livestreams from the next generation of musicians.</p></div><div class="time-note"><span>Your concert times</span><strong id="timezone">Local time</strong><span id="updated">Loading calendar…</span></div></div>
+    <details class="about" id="about">
+      <summary>About this experiment, school selection &amp; Oberlin</summary>
+      <div class="about-content">
+        <h2>A small experiment</h2>
+        <p>This is a first version of an independent concert roundup, built to test whether having these livestreams in one place is useful. The starting roster contains schools that were relatively straightforward to add and keep updated. If people find it useful, the project can grow to include more schools and features.</p>
+        <h2>How the schools were selected</h2>
+        <p>Each school needed an official, publicly accessible schedule, clear evidence that a performance would be livestreamed, a usable viewing link, and a date and time we could interpret reliably. The initial eight schools met those practical requirements with simple automated collection. Inclusion reflects how readily their information could be collected; it is not a ranking of musical quality or a complete survey of conservatories.</p>
+        <h2>How the calendar is assembled</h2>
+        <p>A scheduled program checks the supported schools every Monday around 3 a.m. Eastern and looks up to 45 days ahead. Where a school offers a structured data feed, the program reads it directly. Otherwise, it reads the school's public webpages and extracts the relevant fields. This is often called <em>scraping</em>: collecting information from a page's underlying text and structure.</p>
+        <p>Each school has its own collection rules. An event must have an explicit broadcast label or public livestream link; a free in-person concert alone does not qualify. The program standardizes dates, removes duplicates and expired events, and saves the results in a small data file. It does not use AI to guess missing schedules. Your browser converts concert times to your time zone, with the original school time shown underneath. Videos play through the school's linked service.</p>
+        <h2>Why Oberlin is not included yet</h2>
+        <p>Oberlin does offer livestreams, and its <a href="https://www.oberlin.edu/conservatory/on-stage/live-webcasts" target="_blank" rel="noopener noreferrer">official webcast information page</a> was accessible. But the dates are supplied through a separate calendar service. In our initial automated tests on September 25, 2026, that service's data feed and embedded calendar both returned <strong>HTTP 403</strong>, an access-denied response.</p>
+        <p>That result does not mean Oberlin cannot be added, or that ordinary visitors cannot use its calendar. We would need a reliably accessible official feed or another dependable way to read and verify its schedule. For this first version, the project prioritizes sources that work with the simpler approach. Search results can help find individual concerts, but are not a dependable weekly schedule on their own.</p>
+        <h2>What to keep in mind</h2>
+        <p>Coverage is selective. Some schools publish only a few upcoming streams, and a weekly refresh can miss late additions or cancellations. If a source stops working, its recently verified future listings may remain for up to 14 days with a warning. Always check the official event page before making plans. “Scheduled now” follows the timetable; it does not detect video playback.</p>
+        <p>Calendar downloads are saved copies, not subscriptions. They will not automatically reflect later changes. Where an end time is unavailable, the invite reserves 90 minutes and labels that estimate.</p>
+        <h2>Sources &amp; latest checks</h2>
+        <ul id="source-status"></ul>
+      </div>
+    </details>
     <section class="controls" aria-label="Find concerts">
       <div class="periods" role="group" aria-label="Date range">
         <button type="button" data-period="upcoming" aria-pressed="true">Upcoming</button>
@@ -27,7 +47,6 @@
     <div class="list-heading"><h2 id="result-count" aria-live="polite">Upcoming concerts</h2><button id="download-all" class="text-button" type="button" disabled>Save these concerts (.ics)</button></div>
     <div id="events" aria-busy="true"><p class="empty">Loading concerts…</p></div>
     <noscript><p>This calendar needs JavaScript to show local times. Visit the <a href="https://www.curtis.edu/curtis-performances/watch-listen/">Curtis broadcasts</a> or <a href="https://www.cim.edu/concerts-events">CIM calendar</a> directly.</p></noscript>
-    <details class="about"><summary>About this calendar &amp; sources</summary><div class="about-content"><p>A small, independent guide to free conservatory livestreams. Only events with an explicit broadcast label or a working stream link are included. Coverage is selective; more concerts may be available on each school’s website.</p><ul id="source-status"></ul><p>Scheduled refresh: Mondays around 3 a.m. Eastern. Programs, stream links, and performance times can change. “Scheduled now” follows the published timetable; it does not detect whether a video is live.</p><p>Calendar downloads are saved copies, not subscriptions. Where an end time is unavailable, the calendar reserves 90 minutes and labels that estimate.</p></div></details>
   </main>
   <footer class="wrap"><span>Classical Live</span><span>Good music. Open to everyone.</span></footer>
 </body>

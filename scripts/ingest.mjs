@@ -1,6 +1,6 @@
 import {load} from 'cheerio';
 import {createHash} from 'node:crypto';
-import {safeUrl,endTime} from '../dist/core.js';
+import {safeUrl,endTime,dayKey} from '../dist/core.js';
 export const DAY=86400000;
 export const clean=value=>load(`<body>${value||''}</body>`)('body').text().replace(/\s+/g,' ').trim();
 export const sources=[
@@ -8,7 +8,10 @@ export const sources=[
  {id:'cim',name:'Cleveland Institute of Music',url:'https://www.cim.edu/concerts-events',timezone:'America/New_York'},
  {id:'eastman',name:'Eastman School of Music',url:'https://www.esm.rochester.edu/live/',timezone:'America/New_York'},
  {id:'colburn',name:'Colburn School',url:'https://colburnschool.edu/livestream/',timezone:'America/Los_Angeles'},
- {id:'msm',name:'Manhattan School of Music',url:'https://www.msmnyc.edu/livestream/',timezone:'America/New_York'}
+ {id:'msm',name:'Manhattan School of Music',url:'https://www.msmnyc.edu/livestream/',timezone:'America/New_York'},
+ {id:'northwestern',name:'Northwestern Bienen School of Music',url:'https://www.music.northwestern.edu/live',timezone:'America/Chicago'},
+ {id:'rice',name:'Rice Shepherd School of Music',url:'https://music.rice.edu/events',timezone:'America/Chicago'},
+ {id:'sfcm',name:'San Francisco Conservatory of Music',url:'https://www.sfcm.edu/experience/performance-calendar',timezone:'America/Los_Angeles'}
 ];
 export function zonedTime(local,zone){
  const m=local?.trim().match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?$/);
@@ -35,7 +38,7 @@ export function normalize(raw,source,now){
  if(event.end && (!Number.isFinite(Date.parse(event.end))||new Date(event.end)<=new Date(event.start)))throw new Error('Invalid end time');
  return event;
 }
-const allowedHosts=new Set(['www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu']);
+const allowedHosts=new Set(['www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu']);
 export function makeFetcher(){let requests=0;return async function get(url,json=false){
  if(++requests>180)throw new Error('Request budget exceeded');
  if(!safeUrl(url)||!allowedHosts.has(new URL(url).hostname))throw new Error('Source URL is outside the allowlist');
@@ -125,7 +128,108 @@ export function parseMsm(html){
   return {title,start:zonedTime(namedDate(date)+'T'+clock24(time),'America/New_York'),end:null,program:'',event_url:url,stream_url:url,watch_kind:'direct',evidence_url:'https://www.msmnyc.edu/livestream/',evidence:'Listed as an upcoming event on the official livestream index.'};
  }).filter(e=>!/cancelled|canceled|postponed/i.test(e.title));
 }
-export const adapters={curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/'))};
+const cancelled=text=>/\bcancelled\b|\bcanceled\b|\bpostponed\b/i.test(text);
+function streamLink(href,base){return href&&href.trim()&&!href.trim().startsWith('#')?safeUrl(new URL(href,base).href):null;}
+export function parseNorthwestern(html){
+ const $=load(html),area=$('#upcoming-events-slider');
+ if(!area.length)throw new Error('Northwestern livestream list missing');
+ const cards=area.find('.event-slide');
+ if(!cards.length&&!/no (upcoming |scheduled )?(events|performances)/i.test(area.text()))throw new Error('Northwestern livestream layout changed');
+ return cards.toArray().flatMap(card=>{
+  const item=$(card),title=clean(item.find('.event-title').text());
+  if(cancelled(title))return [];
+  const stream=streamLink(item.find('.event-btns a').filter((i,a)=>/^Watch Live$/i.test(clean($(a).text()))).first().attr('href'),'https://www.music.northwestern.edu');
+  if(!stream)return [];
+  const date=clean(item.find('.date').text()),href=item.find('.event-title').attr('href');
+  if(!title||!href||!/\b20\d\d\b/.test(date)||!/(CDT|CST)\b/.test(date))throw new Error('Northwestern event fields missing');
+  const url=new URL(href,'https://www.music.northwestern.edu').href;
+  return [{title,start:zonedTime(namedDate(date)+'T'+clock24(date),'America/Chicago'),end:null,program:'',event_url:url,stream_url:stream,watch_kind:'venue',evidence_url:'https://www.music.northwestern.edu/live',evidence:'Official livestream schedule provides a Watch Live venue link.'}];
+ });
+}
+export function riceStart(html){
+ const $=load(html),area=$('.event-sidebar').first(),date=clean(area.find('.event-date').text());
+ const m=date.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{1,2}),?\s+(\d{4})\b/);
+ if(!m)throw new Error('Rice event date missing');
+ const month=months.findIndex(value=>value.startsWith(m[1]))+1;
+ // Rice's datetime attributes label local wall times +00:00. Use the printed date and Central clock.
+ return zonedTime(`${m[3]}-${String(month).padStart(2,'0')}-${m[2].padStart(2,'0')}T${clock24(clean(area.find('.event-time').text()))}`,'America/Chicago');
+}
+export function parseRice(html,url){
+ const $=load(html),area=$('.event-sidebar').first(),heading=$('#block-views-block-event-info-date');
+ if(!area.length||!heading.find('h1').length)throw new Error('Rice event layout changed');
+ const title=clean(heading.find('h1').text());
+ if(cancelled(title+' '+$('.event-status').text()))return null;
+ const stream=streamLink(area.find('.livestream-info a.stream-link').attr('href'),url);
+ if(!stream)return null;
+ if(!/\bC[DS]?T\b/.test(area.find('.stream-time').text()))throw new Error('Rice stream time zone missing');
+ const type=clean(heading.find('.event-type').text());
+ return {title,type:kind(type+' '+title),start:riceStart(html),end:null,program:clean($('.field--name-field-repertoire .field__item').html()?.replace(/<br\s*\/?>/gi,'; ')),event_url:url,stream_url:stream,watch_kind:new URL(stream).hostname==='music.rice.edu'?'venue':'direct',evidence_url:url,evidence:'Official event page provides a View Livestream link and Central Time.'};
+}
+async function rice(get,now){
+ let next='https://music.rice.edu/events',page=0;const seen=new Set(),pages=new Set(),events=[];
+ while(next){
+  if(++page>20||pages.has(next))throw new Error('Rice pagination exceeded safety limit');pages.add(next);
+  const $=load(await get(next)),area=$('.view-calendar-example.view-display-id-listing'),cards=area.find('.event-wrapper-link');
+  if(!area.length||(!cards.length&&!area.find('.view-empty').length))throw new Error('Rice calendar layout changed');
+  const broadcasts=cards.filter((i,card)=>$(card).find('.stream-icon').length&&!cancelled($(card).find('.event-title,.event-status').text()));
+  let allBeyond=broadcasts.length>0;
+  for(const card of broadcasts.toArray()){
+   const item=$(card);if(cancelled(item.find('.event-title,.event-status').text()))continue;
+   const href=item.attr('href');if(!href)throw new Error('Rice event link missing');
+   const url=new URL(href,next).href;
+   // /content/ links describe festivals or several performances, not one dated concert.
+   if(new URL(url).pathname.startsWith('/content/')){allBeyond=false;continue;}
+   if(seen.has(url))throw new Error('Rice calendar repeated an event across pages');seen.add(url);
+   // Only inspect marked broadcasts; other cards can point to undated, multi-performance landing pages.
+   const html=await get(url);if(Date.parse(riceStart(html))<+now+45*DAY)allBeyond=false;
+   if(item.find('.stream-icon').length){const event=parseRice(html,url);if(event)events.push(event);}
+   await new Promise(resolve=>setTimeout(resolve,150));
+  }
+  const href=area.find('a[rel="next"]').attr('href');next=href&&!allBeyond?new URL(href,next).href:null;
+ }
+ return events;
+}
+export function parseSfcm(html,url){
+ const $=load(html),area=$('article.event').first(),title=clean(area.find('h1').text());
+ if(!area.length||!title)throw new Error('SFCM event layout changed');
+ if(cancelled(title))return null;
+ const stream=streamLink(area.find('.event-cta-live-stream').first().attr('href'),url);if(!stream)return null;
+ // Some SFCM "Livestream" buttons lead to a partner's ticket-sales page. Admit public video links only.
+ if(!['vimeo.com','www.vimeo.com','youtube.com','www.youtube.com','youtu.be'].includes(new URL(stream).hostname))return null;
+ const date=clean(area.find('.event__info time').first().text());
+ if(!/\b20\d\d\b/.test(date))throw new Error('SFCM event date missing');
+ const start=zonedTime(namedDate(date)+'T'+clock24(date),'America/Los_Angeles');
+ const calendarHref=area.find('.add-cal-event [data-addtocal-type="google"] a').attr('href');
+ if(!calendarHref)throw new Error('SFCM calendar metadata missing');
+ const params=new URL(calendarHref).searchParams,dates=params.get('dates')?.split('/');
+ if(params.get('ctz')!=='America/Los_Angeles'||dates?.length!==2||dates.some(d=>!/^\d{8}T\d{6}$/.test(d)))throw new Error('SFCM calendar metadata changed');
+ const convert=value=>zonedTime(value.replace(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})$/,'$1-$2-$3T$4:$5:$6'),'America/Los_Angeles');
+ if(convert(dates[0])!==start)throw new Error('SFCM displayed date disagrees with calendar');
+ const body=area.find('.field--name-body'),programHeading=body.find('h2,h3,h4').filter((i,e)=>/^Program$/i.test(clean($(e).text()))).first();
+ const program=programHeading.nextUntil('h2,h3,h4,h5,h6','p').toArray().map(p=>clean($(p).text())).filter(Boolean).join('; ');
+ return {title,type:kind(area.find('.entity-categories').first().text()+' '+title),start,end:convert(dates[1]),program,event_url:url,stream_url:stream,watch_kind:'direct',evidence_url:url,evidence:'Public event page provides a video livestream link and calendar dates.'};
+}
+async function sfcm(get,now){
+ const first=dayKey(new Date(+now-DAY),'America/Los_Angeles'),last=dayKey(new Date(+now+45*DAY),'America/Los_Angeles'),events=[],seen=new Set();
+ const month=new Date(first.slice(0,7)+'-01T12:00:00Z');
+ while(month.toISOString().slice(0,7)<=last.slice(0,7)){
+  const index=`https://www.sfcm.edu/experience/performance-calendar?calendar_event_month=${String(month.getUTCMonth()+1).padStart(2,'0')}&calendar_event_year=${month.getUTCFullYear()}`;
+  const $=load(await get(index)),area=$('.view-sfcm-calendar'),links=area.find('.performance-title a');
+  if(!area.length||(!links.length&&!area.find('.view-empty').length))throw new Error('SFCM calendar layout changed');
+  for(const link of links.toArray()){
+   const href=$(link).attr('href');if(!href)throw new Error('SFCM event link missing');
+   const url=new URL(href,index).href;if(seen.has(url))continue;seen.add(url);
+   const row=$(link).closest('.performance-row'),day=clean(row.find('.compact-listing__date-date').first().text()),monthName=clean(row.find('.compact-listing__date-month').first().text());
+   if(!/^\d{1,2}$/.test(day)||monthName!==months[month.getUTCMonth()].slice(0,3))throw new Error('SFCM calendar row date missing');
+   const date=`${month.toISOString().slice(0,7)}-${day.padStart(2,'0')}`;if(date<first||date>last||cancelled($(link).text()))continue;
+   const event=parseSfcm(await get(url),url);if(event)events.push(event);
+   await new Promise(resolve=>setTimeout(resolve,150));
+  }
+  month.setUTCMonth(month.getUTCMonth()+1);
+ }
+ return events;
+}
+export const adapters={curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm};
 export async function collect(previous={events:[],sources:[]},now=new Date(),registry=sources,get=makeFetcher(),handlers=adapters){
  const events=[],statuses=[];
  for(const source of registry){

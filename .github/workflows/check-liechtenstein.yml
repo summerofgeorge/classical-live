@@ -1,0 +1,29 @@
+name: Check Liechtenstein source access
+on:
+  push:
+    branches: [source-check-liechtenstein]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Read public official source pages
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const urls = [
+            'https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',
+            'https://kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',
+            'https://www.kulmag.live/de/Konzerte/221/streichquintette-von-beethoven-und-mozart',
+            'https://www.musikakademie.li/de/veranstaltungen'
+          ];
+          for (const url of urls) {
+            try {
+              const r = await fetch(url, {signal: AbortSignal.timeout(20000), headers: {'User-Agent':'ClassicalLive/1.0 (+https://github.com/summerofgeorge/classical-live)', 'Accept':'text/html'}});
+              const body = await r.text();
+              console.log(JSON.stringify({url, status:r.status, finalUrl:r.url, length:body.length, errorPreview:r.ok?undefined:body.slice(0,800)}));
+            } catch (e) {console.log(JSON.stringify({url,error:e.message}));}
+          }
+          NODE

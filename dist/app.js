@@ -32,7 +32,7 @@ function render(){
       if(event.stale)info.append(el('p','Could not recheck this listing. Confirm the time and stream on the source page.','program'));
       const actions=el('div',null,'actions'),watch=link(event.watch_kind==='channel'?'Watch channel':'Watch stream',event.stream_url,'watch');watch.setAttribute('aria-label',`Watch ${event.title}`);
       const save=el('button','Add to calendar','calendar-button');save.type='button';save.setAttribute('aria-label',`Add ${event.title} to calendar`);save.onclick=()=>download([event]);actions.append(watch,save);
-      if(event.watch_kind==='channel')actions.append(el('small','Opens the school’s official YouTube channel.'));
+      if(event.watch_kind==='channel')actions.append(el('small','Opens the school’s official video channel.'));
       if(event.watch_note)actions.append(el('small',event.watch_note));
       card.append(time,info,actions);list.append(card);
     }

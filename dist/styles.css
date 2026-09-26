@@ -4,3 +4,75 @@ footer{align-items:baseline}footer span:first-child{color:var(--ink)}footer a{co
 @media(max-width:760px){footer{align-items:flex-start}}
 .more-filters{margin-top:20px;font-size:14px}.more-filters summary{color:var(--muted)}.extra-filters{grid-template-columns:1fr 1fr 1fr;margin-top:16px}.filter-note{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:0}#reset-filters{margin-top:16px}.school-list{margin:22px 0}.school-list>p{margin-top:12px}.school-list ul{padding-left:20px}.watch-help ol{padding-left:24px}.watch-help strong{color:var(--ink)}@media(max-width:760px){.extra-filters{grid-template-columns:1fr}.more-filters summary{line-height:1.6}#reset-filters{text-align:left}}
 .earlier{display:block;font-size:12px;font-weight:normal;color:var(--muted);margin-top:8px}
+
+/* Day panels and performance badges keep long schedules easy to scan. */
+.day-group{
+  --day-surface:#faf9f5;
+  --row-band:#efeee7;
+  --day-accent:#1f2120;
+  grid-template-columns:134px minmax(0,1fr);
+  gap:0;
+  margin-bottom:30px;
+  border:1px solid #d1cec3;
+  border-radius:8px;
+  background:var(--day-surface);
+}
+.day-group:nth-child(even){--day-surface:#fcf6f3;--row-band:#f2e7e3;--day-accent:#763237}
+.day-group.is-today{--day-accent:#ac282d;border-color:#ce9698}
+.day-heading{
+  padding:20px 16px;
+  border-radius:7px 0 7px 0;
+  background:var(--day-accent);
+  color:#fff;
+  font-size:12px;
+  top:16px;
+}
+.day-heading .weekday{display:block;color:#fff;font-size:10px;letter-spacing:1px;line-height:1.7}
+.day-heading .day-number{font-size:46px;line-height:1.15;margin:8px 0}
+.day-month{display:block;line-height:1.6}
+.day-count{display:block;margin-top:17px;padding-top:12px;border-top:1px solid #ffffff4d;font-size:11px;font-weight:normal}
+.concerts{border-top:0;min-width:0}
+.concert{padding:24px 22px;grid-template-columns:78px minmax(0,1fr) 140px;gap:18px;border-bottom-color:#d9d4cb}
+.concert:nth-child(even){background:var(--row-band)}
+.concert:first-child{border-top-right-radius:7px}
+.concert:last-child{border-bottom:0;border-bottom-right-radius:7px}
+.concert-info h3{font-size:24px;line-height:1.25}
+.concert-info{overflow-wrap:anywhere}
+.concert-time{font-variant-numeric:tabular-nums}
+.concert-time time{white-space:nowrap}
+.metadata{gap:10px;margin-top:12px}
+.metadata span+span{border:0;padding:0}
+.performance-tag{display:inline-block;padding:5px 9px;border:1px solid #d0cbc2;border-radius:4px;background:#eeebe4;color:#48453e;font-size:11px;font-weight:bold;line-height:1.4}
+.concert[data-performance="Orchestra"] .performance-tag{background:#343735;border-color:#343735;color:#fff}
+.concert[data-performance="Chamber"] .performance-tag{background:#f2dddd;border-color:#e3bbbb;color:#85262c}
+.concert[data-performance="Recital"] .performance-tag{background:#e8e4dd;border-color:#d1cbc1;color:#4e493f}
+.concert[data-performance="Voice & choral"] .performance-tag{background:#763237;border-color:#763237;color:#fff}
+.concert[data-performance="Masterclass"] .performance-tag{background:#fff9f6;border-color:#ac6668;color:#85262c}
+.concert[data-performance="Competition"] .performance-tag{background:#f2dddd;border-color:#ac6668;color:#85262c}
+.concert[data-performance="Jazz"] .performance-tag{background:#e2e3e1;border-color:#bec1bc;color:#343735}
+.program.source-time{font-size:12px;line-height:1.6;margin:12px 0 0}
+.now{background:#f5d9da;color:#85262c;padding:4px 6px;border-radius:3px;line-height:1.4}
+.calendar-button{background:#ffffff66}
+.calendar-button:hover{background:#fff;border-color:var(--ink)}
+@media(max-width:900px) and (min-width:761px){
+  .day-group{grid-template-columns:120px minmax(0,1fr)}
+  .day-heading{padding:18px 12px}
+  .concert{grid-template-columns:78px minmax(0,1fr);padding:22px 18px;gap:15px}
+  .actions{grid-column:2;flex-direction:row;flex-wrap:wrap;padding-top:0}
+  .actions small{max-width:none;width:100%}
+}
+@media(max-width:760px){
+  .day-group{grid-template-columns:minmax(0,1fr);gap:0;margin-bottom:24px}
+  .day-heading{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"number weekday count" "number month count";gap:2px 14px;align-items:center;padding:15px 18px;border-radius:7px 7px 0 0;position:static}
+  .day-heading .weekday{grid-area:weekday;font-size:10px}
+  .day-heading .day-number{grid-area:number;font-size:36px;margin:0}
+  .day-month{grid-area:month;font-size:12px}
+  .day-count{grid-area:count;margin:0;padding:7px 9px;border:0;border-radius:3px;background:#ffffff1a;white-space:nowrap;font-size:11px}
+  .concert{grid-template-columns:62px minmax(0,1fr);padding:20px 16px;gap:14px}
+  .concert:first-child{border-top-right-radius:0}
+  .concert:last-child{border-bottom-left-radius:7px}
+  .concert-info h3{font-size:22px}
+  .concert-time{font-size:15px}
+  .now{font-size:11px;padding:4px 3px}
+  .actions{grid-column:2;min-width:0}
+}

@@ -19,20 +19,22 @@ function render(){
   $('events').replaceChildren();
   if(!visible.length){const empty=el('div',null,'empty');empty.append(el('strong','No concerts in this view.'),el('span','Try another date range or browse all upcoming concerts.'));const button=el('button','Show all upcoming','calendar-button');button.onclick=reset;empty.append(el('br'),button);$('events').append(empty);return;}
   const groups=new Map();for(const event of visible){const key=dayKey(new Date(event.start),timeZone);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(event);}
-  for(const events of groups.values()){
+  for(const [key,events] of groups){
     const group=el('section',null,'day-group'),date=new Date(events[0].start), heading=el('h2',null,'day-heading');
-    heading.append(el('span',format(date,{weekday:'long'}),'weekday'),el('span',format(date,{day:'numeric'}),'day-number'),el('span',format(date,{month:'long',year:'numeric'})));
+    const today=key===dayKey(now,timeZone);group.classList.toggle('is-today',today);
+    heading.id=`day-${key}`;group.setAttribute('aria-labelledby',heading.id);
+    heading.append(el('span',`${today?'Today · ':''}${format(date,{weekday:'long'})}`,'weekday'),el('span',format(date,{day:'numeric'}),'day-number'),el('span',format(date,{month:'long',year:'numeric'}),'day-month'),el('span',`${events.length} concert${events.length===1?'':'s'}`,'day-count'));
     const list=el('div',null,'concerts');group.append(heading,list);
     for(const event of events){
-      const card=el('article',null,'concert'),time=el('div',null,'concert-time');const timeElement=el('time',format(event.start,{hour:'numeric',minute:'2-digit'}));timeElement.dateTime=event.start;time.append(timeElement);
+      const card=el('article',null,'concert'),time=el('div',null,'concert-time');card.dataset.performance=event.type;const timeElement=el('time',format(event.start,{hour:'numeric',minute:'2-digit'}));timeElement.dateTime=event.start;time.append(timeElement);
       time.append(el('small',format(event.start,{timeZoneName:'short'}).split(' ').pop()));
       if(new Date(event.start)<=now && endTime(event)>now)time.append(el('span','Scheduled now','now'));
       else if(new Date(event.start)<=now)time.append(el('span','Started earlier','earlier'));
       const info=el('div',null,'concert-info');info.append(el('p',event.institution,'institution'),el('h3',event.title));
       if(event.program)info.append(el('p',event.program,'program'));
-      const meta=el('div',null,'metadata');meta.append(el('span',event.type),el('span','Free stream'));
+      const meta=el('div',null,'metadata');meta.append(el('span',event.type,'performance-tag'),el('span','Free stream'));
       info.append(meta);
-      const original=el('p',null,'program');original.append(el('span',`Source time: ${format(event.start,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'},event.timezone)} · `),link('Event details',event.event_url,'source-link'));info.append(original);
+      const original=el('p',null,'program source-time');original.append(el('span',`Source time: ${format(event.start,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'},event.timezone)} · `),link('Event details',event.event_url,'source-link'));info.append(original);
       if(event.stale)info.append(el('p','Could not recheck this listing. Confirm the time and stream on the source page.','program'));
       if(event.verification_method==='browser')info.append(el('p',`Checked ${format(event.last_verified_at,{month:'short',day:'numeric'})}. Confirm the latest details with the school.`,'program'));
       const actions=el('div',null,'actions'),watch=link(event.watch_kind==='channel'?'Watch channel':'Watch stream',event.stream_url,'watch');watch.setAttribute('aria-label',`Watch ${event.title}`);

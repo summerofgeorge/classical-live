@@ -19,10 +19,39 @@ test('Tonight uses the viewer date, including an event across UTC midnight',()=>
  assert.ok(!matches(event,{period:'tonight',timeZone:'Europe/London'},now));
  assert.ok(!matches(event,{source:'curtis',timeZone:'UTC'},now));
 });
-test('week and weekend filters use local calendar dates and exclude ended events',()=>{
+test('week and weekend filters use local calendar dates and exclude previous-day concerts',()=>{
  assert.ok(matches(event,{period:'weekend',timeZone:'America/New_York'},now));
  assert.ok(!matches({...event,start:'2026-10-02T12:00:00Z'},{period:'week',timeZone:'America/New_York'},now));
- assert.ok(!matches(event,{timeZone:'UTC'},new Date('2026-09-26T03:00:00Z')));
+ assert.ok(matches(event,{timeZone:'UTC'},new Date('2026-09-26T03:00:00Z')));
+ assert.ok(!matches(event,{timeZone:'UTC'},new Date('2026-09-27T00:00:00Z')));
+});
+
+test('CIM stays visible after its scheduled end until the viewer’s local midnight',()=>{
+ const cim={...event,start:'2026-09-25T23:30:00Z',end:'2026-09-26T00:30:00Z'},zone={timeZone:'America/New_York'};
+ for(const period of ['upcoming','tonight','week','weekend'])assert.ok(matches(cim,{...zone,period},new Date('2026-09-26T03:59:59Z')),period);
+ assert.equal(matches(cim,zone,new Date('2026-09-26T04:00:00Z')),false);
+ assert.equal(matches(cim,{timeZone:'America/Los_Angeles'},new Date('2026-09-26T04:00:00Z')),true);
+ assert.equal(matches(cim,{timeZone:'America/Los_Angeles'},new Date('2026-09-26T07:00:00Z')),false);
+ assert.ok(matches({...cim,end:null},zone,new Date('2026-09-26T03:59:59Z'))); // 90-minute estimate is not a hiding cutoff.
+});
+
+test('25-hour days use calendar midnight, and an explicitly ongoing overnight concert remains available',()=>{
+ const fall={...event,start:'2026-11-01T04:00:00Z',end:'2026-11-01T05:00:00Z'},zone={timeZone:'America/New_York'};
+ assert.ok(matches(fall,zone,new Date('2026-11-02T04:59:59Z')));
+ assert.equal(matches(fall,zone,new Date('2026-11-02T05:00:00Z')),false);
+ const late={...event,start:'2026-09-26T03:00:00Z',end:'2026-09-26T05:00:00Z'};
+ assert.ok(matches(late,zone,new Date('2026-09-26T04:30:00Z')));
+ assert.equal(matches(late,zone,new Date('2026-09-26T05:00:00Z')),false);
+});
+
+test('refresh and failed-source retention keep recently ended concerts for viewer-local day filtering',async()=>{
+ const lateNow=new Date('2026-09-26T00:45:00Z'),finished={...raw,start:'2026-09-25T23:30:00Z',end:'2026-09-26T00:30:00Z'},old={...finished,id:'old',start:'2026-09-22T23:30:00Z',end:'2026-09-23T00:30:00Z'};
+ const healthy=await collect(undefined,lateNow,[source],null,{test:async()=>[finished,old]});
+ assert.deepEqual(healthy.events.map(e=>e.id),['test-1']);assert.ok(matches(healthy.events[0],{timeZone:'America/New_York'},lateNow));
+ const retained=await collect(healthy,new Date(+lateNow+1000),[source],null,{test:async()=>{throw new Error('offline');}});
+ assert.equal(retained.events.length,1);assert.equal(retained.events[0].stale,true);
+ // A healthy source can still withdraw a listing; day retention does not resurrect cancellations.
+ assert.equal((await collect(healthy,lateNow,[source],null,{test:async()=>[]})).events.length,0);
 });
 test('calendar files use UTC, stable UIDs, escaped text, CRLF and declared duration estimate',()=>{
  const ics=calendar([event],now);

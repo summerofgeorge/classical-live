@@ -1,5 +1,5 @@
-import {normalize,DAY} from './ingest.mjs';
-import {endTime,safeUrl} from '../dist/core.js';
+import {normalize,DAY,keepForDisplay} from './ingest.mjs';
+import {safeUrl} from '../dist/core.js';
 
 // Browser observations keep their original timestamp across every scheduled build.
 // They supplement the automated sources without pretending a refresh rechecked them.
@@ -19,7 +19,7 @@ export function applyReviewed(result,payload,now=new Date()){
    if(!/(Z|[+-]\d\d:\d\d)$/.test(item.start)||+new Date(item.start)<+checked-DAY)throw new Error('Invalid reviewed event date');
    return {...normalize(item,source,checked),verification_method:'browser',valid_until};
   });
-  const active=now<new Date(valid_until)?normalized.filter(e=>endTime(e)>now&&new Date(e.start)<new Date(+now+45*DAY)):[];
+  const active=now<new Date(valid_until)?normalized.filter(e=>keepForDisplay(e,now)&&new Date(e.start)<new Date(+now+45*DAY)):[];
   events.push(...active);
   statuses.push({...source,collection:'browser',status:now<new Date(valid_until)?'manual':'review_due',last_success:checked.toISOString(),valid_until,count:active.length});
  }

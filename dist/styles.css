@@ -3,3 +3,4 @@
 footer{align-items:baseline}footer span:first-child{color:var(--ink)}footer a{color:var(--ink)}
 @media(max-width:760px){footer{align-items:flex-start}}
 .more-filters{margin-top:20px;font-size:14px}.more-filters summary{color:var(--muted)}.extra-filters{grid-template-columns:1fr 1fr 1fr;margin-top:16px}.filter-note{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:0}#reset-filters{margin-top:16px}.school-list{margin:22px 0}.school-list>p{margin-top:12px}.school-list ul{padding-left:20px}.watch-help ol{padding-left:24px}.watch-help strong{color:var(--ink)}@media(max-width:760px){.extra-filters{grid-template-columns:1fr}.more-filters summary{line-height:1.6}#reset-filters{text-align:left}}
+.earlier{display:block;font-size:12px;font-weight:normal;color:var(--muted);margin-top:8px}

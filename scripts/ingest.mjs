@@ -3,6 +3,9 @@ import {createHash} from 'node:crypto';
 import {safeUrl,endTime,dayKey} from '../dist/core.js';
 import {expansionSources,expansionHosts,createExpansion} from './expansion.mjs';
 export const DAY=86400000;
+// Keep enough recent data for today's listings in every viewer's time zone,
+// including 25-hour DST days. The browser applies the exact local-midnight cutoff.
+export const keepForDisplay=(event,now)=>endTime(event)>now||Date.parse(event.start)>=+now-2*DAY;
 export const clean=value=>load(`<body>${value||''}</body>`)('body').text().replace(/\s+/g,' ').trim();
 export const sources=[
  ...expansionSources,
@@ -443,11 +446,11 @@ export async function collect(previous={events:[],sources:[]},now=new Date(),reg
  for(const source of registry){
   const old=previous.sources.find(s=>s.id===source.id);
   try{const raw=await handlers[source.id](get,now),parsed=raw.map(e=>normalize(e,source,now));
-   const active=parsed.filter(e=>endTime(e)>now&&new Date(e.start)<new Date(+now+45*DAY));
+   const active=parsed.filter(e=>keepForDisplay(e,now)&&new Date(e.start)<new Date(+now+45*DAY));
    events.push(...active);statuses.push({...source,status:'ok',last_success:now.toISOString(),count:active.length});
    console.log(`${source.name}: ${active.length} upcoming streams`);
   }catch(error){
-   const kept=previous.events.filter(e=>e.source===source.id&&endTime(e)>now&&+now-Date.parse(e.last_verified_at)<14*DAY).map(e=>({...e,stale:true}));
+   const kept=previous.events.filter(e=>e.source===source.id&&keepForDisplay(e,now)&&+now-Date.parse(e.last_verified_at)<14*DAY).map(e=>({...e,stale:true}));
    events.push(...kept);statuses.push({...source,status:'error',last_success:old?.last_success||null,count:kept.length,error:String(error.message).slice(0,200)});
    console.error(`${source.name}: ${error.message}; retained ${kept.length}`);
   }

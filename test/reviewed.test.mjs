@@ -21,11 +21,19 @@ test('Michigan has six verified streams and independent review expiry',()=>{
 test('browser observations preserve check dates across scheduled runs and do not duplicate',()=>{
  const first=applyReviewed(empty,payload,checked);
  assert.deepEqual(first.sources.map(s=>s.count),[10,6]);
- const later=applyReviewed(first,payload,new Date(+checked+DAY));
- assert.ok(later.events.length<first.events.length); // Ended concerts disappear.
+ const later=applyReviewed(first,payload,new Date(+checked+3*DAY));
+ assert.ok(later.events.length<first.events.length); // Old concerts leave the data after the day-retention buffer.
  assert.ok(later.events.every(e=>e.last_verified_at===checked.toISOString()));
  assert.equal(new Set(later.events.map(e=>e.id)).size,later.events.length);
  assert.ok(later.sources.every(s=>s.collection==='browser'&&s.status==='manual'));
+});
+
+test('reviewed performances also survive their scheduled end on the same local day',()=>{
+ const after=applyReviewed(empty,payload,new Date('2026-09-26T03:59:59Z'));
+ const event=after.events.find(e=>e.id==='peabody-peabody-concert-orchestra-3');
+ assert.ok(event);
+ assert.ok(matches(event,{timeZone:'America/New_York'},new Date('2026-09-26T03:59:59Z')));
+ assert.equal(matches(event,{timeZone:'America/New_York'},new Date('2026-09-26T04:00:00Z')),false);
 });
 test('reviews expire at 14 days in the build and browser, including a page left open',()=>{
  const current=clone();current.sources[0].events[0].start=new Date(+checked+20*DAY).toISOString();

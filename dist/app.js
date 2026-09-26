@@ -27,6 +27,7 @@ function render(){
       const card=el('article',null,'concert'),time=el('div',null,'concert-time');const timeElement=el('time',format(event.start,{hour:'numeric',minute:'2-digit'}));timeElement.dateTime=event.start;time.append(timeElement);
       time.append(el('small',format(event.start,{timeZoneName:'short'}).split(' ').pop()));
       if(new Date(event.start)<=now && endTime(event)>now)time.append(el('span','Scheduled now','now'));
+      else if(new Date(event.start)<=now)time.append(el('span','Started earlier','earlier'));
       const info=el('div',null,'concert-info');info.append(el('p',event.institution,'institution'),el('h3',event.title));
       if(event.program)info.append(el('p',event.program,'program'));
       const meta=el('div',null,'metadata');meta.append(el('span',event.type),el('span','Free stream'));

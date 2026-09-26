@@ -3,6 +3,10 @@
 const enrollment=(students,label,url,year=null)=>({students,label,url,year,checked_at:'2026-09-25'});
 const us=(region,city,count=null)=>({region:`US ${region}`,country:'United States',city,enrollment:count});
 export const schools={
+ yale:us('Northeast','New Haven, Connecticut'),
+ colorado:us('West','Boulder, Colorado'),
+ blair:us('South','Nashville, Tennessee',{students:245,label:'about 245',url:'https://blair.vanderbilt.edu/about/',year:null,checked_at:'2026-09-26'}),
+ iowa:us('Midwest','Iowa City, Iowa',{students:450,label:'450',url:'https://music.uiowa.edu/',year:null,checked_at:'2026-09-26'}),
  curtis:us('Northeast','Philadelphia, Pennsylvania',enrollment(160,'about 160','https://www.curtis.edu/apply/why-curtis/')),
  cim:us('Midwest','Cleveland, Ohio',enrollment(350,'up to 350','https://www.cim.edu/aboutcim')),
  eastman:us('Northeast','Rochester, New York',enrollment(900,'about 900','https://www.esm.rochester.edu/about/history/')),
@@ -22,6 +26,9 @@ export const schools={
  ohio:us('Midwest','Athens, Ohio'),
  unt:us('South','Denton, Texas',enrollment(1500,'more than 1,500','https://music.unt.edu/community/index.html')),
  weimar:{region:'Europe',country:'Germany',city:'Weimar'},
+ udk:{region:'Europe',country:'Germany',city:'Berlin'},
+ bruckner:{region:'Europe',country:'Austria',city:'Linz'},
+ 'reina-sofia':{region:'Europe',country:'Spain',city:'Madrid',enrollment:{students:150,label:'more than 150',url:'https://www.escuelasuperiordemusicareinasofia.es/abierto-el-plazo-de-inscripcion-para-las-audiciones-del-curso-2026-2027-en-la-escuela-reina-sofia/',year:2026,checked_at:'2026-09-26'}},
  rcm:{region:'Europe',country:'United Kingdom',city:'London',enrollment:enrollment(900,'about 900','https://www.rcm.ac.uk/media/ImpactReport2025.pdf',2025)},
  western:{region:'Canada',country:'Canada',city:'London, Ontario'}
 };

@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "type": "events",
+    "total_results": 2,
+    "per_page": 1000,
+    "page": 1,
+    "total_pages": 1,
+    "response_fields": [
+      "location",
+      "image",
+      "summary",
+      "custom_remote_image_caption"
+    ],
+    "supported_fields": [
+      "event_types",
+      "location",
+      "tags",
+      "image",
+      "summary",
+      "description",
+      "contact_info",
+      "registration",
+      "last_modified",
+      "group_title",
+      "status",
+      "related_content",
+      "custom_registration_link",
+      "custom_room_number",
+      "custom_remote_image_caption",
+      "custom_custom_registration_link",
+      "custom_custom_room_number",
+      "custom_fields"
+    ],
+    "response_time": 0.09
+  },
+  "links": {
+    "self": "https://events.iu.edu/live/json/v2/events/paginate/false/group_id/56/tag_id/2752/response_fields/summary,image,location",
+    "first": null,
+    "prev": null,
+    "next": null,
+    "last": null
+  },
+  "data": [
+    {
+      "id": 2388262,
+      "title": "Concert Orchestra – Arthur Fagen, conductor; Norman Krieger, piano soloist",
+      "url": "https://events.iu.edu/musiciub/event/2388262-concert-orchestra-arthur-fagen-conductor-norman",
+      "date_iso": "2026-09-25T19:30:00-04:00",
+      "date2_iso": "2026-09-25T21:30:00-04:00",
+      "date_ts": 1790379000,
+      "timezone": "America/New_York",
+      "is_canceled": null,
+      "is_all_day": null,
+      "is_online": 1,
+      "online_url": "https://liveatjacobs.music.indiana.edu/",
+      "summary": null
+    },
+    {
+      "id": 2388123,
+      "title": "Jiji Kim, guitar; Roger Neill, composer/conductor",
+      "url": "https://events.iu.edu/musiciub/event/2388123-jiji-kim-guitar",
+      "date_iso": "2026-09-25T20:00:00-04:00",
+      "date2_iso": "2026-09-25T21:30:00-04:00",
+      "date_ts": 1790380800,
+      "timezone": "America/New_York",
+      "is_canceled": null,
+      "is_all_day": null,
+      "is_online": 1,
+      "online_url": "https://liveatjacobs.music.indiana.edu/",
+      "summary": "<p>“Guitar in Bloom: Across Time &amp; Strings” | Music by Pärt, Vivaldi, Björnsson, and Boccherini; featuring world premieres of music by Roger Neill | Faculty Recital</p>"
+    }
+  ]
+}

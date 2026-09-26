@@ -5,11 +5,12 @@ export function dayKey(date, timeZone) {
   const get = type => parts.find(p => p.type === type).value;
   return `${get('year')}-${get('month')}-${get('day')}`;
 }
-export function matches(event, {period='upcoming',source='',type='',query='',timeZone}, now=new Date()) {
+export function matches(event, {period='upcoming',source='',type='',query='',region='',country='',size='',timeZone}, now=new Date()) {
   const start = new Date(event.start);
   if (endTime(event) <= now) return false;
   if (event.valid_until && (!Number.isFinite(Date.parse(event.valid_until)) || new Date(event.valid_until) <= now)) return false;
   if (source && event.source !== source || type && event.type !== type) return false;
+  if (region && event.region !== region || country && event.country !== country || size && event.size !== size) return false;
   if (query && !`${event.title} ${event.institution} ${event.program}`.toLowerCase().includes(query.toLowerCase())) return false;
   const today = dayKey(now,timeZone), day = dayKey(start,timeZone);
   if (period === 'tonight') return day === today;

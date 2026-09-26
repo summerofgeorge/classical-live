@@ -1,9 +1,11 @@
 import {load} from 'cheerio';
 import {createHash} from 'node:crypto';
 import {safeUrl,endTime,dayKey} from '../dist/core.js';
+import {expansionSources,expansionHosts,createExpansion} from './expansion.mjs';
 export const DAY=86400000;
 export const clean=value=>load(`<body>${value||''}</body>`)('body').text().replace(/\s+/g,' ').trim();
 export const sources=[
+ ...expansionSources,
  {id:'curtis',name:'Curtis Institute of Music',url:'https://www.curtis.edu/curtis-performances/watch-listen/',timezone:'America/New_York'},
  {id:'cim',name:'Cleveland Institute of Music',url:'https://www.cim.edu/concerts-events',timezone:'America/New_York'},
  {id:'eastman',name:'Eastman School of Music',url:'https://www.esm.rochester.edu/live/',timezone:'America/New_York'},
@@ -44,7 +46,7 @@ export function normalize(raw,source,now){
  if(event.end && (!Number.isFinite(Date.parse(event.end))||new Date(event.end)<=new Date(event.start)))throw new Error('Invalid end time');
  return event;
 }
-const allowedHosts=new Set(['www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu','www.hfm-weimar.de','hfm-weimar.de','www.kulmag.live','kulmag.live','www.lawrence.edu','bostonconservatory.berklee.edu','calendar.oberlin.edu','www.oberlin.edu']);
+const allowedHosts=new Set([...expansionHosts,'www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu','www.hfm-weimar.de','hfm-weimar.de','www.kulmag.live','kulmag.live','www.lawrence.edu','bostonconservatory.berklee.edu','calendar.oberlin.edu','www.oberlin.edu']);
 export function makeFetcher(){let requests=0;const lastRequest=new Map();return async function get(url,json=false){
  if(++requests>360)throw new Error('Request budget exceeded');
  if(!safeUrl(url)||!allowedHosts.has(new URL(url).hostname))throw new Error('Source URL is outside the allowlist');
@@ -434,7 +436,8 @@ async function weimar(get,now){
  }
  return events;
 }
-export const adapters={curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar,lawrence:async get=>parseLawrence(await get(lawrenceIndex)),boston,oberlin};
+export const expansion=createExpansion({clean,zonedTime,clock24,namedDate,DAY});
+export const adapters={...expansion.adapters,curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar,lawrence:async get=>parseLawrence(await get(lawrenceIndex)),boston,oberlin};
 export async function collect(previous={events:[],sources:[]},now=new Date(),registry=sources,get=makeFetcher(),handlers=adapters){
  const events=[],statuses=[];
  for(const source of registry){

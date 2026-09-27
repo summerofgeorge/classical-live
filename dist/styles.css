@@ -51,14 +51,6 @@ footer{align-items:baseline}footer span:first-child{color:var(--ink)}footer a{co
 .concert[data-performance="Competition"] .performance-tag{background:#f2dddd;border-color:#ac6668;color:#85262c}
 .concert[data-performance="Jazz"] .performance-tag{background:#e2e3e1;border-color:#bec1bc;color:#343735}
 .program.source-time{font-size:12px;line-height:1.6;margin:12px 0 0}
-.analytics-choice{background:#1f2120;color:#eeece1;padding:22px 26px;margin:0 0 26px;border-radius:6px;display:flex;align-items:center;gap:24px}
-.analytics-choice[hidden]{display:none}
-.analytics-choice h2{font-size:21px;margin:0 0 8px;color:#eeece1}
-.analytics-choice p{font-size:14px;line-height:1.6;margin:0;max-width:760px}
-.analytics-actions{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}
-.analytics-actions button{background:#eeece1;color:#1f2120;border:1px solid #eeece1;padding:10px 14px;border-radius:4px;cursor:pointer;font:inherit;font-size:14px}
-.analytics-actions button:hover{background:#fff}
-@media(max-width:900px){.analytics-choice{align-items:flex-start;flex-direction:column;gap:15px}}
 .now{background:#f5d9da;color:#85262c;padding:4px 6px;border-radius:3px;line-height:1.4}
 .calendar-button{background:#ffffff66}
 .calendar-button:hover{background:#fff;border-color:var(--ink)}

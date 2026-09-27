@@ -3,6 +3,8 @@
 const enrollment=(students,label,url,year=null)=>({students,label,url,year,checked_at:'2026-09-25'});
 const us=(region,city,count=null)=>({region:`US ${region}`,country:'United States',city,enrollment:count});
 export const schools={
+ toronto:{region:'Canada',country:'Canada',city:'Toronto, Ontario'},
+ stanford:us('West','Stanford, California'),
  melbourne:{region:'Oceania',country:'Australia',city:'Melbourne'},
  geidai:{region:'Asia',country:'Japan',city:'Tokyo'},
  moscow:{region:'Europe',country:'Russia',city:'Moscow'},

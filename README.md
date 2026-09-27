@@ -28,10 +28,16 @@ In Analytics, select **ClassicalWatch**. Use **Reports → Generate leads → Tr
 
 `dist/support.html` introduces George and Stringfest Analytics, with referrals to professional Excel users as the main way to support Classical Watch. It is linked below the homepage introduction, in About, and in the footer. The page has the same automatic GA tag as the calendar. Links to Stringfest use `utm_source=classicalwatch`, `utm_medium=referral`, and `utm_campaign=community_support` so the main site's reports can identify those visits. No payment flow is included.
 
+## Public coverage review
+
+`dist/coverage.html` explains the admission criteria and broad reasons a school may be missing, with an invitation to contact George about desired additions. It is linked from the homepage's Coverage & methodology disclosure and footer. At George's request, individual school assessments stay in `docs/school-review-2026-09-27.md`, outside the published site. The public page and homepage also link to Bachtrack for professional orchestras and opera, distinguishing free browsing from free, paid, and subscription streams. These static additions make no requests to schools and need no additional runtime dependency.
+
 ## Sources
 
 | School | Method | Admission rule |
 | --- | --- | --- |
+| [University of Toronto Faculty of Music](https://music.utoronto.ca/events) | Paginated official upcoming calendar and individual event pages | Free, public concert/recital/masterclass category plus an explicit public Faculty YouTube livestream paragraph on the event itself. Uses the full date and Eastern start/end times. Paid, private, canceled and postponed events excluded. |
+| [Stanford Department of Music](https://music.stanford.edu/events) | Paginated official upcoming calendar, dated event and linked broadcast page | Explicit affirmative livestream link to the school's public viewing page; its program must match the dated concert and link public Vimeo or YouTube. Paid physical admission does not imply a paid stream. Dates use Los Angeles time; ambiguous ranges fail closed. |
 | [Melbourne Conservatorium](https://finearts-music.unimelb.edu.au/about-us/mcm/conservatorium-streamed-concerts) | University LiveWhale JSON feed and structured event details | Free, dated membership in the explicitly streamed Hanson Dyer Hall or Melba Hall Lunch Hour series; calendar timestamps and event metadata must agree. Australia/Melbourne handles southern-hemisphere DST. |
 | [Tokyo University of the Arts — Geidai](https://gma.geidai.ac.jp/) | GEIDAI Music Archive recent announcements and concert details | Explicit Japanese livestream marker, matching full concert date and start time; ended, canceled and restricted broadcasts excluded. A healthy empty announcement list is valid. |
 | [Moscow Conservatory TV](https://www.mosconsv.tv/stream) | TV service's official public Telegram monthly broadcast announcements | Only explicitly scheduled broadcasts; the announcement timestamp determines the year of Russian month/day dates. Uses Europe/Moscow and the official public TV player. |

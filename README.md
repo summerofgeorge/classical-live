@@ -24,6 +24,10 @@ At George's explicit request, there is no analytics opt-in prompt or stored cons
 
 In Analytics, select **ClassicalWatch**. Use **Reports → Generate leads → Traffic acquisition** for incoming sources. The saved **ClassicalWatch — Outgoing links** exploration uses **Link domain**, **Link URL**, and **Event count**, filtered to **Outbound exactly matches true**. **Realtime** is useful for installation checks. Standard reports need processing time.
 
+## Support page
+
+`dist/support.html` introduces George and Stringfest Analytics, with referrals to professional Excel users as the main way to support Classical Watch. It is linked below the homepage introduction, in About, and in the footer. The page has the same automatic GA tag as the calendar. Links to Stringfest use `utm_source=classicalwatch`, `utm_medium=referral`, and `utm_campaign=community_support` so the main site's reports can identify those visits. No payment flow is included.
+
 ## Sources
 
 | School | Method | Admission rule |

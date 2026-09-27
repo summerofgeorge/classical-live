@@ -3,6 +3,9 @@
 const enrollment=(students,label,url,year=null)=>({students,label,url,year,checked_at:'2026-09-25'});
 const us=(region,city,count=null)=>({region:`US ${region}`,country:'United States',city,enrollment:count});
 export const schools={
+ melbourne:{region:'Oceania',country:'Australia',city:'Melbourne'},
+ geidai:{region:'Asia',country:'Japan',city:'Tokyo'},
+ moscow:{region:'Europe',country:'Russia',city:'Moscow'},
  yale:us('Northeast','New Haven, Connecticut'),
  colorado:us('West','Boulder, Colorado'),
  blair:us('South','Nashville, Tennessee',{students:245,label:'about 245',url:'https://blair.vanderbilt.edu/about/',year:null,checked_at:'2026-09-26'}),

@@ -4,12 +4,15 @@ import {safeUrl,endTime,dayKey} from '../dist/core.js';
 import {expansionSources,expansionHosts,createExpansion} from './expansion.mjs';
 import {europeanSources,europeanHosts,createEuropean} from './european.mjs';
 import {americanSources,americanHosts,createAmerican} from './american.mjs';
+import {createFetcher} from './http.mjs';
+import {internationalSources,internationalHosts,createInternational} from './international.mjs';
 export const DAY=86400000;
 // Keep enough recent data for today's listings in every viewer's time zone,
 // including 25-hour DST days. The browser applies the exact local-midnight cutoff.
 export const keepForDisplay=(event,now)=>endTime(event)>now||Date.parse(event.start)>=+now-2*DAY;
 export const clean=value=>load(`<body>${value||''}</body>`)('body').text().replace(/\s+/g,' ').trim();
 export const sources=[
+ ...internationalSources,
  ...americanSources,
  ...europeanSources,
  ...expansionSources,
@@ -53,29 +56,8 @@ export function normalize(raw,source,now){
  if(event.end && (!Number.isFinite(Date.parse(event.end))||new Date(event.end)<=new Date(event.start)))throw new Error('Invalid end time');
  return event;
 }
-const allowedHosts=new Set([...americanHosts,...expansionHosts,...europeanHosts,'www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu','www.hfm-weimar.de','hfm-weimar.de','www.kulmag.live','kulmag.live','www.lawrence.edu','bostonconservatory.berklee.edu','calendar.oberlin.edu','www.oberlin.edu']);
-export function makeFetcher(){let requests=0;const lastRequest=new Map();return async function get(url,json=false){
- if(++requests>360)throw new Error('Request budget exceeded');
- if(!safeUrl(url)||!allowedHosts.has(new URL(url).hostname))throw new Error('Source URL is outside the allowlist');
- for(let attempt=0;attempt<2;attempt++){
-  try{let current=url,r;
-   for(let redirects=0;redirects<4;redirects++){
-    if(!safeUrl(current)||!allowedHosts.has(new URL(current).hostname))throw new Error('Redirect outside source allowlist');
-    // Pace providers with rate-sensitive calendars; never retry access-denied or rate-limit responses.
-    const host=new URL(current).hostname;
-    if(['kulmag.live','www.kulmag.live','calendar.oberlin.edu','bostonconservatory.berklee.edu',...europeanHosts,...americanHosts].includes(host)){
-     const delay=1000-(Date.now()-(lastRequest.get(host)||0));if(delay>0)await new Promise(resolve=>setTimeout(resolve,delay));lastRequest.set(host,Date.now());
-    }
-    r=await fetch(current,{signal:AbortSignal.timeout(20000),redirect:'manual',headers:{'User-Agent':'ClassicalLive/1.0 (+https://github.com/summerofgeorge/classical-live)','Accept':json?'application/json':'text/html'}});
-    if(r.status>=300&&r.status<400&&r.headers.get('location')){current=new URL(r.headers.get('location'),current).href;continue;}
-    break;
-   }
-   if(!r.ok)throw new Error(`HTTP ${r.status} from ${new URL(url).hostname}`);
-   const body=await r.text();if(body.length>5_000_000)throw new Error('Response too large');
-   return json?JSON.parse(body):body;
-  }catch(error){if(attempt||/HTTP 4\d\d/.test(error.message))throw error;await new Promise(resolve=>setTimeout(resolve,1000));}
- }
-};}
+const allowedHosts=new Set([...internationalHosts,...americanHosts,...expansionHosts,...europeanHosts,'www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu','www.hfm-weimar.de','hfm-weimar.de','www.kulmag.live','kulmag.live','www.lawrence.edu','bostonconservatory.berklee.edu','calendar.oberlin.edu','www.oberlin.edu']);
+export function makeFetcher(){return createFetcher({allowedHosts,pacedHosts:allowedHosts});}
 export function curtisCandidates(payload,now){
  if(payload.success!==true||!Array.isArray(payload.data))throw new Error('Curtis feed format changed');
  return payload.data.filter(e=>e.date>=new Date(+now-DAY).toISOString().slice(0,10)&&e.date<=new Date(+now+45*DAY).toISOString().slice(0,10)&&e.categories?.includes('broadcast')&&e.categories?.includes('free')&&!/cancelled|canceled|postponed/i.test(e.title));
@@ -111,7 +93,7 @@ async function cim(get,now){
    const html=await get(url),event=parseCim(html,url);
    const rawStart=clean(load(html)('.atc_date_start').text());
    if(zonedTime(rawStart,'America/New_York')<new Date(+now+45*DAY).toISOString())allBeyond=false;
-   if(event)events.push(event);await new Promise(resolve=>setTimeout(resolve,150));
+   if(event)events.push(event);
   }
   const href=$('a[rel="next"]').attr('href');next=href&&!allBeyond?new URL(href,next).href:null;
  }
@@ -203,7 +185,7 @@ async function rice(get,now){
    // Only inspect marked broadcasts; other cards can point to undated, multi-performance landing pages.
    const html=await get(url);if(Date.parse(riceStart(html))<+now+45*DAY)allBeyond=false;
    if(item.find('.stream-icon').length){const event=parseRice(html,url);if(event)events.push(event);}
-   await new Promise(resolve=>setTimeout(resolve,150));
+
   }
   const href=area.find('a[rel="next"]').attr('href');next=href&&!allBeyond?new URL(href,next).href:null;
  }
@@ -243,7 +225,7 @@ async function sfcm(get,now){
    if(!/^\d{1,2}$/.test(day)||monthName!==months[month.getUTCMonth()].slice(0,3))throw new Error('SFCM calendar row date missing');
    const date=`${month.toISOString().slice(0,7)}-${day.padStart(2,'0')}`;if(date<first||date>last||cancelled($(link).text()))continue;
    const event=parseSfcm(await get(url),url);if(event)events.push(event);
-   await new Promise(resolve=>setTimeout(resolve,150));
+
   }
   month.setUTCMonth(month.getUTCMonth()+1);
  }
@@ -446,10 +428,13 @@ async function weimar(get,now){
 export const expansion=createExpansion({clean,zonedTime,clock24,namedDate,DAY});
 export const european=createEuropean({clean,zonedTime,DAY});
 export const american=createAmerican({clean,zonedTime,clock24,namedDate,DAY});
-export const adapters={...american.adapters,...european.adapters,...expansion.adapters,curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar,lawrence:async get=>parseLawrence(await get(lawrenceIndex)),boston,oberlin};
+export const international=createInternational({clean,zonedTime,kind,DAY});
+export const adapters={...international.adapters,...american.adapters,...european.adapters,...expansion.adapters,curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar,lawrence:async get=>parseLawrence(await get(lawrenceIndex)),boston,oberlin};
 export async function collect(previous={events:[],sources:[]},now=new Date(),registry=sources,get=makeFetcher(),handlers=adapters){
+ const started=Date.now();
  const events=[],statuses=[];
  for(const source of registry){
+  const sourceStarted=Date.now(),before=get?.stats?.().requests;
   const old=previous.sources.find(s=>s.id===source.id);
   try{const raw=await handlers[source.id](get,now),parsed=raw.map(e=>normalize(e,source,now));
    const active=parsed.filter(e=>keepForDisplay(e,now)&&new Date(e.start)<new Date(+now+45*DAY));
@@ -460,7 +445,8 @@ export async function collect(previous={events:[],sources:[]},now=new Date(),reg
    events.push(...kept);statuses.push({...source,status:'error',last_success:old?.last_success||null,count:kept.length,error:String(error.message).slice(0,200)});
    console.error(`${source.name}: ${error.message}; retained ${kept.length}`);
   }
+  if(before!==undefined)Object.assign(statuses.at(-1),{requests:get.stats().requests-before,duration_ms:Date.now()-sourceStarted});
  }
  const unique=new Map();for(const event of events)unique.set(event.id,event);
- return {schema_version:1,generated_at:now.toISOString(),horizon_days:45,sources:statuses,events:[...unique.values()].sort((a,b)=>Date.parse(a.start)-Date.parse(b.start))};
+ return {schema_version:1,generated_at:now.toISOString(),horizon_days:45,...(get?.stats?{collection:{...get.stats(),duration_ms:Date.now()-started}}:{}),sources:statuses,events:[...unique.values()].sort((a,b)=>Date.parse(a.start)-Date.parse(b.start))};
 }

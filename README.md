@@ -32,6 +32,9 @@ In Analytics, select **ClassicalWatch**. Use **Reports → Generate leads → Tr
 
 | School | Method | Admission rule |
 | --- | --- | --- |
+| [Melbourne Conservatorium](https://finearts-music.unimelb.edu.au/about-us/mcm/conservatorium-streamed-concerts) | University LiveWhale JSON feed and structured event details | Free, dated membership in the explicitly streamed Hanson Dyer Hall or Melba Hall Lunch Hour series; calendar timestamps and event metadata must agree. Australia/Melbourne handles southern-hemisphere DST. |
+| [Tokyo University of the Arts — Geidai](https://gma.geidai.ac.jp/) | GEIDAI Music Archive recent announcements and concert details | Explicit Japanese livestream marker, matching full concert date and start time; ended, canceled and restricted broadcasts excluded. A healthy empty announcement list is valid. |
+| [Moscow Conservatory TV](https://www.mosconsv.tv/stream) | TV service's official public Telegram monthly broadcast announcements | Only explicitly scheduled broadcasts; the announcement timestamp determines the year of Russian month/day dates. Uses Europe/Moscow and the official public TV player. |
 | [Curtis Institute](https://www.curtis.edu/curtis-performances/watch-listen/) | Public JSON calendar API plus event details | Both Broadcast and Free categories; excludes cancellations. Channel fallback is labeled when a direct video is not yet published. |
 | [Cleveland Institute](https://www.cim.edu/concerts-events) | Paginated event index; event-specific calendar metadata | Explicit public livestream link. Empty placeholder links and canceled concerts are skipped. |
 | [Eastman](https://www.esm.rochester.edu/live/) | Dedicated structured upcoming-stream list | Only listed livestreams, with the venue player linked by the school. |
@@ -79,6 +82,16 @@ Seven automated schools were added after investigating all 19 requested candidat
 
 `scripts/european.mjs` and `scripts/american.mjs` use the existing HTTP fetcher, normalization, stale-data handling and daily workflow. New hosts are paced at one request per second. New fixtures cover Unicode, US/European DST, positive broadcast evidence, duplicate metadata, legacy viewing redirects, cancellations, pagination limits and calendar downloads. Tests do not require network access. No new dependencies or paid services were added.
 
+## September 27 international expansion and maintenance
+
+Melbourne, Geidai and Moscow now use the daily automatic refresh. See [the international assessment](docs/international-expansion-2026-09-27.md) for evidence, coverage limits and remaining candidates. The initial check found six future Melbourne streams, no future Geidai announcement and a Moscow September schedule whose dates were already past. Adding a collector does not imply that the school currently has an upcoming broadcast.
+
+`scripts/international.mjs` follows the regional-adapter interface used by the existing sources. `scripts/http.mjs` now owns request pacing, redirects, retries and response-size checks. Its 600-request ceiling counts **every actual HTTP request**, including redirect hops and retries. Every allowed host is paced to at most one request start per second; individual collectors no longer manage their own delays. Access-denied and rate-limited responses, off-site redirects, malformed JSON and redirect loops fail without wasteful retries. New collectors add no dependencies or paid services.
+
+`events.json` includes total request count, response bytes and collection duration, plus request count and duration per automatic school. The Actions summary reports these figures and published-site size. Warnings begin at 80% of the request ceiling, 10 minutes of collection time or 800 MB of site files. The request ceiling and workflow timeout are engineering safeguards, not paid allowances. Actual visitor bandwidth and account-wide storage are not measured by these figures.
+
+Daily publication remains at 3:15 a.m. Eastern: using a standard runner on a public repository is free, and daily checks help catch additions and cancellations. Lowering frequency would not change the request or runtime demand of each refresh.
+
 ## Run locally
 
 Requires Node.js 22 or newer and pnpm 11.19.0.
@@ -94,7 +107,7 @@ Open http://127.0.0.1:4173. Do not double-click `index.html`; browsers block JSO
 
 ## Hosting and refresh
 
-The repository is public and uses the standard `ubuntu-latest` runner, which GitHub currently provides free for public repositories and Pages. The workflow skips the job if the repository becomes private. It stays daily with a 15-minute timeout, a 360-call collector budget, one-day Pages artifact retention, and no paid APIs or hosted browsers. The published site is under 1 MB, with no stored video. Prioritize established music schools with frequent confirmed free streams; do not expand at the expense of this operating model. No custom domain is required.
+The repository is public and uses the standard `ubuntu-latest` runner, which GitHub currently provides free for public repositories and Pages. The workflow skips the job if the repository becomes private. It stays daily with a 15-minute timeout, a 600-call collector budget, one-day Pages artifact retention, and no paid APIs or hosted browsers. The published site is under 1 MB, with no stored video. Prioritize established music schools with frequent confirmed free streams; do not expand at the expense of this operating model. No custom domain is required.
 
 In repository **Settings → Pages**, select **GitHub Actions** as the source. The `Refresh and publish calendar` workflow runs on pushes to `main`, manually through **Actions → Run workflow**, and on the daily schedule. It tests, refreshes, commits the data file, and deploys `dist/` in the same run. A bot commit does not need to trigger a second workflow.
 
@@ -125,7 +138,7 @@ The `.ics` download is a snapshot, not a calendar subscription. Re-importing it 
 4. Require affirmative livestream evidence. Do not infer streaming just because admission to the in-person concert is free. Throw on a structural source change; return an empty array only for a genuinely empty schedule.
 5. Add parser fixtures and tests for dates, canceled records, and missing stream links. Run a real refresh, inspect the resulting listings, and then publish.
 
-The test suite covers time zones, DST ambiguity, date filters, `.ics` escaping and UTF-8 folding, parser rules for all twenty-five automatic schools and the deferred Liechtenstein prototype, pagination, and failed-source retention. European parser fixtures preserve small relevant excerpts of the official HTML observed on September 25, 2026. The additional conservatory tests use reduced fixtures matching the observed September 25 layouts and cover same-day occurrence IDs, canceled listings, virtual-link validation, multi-performance exclusions, relevance-ordered search pagination, and date-only end metadata.
+The test suite covers time zones, DST ambiguity, date filters, `.ics` escaping and UTF-8 folding, parser rules for every automatic school and the deferred Liechtenstein prototype, pagination, and failed-source retention. Regional fixtures preserve relevant excerpts of the official pages observed during source verification. Tests also cover same-day occurrence IDs, canceled listings, virtual-link validation, multi-performance exclusions, relevance-ordered search pagination, date-only end metadata, request accounting and source-directory consistency.
 
 ## School filters and viewing help
 

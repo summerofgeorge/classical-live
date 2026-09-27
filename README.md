@@ -12,7 +12,17 @@ A small, free calendar of conservatory livestreams, built for personal use and e
 - Downloads one concert or the current filtered selection as an `.ics` file for Apple Calendar, Outlook, Google Calendar import, and other calendar apps.
 - Refreshes and publishes daily at **3:15 a.m. America/New_York**, including daylight-saving changes. GitHub may delay scheduled starts.
 
-No visitor accounts, database server, API keys, analytics, paid services, or frontend framework. The site is plain HTML/CSS/JavaScript; `dist/events.json` is the data store. Only the ingestion scripts use a dependency: Cheerio for parsing official HTML.
+No visitor accounts, database server, API keys, paid services, or frontend framework. The site is plain HTML/CSS/JavaScript; `dist/events.json` is the data store. Only the ingestion scripts use a dependency: Cheerio for parsing official HTML. Optional Google Analytics loads only after a visitor grants analytics consent.
+
+## Audience analytics
+
+ClassicalWatch has its own GA4 property in the existing Stringfest Analytics account. The web stream is **ClassicalWatch website**, measurement ID **G-CCRKXW68XX**, with America/New_York reporting time. This public ID is not a password or API secret.
+
+`dist/analytics.js` loads the Google tag once, only on `classicalwatch.stringfestanalytics.com` and only after analytics consent. Local previews and alternate hosts do not send events. Enhanced measurement supplies page views, engagement, scrolls, and outbound `click` events with Link URL and Link domain. Do not add a second page-view or outbound-click listener for these same events. A link click indicates departure to a concert provider; it does not establish that someone played or watched its video.
+
+The inline analytics choice and footer **Analytics preferences** control consent, remembered for 180 days in localStorage. With no consent, no Google tag is loaded. Advertising consent remains denied; Google signals and ad personalization are disabled. GA cookies use the `cw` prefix and ClassicalWatch hostname so withdrawing consent clears only this site's analytics cookies. Withdrawal reloads the page to unload Google's listeners. Reports represent consenting visitors, subject to browser blocking, and start when tracking was installed; they do not recover historical visits.
+
+In Analytics, select **ClassicalWatch**. Use **Reports → Acquisition → Traffic acquisition** (or the traffic objective collection) for incoming sources, and **Explore** with **Link domain**, **Link URL**, **Outbound**, and **Event count**, filtered to event name `click`, for outgoing links. **Realtime** is useful for installation checks. Standard reports need processing time.
 
 ## Sources
 

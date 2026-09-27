@@ -98,6 +98,10 @@ Melbourne, Geidai and Moscow now use the daily automatic refresh. See [the inter
 
 Daily publication remains at 3:15 a.m. Eastern: using a standard runner on a public repository is free, and daily checks help catch additions and cancellations. Lowering frequency would not change the request or runtime demand of each refresh.
 
+## September 27 Cleveland-area expansion
+
+Baldwin Wallace, Bowling Green, Carnegie Mellon, Duquesne, the University of Pittsburgh and Case Western Reserve now participate in the existing daily refresh. Their collectors require explicit public livestream evidence on an official schedule or concert record. The initial regional run found 35 listings with 30 requests. See [the regional review](docs/great-lakes-expansion-2026-09-27.md) for admission rules and the remaining Cincinnati CCM, Michigan State, Akron and Kent State evidence gaps. These additions use the existing free operating model and add no dependencies or scheduled jobs.
+
 ## Run locally
 
 Requires Node.js 22 or newer and pnpm 11.19.0.

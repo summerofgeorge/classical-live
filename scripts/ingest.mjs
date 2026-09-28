@@ -1,4 +1,5 @@
 import {conservatorySources,conservatoryHosts,createConservatories} from './conservatories.mjs';
+import {prioritySources,priorityHosts,createPrioritySchools} from './priority-schools.mjs';
 import {load} from 'cheerio';
 import {createHash} from 'node:crypto';
 import {safeUrl,endTime,dayKey} from '../dist/core.js';
@@ -16,6 +17,7 @@ export const DAY=86400000;
 export const keepForDisplay=(event,now)=>endTime(event)>now||Date.parse(event.start)>=+now-2*DAY;
 export const clean=value=>load(`<body>${value||''}</body>`)('body').text().replace(/\s+/g,' ').trim();
 export const sources=[
+ ...prioritySources,
  ...conservatorySources,
  ...auditedSources,
  ...greatLakesSources,
@@ -68,6 +70,7 @@ const allowedHosts=new Set([...campusHosts,...internationalHosts,...americanHost
 for(const host of greatLakesHosts)allowedHosts.add(host);
 for(const host of auditedHosts)allowedHosts.add(host);
 for(const host of conservatoryHosts)allowedHosts.add(host);
+for(const host of priorityHosts)allowedHosts.add(host);
 export function makeFetcher(){return createFetcher({allowedHosts,pacedHosts:allowedHosts});}
 export function curtisCandidates(payload,now){
  if(payload.success!==true||!Array.isArray(payload.data))throw new Error('Curtis feed format changed');
@@ -444,7 +447,8 @@ export const campus=createCampus({clean,zonedTime,clock24,namedDate,DAY});
 export const greatLakes=createGreatLakes({clean,zonedTime,clock24,namedDate,DAY});
 export const audited=createAudited({clean,zonedTime,clock24,namedDate,DAY});
 export const conservatories=createConservatories({clean,zonedTime,clock24,namedDate,DAY});
-export const adapters={...conservatories.adapters,...audited.adapters,...greatLakes.adapters,...campus.adapters,...international.adapters,...american.adapters,...european.adapters,...expansion.adapters,curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar,lawrence:async get=>parseLawrence(await get(lawrenceIndex)),boston,oberlin};
+export const prioritySchools=createPrioritySchools({clean,zonedTime,clock24,namedDate,DAY});
+export const adapters={...prioritySchools.adapters,...conservatories.adapters,...audited.adapters,...greatLakes.adapters,...campus.adapters,...international.adapters,...american.adapters,...european.adapters,...expansion.adapters,curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar,lawrence:async get=>parseLawrence(await get(lawrenceIndex)),boston,oberlin};
 export async function collect(previous={events:[],sources:[]},now=new Date(),registry=sources,get=makeFetcher(),handlers=adapters){
  const started=Date.now();
  const events=[],statuses=[];

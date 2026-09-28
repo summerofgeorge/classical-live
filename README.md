@@ -175,3 +175,9 @@ Added Boston University, Hartt, Ithaca, Florida State, SUNY Potsdam Crane, CSU L
 The performance sharing panel supports Email, Text message, Facebook and X, plus copying details and the native share sheet. Email and text carry full concert details and an explicit time zone; the visitor chooses a recipient and sends in their own app. [Photo provenance and editable layout](docs/social-preview.md).
 
 BYU’s GitHub-hosted collector returned HTTP 403 during the September 28 deployment. Its ten locally browser-reviewed streams use the existing 14-day review expiry instead of scheduled scraping. The source’s check timestamp is not advanced by daily builds. Case Western’s official calendar now includes flattened music-department event URLs; the collector accepts these while retaining same-origin, department-path and event-header streaming checks.
+
+## Requested schools and schedule notices
+
+Added automated Bard Noon Concert and UCLA event-specific stream collectors in `scripts/priority-schools.mjs`. Rutgers’ free Nicholas Music Center schedule and Columbia’s free Music at St. Paul’s series use dated manual reviews because automated access returns HTTP 403. These reviews expire after 14 days, retaining their original check times. The 30-school checklist now has 24 covered schools; the six unresolved schools and additional NYC leads are documented in the coverage audit. Across this update, 12 sources were added (nine automatic, three reviewed).
+
+Schedule notices name affected schools and distinguish older retained concert details, missing new listings, and expired manual reviews. The chosen Ri_Ya cello photograph is now the `social-card-v3.jpg` preview for Facebook, X, and the sharing dialog.

@@ -2,15 +2,15 @@
   "checked_at": "2026-09-28",
   "inventory_url": "https://en.wikipedia.org/wiki/List_of_conservatories_of_music_in_the_United_States",
   "counts": {
-    "Candidate — not enabled": 38,
+    "Candidate — not enabled": 37,
     "Existing automated source": 20,
     "Restricted featured streams": 1,
     "Closed institution": 3,
-    "Added automated source": 7,
+    "Added automated source": 8,
     "Existing browser-reviewed source": 4,
     "Outside current scope": 1,
-    "Historical entry": 7,
-    "Added browser-reviewed source": 1
+    "Added browser-reviewed source": 1,
+    "Historical entry": 7
   },
   "schools": [
     {
@@ -127,10 +127,10 @@
       "name": "Bard College Conservatory of Music",
       "group": "Liberal arts colleges, secular",
       "wikipedia": "https://en.wikipedia.org/wiki/Bard_College_Conservatory_of_Music",
-      "status": "Candidate — not enabled",
-      "source_id": null,
-      "evidence_url": "https://blogs.bard.edu/conservatory-wiki/home/the-concert-office/noon-concerts/",
-      "note": "Strong next addition: official 2026–27 Noon Concert schedule promises YouTube streaming, including October 19 and November 2 at noon. Current public calendar fetch timed out; confirm viewing destination and automated retrieval before enabling.",
+      "status": "Added automated source",
+      "source_id": "bard",
+      "evidence_url": "https://www.bard.edu/conservatory/events/",
+      "note": "Dated Noon Concert events explicitly confirm free public access and streaming on the official Conservatory YouTube channel. The collector checks each listed Noon Concert; two currently fall within the rolling window. Other Bard concerts need their own broadcast evidence.",
       "checked_at": "2026-09-28"
     },
     {
@@ -832,6 +832,244 @@
       "evidence_url": "https://en.wikipedia.org/wiki/Western_University_(Kansas)",
       "note": "Listed in Wikipedia’s former-institutions section. Retain in the inventory, exclude from current-school ingestion.",
       "checked_at": "2026-09-28"
+    }
+  ],
+  "priority_schools": [
+    {
+      "name": "Curtis",
+      "source_id": "curtis",
+      "status": "Covered — automatic",
+      "evidence_url": "https://www.curtis.edu/curtis-performances/watch-listen/",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Juilliard",
+      "source_id": "juilliard",
+      "status": "Covered — manual review",
+      "evidence_url": "https://www.juilliard.edu/stage-beyond/performance/calendar",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "New England Conservatory",
+      "status": "Restricted featured streams",
+      "source_id": null,
+      "evidence_url": "https://necmusic.edu/live/",
+      "note": "Featured streams checked in this pass require a password for the NEC community. Public admission to the hall does not establish unrestricted online access."
+    },
+    {
+      "name": "Colburn",
+      "source_id": "colburn",
+      "status": "Covered — automatic",
+      "evidence_url": "https://colburnschool.edu/livestream/",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Yale",
+      "source_id": "yale",
+      "status": "Covered — automatic",
+      "evidence_url": "https://music.yale.edu/live",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Rice (Shepherd)",
+      "source_id": "rice",
+      "status": "Covered — automatic",
+      "evidence_url": "https://music.rice.edu/events",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Rochester (Eastman)",
+      "source_id": "eastman",
+      "status": "Covered — automatic",
+      "evidence_url": "https://www.esm.rochester.edu/live/",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Johns Hopkins (Peabody)",
+      "source_id": "peabody",
+      "status": "Covered — manual review",
+      "evidence_url": "https://peabody.jhu.edu/events/",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "University of North Texas",
+      "source_id": "unt",
+      "status": "Covered — automatic",
+      "evidence_url": "https://recording.music.unt.edu/webcasts",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Northwestern (Bienen)",
+      "source_id": "northwestern",
+      "status": "Covered — automatic",
+      "evidence_url": "https://www.music.northwestern.edu/live",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Manhattan School of Music",
+      "source_id": "msm",
+      "status": "Covered — automatic",
+      "evidence_url": "https://www.msmnyc.edu/livestream/",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Indiana University (Jacobs)",
+      "source_id": "indiana",
+      "status": "Covered — automatic",
+      "evidence_url": "https://liveatjacobs.music.indiana.edu/",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Cleveland Institute of Music",
+      "source_id": "cim",
+      "status": "Covered — automatic",
+      "evidence_url": "https://www.cim.edu/concerts-events",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Oberlin",
+      "source_id": "oberlin",
+      "status": "Covered — automatic",
+      "evidence_url": "https://www.oberlin.edu/conservatory/on-stage/live-webcasts",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "University of Michigan (SMTD)",
+      "source_id": "michigan",
+      "status": "Covered — manual review",
+      "evidence_url": "https://smtd.umich.edu/events/?_viewing_options=37acb94c8a8ff095031820c312e81ccd",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Boston Conservatory at Berklee",
+      "source_id": "boston",
+      "status": "Covered — automatic",
+      "evidence_url": "https://bostonconservatory.berklee.edu/events",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "USC (Thornton)",
+      "status": "Public stream not yet verified",
+      "source_id": null,
+      "evidence_url": "https://music.usc.edu/events/details/?event-id=53497635556551",
+      "note": "The October 7 Thornton Symphony concert is free on campus, but its current event page does not confirm a public stream. Further concert-specific evidence is needed."
+    },
+    {
+      "name": "Carnegie Mellon",
+      "source_id": "carnegie-mellon",
+      "status": "Covered — automatic",
+      "evidence_url": "https://events.cmu.edu/music/",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "San Francisco Conservatory",
+      "source_id": "sfcm",
+      "status": "Covered — automatic",
+      "evidence_url": "https://www.sfcm.edu/experience/performance-calendar",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Vanderbilt (Blair)",
+      "source_id": "blair",
+      "status": "Covered — automatic",
+      "evidence_url": "https://blair.vanderbilt.edu/livestreams/",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "Bard College",
+      "source_id": "bard",
+      "status": "Covered — automatic",
+      "evidence_url": "https://www.bard.edu/conservatory/events/",
+      "note": "Noon Concert series; other programs require individual confirmation."
+    },
+    {
+      "name": "UT Austin (Butler)",
+      "source_id": "ut-austin",
+      "status": "Covered — automatic",
+      "evidence_url": "https://music.utexas.edu/events?field_cofaevent_types_target_id%5B0%5D=236",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "The New School (Mannes)",
+      "source_id": "mannes",
+      "status": "Covered — manual review",
+      "evidence_url": "https://event.newschool.edu/schneiderconcerts20262027subs/",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "SMU (Meadows)",
+      "status": "Public stream not yet verified",
+      "source_id": null,
+      "evidence_url": "https://calendar.smu.edu/site/meadows/?keywords=Livestream+Event",
+      "note": "The current calendar search did not provide a dated eligible stream. The season page’s livestream-registration link still points to Spring 2022; it is not current evidence."
+    },
+    {
+      "name": "NYU (Steinhardt)",
+      "status": "Public stream not yet verified",
+      "source_id": null,
+      "evidence_url": "https://steinhardt.nyu.edu/events",
+      "note": "The current calendar was reviewed, but an upcoming classical performance with a confirmed public stream was not established. Recent search results for livestreams include commencement and non-classical events; these are not substituted."
+    },
+    {
+      "name": "University of Houston (Moores)",
+      "status": "Public stream not yet verified",
+      "source_id": null,
+      "evidence_url": "https://www.uh.edu/kgmca/msm/live-stream/moores-opera-house.php",
+      "note": "A public Moores Opera House player exists. The current events endpoint returned an empty content area, and no dated performance-to-stream confirmation was established. Keep the player as a lead, not an assumed calendar of broadcasts."
+    },
+    {
+      "name": "UCLA (Herb Alpert)",
+      "source_id": "ucla",
+      "status": "Covered — automatic",
+      "evidence_url": "https://schoolofmusic.ucla.edu/calendar/",
+      "note": "Only event-specific Watch Livestream links qualify."
+    },
+    {
+      "name": "Ithaca (SMTD)",
+      "source_id": "ithaca",
+      "status": "Covered — automatic",
+      "evidence_url": "https://www.ithaca.edu/academics/school-music-theatre-and-dance/live/webcasting-schedule",
+      "note": "Coverage includes performances with verified stream evidence, not every school event."
+    },
+    {
+      "name": "University of Illinois Urbana-Champaign",
+      "status": "Public stream not yet verified",
+      "source_id": null,
+      "evidence_url": "https://music.illinois.edu/live-stream-concerts-and-events/",
+      "note": "The school links its public YouTube channel for events that are streamed; it does not promise every concert is streamed. The inspected September 28 recital page has no event-specific stream link. Await a dated broadcast announcement."
+    },
+    {
+      "name": "Rutgers (Mason Gross)",
+      "source_id": "rutgers",
+      "status": "Covered — manual review",
+      "evidence_url": "https://www.masongross.rutgers.edu/nicholas-music-center-stream/",
+      "note": "Free 2026–27 Nicholas Music Center series. Manual review because the identified collector receives HTTP 403."
+    }
+  ],
+  "nyc_additional": [
+    {
+      "name": "Columbia University — Music at St. Paul’s",
+      "status": "Added — manual review",
+      "evidence_url": "https://religiouslife.columbia.edu/sacred-music",
+      "note": "Free Fall 2026 chapel concerts explicitly stream on the official YouTube channel. Six eligible classical concerts currently fit the rolling window. Registration is for campus entry. Direct collection returns HTTP 403; readable official web view reviewed manually. The in-person-only November 19 event is excluded."
+    },
+    {
+      "name": "Queens College — Aaron Copland School of Music",
+      "status": "Public stream not yet verified",
+      "evidence_url": "https://www.qc.cuny.edu/academics/music/",
+      "note": "Official school and performance information reviewed. No current dated public classical webcast established. “Chamber Music Live” is a concert-series name, not evidence of livestreaming."
+    },
+    {
+      "name": "Brooklyn College Conservatory of Music",
+      "status": "Public stream not yet verified",
+      "evidence_url": "https://www.brooklyn.edu/event/conservatory-orchestra-i/",
+      "note": "The October 1 orchestra concert is a ticketed campus event; no webcast is stated. The school’s audio/video archive contains past recordings, which do not establish future broadcasts."
+    },
+    {
+      "name": "Brooklyn Conservatory of Music",
+      "status": "Past stream; next broadcast unconfirmed",
+      "evidence_url": "https://bkcm.org/event/carmina-burana/",
+      "note": "A January 31, 2026 Carmina Burana webcast confirms that this separate institution sometimes streams. No current upcoming broadcast was established in this pass."
     }
   ]
 }

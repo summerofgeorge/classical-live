@@ -3,6 +3,10 @@
 const enrollment=(students,label,url,year=null)=>({students,label,url,year,checked_at:'2026-09-25'});
 const us=(region,city,count=null)=>({region:`US ${region}`,country:'United States',city,enrollment:count});
 export const schools={
+ bard:us('Northeast','Annandale-on-Hudson, New York'),
+ rutgers:us('Northeast','New Brunswick, New Jersey'),
+ ucla:us('West','Los Angeles, California'),
+ columbia:us('Northeast','New York, New York'),
  bu:us('Northeast','Boston, Massachusetts'),
  hartt:us('Northeast','West Hartford, Connecticut'),
  ithaca:us('Northeast','Ithaca, New York'),

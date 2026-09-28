@@ -40,14 +40,20 @@ export function createExpansion({clean,zonedTime,clock24,namedDate,DAY}){
   const link=body.find('a[href]').filter((i,a)=>/livestream|watch.*live/i.test($(a).text())).first();
   const stream=safeUrl(link.attr('href'));if(!stream||!['youtube.com','www.youtube.com','youtu.be'].includes(new URL(stream).hostname))return null;
   if(!/free and open to the public/i.test(body.text()))return null;
-  const calendar=area.find('a[href^="https://calendar.google.com/calendar/render"]').first().attr('href');if(!calendar)throw new Error('Ohio State calendar metadata missing');
+  const printed=clean(area.find('.icon-calendar').parent().text()),clock=clean(area.find('.icon-clock').parent().text());
+  if(!/\b20\d{2}\b/.test(printed)||!/^\d{1,2}(?::\d{2})?\s*(?:am|pm)(?:\s*[-–]\s*\d{1,2}(?::\d{2})?\s*(?:am|pm))?$/i.test(clock))throw new Error('Ohio State visible date or time missing');
+  const day=namedDate(printed),times=clock.split(/\s*[-–]\s*/),visibleStart=zonedTime(day+'T'+clock24(times[0]),'America/New_York'),visibleEnd=times[1]?zonedTime(day+'T'+clock24(times[1]),'America/New_York'):null;
+  let start=visibleStart,end=visibleEnd;
+  // Some current event pages omit Add to Calendar but retain a complete visible schedule.
+  const calendar=area.find('a[href^="https://calendar.google.com/calendar/render"]').first().attr('href');
+  if(calendar){
   const p=new URL(calendar).searchParams,dates=p.get('dates')?.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})\/(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})$/);
   if(!dates||p.get('ctz')!=='America/New_York')throw new Error('Ohio State date format changed');
   const local=n=>`${dates[n]}-${dates[n+1]}-${dates[n+2]}T${dates[n+3]}:${dates[n+4]}:${dates[n+5]}`;
-  const start=zonedTime(local(1),'America/New_York'),end=zonedTime(local(7),'America/New_York');
-  const printed=area.find('.icon-calendar').parent().text();
-  if(namedDate(clean(printed))!==local(1).slice(0,10)||clock24(area.find('.icon-clock').parent().text())!==local(1).slice(11))throw new Error('Ohio State date disagrees with visible schedule');
-  return {title,start,end:usableEnd(start,end),program:clean(body.find('p').first().html()),event_url:url,stream_url:stream,watch_kind:'direct',evidence_url:url,evidence:'Official event provides a public YouTube livestream link and verified Eastern calendar metadata.'};
+  start=zonedTime(local(1),'America/New_York');end=zonedTime(local(7),'America/New_York');
+  if(start!==visibleStart||(visibleEnd&&end!==visibleEnd))throw new Error('Ohio State date disagrees with visible schedule');
+  }
+  return {title,start,end:usableEnd(start,end),program:clean(body.find('p').first().html()),event_url:url,stream_url:stream,watch_kind:'direct',evidence_url:url,evidence:'Official event provides a public YouTube livestream link and an explicit campus-local Eastern date/time. Calendar metadata is cross-checked when present.'};
  }
  async function ohioState(get,now){
   let next='https://music.osu.edu/events';const seen=new Set(),pages=new Set(),events=[];

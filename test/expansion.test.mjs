@@ -39,6 +39,14 @@ test('Ohio State pagination excludes external departments and ends at the look-a
  assert.equal(events.length,1);assert.equal(calls.length,3);
 });
 
+test('Ohio State retains concerts whose Add to Calendar metadata disappears, while requiring an explicit visible schedule',async()=>{
+ const html=(await fixture('osu.html')).replace(/<a\b[^>]*href="https:\/\/calendar\.google\.com\/calendar\/render[^>]*>[\s\S]*?<\/a>/g,''),url='https://music.osu.edu/events/wind-symphony-093026';
+ assert.ok(!html.includes('https://calendar.google.com/calendar/render'));
+ const e=parseOhioState(html,url);assert.equal(e.start,'2026-09-30T23:30:00.000Z');assert.equal(e.end,'2026-10-01T01:00:00.000Z');
+ assert.throws(()=>parseOhioState(html.replace('September 30, 2026','September 30'),url),/visible date/);
+ assert.throws(()=>parseOhioState(html.replace('7:30 pm - 9:00 pm','7:30 - 9:00'),url),/visible date/);
+});
+
 test('Ohio University uses explicit public channel links and preserves recurring instance dates',async()=>{
  const data=JSON.parse(await fixture('ohio.json')),events=parseOhio(data);assert.equal(events.length,2);
  const first=data.events[0].event;first.event_instances.push({event_instance:{id:'repeat',start:'2026-11-02T20:00:00-05:00',end:null}});

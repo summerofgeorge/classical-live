@@ -154,7 +154,9 @@ export function createGreatLakes({clean,zonedTime,clock24,namedDate,DAY}){
    if(!links.length&&!/no (?:events|results)/i.test(view.text()))throw new Error('Case Western calendar entries missing');
    for(const link of links.toArray()){
     if(cancelled($(link).text())||outOfScope($(link).text()))continue;
-    const url=official($(link).attr('href'),'https://case.edu','/artsci/music/news-events/upcoming-concerts-events/');
+    const url=official($(link).attr('href'),'https://case.edu','/artsci/music/');
+    // The current official calendar also uses flattened music-department event aliases.
+    if(!/^\/artsci\/music\/(?:news-events\/upcoming-concerts-events\/)?[^/]+\/?$/.test(new URL(url).pathname))throw new Error('Unexpected Case Western event path');
     if(seen.has(url))continue;seen.add(url);if(seen.size>50)throw new Error('Case Western event budget exceeded');
     const parsed=parseCaseWestern(await get(url),url);if(parsed&&current(parsed.start,now))events.push(parsed);
    }

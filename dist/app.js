@@ -1,6 +1,7 @@
 import {calendar,dayKey,endTime,matches,safeUrl,periodRange} from './core.js';
 import {schoolInfo} from './schools.js';
 import {createShareButton} from './share.js';
+import {scheduleHealth} from './freshness.js';
 const $=id=>document.getElementById(id);
 const timeZone=Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 const filterIds=['source','type','query','region','country','size'];
@@ -43,8 +44,8 @@ function render(){
       const meta=el('div',null,'metadata');meta.append(el('span',event.type,'performance-tag'),el('span','Free stream'));
       info.append(meta);
       const original=el('p',null,'program source-time');original.append(el('span',`Source time: ${format(event.start,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'},event.timezone)} · `),link('Event details',event.event_url,'source-link'));info.append(original);
-      if(event.stale)info.append(el('p','Could not recheck this listing. Confirm the time and stream on the source page.','program'));
-      if(event.verification_method==='browser')info.append(el('p',`Checked ${format(event.last_verified_at,{month:'short',day:'numeric'})}. Confirm the latest details with the school.`,'program'));
+      if(event.stale)info.append(el('p',`Schedule last confirmed ${format(event.last_verified_at,{month:'short',day:'numeric'})}. The latest check did not complete; use Event details to check for time changes or cancellations.`,'program'));
+      if(event.verification_method==='browser')info.append(el('p',`Manually checked ${format(event.last_verified_at,{month:'short',day:'numeric'})}. Confirm the latest details with the school.`,'program'));
       const actions=el('div',null,'actions'),watch=link(event.watch_kind==='channel'?'Watch channel':event.watch_kind==='registration'?'Register to watch':'Watch stream',event.stream_url,'watch');watch.setAttribute('aria-label',`${event.watch_kind==='registration'?'Register to watch':'Watch'} ${event.title}`);
       const save=el('button','Add to calendar','calendar-button');save.type='button';save.setAttribute('aria-label',`Add ${event.title} to calendar`);save.onclick=()=>download([event]);actions.append(watch,save,createShareButton(event));
       if(event.watch_kind==='channel')actions.append(el('small','Opens the school’s official video channel.'));
@@ -72,8 +73,18 @@ async function load(){
     }
     for(const type of [...new Set(data.events.map(e=>e.type))].sort()){const option=el('option',type);option.value=type;$('type').append(option);}
     for(const key of ['region','country'])for(const value of [...new Set(data.sources.map(s=>schoolInfo(s.id)[key]).filter(Boolean))].sort()){const option=el('option',value);option.value=value;$(key).append(option);}
-    const old=Date.now()-Date.parse(data.generated_at)>2*86400000, failed=data.sources.some(s=>!['ok','manual'].includes(s.status));
-    if(old||failed){$('notice').hidden=false;$('notice').textContent=old?'This calendar has not been refreshed in over two days. Check each school’s event page before making plans.':'Some sources could not be refreshed. Previously verified listings are marked; check the source before watching.';}
+    const {old,issues}=scheduleHealth(data);
+    if(old||issues.length){
+      const notice=$('notice');notice.hidden=false;
+      notice.append(el('strong',old?'The calendar needs a fresh schedule check.':`${issues.length} school schedule${issues.length===1?' needs':'s need'} another check.`));
+      notice.append(el('p',old?'The calendar has not been updated in over two days. Concert times or cancellations may have changed; check the school’s Event details page before watching.':'We could not confirm the latest concert times and cancellations for the schools below. Their streams may still work; check the school’s event page for the latest schedule.'));
+      if(issues.length){const details=el('details'),summary=el('summary',`Affected schools (${issues.length})`),list=el('ul');details.open=issues.length<=3;
+        for(const source of issues){const row=el('li'),checked=source.last_success?format(source.last_success,{month:'short',day:'numeric'}):null;
+          const explanation=source.reviewDue?'Another manual review is due. Older listings are hidden.':source.hasOlderListings?`Showing earlier information${checked?' checked '+checked:''}; affected concerts are marked below.`:'New concerts from this school may be missing until its schedule can be checked again.';
+          row.append(link(source.name,source.url),el('span',' — '+explanation));list.append(row);
+        }details.append(summary,list);notice.append(details);
+      }
+    }
     $('events').setAttribute('aria-busy','false');render();
     if(sharedEventId){
       const sharedCard=$(`concert-${sharedEventId}`);

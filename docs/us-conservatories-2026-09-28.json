@@ -6,10 +6,11 @@
     "Existing automated source": 20,
     "Restricted featured streams": 1,
     "Closed institution": 3,
-    "Added automated source": 8,
+    "Added automated source": 7,
     "Existing browser-reviewed source": 4,
     "Outside current scope": 1,
-    "Historical entry": 7
+    "Historical entry": 7,
+    "Added browser-reviewed source": 1
   },
   "schools": [
     {
@@ -506,10 +507,10 @@
       "name": "Brigham Young University, School of Music",
       "group": "Private universities, non-secular",
       "wikipedia": "https://en.wikipedia.org/wiki/Brigham_Young_University,_School_of_Music?action=edit&redlink=1",
-      "status": "Added automated source",
+      "status": "Added browser-reviewed source",
       "source_id": "byu",
       "evidence_url": "https://musicstreaming.byu.edu/calendar",
-      "note": "Free-stream policy, streaming-only calendar and matching event iCal timestamps; hall-specific player.",
+      "note": "Ten free streams reviewed locally in the browser on September 28. GitHub returns HTTP 403, so these observations expire after 14 days and are not automatically renewed. The local parser remains available for future reviews.",
       "checked_at": "2026-09-28"
     },
     {

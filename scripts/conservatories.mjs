@@ -10,11 +10,14 @@ export const conservatorySources=[
  {id:'fsu',name:'Florida State University College of Music',url:'https://wfsu.org/fsumusic/',timezone:east},
  {id:'crane',name:'SUNY Potsdam Crane School of Music',url:'https://www.potsdam.edu/academics/crane-school-music/crane-school-music-live-concert',timezone:east},
  {id:'csulb',name:'Bob Cole Conservatory of Music, CSU Long Beach',url:'https://web.csulb.edu/colleges/cota/music/events/',timezone:'America/Los_Angeles'},
- {id:'frost',name:'University of Miami Frost School of Music',url:'https://events.miami.edu/department/frost_school_of_music/calendar',timezone:east},
+ {id:'frost',name:'University of Miami Frost School of Music',url:'https://events.miami.edu/department/frost_school_of_music/calendar',timezone:east}
+];
+// Hosted requests receive HTTP 403. Retain the parser for local reviews, not scheduled collection.
+export const conservatoryCandidates=[
  {id:'byu',name:'Brigham Young University School of Music',url:'https://musicstreaming.byu.edu/calendar',timezone:'America/Denver'}
 ];
 export const conservatoryHosts=['www.bu.edu','www.hartford.edu','www.ithaca.edu','wfsu.org','www.potsdam.edu','web.csulb.edu','events.miami.edu','musicstreaming.byu.edu','onstage.byu.edu','music.byu.edu'];
-const info=Object.fromEntries(conservatorySources.map(s=>[s.id,s]));
+const info=Object.fromEntries([...conservatorySources,...conservatoryCandidates].map(s=>[s.id,s]));
 const excluded=title=>/cancel(?:led|ed)|postponed|\bjazz\b|big band|\bpop\b|\brock\b|lecture|master\s?class|workshop|fundraiser|Beach Caf[eé]|gala|VIP|memorial ceremony|Veterans Day Memorial/i.test(title);
 const restricted=text=>/password|members.only|community members only|login required|private stream|pay.per.view|(?:stream|broadcast).{0,30}(?:ticket required|subscription|paid)/i.test(text);
 function official(value,base){const url=safeUrl(new URL(value,base).href);if(!url||new URL(url).origin!==new URL(base).origin)throw new Error('Conservatory event destination changed');return url;}

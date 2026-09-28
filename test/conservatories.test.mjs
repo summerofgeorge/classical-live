@@ -1,9 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {conservatories} from '../scripts/ingest.mjs';
+import {conservatories,sources,DAY} from '../scripts/ingest.mjs';
+import {applyReviewed} from '../scripts/reviewed.mjs';
 const f=JSON.parse(await readFile(new URL('./fixtures/conservatories.json',import.meta.url),'utf8'));
 const p=conservatories.parsers,now=new Date('2026-09-28T22:00:00Z');
+test('BYU stays outside hosted collection and its browser observations expire without renewal',async()=>{
+ assert.ok(!sources.some(s=>s.id==='byu'));
+ const payload=JSON.parse(await readFile(new URL('../data/browser-reviewed.json',import.meta.url),'utf8'));
+ payload.sources=payload.sources.filter(s=>s.id==='byu');assert.equal(payload.sources.length,1);
+ const checked=new Date(payload.sources[0].checked_at),empty={sources:[],events:[]};
+ const current=applyReviewed(empty,payload,checked);assert.equal(current.events.length,10);assert.equal(current.sources[0].status,'manual');
+ const later=applyReviewed(current,payload,new Date(+checked+DAY));assert.ok(later.events.every(e=>e.last_verified_at===checked.toISOString()));
+ const expired=applyReviewed(current,payload,new Date(+checked+14*DAY));assert.equal(expired.events.length,0);assert.equal(expired.sources[0].status,'review_due');
+});
 test('BU uses the published term year and rejects a conflicting weekday',()=>{
  const events=p.parseBu(f.bu);assert.equal(events.length,3);assert.equal(events.at(-1).start,'2026-10-01T23:30:00.000Z');
  assert.throws(()=>p.parseBu(f.bu.replace('Fall 2026','Fall 2025')),/weekday/);

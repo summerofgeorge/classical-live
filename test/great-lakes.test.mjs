@@ -8,6 +8,13 @@ const f=JSON.parse(readFileSync(new URL('./fixtures/great-lakes.json',import.met
 const now=new Date('2026-09-27T20:00:00Z');
 const {parseBaldwinWallace,parseLocalist,parseCarnegieMellon,parseDuquesne,parseCaseWestern}=greatLakes.parsers;
 const caseUrl='https://case.edu/artsci/music/news-events/upcoming-concerts-events/CUCSO-09-30-2026';
+test('Case Western accepts flattened official music event aliases and still rejects outside links',async()=>{
+ const short='https://case.edu/artsci/music/honoring-cowart-10-16-2026';
+ const index=href=>`<div class="view-event-listing"><h2><a href="${href}">Faculty recital</a></h2></div>`;
+ const result=await greatLakes.adapters['case-western'](async url=>url===short?f.caseWestern:index(short),now);
+ assert.equal(result.length,1);assert.equal(result[0].event_url,short);
+ for(const href of ['https://example.com/artsci/music/event','https://case.edu/other-department/event'])await assert.rejects(()=>greatLakes.adapters['case-western'](async()=>index(href),now),/official event URL/);
+});
 test('Baldwin Wallace requires a usable event link and agreeing concert dates',()=>{
  const e=parseBaldwinWallace(f.bw,f.bwItem);
  assert.equal(e.start,'2026-10-02T23:00:00.000Z');assert.equal(e.end,'2026-10-03T01:00:00.000Z');

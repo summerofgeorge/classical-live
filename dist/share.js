@@ -38,7 +38,7 @@ function setupDialog(){
     <div class="share-actions"><a class="watch" data-email>Email</a><a class="watch" data-sms>Text message</a><a class="calendar-button" data-facebook target="_blank" rel="noopener noreferrer">Share on Facebook</a><a class="calendar-button" data-x target="_blank" rel="noopener noreferrer">Share on X</a><button type="button" class="calendar-button" data-copy-post>Copy details &amp; link</button><button type="button" class="calendar-button" data-copy-link>Copy link</button><button type="button" class="calendar-button" data-native hidden>More options…</button></div>
     <p class="share-help">Email and text include the concert details and time zone. Choose a recipient in your app, then send. Facebook opens the link; add your message there. You can also copy the details if an app doesn’t open.</p>
     <details class="share-details"><summary>Concert details included with email and text</summary><p data-details></p></details>
-    <figure class="share-preview"><img src="./social-card-v2.jpg" width="1200" height="630" alt="Classical Watch — Free classical livestreams, beside a photograph of a violin and bow."><figcaption>Link preview image. Availability and appearance vary by app.</figcaption></figure>
+    <figure class="share-preview"><img src="./social-card-v3.jpg" width="1200" height="630" alt="Classical Watch — Free classical livestreams, beside a photograph of a cello."><figcaption>Link preview image. Availability and appearance vary by app.</figcaption></figure>
     <textarea data-copy-fallback aria-label="Text to copy manually" rows="6" readonly hidden></textarea>
     <p class="share-status" role="status" aria-live="polite"></p>`;
   document.body.append(dialog);

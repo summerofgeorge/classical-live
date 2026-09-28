@@ -1,4 +1,5 @@
 import {load} from 'cheerio';
+import {liveWhaleWindow} from './livewhale.mjs';
 import {safeUrl,dayKey} from '../dist/core.js';
 
 export const expansionSources=[
@@ -133,5 +134,5 @@ export function createExpansion({clean,zonedTime,clock24,namedDate,DAY}){
    return [{id:`western-${start.slice(0,10)}`,title:series,start,end:null,program,event_url:westernIndex,stream_url:westernIndex,watch_kind:'venue',watch_note:'The player appears here when the performance begins.',evidence_url:westernIndex,evidence:'Listed in the official upcoming Livestream Performances section with a public Vimeo player and Eastern time.'}];
   });
  }
- return {adapters:{indiana:async get=>parseIndiana(await get(indianaFeed,true)),'ohio-state':ohioState,ohio,unt:async get=>parseUnt(await get(untIndex)),rcm:async get=>parseRcm(await get(rcmIndex)),western:async get=>parseWestern(await get(westernIndex))},parsers:{parseIndiana,parseOhioState,parseOhio,parseUnt,parseRcm,parseWestern},current};
+ return {adapters:{indiana:async(get,now)=>parseIndiana(await get(liveWhaleWindow(indianaFeed,now,'America/New_York'),true)),'ohio-state':ohioState,ohio,unt:async get=>parseUnt(await get(untIndex)),rcm:async get=>parseRcm(await get(rcmIndex)),western:async get=>parseWestern(await get(westernIndex))},parsers:{parseIndiana,parseOhioState,parseOhio,parseUnt,parseRcm,parseWestern},current};
 }

@@ -75,7 +75,7 @@ test('Moscow January announcements resolve across year end and simultaneous hall
 });
 
 test('new adapters share collection, normalization, request metrics and failure retention',async()=>{
- const responses=new Map([[melbourneFeed,JSON.parse(feed)], [byId(53392).url,britten],[byId(54873).url,melba],[byId(55583).url,inPerson],[byId(55721).url,await fixture('melbourne-zero-duration.html')],[geidaiIndex,index],[moscowFeed,moscow]]);
+ const responses=new Map([[melbourneFeed+'/start_date/2026-09-25/end_date/2026-11-12',JSON.parse(feed)], [byId(53392).url,britten],[byId(54873).url,melba],[byId(55583).url,inPerson],[byId(55721).url,await fixture('melbourne-zero-duration.html')],[geidaiIndex,index],[moscowFeed,moscow]]);
  let requests=0;const get=async url=>{requests++;if(!responses.has(url))throw new Error('Unexpected URL '+url);return responses.get(url);};get.stats=()=>({requests,request_limit:360,response_bytes:0});
  const result=await collect(undefined,now,internationalSources,get,adapters);
  assert.ok(result.sources.every(s=>s.status==='ok'));

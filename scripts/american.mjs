@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
 import {load} from 'cheerio';
+import {liveWhaleWindow} from './livewhale.mjs';
 import {safeUrl} from '../dist/core.js';
 const cu='https://cupresents.org',iowa='https://music.uiowa.edu';
 export const blairFeed='https://events.vanderbilt.edu/live/json/events/tag/blair/max/500';
@@ -148,5 +149,5 @@ export function createAmerican({clean,zonedTime,clock24,namedDate,DAY}){
   }
   return dedup(events);
  }
- return {adapters:{yale,colorado,blair:async(get,now)=>parseBlair(await get(blairFeed,true),now),iowa:iowaAdapter},parsers:{yaleCandidate,parseYale,parseColorado,coloradoPage,parseBlair,parseIowa}};
+ return {adapters:{yale,colorado,blair:async(get,now)=>parseBlair(await get(liveWhaleWindow(blairFeed,now,'America/Chicago'),true),now),iowa:iowaAdapter},parsers:{yaleCandidate,parseYale,parseColorado,coloradoPage,parseBlair,parseIowa}};
 }

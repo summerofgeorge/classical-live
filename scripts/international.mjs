@@ -1,4 +1,5 @@
 import {load} from 'cheerio';
+import {liveWhaleWindow} from './livewhale.mjs';
 import {createHash} from 'node:crypto';
 import {safeUrl,dayKey} from '../dist/core.js';
 
@@ -51,7 +52,7 @@ export function createInternational({clean,zonedTime,kind,DAY}){
   return {id:`melbourne-${candidate.id}-${candidate.date_ts}`,title,start:candidate.start,end,program,type:candidate.tags.includes('Jazz')?'Jazz':kind(title+' '+program),event_url:candidate.url,stream_url:melbourneWatch,watch_kind:'venue',watch_note:`Select the ${melba?'Melba Hall Lunch Hour':'Hanson Dyer Hall'} player on the school’s streaming page.`,evidence_url:candidate.url,evidence:melba?'Official free, dated Melba Hall Lunch Hour series event; the university streaming page explicitly provides this series’ public live player.':'Official free event explicitly promises live streaming of the Hanson Dyer Hall series; calendar and event timestamps agree.'};
  }
  async function melbourne(get,now){
-  const candidates=melbourneCandidates(await get(melbourneFeed,true),now),events=[];
+  const candidates=melbourneCandidates(await get(liveWhaleWindow(melbourneFeed,now,'Australia/Melbourne'),true),now),events=[];
   if(candidates.length>60)throw new Error('Melbourne detail-page budget exceeded');
   for(const candidate of candidates){const event=parseMelbourne(await get(candidate.url),candidate);if(event)events.push(event);}
   return events;

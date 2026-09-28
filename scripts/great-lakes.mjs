@@ -1,4 +1,5 @@
 import {load} from 'cheerio';
+import {liveWhaleWindow} from './livewhale.mjs';
 const eastern='America/New_York';
 const bwIndex='https://www.bw.edu/events/_data/current.json';
 const bgsuLive='https://www.bgsu.edu/musical-arts/events/live-streaming.html';
@@ -160,5 +161,5 @@ export function createGreatLakes({clean,zonedTime,clock24,namedDate,DAY}){
    const href=view.find('a[rel="next"]').attr('href');next=href?official(new URL(href,next).href,'https://case.edu',new URL(caseIndex).pathname):null;
   }return events;
  }
- return {adapters:{'baldwin-wallace':baldwinWallace,bgsu,'carnegie-mellon':async(get,now)=>parseCarnegieMellon(await get(cmuFeed,true),now),duquesne:async(get,now)=>parseDuquesne(await get(duqLive),now),pittsburgh:async(get,now)=>localist(get,now,'pittsburgh'),'case-western':caseWestern},parsers:{parseBaldwinWallace,parseLocalist,parseCarnegieMellon,parseDuquesne,parseCaseWestern}};
+ return {adapters:{'baldwin-wallace':baldwinWallace,bgsu,'carnegie-mellon':async(get,now)=>parseCarnegieMellon(await get(liveWhaleWindow(cmuFeed,now,eastern),true),now),duquesne:async(get,now)=>parseDuquesne(await get(duqLive),now),pittsburgh:async(get,now)=>localist(get,now,'pittsburgh'),'case-western':caseWestern},parsers:{parseBaldwinWallace,parseLocalist,parseCarnegieMellon,parseDuquesne,parseCaseWestern}};
 }

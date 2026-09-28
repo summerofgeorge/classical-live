@@ -81,7 +81,7 @@ test('Blair requires positive stream and free evidence, excludes jazz, and conve
  assert.throws(()=>parseBlair(Array(500).fill(e),now),/budget/);
  assert.throws(()=>parseBlair({},now),/changed/);assert.deepEqual(parseBlair([],now),[]);
  const later=parseBlair([e],new Date('2027-01-01'));assert.deepEqual(later,[]);
- assert.equal((await adapters.blair(async(url,json)=>{assert.equal(url,blairFeed);assert.equal(json,true);return data;},now)).length,3);
+ assert.equal((await adapters.blair(async(url,json)=>{assert.equal(url,blairFeed+'/start_date/2026-09-24/end_date/2026-11-11');assert.equal(json,true);return data;},now)).length,3);
 });
 
 test('Iowa checks individual broadcast evidence and cancellation, not generic site links',async()=>{

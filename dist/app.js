@@ -1,10 +1,12 @@
 import {calendar,dayKey,endTime,matches,safeUrl} from './core.js';
 import {schoolInfo} from './schools.js';
+import {createShareButton} from './share.js';
 const $=id=>document.getElementById(id);
 const timeZone=Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 const filterIds=['source','type','query','region','country','size'];
 const state={period:'upcoming',...Object.fromEntries(filterIds.map(id=>[id,''])),timeZone};
 let data, visible=[];
+const sharedEventId=new URLSearchParams(location.search).get('event');
 const format=(date,options,zone=timeZone)=>new Intl.DateTimeFormat(undefined,{...options,timeZone:zone}).format(new Date(date));
 function el(tag,text,className){const node=document.createElement(tag);if(text)node.textContent=text;if(className)node.className=className;return node;}
 function link(text,url,className){const node=el('a',text,className);node.href=safeUrl(url)||'#';node.target='_blank';node.rel='noopener noreferrer';return node;}
@@ -26,11 +28,11 @@ function render(){
     heading.append(el('span',`${today?'Today · ':''}${format(date,{weekday:'long'})}`,'weekday'),el('span',format(date,{day:'numeric'}),'day-number'),el('span',format(date,{month:'long',year:'numeric'}),'day-month'),el('span',`${events.length} concert${events.length===1?'':'s'}`,'day-count'));
     const list=el('div',null,'concerts');group.append(heading,list);
     for(const event of events){
-      const card=el('article',null,'concert'),time=el('div',null,'concert-time');card.dataset.performance=event.type;const timeElement=el('time',format(event.start,{hour:'numeric',minute:'2-digit'}));timeElement.dateTime=event.start;time.append(timeElement);
+      const card=el('article',null,'concert'),time=el('div',null,'concert-time');card.id=`concert-${event.id}`;card.dataset.performance=event.type;card.classList.toggle('shared-concert',event.id===sharedEventId);const timeElement=el('time',format(event.start,{hour:'numeric',minute:'2-digit'}));timeElement.dateTime=event.start;time.append(timeElement);
       time.append(el('small',format(event.start,{timeZoneName:'short'}).split(' ').pop()));
       if(new Date(event.start)<=now && endTime(event)>now)time.append(el('span','Scheduled now','now'));
       else if(new Date(event.start)<=now)time.append(el('span','Started earlier','earlier'));
-      const info=el('div',null,'concert-info');info.append(el('p',event.institution,'institution'),el('h3',event.title));
+      const info=el('div',null,'concert-info');if(event.id===sharedEventId)info.append(el('p','Shared performance','shared-label'));info.append(el('p',event.institution,'institution'),el('h3',event.title));
       if(event.program)info.append(el('p',event.program,'program'));
       const meta=el('div',null,'metadata');meta.append(el('span',event.type,'performance-tag'),el('span','Free stream'));
       info.append(meta);
@@ -38,7 +40,7 @@ function render(){
       if(event.stale)info.append(el('p','Could not recheck this listing. Confirm the time and stream on the source page.','program'));
       if(event.verification_method==='browser')info.append(el('p',`Checked ${format(event.last_verified_at,{month:'short',day:'numeric'})}. Confirm the latest details with the school.`,'program'));
       const actions=el('div',null,'actions'),watch=link(event.watch_kind==='channel'?'Watch channel':'Watch stream',event.stream_url,'watch');watch.setAttribute('aria-label',`Watch ${event.title}`);
-      const save=el('button','Add to calendar','calendar-button');save.type='button';save.setAttribute('aria-label',`Add ${event.title} to calendar`);save.onclick=()=>download([event]);actions.append(watch,save);
+      const save=el('button','Add to calendar','calendar-button');save.type='button';save.setAttribute('aria-label',`Add ${event.title} to calendar`);save.onclick=()=>download([event]);actions.append(watch,save,createShareButton(event));
       if(event.watch_kind==='channel')actions.append(el('small','Opens the school’s official video channel.'));
       if(event.watch_note)actions.append(el('small',event.watch_note));
       card.append(time,info,actions);list.append(card);
@@ -66,7 +68,13 @@ async function load(){
     for(const key of ['region','country'])for(const value of [...new Set(data.sources.map(s=>schoolInfo(s.id)[key]).filter(Boolean))].sort()){const option=el('option',value);option.value=value;$(key).append(option);}
     const old=Date.now()-Date.parse(data.generated_at)>2*86400000, failed=data.sources.some(s=>!['ok','manual'].includes(s.status));
     if(old||failed){$('notice').hidden=false;$('notice').textContent=old?'This calendar has not been refreshed in over two days. Check each school’s event page before making plans.':'Some sources could not be refreshed. Previously verified listings are marked; check the source before watching.';}
-    $('events').setAttribute('aria-busy','false');render();setInterval(render,60000);
+    $('events').setAttribute('aria-busy','false');render();
+    if(sharedEventId){
+      const sharedCard=$(`concert-${sharedEventId}`);
+      if(sharedCard){sharedCard.tabIndex=-1;sharedCard.focus({preventScroll:true});sharedCard.scrollIntoView({block:'center'});}
+      else{const notice=el('p','This shared performance is no longer listed. Browse upcoming concerts below.','notice');$('events').before(notice);}
+    }
+    setInterval(()=>{if(!document.querySelector('dialog[open]')&&!$('events').contains(document.activeElement))render();},60000);
   }catch(error){$('events').setAttribute('aria-busy','false');$('events').replaceChildren(el('p','The calendar could not be loaded. Please reload the page, or use the school links below.','empty'));$('updated').textContent='Calendar unavailable';$('source-status').append(el('li','Sources: Curtis Institute of Music and Cleveland Institute of Music.'));}
 }
 document.querySelectorAll('[data-period]').forEach(button=>button.onclick=()=>{state.period=button.dataset.period;if(data)render();});

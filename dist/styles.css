@@ -4,6 +4,21 @@ footer{align-items:baseline}footer span:first-child{color:var(--ink)}footer a{co
 @media(max-width:760px){footer{align-items:flex-start}}
 .more-filters{margin-top:20px;font-size:14px}.more-filters summary{color:var(--muted)}.extra-filters{grid-template-columns:1fr 1fr 1fr;margin-top:16px}.filter-note{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:0}#reset-filters{margin-top:16px}.school-list{margin:22px 0}.school-list>p{margin-top:12px}.school-list ul{padding-left:20px}.watch-help ol{padding-left:24px}.watch-help strong{color:var(--ink)}@media(max-width:760px){.extra-filters{grid-template-columns:1fr}.more-filters summary{line-height:1.6}#reset-filters{text-align:left}}
 .earlier{display:block;font-size:12px;font-weight:normal;color:var(--muted);margin-top:8px}
+.share-button{background:transparent;border:0;padding:7px 0;color:#a9272c;font-size:13px;text-decoration:underline;text-underline-offset:3px;min-height:36px}
+.share-button:hover{color:var(--ink)}
+.share-dialog{width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 40px);overflow:auto;border:1px solid var(--line);border-top:5px solid var(--red);border-radius:6px;padding:24px;color:var(--ink);background:var(--paper)}
+.share-dialog::backdrop{background:#1f2120a6}
+.share-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.share-heading h2{font:normal 28px/1.2 Georgia,serif;margin:0}
+.share-intro{font-size:14px;line-height:1.6;color:var(--muted);margin:18px 0}
+.share-dialog label{margin-top:18px}
+.share-dialog textarea{font:normal 16px/1.5 Arial,Helvetica,sans-serif;resize:vertical;width:100%;min-height:110px;padding:12px;border:1px solid #adada4;border-radius:3px;background:#f9f8f2;color:var(--ink)}
+.share-dialog textarea:focus-visible{outline:3px solid var(--red);outline-offset:4px}
+.share-dialog input{font-size:14px}
+.share-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.share-status{min-height:1.5em;font-size:13px;line-height:1.5;margin:16px 0 0;color:var(--muted)}
+.shared-concert{box-shadow:inset 4px 0 var(--red);scroll-margin:24px}
+.shared-label{color:#a9272c;font-size:12px;font-weight:bold;margin:0 0 10px}
 .support-link{font-size:14px;line-height:1.6;margin:0 0 24px;color:var(--muted)}.support-link a{color:#a9272c;text-underline-offset:3px}
 
 /* Day panels and performance badges keep long schedules easy to scan. */

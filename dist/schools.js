@@ -3,6 +3,10 @@
 const enrollment=(students,label,url,year=null)=>({students,label,url,year,checked_at:'2026-09-25'});
 const us=(region,city,count=null)=>({region:`US ${region}`,country:'United States',city,enrollment:count});
 export const schools={
+ 'ut-austin':us('South','Austin, Texas'),
+ temple:us('Northeast','Philadelphia, Pennsylvania'),
+ mcgill:{region:'Canada',country:'Canada',city:'Montreal, Quebec'},
+ mannes:us('Northeast','New York, New York'),
  'baldwin-wallace':us('Midwest','Berea, Ohio'),
  bgsu:us('Midwest','Bowling Green, Ohio'),
  'carnegie-mellon':us('Northeast','Pittsburgh, Pennsylvania'),

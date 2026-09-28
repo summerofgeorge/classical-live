@@ -4,6 +4,21 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Classical Watch — Free classical livestreams</title>
   <meta name="description" content="Find free conservatory livestreams, see times in your time zone, and save concerts to your calendar.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Classical Watch">
+  <meta property="og:title" content="Classical Watch — Free classical livestreams">
+  <meta property="og:description" content="A seat at the next concert. Discover free livestreams from conservatories and university music schools around the world.">
+  <meta property="og:image" content="https://classicalwatch.stringfestanalytics.com/social-card-v1.jpg">
+  <meta property="og:image:secure_url" content="https://classicalwatch.stringfestanalytics.com/social-card-v1.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Classical Watch — Free classical livestreams, beside a warmly lit cello.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Classical Watch — Free classical livestreams">
+  <meta name="twitter:description" content="Discover free livestreams from conservatories and university music schools around the world.">
+  <meta name="twitter:image" content="https://classicalwatch.stringfestanalytics.com/social-card-v1.jpg">
+  <meta name="twitter:image:alt" content="Classical Watch — Free classical livestreams, beside a warmly lit cello.">
   <meta name="theme-color" content="#1f2120">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
@@ -62,12 +77,14 @@
     </details>
     <p class="support-link">Looking for professional orchestras or opera? <a href="https://bachtrack.com/search-events/livestream=1" target="_blank" rel="noopener noreferrer">Browse Bachtrack's livestream listings</a>. Browsing is free; individual streams may be free, paid, or subscription-based. Look for “Free to view.”</p>
     <section class="controls" aria-label="Find concerts">
-      <div class="periods" role="group" aria-label="Date range">
-        <button type="button" data-period="upcoming" aria-pressed="true">Upcoming</button>
-        <button type="button" data-period="tonight" aria-pressed="false">Tonight</button>
+      <div class="periods" role="group" aria-label="Date range" aria-describedby="period-description">
+        <button type="button" data-period="all" aria-pressed="true">All dates</button>
+        <button type="button" data-period="today" aria-pressed="false">Today</button>
+        <button type="button" data-period="tomorrow" aria-pressed="false">Tomorrow</button>
         <button type="button" data-period="week" aria-pressed="false">Next 7 days</button>
         <button type="button" data-period="weekend" aria-pressed="false">This weekend</button>
       </div>
+      <p id="period-description" class="period-description" aria-live="polite">Dates are based on your local time. The calendar lists announced streams up to 45 days ahead.</p>
       <div class="filter-row"><label>School<select id="source"><option value="">All schools</option></select></label><label>Performance<select id="type"><option value="">All performances</option></select></label><label class="search-label">Search<input id="query" type="search" placeholder="Composer, artist, or program" autocomplete="off"></label></div>
       <details class="more-filters"><summary>More filters: region, country &amp; school size</summary>
         <div class="filter-row extra-filters">
@@ -80,7 +97,7 @@
       <button id="reset-filters" class="text-button" type="button" hidden>Clear filters</button>
     </section>
     <p id="notice" class="notice" hidden></p>
-    <div class="list-heading"><h2 id="result-count" aria-live="polite">Upcoming concerts</h2><button id="download-all" class="text-button" type="button" disabled>Save these concerts</button></div>
+    <div class="list-heading"><h2 id="result-count" aria-live="polite">Concerts</h2><button id="download-all" class="text-button" type="button" disabled>Save these concerts</button></div>
     <div id="events" aria-busy="true"><p class="empty">Loading concerts…</p></div>
     <noscript><p>This calendar needs JavaScript to show local times. Visit the <a href="https://www.curtis.edu/curtis-performances/watch-listen/">Curtis broadcasts</a> or <a href="https://www.cim.edu/concerts-events">CIM calendar</a> directly.</p></noscript>
   </main>

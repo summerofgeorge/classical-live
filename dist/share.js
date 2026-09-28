@@ -22,6 +22,7 @@ function setupDialog(){
   dialog.setAttribute('aria-labelledby','share-heading');
   dialog.innerHTML=`<div class="share-heading"><h2 id="share-heading">Share this performance</h2><button type="button" class="calendar-button" data-close>Close</button></div>
     <p class="share-intro">Invite someone to listen. The link brings them to this concert on Classical Watch.</p>
+    <figure class="share-preview"><img src="./social-card-v1.jpg" width="1200" height="630" alt="Classical Watch — Free classical livestreams, beside a warmly lit cello."><figcaption>Link preview image. Availability and appearance vary by app.</figcaption></figure>
     <label for="share-message">Your message<textarea id="share-message" rows="4"></textarea></label>
     <label for="share-url">Performance link<input id="share-url" type="url" readonly></label>
     <div class="share-actions"><a class="watch" data-x target="_blank" rel="noopener noreferrer">Share on X</a><button type="button" class="calendar-button" data-copy-post>Copy message &amp; link</button><button type="button" class="calendar-button" data-copy-link>Copy link</button><button type="button" class="calendar-button" data-native hidden>More options…</button></div>

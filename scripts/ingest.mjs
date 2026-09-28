@@ -8,12 +8,14 @@ import {createFetcher} from './http.mjs';
 import {internationalSources,internationalHosts,createInternational} from './international.mjs';
 import {campusSources,campusHosts,createCampus} from './campus.mjs';
 import {greatLakesSources,greatLakesHosts,createGreatLakes} from './great-lakes.mjs';
+import {auditedSources,auditedHosts,createAudited} from './audited.mjs';
 export const DAY=86400000;
 // Keep enough recent data for today's listings in every viewer's time zone,
 // including 25-hour DST days. The browser applies the exact local-midnight cutoff.
 export const keepForDisplay=(event,now)=>endTime(event)>now||Date.parse(event.start)>=+now-2*DAY;
 export const clean=value=>load(`<body>${value||''}</body>`)('body').text().replace(/\s+/g,' ').trim();
 export const sources=[
+ ...auditedSources,
  ...greatLakesSources,
  ...campusSources,
  ...internationalSources,
@@ -62,6 +64,7 @@ export function normalize(raw,source,now){
 }
 const allowedHosts=new Set([...campusHosts,...internationalHosts,...americanHosts,...expansionHosts,...europeanHosts,'www.curtis.edu','www.cim.edu','www.esm.rochester.edu','colburnschool.edu','www.colburnschool.edu','www.msmnyc.edu','www.music.northwestern.edu','music.northwestern.edu','music.rice.edu','www.sfcm.edu','sfcm.edu','www.hfm-weimar.de','hfm-weimar.de','www.kulmag.live','kulmag.live','www.lawrence.edu','bostonconservatory.berklee.edu','calendar.oberlin.edu','www.oberlin.edu']);
 for(const host of greatLakesHosts)allowedHosts.add(host);
+for(const host of auditedHosts)allowedHosts.add(host);
 export function makeFetcher(){return createFetcher({allowedHosts,pacedHosts:allowedHosts});}
 export function curtisCandidates(payload,now){
  if(payload.success!==true||!Array.isArray(payload.data))throw new Error('Curtis feed format changed');
@@ -436,7 +439,8 @@ export const american=createAmerican({clean,zonedTime,clock24,namedDate,DAY});
 export const international=createInternational({clean,zonedTime,kind,DAY});
 export const campus=createCampus({clean,zonedTime,clock24,namedDate,DAY});
 export const greatLakes=createGreatLakes({clean,zonedTime,clock24,namedDate,DAY});
-export const adapters={...greatLakes.adapters,...campus.adapters,...international.adapters,...american.adapters,...european.adapters,...expansion.adapters,curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar,lawrence:async get=>parseLawrence(await get(lawrenceIndex)),boston,oberlin};
+export const audited=createAudited({clean,zonedTime,clock24,namedDate,DAY});
+export const adapters={...audited.adapters,...greatLakes.adapters,...campus.adapters,...international.adapters,...american.adapters,...european.adapters,...expansion.adapters,curtis,cim,eastman:async(get,now)=>parseEastman(await get('https://www.esm.rochester.edu/live/'),now),colburn:async get=>parseColburn(await get('https://colburnschool.edu/livestream/')),msm:async get=>parseMsm(await get('https://www.msmnyc.edu/livestream/')),northwestern:async get=>parseNorthwestern(await get('https://www.music.northwestern.edu/live')),rice,sfcm,liechtenstein,weimar,lawrence:async get=>parseLawrence(await get(lawrenceIndex)),boston,oberlin};
 export async function collect(previous={events:[],sources:[]},now=new Date(),registry=sources,get=makeFetcher(),handlers=adapters){
  const started=Date.now();
  const events=[],statuses=[];

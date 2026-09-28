@@ -11,6 +11,8 @@ footer{align-items:baseline}footer span:first-child{color:var(--ink)}footer a{co
 .share-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
 .share-heading h2{font:normal 28px/1.2 Georgia,serif;margin:0}
 .share-intro{font-size:14px;line-height:1.6;color:var(--muted);margin:18px 0}
+.share-preview{margin:0 0 18px}.share-preview img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:3px}.share-preview figcaption{font-size:12px;line-height:1.5;color:var(--muted);margin-top:6px}
+.period-description{font-size:13px;line-height:1.6;color:var(--muted);margin:-6px 0 24px;max-width:780px}
 .share-dialog label{margin-top:18px}
 .share-dialog textarea{font:normal 16px/1.5 Arial,Helvetica,sans-serif;resize:vertical;width:100%;min-height:110px;padding:12px;border:1px solid #adada4;border-radius:3px;background:#f9f8f2;color:var(--ink)}
 .share-dialog textarea:focus-visible{outline:3px solid var(--red);outline-offset:4px}

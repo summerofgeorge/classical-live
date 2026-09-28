@@ -5,16 +5,17 @@ import {applyReviewed} from '../scripts/reviewed.mjs';
 import {calendar,matches} from '../dist/core.js';
 import {DAY} from '../scripts/ingest.mjs';
 const allReviews=JSON.parse(await readFile(new URL('../data/browser-reviewed.json',import.meta.url),'utf8'));
-const payload={...allReviews,sources:allReviews.sources.filter(s=>s.id!=='michigan')};
+const payload={...allReviews,sources:allReviews.sources.filter(s=>['juilliard','peabody'].includes(s.id))};
 const checked=new Date(payload.sources[0].checked_at),empty={schema_version:1,sources:[],events:[]};
 const clone=()=>structuredClone(payload);
 
 test('Michigan has six verified streams and independent review expiry',()=>{
  const now=new Date(Math.max(...allReviews.sources.map(s=>Date.parse(s.checked_at))));
- const result=applyReviewed(empty,allReviews,now),events=result.events.filter(e=>e.source==='michigan');
+ const michiganPayload={...allReviews,sources:allReviews.sources.filter(s=>['juilliard','peabody','michigan'].includes(s.id))};
+ const result=applyReviewed(empty,michiganPayload,now),events=result.events.filter(e=>e.source==='michigan');
  assert.equal(events.length,6);
  assert.ok(events.every(e=>e.stream_url.startsWith('https://smtd.umich.edu/live-stream-')));
- const later=applyReviewed(result,allReviews,new Date(+checked+14*DAY));
+ const later=applyReviewed(result,michiganPayload,new Date(+checked+14*DAY));
  assert.deepEqual(later.sources.filter(s=>s.status==='manual').map(s=>s.id),['michigan']);
  assert.ok(later.events.every(e=>e.source==='michigan'));
 });

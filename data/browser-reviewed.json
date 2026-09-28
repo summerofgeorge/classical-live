@@ -301,6 +301,63 @@
           "evidence": "Official event page checked in browser: Free — no tickets required, explicit Livestream link, and printed Ann Arbor date and time."
         }
       ]
+    },
+    {
+      "id": "mcgill",
+      "name": "McGill University Schulich School of Music",
+      "url": "https://www.mcgill.ca/music/events/calendar",
+      "timezone": "America/Toronto",
+      "checked_at": "2026-09-28T00:37:47.701Z",
+      "events": [
+        {
+          "id": "mcgill-374055",
+          "title": "Opera McGill | Essential Handel",
+          "start": "2026-10-24T19:30:00-04:00",
+          "end": "2026-10-24T21:30:00-04:00",
+          "program": "George Frideric Handel: opera excerpts. Members of Opera McGill and the Early Music Area; Elizaveta Miller, coordinator.",
+          "event_url": "https://www.mcgill.ca/music/channels/event/opera-mcgill-essential-handel-374055",
+          "stream_url": "https://www.youtube.com/schulichmusic",
+          "watch_kind": "channel",
+          "watch_note": "Choose this performance on the Schulich School of Music YouTube channel.",
+          "evidence_url": "https://www.mcgill.ca/music/channels/event/opera-mcgill-essential-handel-374055",
+          "evidence": "Official event page inspected in the browser: dated concert explicitly promises a webcast on the public Schulich YouTube channel. Physical ticket prices do not apply to the public webcast."
+        },
+        {
+          "id": "mcgill-374061",
+          "title": "McGill Jazz Orchestra I",
+          "start": "2026-10-26T19:30:00-04:00",
+          "end": "2026-10-26T21:30:00-04:00",
+          "program": "Marianne Trudel, artistic director and conductor.",
+          "event_url": "https://www.mcgill.ca/music/channels/event/mcgill-jazz-orchestra-i-374061",
+          "stream_url": "https://www.youtube.com/schulichmusic",
+          "watch_kind": "channel",
+          "watch_note": "Choose this performance on the Schulich School of Music YouTube channel.",
+          "evidence_url": "https://www.mcgill.ca/music/channels/event/mcgill-jazz-orchestra-i-374061",
+          "evidence": "Official event page inspected in the browser: dated concert explicitly promises a webcast on the public Schulich YouTube channel. Physical ticket prices do not apply to the public webcast."
+        }
+      ]
+    },
+    {
+      "id": "mannes",
+      "name": "Mannes School of Music / The New School",
+      "url": "https://event.newschool.edu/schneiderconcerts20262027subs/",
+      "timezone": "America/New_York",
+      "checked_at": "2026-09-28T00:37:47.701Z",
+      "events": [
+        {
+          "id": "mannes-tesla-2026-10-04",
+          "title": "Schneider Concerts: Tesla Quartet",
+          "start": "2026-10-04T14:00:00-04:00",
+          "end": "2026-10-04T16:30:00-04:00",
+          "program": "Caroline Shaw: Valencia; Grażyna Bacewicz: Quartet No. 3; Haydn: Quartet Op. 50 No. 4; Schumann: Quartet Op. 41 No. 3.",
+          "event_url": "https://event.newschool.edu/schneiderconcerts-erinys",
+          "stream_url": "https://event.newschool.edu/schneiderconcerts-livestream-erinys",
+          "watch_kind": "registration",
+          "watch_note": "Free registration required ($0 option; contribution optional). The organizer emails a viewing link 24 hours before the concert.",
+          "evidence_url": "https://event.newschool.edu/schneiderconcerts-erinys",
+          "evidence": "Browser reviewed the current season, individual Tesla Quartet event, and linked livestream registration page: October 4, 2026 at 2 p.m. EDT; explicit free registration and emailed viewing link. Header, image, biography and program agree on Tesla despite an old Erinys slug and one stale sentence."
+        }
+      ]
     }
   ]
 }

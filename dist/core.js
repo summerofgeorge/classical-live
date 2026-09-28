@@ -5,7 +5,19 @@ export function dayKey(date, timeZone) {
   const get = type => parts.find(p => p.type === type).value;
   return `${get('year')}-${get('month')}-${get('day')}`;
 }
-export function matches(event, {period='upcoming',source='',type='',query='',region='',country='',size='',timeZone}, now=new Date()) {
+export function periodRange(period,timeZone,now=new Date()) {
+  const today=dayKey(now,timeZone),base=new Date(`${today}T12:00:00Z`);
+  const shift=days=>{const date=new Date(base);date.setUTCDate(date.getUTCDate()+days);return date.toISOString().slice(0,10);};
+  if(period==='today'||period==='tonight')return {first:today,last:today};
+  if(period==='tomorrow')return {first:shift(1),last:shift(1)};
+  if(period==='week')return {first:today,last:shift(6)};
+  if(period==='weekend'){
+    const dow=base.getUTCDay(),offset=dow===0?-2:dow===6?-1:5-dow;
+    return {first:shift(Math.max(0,offset)),last:shift(offset+2)};
+  }
+  return {first:today,last:null};
+}
+export function matches(event, {period='all',source='',type='',query='',region='',country='',size='',timeZone}, now=new Date()) {
   const start = new Date(event.start);
   const today = dayKey(now,timeZone), day = dayKey(start,timeZone);
   // A scheduled end is not a reliable signal that the stream has finished.
@@ -14,20 +26,8 @@ export function matches(event, {period='upcoming',source='',type='',query='',reg
   if (source && event.source !== source || type && event.type !== type) return false;
   if (region && event.region !== region || country && event.country !== country || size && event.size !== size) return false;
   if (query && !`${event.title} ${event.institution} ${event.program}`.toLowerCase().includes(query.toLowerCase())) return false;
-  if (period === 'tonight') return day === today;
-  if (period === 'week') {
-    const until = new Date(`${today}T12:00:00Z`); until.setUTCDate(until.getUTCDate()+7);
-    return day >= today && day < until.toISOString().slice(0,10);
-  }
-  if (period === 'weekend') {
-    const base = new Date(`${today}T12:00:00Z`), dow = base.getUTCDay();
-    const offset = dow === 0 ? -2 : dow === 6 ? -1 : 5-dow;
-    base.setUTCDate(base.getUTCDate()+offset);
-    const first = base.toISOString().slice(0,10);
-    base.setUTCDate(base.getUTCDate()+2);
-    return day >= first && day <= base.toISOString().slice(0,10);
-  }
-  return true;
+  const range=periodRange(period,timeZone,now);
+  return !range.last||day>=range.first&&day<=range.last;
 }
 export function safeUrl(value) {
   try {const url=new URL(value); return url.protocol==='https:' && !url.username && !url.password ? url.href : null;} catch {return null;}

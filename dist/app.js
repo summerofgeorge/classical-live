@@ -1,25 +1,31 @@
-import {calendar,dayKey,endTime,matches,safeUrl} from './core.js';
+import {calendar,dayKey,endTime,matches,safeUrl,periodRange} from './core.js';
 import {schoolInfo} from './schools.js';
 import {createShareButton} from './share.js';
 const $=id=>document.getElementById(id);
 const timeZone=Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 const filterIds=['source','type','query','region','country','size'];
-const state={period:'upcoming',...Object.fromEntries(filterIds.map(id=>[id,''])),timeZone};
+const state={period:'all',...Object.fromEntries(filterIds.map(id=>[id,''])),timeZone};
 let data, visible=[];
 const sharedEventId=new URLSearchParams(location.search).get('event');
 const format=(date,options,zone=timeZone)=>new Intl.DateTimeFormat(undefined,{...options,timeZone:zone}).format(new Date(date));
 function el(tag,text,className){const node=document.createElement(tag);if(text)node.textContent=text;if(className)node.className=className;return node;}
 function link(text,url,className){const node=el('a',text,className);node.href=safeUrl(url)||'#';node.target='_blank';node.rel='noopener noreferrer';return node;}
 function download(events){const url=URL.createObjectURL(new Blob([calendar(events)],{type:'text/calendar;charset=utf-8'}));const a=el('a');a.href=url;a.download=events.length===1?`${events[0].id}.ics`:'classical-live.ics';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
-function reset(){state.period='upcoming';filterIds.forEach(id=>{state[id]='';$(id).value='';});render();}
+function reset(){state.period='all';filterIds.forEach(id=>{state[id]='';$(id).value='';});render();}
 function render(){
   const now=new Date();visible=data.events.filter(event=>matches(event,state,now));
-  $('reset-filters').hidden=state.period==='upcoming'&&!filterIds.some(id=>state[id]);
+  $('reset-filters').hidden=state.period==='all'&&!filterIds.some(id=>state[id]);
   document.querySelectorAll('[data-period]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.period===state.period)));
+  const range=periodRange(state.period,timeZone,now);
+  const last=range.last||dayKey(new Date(Date.parse(data.generated_at)+(data.horizon_days||45)*86400000),timeZone);
+  const shortDay=day=>format(`${day}T12:00:00Z`,{weekday:'short',month:'short',day:'numeric',...(day.slice(0,4)!==range.first.slice(0,4)?{year:'numeric'}:{})},'UTC');
+  const dates=range.first===last?shortDay(range.first):`${shortDay(range.first)} – ${shortDay(last)}`;
+  const context={all:'All listed dates',today:'Today',tomorrow:'Tomorrow',week:'Seven days, including today',weekend:'Weekend dates (Friday–Sunday)'}[state.period];
+  $('period-description').textContent=`${context} · ${dates}.${range.first===dayKey(now,timeZone)?' Includes concerts that started earlier today.':''}`;
   $('result-count').textContent=`${visible.length} concert${visible.length===1?'':'s'} · times in ${timeZone.replaceAll('_',' ')}`;
   $('download-all').disabled=!visible.length;
   $('events').replaceChildren();
-  if(!visible.length){const empty=el('div',null,'empty');empty.append(el('strong','No concerts in this view.'),el('span','Try another date range or browse all upcoming concerts.'));const button=el('button','Show all upcoming','calendar-button');button.onclick=reset;empty.append(el('br'),button);$('events').append(empty);return;}
+  if(!visible.length){const empty=el('div',null,'empty');empty.append(el('strong','No concerts in this view.'),el('span','Try another date range or browse all listed concerts.'));const button=el('button','Show all dates','calendar-button');button.onclick=reset;empty.append(el('br'),button);$('events').append(empty);return;}
   const groups=new Map();for(const event of visible){const key=dayKey(new Date(event.start),timeZone);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(event);}
   for(const [key,events] of groups){
     const group=el('section',null,'day-group'),date=new Date(events[0].start), heading=el('h2',null,'day-heading');
@@ -39,7 +45,7 @@ function render(){
       const original=el('p',null,'program source-time');original.append(el('span',`Source time: ${format(event.start,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'},event.timezone)} · `),link('Event details',event.event_url,'source-link'));info.append(original);
       if(event.stale)info.append(el('p','Could not recheck this listing. Confirm the time and stream on the source page.','program'));
       if(event.verification_method==='browser')info.append(el('p',`Checked ${format(event.last_verified_at,{month:'short',day:'numeric'})}. Confirm the latest details with the school.`,'program'));
-      const actions=el('div',null,'actions'),watch=link(event.watch_kind==='channel'?'Watch channel':'Watch stream',event.stream_url,'watch');watch.setAttribute('aria-label',`Watch ${event.title}`);
+      const actions=el('div',null,'actions'),watch=link(event.watch_kind==='channel'?'Watch channel':event.watch_kind==='registration'?'Register to watch':'Watch stream',event.stream_url,'watch');watch.setAttribute('aria-label',`${event.watch_kind==='registration'?'Register to watch':'Watch'} ${event.title}`);
       const save=el('button','Add to calendar','calendar-button');save.type='button';save.setAttribute('aria-label',`Add ${event.title} to calendar`);save.onclick=()=>download([event]);actions.append(watch,save,createShareButton(event));
       if(event.watch_kind==='channel')actions.append(el('small','Opens the school’s official video channel.'));
       if(event.watch_note)actions.append(el('small',event.watch_note));

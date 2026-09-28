@@ -7,7 +7,7 @@ A small, free calendar of conservatory livestreams, built for personal use and e
 ## What it does
 
 - Lists verified upcoming streams with automatic local-time display and the original source time.
-- Filters by Tonight, Next 7 days, This weekend, school, performance type, region, country, published music-school enrollment, and search.
+- Filters by All dates, Today, Tomorrow, Next 7 days, This weekend, school, performance type, region, country, published music-school enrollment, and search. Each date selection displays its exact range in the viewer's local calendar. Today includes earlier concerts; Next 7 days includes today; weekend means Friday–Sunday, excluding prior days.
 - Opens the official stream, venue player, or clearly labeled school channel.
 - Downloads one concert or the current filtered selection as an `.ics` file for Apple Calendar, Outlook, Google Calendar import, and other calendar apps.
 - Refreshes and publishes daily at **3:15 a.m. America/New_York**, including daylight-saving changes. GitHub may delay scheduled starts.
@@ -101,6 +101,18 @@ Daily publication remains at 3:15 a.m. Eastern: using a standard runner on a pub
 ## September 27 Cleveland-area expansion
 
 Baldwin Wallace, Bowling Green, Carnegie Mellon, Duquesne, the University of Pittsburgh and Case Western Reserve now participate in the existing daily refresh. Their collectors require explicit public livestream evidence on an official schedule or concert record. The initial regional run found 35 listings with 30 requests. See [the regional review](docs/great-lakes-expansion-2026-09-27.md) for admission rules and the remaining Cincinnati CCM, Michigan State, Akron and Kent State evidence gaps. These additions use the existing free operating model and add no dependencies or scheduled jobs.
+
+## September 27 candidate audit follow-through
+
+UT Austin Butler and Temple Boyer now have automatic collectors. Initial verification found two Butler streams and 15 Boyer streams using 41 requests in about 37 seconds. Both require an explicit public viewing destination on each event. Temple's printed Philadelphia date is checked against the detail page and its UTC analytics date, avoiding an off-by-one-day error for evening performances after daylight saving ends. See [the integration notes](docs/audited-expansion-2026-09-27.md).
+
+Two McGill concerts and the October 4 Mannes / New School Schneider Concerts performance are browser-reviewed additions. Their pages work in the browser but direct collection returned HTTP 403. They use the existing 14-day verification expiry and do not gain a new verification date during scheduled builds. Mannes offers a $0 livestream registration option; its button says **Register to watch** and explains that the organizer emails the viewing link. No registration was submitted. McGill needs another browser check before its October concerts because these initial observations expire earlier.
+
+## Sharing preview
+
+The homepage includes Open Graph and X large-image card metadata in the initial HTML, including for `?event=` performance links. `dist/social-card-v1.jpg` is a 1200 × 630 default Classical Watch preview (about 92 KB) with the site name, domain, and cello artwork. The share dialog previews it. The existing share message still names the performance and credits Classical Watch; the image is generic. No homepage-only `og:url` or canonical tag is added to override performance-specific query links.
+
+Preview rendering and caching are controlled by the receiving platform; these tags do not attach an image file to a post or guarantee a preview in every app. The asset is hosted on the existing site with no extra API or service. It was created with the built-in image-generation tool and exported as an optimized JPEG; [asset notes](docs/social-preview.md) retain the prompt.
 
 ## Run locally
 

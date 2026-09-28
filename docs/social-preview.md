@@ -1,0 +1,11 @@
+# Default social preview
+
+The project asset is `dist/social-card-v1.jpg`: 1200 × 630 pixels, 92,174 bytes. It was generated with the built-in image-generation tool, visually checked, and converted to an optimized JPEG for the site. The generated source remains preserved separately. No ongoing image-generation service is required.
+
+The image has Classical Watch's name and domain baked into it. Open Graph and X large-image tags live in the initial homepage HTML, so social crawlers do not need to run JavaScript. The same image serves all performance query links. The share message still contains the specific performance title and school; no photo of a particular school or performer is implied.
+
+The share dialog includes an image preview and notes that availability varies by app. This is link-preview metadata, not an uploaded photo attachment. Platforms can cache older previews or decline to render a card. The original performance URL remains intact; there is no homepage-only canonical override. [Open Graph specification](https://ogp.me/)
+
+## Generation prompt
+
+Use case: ads-marketing. Create one polished default social-link preview image for the existing website Classical Watch, a free classical livestream calendar. Wide landscape social card, approximately 1.91:1 (1200 by 630 target proportion). Flat artwork, no mockup frame. Elegant editorial design that remains very readable at small preview sizes. Warm off-white #EEECE1 background; a substantial charcoal #1F2120 photographic panel on the right showing a beautifully lit close-up of a cello's wooden body, strings and bow, with the imagery almost monochrome and subtly warm. Left two thirds has generous negative space and large restrained Georgian-style serif lettering. Exact text only: large title "Classical Watch" with "Watch" in italic brand red #CF3338; below in smaller dark sans-serif "Free classical livestreams"; near bottom left, small but readable "classicalwatch.stringfestanalytics.com". Overall feels like an elegant classical concert program. All text within 8% safe margins, no cropping. Do not imply any particular school or actual performance. No people, no school logos, no Stringfest logo, no invented logos, no play triangle, no decorative chevrons, triangles, arrows or corner motifs. No additional text. Opaque background.

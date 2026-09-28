@@ -94,3 +94,5 @@ footer{align-items:baseline}footer span:first-child{color:var(--ink)}footer a{co
   .now{font-size:11px;padding:4px 3px}
   .actions{grid-column:2;min-width:0}
 }
+.share-help{font-size:12px;line-height:1.5;color:var(--muted);margin:14px 0 0}.share-actions a{text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.share-details{font-size:12px;margin:12px 0}.share-details summary{cursor:pointer}.share-details p{white-space:pre-line;line-height:1.6}[data-copy-fallback][hidden]{display:none}

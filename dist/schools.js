@@ -3,6 +3,14 @@
 const enrollment=(students,label,url,year=null)=>({students,label,url,year,checked_at:'2026-09-25'});
 const us=(region,city,count=null)=>({region:`US ${region}`,country:'United States',city,enrollment:count});
 export const schools={
+ bu:us('Northeast','Boston, Massachusetts'),
+ hartt:us('Northeast','West Hartford, Connecticut'),
+ ithaca:us('Northeast','Ithaca, New York'),
+ fsu:us('South','Tallahassee, Florida'),
+ crane:us('Northeast','Potsdam, New York'),
+ csulb:us('West','Long Beach, California'),
+ frost:us('South','Coral Gables, Florida'),
+ byu:us('West','Provo, Utah'),
  'ut-austin':us('South','Austin, Texas'),
  temple:us('Northeast','Philadelphia, Pennsylvania'),
  mcgill:{region:'Canada',country:'Canada',city:'Montreal, Quebec'},

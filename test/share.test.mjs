@@ -1,8 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {shareDetails,xShareUrl} from '../dist/share.js';
+import {shareDetails,xShareUrl,facebookShareUrl,emailShareUrl,smsShareUrl,invitationBody} from '../dist/share.js';
 
 const event={id:'recital/1 & é#2',title:'Bach & friends',institution:'Example Conservatory',start:'2026-09-27T20:00:00Z',end:'2026-09-27T21:30:00Z'};
+test('email and text preserve full details, explicit time zone, edited message and encoded link',()=>{
+ const details=shareDetails({...event,timezone:'America/New_York',watch_note:'Select the recital hall player.'}),message='Join me? 🎻 & bring a friend';
+ assert.match(details.performance,/Sunday, September 27, 2026 at 4:00 PM EDT \(America\/New_York\)/);
+ const mail=new URL(emailShareUrl(details,message));assert.equal(mail.pathname,'');assert.equal(mail.searchParams.get('subject'),details.title);assert.equal(mail.searchParams.get('body').replaceAll('\r',''),invitationBody(details,message));
+ for(const apple of [true,false]){const uri=smsShareUrl(details,message,apple);assert.ok(uri.startsWith(apple?'sms:&body=':'sms:?body='));assert.equal(decodeURIComponent(uri.split('body=')[1]),invitationBody(details,message));}
+ const fb=new URL(facebookShareUrl(details.url));assert.equal(fb.origin,'https://www.facebook.com');assert.equal(fb.searchParams.get('u'),details.url);assert.equal([...fb.searchParams].length,1);
+});
 test('share links identify the performance on Classical Watch and safely encode its ID',()=>{
   const details=shareDetails(event,new Date('2026-09-27T20:30:00Z')),url=new URL(details.url);
   assert.equal(url.origin,'https://classicalwatch.stringfestanalytics.com');

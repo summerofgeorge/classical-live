@@ -1,0 +1,836 @@
+{
+  "checked_at": "2026-09-28",
+  "inventory_url": "https://en.wikipedia.org/wiki/List_of_conservatories_of_music_in_the_United_States",
+  "counts": {
+    "Candidate — not enabled": 38,
+    "Existing automated source": 20,
+    "Restricted featured streams": 1,
+    "Closed institution": 3,
+    "Added automated source": 8,
+    "Existing browser-reviewed source": 4,
+    "Outside current scope": 1,
+    "Historical entry": 7
+  },
+  "schools": [
+    {
+      "name": "Berklee College of Music",
+      "group": "Independent conservatories of music",
+      "wikipedia": "https://en.wikipedia.org/wiki/Berklee_College_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.berklee.edu/events/recitals",
+      "note": "Selected recitals stream; inspected upcoming programs lean pop, jazz and fusion. Do not duplicate Boston Conservatory, which has its own active source.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Cleveland Institute of Music",
+      "group": "Independent conservatories of music",
+      "wikipedia": "https://en.wikipedia.org/wiki/Cleveland_Institute_of_Music",
+      "status": "Existing automated source",
+      "source_id": "cim",
+      "evidence_url": "https://www.cim.edu/concerts-events",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "The Curtis Institute of Music",
+      "group": "Independent conservatories of music",
+      "wikipedia": "https://en.wikipedia.org/wiki/The_Curtis_Institute_of_Music",
+      "status": "Existing automated source",
+      "source_id": "curtis",
+      "evidence_url": "https://www.curtis.edu/curtis-performances/watch-listen/",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Interlochen Arts Academy",
+      "group": "Independent conservatories of music",
+      "wikipedia": "https://en.wikipedia.org/wiki/Interlochen_Center_for_the_Arts#Interlochen_Arts_Academy",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.interlochen.org/webcasts/featured-webcast",
+      "note": "Public and restricted webcasts coexist. Need a current dated public classical broadcast; do not infer access from the general performance calendar.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Manhattan School of Music",
+      "group": "Independent conservatories of music",
+      "wikipedia": "https://en.wikipedia.org/wiki/Manhattan_School_of_Music",
+      "status": "Existing automated source",
+      "source_id": "msm",
+      "evidence_url": "https://www.msmnyc.edu/livestream/",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "New England Conservatory",
+      "group": "Independent conservatories of music",
+      "wikipedia": "https://en.wikipedia.org/wiki/New_England_Conservatory",
+      "status": "Restricted featured streams",
+      "source_id": null,
+      "evidence_url": "https://necmusic.edu/events/miriam-fried-80th-birthday-celebration/",
+      "note": "September 29 Miriam Fried and September 28 Borromeo streams explicitly require the NEC community password. Keep public in-person admission separate from online access.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "San Francisco Conservatory of Music",
+      "group": "Independent conservatories of music",
+      "wikipedia": "https://en.wikipedia.org/wiki/San_Francisco_Conservatory_of_Music",
+      "status": "Existing automated source",
+      "source_id": "sfcm",
+      "evidence_url": "https://www.sfcm.edu/experience/performance-calendar",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "VanderCook College of Music",
+      "group": "Independent conservatories of music",
+      "wikipedia": "https://en.wikipedia.org/wiki/VanderCook_College_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.vandercook.edu/livestream/",
+      "note": "Public player found, but no upcoming dated broadcast verified in this pass.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "McNally Smith College of Music",
+      "group": "Independent for-profit conservatories of music",
+      "wikipedia": "https://en.wikipedia.org/wiki/McNally_Smith_College_of_Music",
+      "status": "Closed institution",
+      "source_id": null,
+      "evidence_url": "https://en.wikipedia.org/wiki/McNally_Smith_College_of_Music",
+      "note": "Wikipedia explicitly marks McNally Smith as shut down. Exclude this former college as a current calendar source.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Musicians Institute",
+      "group": "Independent for-profit conservatories of music",
+      "wikipedia": "https://en.wikipedia.org/wiki/Musicians_Institute",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.mi.edu/",
+      "note": "Music instruction and online learning are not evidence of a scheduled public classical concert stream.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Baldwin Wallace Conservatory of Music",
+      "group": "Liberal arts colleges, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Baldwin_Wallace_Conservatory_of_Music",
+      "status": "Existing automated source",
+      "source_id": "baldwin-wallace",
+      "evidence_url": "https://www.bw.edu/events/",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Bard College Conservatory of Music",
+      "group": "Liberal arts colleges, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Bard_College_Conservatory_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://blogs.bard.edu/conservatory-wiki/home/the-concert-office/noon-concerts/",
+      "note": "Strong next addition: official 2026–27 Noon Concert schedule promises YouTube streaming, including October 19 and November 2 at noon. Current public calendar fetch timed out; confirm viewing destination and automated retrieval before enabling.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Ithaca College School of Music",
+      "group": "Liberal arts colleges, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Ithaca_College_School_of_Music",
+      "status": "Added automated source",
+      "source_id": "ithaca",
+      "evidence_url": "https://www.ithaca.edu/academics/school-music-theatre-and-dance/live/webcasting-schedule",
+      "note": "Webcast-only ensemble schedule; nearby year checked against printed weekdays.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Lawrence University Conservatory of Music",
+      "group": "Liberal arts colleges, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Lawrence_University",
+      "status": "Existing automated source",
+      "source_id": "lawrence",
+      "evidence_url": "https://www.lawrence.edu/academics/ensembles-performances/performances/webcasts/",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Longy School of Music",
+      "group": "Liberal arts colleges, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Longy_School_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://longy.edu/",
+      "note": "Current concert activity found; no eligible dated free public stream verified in this pass.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Oberlin Conservatory of Music",
+      "group": "Liberal arts colleges, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Oberlin_Conservatory_of_Music",
+      "status": "Existing automated source",
+      "source_id": "oberlin",
+      "evidence_url": "https://www.oberlin.edu/conservatory/on-stage/live-webcasts",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Birmingham–Southern Conservatory of Fine and Performing Arts",
+      "group": "Liberal arts colleges, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Birmingham–Southern_College",
+      "status": "Closed institution",
+      "source_id": null,
+      "evidence_url": "https://bsc.meritpages.com/news/Birmingham-Southern-College-Announces-Closure-Operations-to-Cease-on-May-31-2024/42533",
+      "note": "College announced closure effective May 31, 2024. Wikipedia still places it among active categories.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Concordia College Conservatory",
+      "group": "Liberal arts colleges, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Concordia_College_(New_York)",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.concordiaconservatory.org/about",
+      "note": "The Bronxville/Stamford community conservatory continues separately from the former college. No eligible dated free concert stream verified.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Saint Mary-of-the-Woods Conservatory of Music",
+      "group": "Liberal arts colleges, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Saint_Mary-of-the-Woods_College",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.smwc.edu/",
+      "note": "Music ensembles and campus events found; no eligible dated public concert stream verified.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Gettysburg College, Sunderman Conservatory of Music",
+      "group": "Liberal arts colleges, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Gettysburg_College",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.gettysburg.edu/academic-programs/sunderman-conservatory/",
+      "note": "Streaming can depend on student permission. Require an explicit event announcement rather than assume every recital streams.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Wheaton College, Conservatory of Music",
+      "group": "Liberal arts colleges, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Wheaton_College_Conservatory_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.wheaton.edu/life-at-wheaton/streaming-media/",
+      "note": "General campus streaming exists; a current dated conservatory performance still needs confirmation.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Boston Conservatory at Berklee",
+      "group": "Schools of the Arts",
+      "wikipedia": "https://en.wikipedia.org/wiki/Boston_Conservatory_at_Berklee",
+      "status": "Existing automated source",
+      "source_id": "boston",
+      "evidence_url": "https://bostonconservatory.berklee.edu/events",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Colburn School",
+      "group": "Schools of the Arts",
+      "wikipedia": "https://en.wikipedia.org/wiki/Colburn_School",
+      "status": "Existing automated source",
+      "source_id": "colburn",
+      "evidence_url": "https://colburnschool.edu/livestream/",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Cornish College of the Arts",
+      "group": "Schools of the Arts",
+      "wikipedia": "https://en.wikipedia.org/wiki/Cornish_College_of_the_Arts",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.cornish.edu/area_of_study/music/",
+      "note": "Current music programs are at Cornish College of the Arts at Seattle University. Older virtual festivals do not establish a future free stream.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Juilliard School",
+      "group": "Schools of the Arts",
+      "wikipedia": "https://en.wikipedia.org/wiki/Juilliard_School",
+      "status": "Existing browser-reviewed source",
+      "source_id": "juilliard",
+      "evidence_url": "https://en.wikipedia.org/wiki/Juilliard_School",
+      "note": "Selected events already covered. Checks expire after 14 days and are not renewed by the automated refresh.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of the Arts, Philadelphia",
+      "group": "Schools of the Arts",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_the_Arts,_Philadelphia",
+      "status": "Closed institution",
+      "source_id": null,
+      "evidence_url": "https://now.temple.edu/news/2024-08-08/uarts-students-find-new-home-temple",
+      "note": "University closed in June 2024. Temple is already a separate active ClassicalWatch source; do not transfer this institution’s identity to it.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Boston University College of Fine Arts",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Boston_University_College_of_Fine_Arts",
+      "status": "Added automated source",
+      "source_id": "bu",
+      "evidence_url": "https://www.bu.edu/cfa/music/concerts-recitals/music-livestream/",
+      "note": "Dated term webcast schedule; public main player. Only currently published broadcasts.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Carnegie Mellon School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Carnegie_Mellon_School_of_Music",
+      "status": "Existing automated source",
+      "source_id": "carnegie-mellon",
+      "evidence_url": "https://events.cmu.edu/music/",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Eastman School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Eastman_School_of_Music",
+      "status": "Existing automated source",
+      "source_id": "eastman",
+      "evidence_url": "https://www.esm.rochester.edu/live/",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Frost School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Frost_School_of_Music",
+      "status": "Added automated source",
+      "source_id": "frost",
+      "evidence_url": "https://events.miami.edu/department/frost_school_of_music/calendar",
+      "note": "Official Frost-filtered Localist events with an explicit public YouTube live destination.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "The Hartt School",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/The_Hartt_School",
+      "status": "Added automated source",
+      "source_id": "hartt",
+      "evidence_url": "https://www.hartford.edu/academics/schools-colleges/hartt/performances/livestream.aspx",
+      "note": "Dated broadcast card plus public YouTube player; usually one announced next event.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Lamont School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Lamont_School_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://liberalarts.du.edu/lamont/performances-events/calendar",
+      "note": "Strong next addition: most events stream on YouTube, but links may appear only 24 hours ahead. Require each event’s posted stream link.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Lynn University Conservatory of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Lynn_University",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.lynn.edu/academics/colleges/conservatory-of-music",
+      "note": "Current concert offerings found; no eligible dated free public stream verified in this pass.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Mannes School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Mannes_School_of_Music",
+      "status": "Existing browser-reviewed source",
+      "source_id": "mannes",
+      "evidence_url": "https://en.wikipedia.org/wiki/Mannes_School_of_Music",
+      "note": "Selected events already covered. Checks expire after 14 days and are not renewed by the automated refresh.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "The Music Conservatory of Chicago College of Performing Arts",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/The_Music_Conservatory_of_Chicago_College_of_Performing_Arts",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.roosevelt.edu/colleges/ccpa/music-conservatory",
+      "note": "Music conservatory is active. No eligible upcoming public broadcast verified in this pass.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "The New School for Jazz and Contemporary Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/The_New_School_for_Jazz_and_Contemporary_Music",
+      "status": "Outside current scope",
+      "source_id": null,
+      "evidence_url": "https://www.newschool.edu/jazz/",
+      "note": "Jazz and contemporary-music school is outside the current classical-focused feed. Mannes is already covered separately.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Northwestern University, Bienen School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Bienen_School_of_Music",
+      "status": "Existing automated source",
+      "source_id": "northwestern",
+      "evidence_url": "https://www.music.northwestern.edu/live",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Peabody Institute",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Peabody_Institute",
+      "status": "Existing browser-reviewed source",
+      "source_id": "peabody",
+      "evidence_url": "https://en.wikipedia.org/wiki/Peabody_Institute",
+      "note": "Selected events already covered. Checks expire after 14 days and are not renewed by the automated refresh.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Point Park Conservatory of Performing Arts",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Point_Park_University",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.pointpark.edu/academics/schools/copa/",
+      "note": "Performing-arts institution; dance and theatre calendars alone do not establish classical concert webcasts.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Shepherd School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Shepherd_School_of_Music",
+      "status": "Existing automated source",
+      "source_id": "rice",
+      "evidence_url": "https://music.rice.edu/events",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of the Pacific, Conservatory of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_the_Pacific_(United_States)",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://music.pacific.edu/",
+      "note": "Current concerts found, but commencement streams and recordings do not establish an upcoming concert broadcast.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "USC Thornton School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/USC_Thornton_School_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://music.usc.edu/",
+      "note": "Retain as a prospect from the earlier audit. No current eligible free public broadcast verified in this pass.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Vanderbilt University, Blair School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Vanderbilt_University",
+      "status": "Existing automated source",
+      "source_id": "blair",
+      "evidence_url": "https://blair.vanderbilt.edu/livestreams/",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Westminster Choir College",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Westminster_Choir_College",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.rider.edu/westminster",
+      "note": "Current Westminster activity is associated with Rider. Older virtual concerts are not evidence for upcoming broadcast access.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Wilkes University Conservatory of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Wilkes_University",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.wilkes.edu/",
+      "note": "Community conservatory instruction found. No eligible dated public concert stream verified.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Syracuse University, Setnor School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Setnor_School_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://vpa.syracuse.edu/academics/music/setnor-auditorium/",
+      "note": "Strong next addition: many Setnor performances stream, and the school explicitly requires checking each event for confirmation. Current event/feed mapping still needs work.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Yale School of Music",
+      "group": "Private universities, secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Yale_School_of_Music",
+      "status": "Existing automated source",
+      "source_id": "yale",
+      "evidence_url": "https://music.yale.edu/live",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Anderson University Conservatory of Music",
+      "group": "Private universities, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Anderson_University_(South_Carolina)",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://andersonuniversity.edu/academics/the-south-carolina-school-of-the-arts/conservatory-of-music/",
+      "note": "This entry means Anderson, South Carolina, not the similarly named Indiana university. No eligible current stream verified.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Biola University Conservatory of Music",
+      "group": "Private universities, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Biola_University",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.biola.edu/music",
+      "note": "Past Christmas livestream evidence found, but no verified upcoming broadcast in the current window.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Brigham Young University, School of Music",
+      "group": "Private universities, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Brigham_Young_University,_School_of_Music?action=edit&redlink=1",
+      "status": "Added automated source",
+      "source_id": "byu",
+      "evidence_url": "https://musicstreaming.byu.edu/calendar",
+      "note": "Free-stream policy, streaming-only calendar and matching event iCal timestamps; hall-specific player.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Capital University Conservatory of Music",
+      "group": "Private universities, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Capital_University",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.capital.edu/student-life/arts-and-culture/annual-events/christmas-festival/",
+      "note": "The inspected Christmas Festival page says it is not planned for livestreaming. This is event-specific, not a conclusion about all Capital concerts.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Chapman University Conservatory of Music",
+      "group": "Private universities, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Chapman_University",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.chapman.edu/copa/",
+      "note": "Current campus performances found; no verified free public livestream in this pass.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "DePaul School of Music",
+      "group": "Private universities, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/DePaul_School_of_Music?action=edit&redlink=1",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://music.depaul.edu/",
+      "note": "Current concert calendar found. Commencement video does not establish concert-stream access.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Duquesne University, Mary Pappert School of Music",
+      "group": "Private universities, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Mary_Pappert_School_of_Music",
+      "status": "Existing automated source",
+      "source_id": "duquesne",
+      "evidence_url": "https://www.duq.edu/academics/colleges-and-schools/music/iemma/iemma-broadcast-network.php",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Shenandoah University Conservatory",
+      "group": "Private universities, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/Shenandoah_University",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.su.edu/performs/",
+      "note": "Current performance season found; older virtual seasons do not confirm current stream access.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of Mary Hardin–Baylor Conservatory of Music",
+      "group": "Private universities, non-secular",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_Mary_Hardin–Baylor",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.umhb.edu/",
+      "note": "Past Temple Symphony livestream found; no current eligible broadcast verified.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Oakland Public Conservatory of Music",
+      "group": "Pre-college public schools of the art",
+      "wikipedia": "https://en.wikipedia.org/wiki/Oakland_Public_Conservatory_of_Music?action=edit&redlink=1",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://opcmusic.org/",
+      "note": "Community music institution; no dated upcoming free classical livestream verified. Do not treat its presence in Wikipedia’s pre-college section as broadcast evidence.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Bob Cole Conservatory of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/Bob_Cole_Conservatory_of_Music",
+      "status": "Added automated source",
+      "source_id": "csulb",
+      "evidence_url": "https://web.csulb.edu/colleges/cota/music/events/",
+      "note": "Only Daniel Recital Hall concerts under the school’s explicit all-concerts streaming policy.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Cadek Conservatory",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/Cadek_Conservatory?action=edit&redlink=1",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://en.wikipedia.org/wiki/Girls_Preparatory_School",
+      "note": "Wikipedia’s University of Tennessee/Knoxville label needs correction: Cadek is associated with Girls Preparatory School in Chattanooga. Verify a current official performance calendar before integration.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "FSU College of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/Florida_State_University_College_of_Music",
+      "status": "Added automated source",
+      "source_id": "fsu",
+      "evidence_url": "https://wfsu.org/fsumusic/",
+      "note": "WFSU’s dated live-player schedule. Campus-local Eastern clock applies DST; generic EDT label is inaccurate in winter.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Indiana University Bloomington, Jacobs School of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/Jacobs_School_of_Music",
+      "status": "Existing automated source",
+      "source_id": "indiana",
+      "evidence_url": "https://liveatjacobs.music.indiana.edu/",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Kean University Conservatory of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/Kean_University",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.kean.edu/",
+      "note": "Music conservatory and Kean Stage programming found; no eligible concert webcast verified.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Lionel Hampton School of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/Lionel_Hampton_School_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.uidaho.edu/class/music",
+      "note": "Streaming references found, but no dated upcoming free classical broadcast verified in this pass.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "LSU School of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/LSU_School_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.lsu.edu/cmda/music/",
+      "note": "Music programs are active; graduation streams are not concert broadcasts. No eligible current event verified.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "State University of New York at Potsdam, Crane School of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/Crane_School_of_Music",
+      "status": "Added automated source",
+      "source_id": "crane",
+      "evidence_url": "https://www.potsdam.edu/academics/crane-school-music/crane-school-music-live-concert",
+      "note": "Only the explicitly labeled next live-streamed event; do not scrape all upcoming campus performances as streams.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "UCLA Herb Alpert School of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/UCLA_Herb_Alpert_School_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://schoolofmusic.ucla.edu/",
+      "note": "Retain as a prospect from the earlier audit. A current event still needs explicit broadcast access and schedule confirmation.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of Cincinnati – College-Conservatory of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_Cincinnati_–_College-Conservatory_of_Music",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.ccm.uc.edu/overview/videos/live-stream/watson.html",
+      "note": "Public hall players found. A current dated webcast schedule was not available in the fetched page; player presence alone is insufficient.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of Colorado-Boulder College of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_Colorado_Boulder",
+      "status": "Existing automated source",
+      "source_id": "colorado",
+      "evidence_url": "https://cupresents.org/performances",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of Maryland School of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_Maryland",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://music.umd.edu/",
+      "note": "Upcoming music events found. Each needs explicit online-viewing evidence from its official event page.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of Michigan School of Music, Theatre & Dance",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_Michigan_School_of_Music,_Theatre_&_Dance",
+      "status": "Existing browser-reviewed source",
+      "source_id": "michigan",
+      "evidence_url": "https://en.wikipedia.org/wiki/University_of_Michigan_School_of_Music,_Theatre_&_Dance",
+      "note": "Selected events already covered. Checks expire after 14 days and are not renewed by the automated refresh.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of Missouri–Kansas City Conservatory",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_Missouri–Kansas_City",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://conservatory.umkc.edu/performances-and-news/",
+      "note": "Official performance information and video presence found; no eligible dated public stream verified in this pass.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of North Texas College of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_North_Texas_College_of_Music",
+      "status": "Existing automated source",
+      "source_id": "unt",
+      "evidence_url": "https://recording.music.unt.edu/webcasts",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of Oregon School of Music and Dance",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_Oregon_School_of_Music_and_Dance?action=edit&redlink=1",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://musicanddance.uoregon.edu/events/live-stream",
+      "note": "Public livestream page found. Need date-specific broadcast confirmation before adding its general calendar.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of Texas at Austin, Butler School of Music",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/Sarah_and_Ernest_Butler_School_of_Music",
+      "status": "Existing automated source",
+      "source_id": "ut-austin",
+      "evidence_url": "https://music.utexas.edu/events?field_cofaevent_types_target_id%5B0%5D=236",
+      "note": "Already in the daily verified-stream collection. Coverage remains selective and depends on what the school publishes.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "University of North Carolina School of the Arts",
+      "group": "Public universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_North_Carolina_School_of_the_Arts",
+      "status": "Candidate — not enabled",
+      "source_id": null,
+      "evidence_url": "https://www.uncsa.edu/performances/live-from-watson-hall.aspx",
+      "note": "Public streaming series found. A January 2027 event is beyond the 45-day window; current automated event/player matching still needs verification.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "American Conservatory of Music",
+      "group": "Former music institutions of higher learning",
+      "wikipedia": "https://en.wikipedia.org/wiki/American_Conservatory_of_Music",
+      "status": "Historical entry",
+      "source_id": null,
+      "evidence_url": "https://en.wikipedia.org/wiki/American_Conservatory_of_Music",
+      "note": "Listed in Wikipedia’s former-institutions section. Retain in the inventory, exclude from current-school ingestion.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "American Institute of Applied Music",
+      "group": "Former music institutions of higher learning",
+      "wikipedia": "https://en.wikipedia.org/wiki/American_Institute_of_Applied_Music",
+      "status": "Historical entry",
+      "source_id": null,
+      "evidence_url": "https://en.wikipedia.org/wiki/American_Institute_of_Applied_Music",
+      "note": "Listed in Wikipedia’s former-institutions section. Retain in the inventory, exclude from current-school ingestion.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Combs College of Music",
+      "group": "Former music institutions of higher learning",
+      "wikipedia": "https://en.wikipedia.org/wiki/Combs_College_of_Music",
+      "status": "Historical entry",
+      "source_id": null,
+      "evidence_url": "https://en.wikipedia.org/wiki/Combs_College_of_Music",
+      "note": "Listed in Wikipedia’s former-institutions section. Retain in the inventory, exclude from current-school ingestion.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Detroit Institute of Musical Arts",
+      "group": "Former music institutions of higher learning",
+      "wikipedia": "https://en.wikipedia.org/wiki/Detroit_Institute_of_Musical_Arts",
+      "status": "Historical entry",
+      "source_id": null,
+      "evidence_url": "https://en.wikipedia.org/wiki/Detroit_Institute_of_Musical_Arts",
+      "note": "Listed in Wikipedia’s former-institutions section. Retain in the inventory, exclude from current-school ingestion.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Ellison-White Conservatory of Music",
+      "group": "Former music institutions of higher learning",
+      "wikipedia": "https://en.wikipedia.org/wiki/Ellison-White_Conservatory_of_Music",
+      "status": "Historical entry",
+      "source_id": null,
+      "evidence_url": "https://en.wikipedia.org/wiki/Ellison-White_Conservatory_of_Music",
+      "note": "Listed in Wikipedia’s former-institutions section. Retain in the inventory, exclude from current-school ingestion.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Hartford Conservatory",
+      "group": "Former music institutions of higher learning",
+      "wikipedia": "https://en.wikipedia.org/wiki/Hartford_Conservatory",
+      "status": "Historical entry",
+      "source_id": null,
+      "evidence_url": "https://en.wikipedia.org/wiki/Hartford_Conservatory",
+      "note": "Listed in Wikipedia’s former-institutions section. Retain in the inventory, exclude from current-school ingestion.",
+      "checked_at": "2026-09-28"
+    },
+    {
+      "name": "Western University, School of Music",
+      "group": "Former music institutions at historically black colleges and universities",
+      "wikipedia": "https://en.wikipedia.org/wiki/Western_University_(Kansas)",
+      "status": "Historical entry",
+      "source_id": null,
+      "evidence_url": "https://en.wikipedia.org/wiki/Western_University_(Kansas)",
+      "note": "Listed in Wikipedia’s former-institutions section. Retain in the inventory, exclude from current-school ingestion.",
+      "checked_at": "2026-09-28"
+    }
+  ]
+}

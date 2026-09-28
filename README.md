@@ -110,7 +110,7 @@ Two McGill concerts and the October 4 Mannes / New School Schneider Concerts per
 
 ## Sharing preview
 
-The homepage includes Open Graph and X large-image card metadata in the initial HTML, including for `?event=` performance links. `dist/social-card-v1.jpg` is a 1200 × 630 default Classical Watch preview (about 92 KB) with the site name, domain, and cello artwork. The share dialog previews it. The existing share message still names the performance and credits Classical Watch; the image is generic. No homepage-only `og:url` or canonical tag is added to override performance-specific query links.
+The homepage includes Open Graph and X large-image card metadata in the initial HTML, including for `?event=` performance links. `dist/social-card-v2.jpg` is a 1200 × 630 default Classical Watch preview with the site name, domain, and a real Pixabay photograph of a violin and bow. The share dialog previews it. The existing share message still names the performance and credits Classical Watch; the image is generic. No homepage-only `og:url` or canonical tag is added to override performance-specific query links.
 
 Preview rendering and caching are controlled by the receiving platform; these tags do not attach an image file to a post or guarantee a preview in every app. The asset is hosted on the existing site with no extra API or service. It was created with the built-in image-generation tool and exported as an optimized JPEG; [asset notes](docs/social-preview.md) retain the prompt.
 
@@ -167,3 +167,9 @@ The test suite covers time zones, DST ambiguity, date filters, `.ics` escaping a
 `dist/schools.js` keeps location and published collegiate music enrollment separate from event data. Size bands are under 500, 500–999, and 1,000+. Thirteen schools have a linked official enrollment figure; estimates are labeled and dated when the source supplies a year. No overall university totals, preparatory divisions, or combined music/dance/theatre totals are substituted for music enrollment. Unknown values remain available under Not listed. Source links appear in About → Browse the schools. These are approximate discovery filters, not rankings.
 
 The public page keeps George's personal story, basic viewing guidance, and a separate TV guide recommending his preferred Chrome-on-laptop casting method. Implementation details and candidate-school research stay in this README. Casting steps follow [Google's Chrome casting instructions](https://support.google.com/chromecast/answer/3228332?hl=en).
+
+## September 28 conservatory audit and sharing
+
+Added Boston University, Hartt, Ithaca, Florida State, SUNY Potsdam Crane, CSU Long Beach, Miami Frost and BYU. [The complete 82-entry Wikipedia inventory](docs/us-conservatories-2026-09-28.md) accounts for every institution, including existing coverage, candidates, access restrictions and former schools. `scripts/conservatories.mjs` uses explicit stream evidence and the existing request budget, pacing and stale-data rules. It adds no services or dependencies.
+
+The performance sharing panel supports Email, Text message, Facebook and X, plus copying details and the native share sheet. Email and text carry full concert details and an explicit time zone; the visitor chooses a recipient and sends in their own app. [Photo provenance and editable layout](docs/social-preview.md).

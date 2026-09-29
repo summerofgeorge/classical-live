@@ -36,10 +36,9 @@ test('About retains the personal story and contact form without an Oberlin callo
  assert.equal($('.controls').parent('main').length,1);
 });
 
-test('daily calendar freshness warning uses two days while manual review labels remain',async()=>{
- const app=await read('dist/app.js'),health=await read('dist/freshness.js'),readme=await read('README.md');
- assert.match(health,/Date\.parse\(data\.generated_at\)>2\*86400000/);
- assert.match(app,/not been updated in over two days/);
- assert.match(readme,/data file is over two days old/);
- assert.match(app,/Confirm the latest details with the school/);
+test('concert browsing omits collection diagnostics and repeated free labels',async()=>{
+ const app=await read('dist/app.js'),html=await read('dist/index.html');
+ assert.doesNotMatch(app,/Free stream|Manually checked|Schedule last confirmed|another check|scheduleHealth/);
+ assert.doesNotMatch(html,/id="notice"/);
+ assert.match(app,/Event details/);
 });

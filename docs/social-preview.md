@@ -1,6 +1,6 @@
 # Default social preview
 
-The current asset is `dist/social-card-v3.jpg`, 1200 × 630 pixels. It combines Classical Watch typography with the exact cello photograph selected by George, without generative image editing. The complete portrait composition remains visible.
+The current asset is `dist/social-card-v3.jpg`, 1200 × 630 pixels. It combines Classical Watch typography with a cello photograph by Ri_Ya, without generative image editing. The complete portrait composition remains visible.
 
 Photo: [Cello, Musical Instrument, Music](https://pixabay.com/photos/cello-musical-instrument-music-6942912/), by **Ri_Ya** on Pixabay, published January 18, 2022. The source page identifies a Nikon D5600 photograph. [Pixabay content license](https://pixabay.com/service/license-summary/), checked September 28, 2026. The photograph is incorporated into a branded design rather than redistributed as a standalone stock asset.
 

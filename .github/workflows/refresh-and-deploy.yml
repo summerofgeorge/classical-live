@@ -2,6 +2,14 @@ name: Refresh and publish calendar
 on:
   push:
     branches: [main]
+    paths:
+      - 'dist/**'
+      - 'scripts/**'
+      - 'data/**'
+      - 'test/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/**'
   workflow_dispatch:
   schedule:
     - cron: '15 3 * * *'
@@ -26,6 +34,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: pnpm/action-setup@v4
         with:
           version: 11.19.0
@@ -36,10 +46,15 @@ jobs:
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Test parsers and calendar behavior
         run: node --test
+      - name: Decide whether schedules need collecting
+        id: collection
+        run: node scripts/refresh-needed.mjs
       - name: Refresh from official sources
         id: refresh
+        if: steps.collection.outputs.required == 'true'
         run: node scripts/refresh.mjs
       - name: Save refreshed event file
+        if: steps.collection.outputs.required == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

@@ -48,7 +48,6 @@ export function calendar(events, now=new Date()) {
   for (const event of events) {
     const notes=[event.program,`Watch: ${event.stream_url}`,`Event details: ${event.event_url}`,
       `Times originate in ${event.timezone}.`, event.watch_note,
-      event.verification_method==='browser' ? `Browser-checked ${event.last_verified_at.slice(0,10)}; not automatically rechecked. Confirm the official event page.` : '',
       !event.end ? 'End time is an estimate (90 minutes); check the source for updates.' : '',
       'This is a saved calendar copy, not a subscription. Check the source for changes.'].filter(Boolean).join('\n\n');
     lines.push('BEGIN:VEVENT',`UID:${escapeIcs(event.id)}@classical-live`,

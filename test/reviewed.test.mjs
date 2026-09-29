@@ -53,12 +53,12 @@ test('invalid timestamps, missing official evidence, unsafe links and source col
  p=clone();p.sources[0].events[0].event_url='https://example.org/event';assert.throws(()=>applyReviewed(empty,p,checked),/evidence/);
  assert.throws(()=>applyReviewed({...empty,sources:[{id:'juilliard'}]},payload,checked),/conflicts/);
 });
-test('reviewed calendars preserve Eastern times, durations, source provenance and login notes',()=>{
+test('reviewed calendars preserve Eastern times, durations, official links and login notes',()=>{
  const result=applyReviewed(empty,payload,checked);
  const axiom=result.events.find(e=>e.id==='juilliard-185731');
  assert.match(calendar([axiom],checked),/DTSTART:20261001T233000Z/);
  const notes=calendar([axiom],checked).replace(/\r\n /g,'');
- assert.match(notes,/free account/);assert.match(notes,/Browser-checked 2026-09-25/);assert.match(notes,/not automatically rechecked/);
+ assert.match(notes,/free account/);assert.ok(notes.includes(axiom.event_url));assert.doesNotMatch(notes,/Browser-checked|not automatically rechecked/);
  const peabody=result.events.find(e=>e.id==='peabody-peabody-concert-orchestra-3');
  assert.match(calendar([peabody],checked),/DTEND:20260926T013000Z/);
  assert.equal(result.events.find(e=>e.id==='peabody-next-ensemble-2').end,null);

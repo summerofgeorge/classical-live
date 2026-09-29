@@ -35,21 +35,42 @@ function setupDialog(){
     <p class="share-intro">Invite someone to listen. The link brings them to this concert on Classical Watch.</p>
     <label for="share-message">Your message<textarea id="share-message" rows="4"></textarea></label>
     <label for="share-url">Performance link<input id="share-url" type="url" readonly></label>
-    <div class="share-actions"><a class="watch" data-email>Email</a><a class="watch" data-sms>Text message</a><a class="calendar-button" data-facebook target="_blank" rel="noopener noreferrer">Share on Facebook</a><a class="calendar-button" data-x target="_blank" rel="noopener noreferrer">Share on X</a><button type="button" class="calendar-button" data-copy-post>Copy details &amp; link</button><button type="button" class="calendar-button" data-copy-link>Copy link</button><button type="button" class="calendar-button" data-native hidden>More options…</button></div>
-    <p class="share-help">Email and text include the concert details and time zone. Choose a recipient in your app, then send. Facebook opens the link; add your message there. You can also copy the details if an app doesn’t open.</p>
-    <details class="share-details"><summary>Concert details included with email and text</summary><p data-details></p></details>
-    <figure class="share-preview"><img src="./social-card-v3.jpg" width="1200" height="630" alt="Classical Watch — Free classical livestreams, beside a photograph of a cello."><figcaption>Link preview image. Availability and appearance vary by app.</figcaption></figure>
+    <div class="share-actions"><a class="watch" data-email>Email</a><a class="watch" data-sms>Text message</a><button type="button" class="calendar-button" data-copy-facebook aria-controls="facebook-next" aria-expanded="false">Copy for Facebook</button><a class="calendar-button" data-x target="_blank" rel="noopener noreferrer">Share on X</a><button type="button" class="calendar-button" data-copy-post>Copy details &amp; link</button><button type="button" class="calendar-button" data-copy-link>Copy link</button><button type="button" class="calendar-button" data-native hidden>More options…</button></div>
+    <p class="share-status" role="status" aria-live="polite"></p>
     <textarea data-copy-fallback aria-label="Text to copy manually" rows="6" readonly hidden></textarea>
-    <p class="share-status" role="status" aria-live="polite"></p>`;
+    <div id="facebook-next" class="facebook-next" hidden>
+      <p id="facebook-help">Open Facebook, then paste the copied text into your post above the link preview.</p>
+      <a class="watch" data-facebook target="_blank" rel="noopener noreferrer" aria-describedby="facebook-help">Open Facebook</a>
+    </div>
+    <p class="share-help">Facebook shares the link preview automatically. Use “Copy for Facebook,” then paste the text into your post. Email and text include your message, concert details and time zone automatically.</p>
+    <details class="share-details"><summary>Concert details included when sending or copying</summary><p data-details></p></details>
+    <figure class="share-preview"><img src="./social-card-v3.jpg" width="1200" height="630" alt="Classical Watch — Free classical livestreams, beside a photograph of a cello."><figcaption>Link preview image. Availability and appearance vary by app.</figcaption></figure>
+    `;
   document.body.append(dialog);
-  const find=selector=>dialog.querySelector(selector),message=find('textarea'),url=find('input'),status=find('[role="status"]');
-  find('[data-close]').onclick=()=>dialog.close();
-  message.oninput=()=>{updateLinks();status.textContent='';};
-  async function copy(text,success){
+  const find=selector=>dialog.querySelector(selector),message=find('#share-message'),status=find('[role="status"]');
+  function resetCopy(){
+    find('[data-copy-fallback]').hidden=true;
+    find('#facebook-next').hidden=true;
+    find('[data-copy-facebook]').setAttribute('aria-expanded','false');
     status.textContent='';
-    try{await navigator.clipboard.writeText(text);status.textContent=success;}
-    catch{const fallback=find('[data-copy-fallback]');fallback.hidden=false;fallback.value=text;fallback.focus();fallback.select();status.textContent='Copying is unavailable in this browser. Copy the selected text above.';}
   }
+  find('[data-close]').onclick=()=>dialog.close();
+  message.oninput=()=>{updateLinks();resetCopy();};
+  async function copy(text,success){
+    resetCopy();
+    const currentDetails=details,currentMessage=message.value;
+    const stillCurrent=()=>dialog.open&&details===currentDetails&&message.value===currentMessage;
+    try{await navigator.clipboard.writeText(text);if(!stillCurrent())return;status.textContent=success;return true;}
+    catch{if(!stillCurrent())return;const fallback=find('[data-copy-fallback]');fallback.hidden=false;fallback.value=text;fallback.focus();fallback.select();status.textContent='Copying is unavailable in this browser. Copy the selected text below.';return false;}
+  }
+  find('[data-copy-facebook]').onclick=async()=>{
+    const copied=await copy(invitationBody(details,message.value),'Message, concert details and link copied. Paste them into your Facebook post.');
+    if(copied===undefined)return;
+    find('#facebook-next').hidden=false;
+    find('[data-copy-facebook]').setAttribute('aria-expanded','true');
+    find('#facebook-help').textContent=copied?'Open Facebook, then paste the copied text into your post above the link preview.':'Copy the selected text above, then open Facebook and paste it into your post.';
+    if(copied)find('[data-facebook]').focus();
+  };
   find('[data-copy-post]').onclick=()=>copy(invitationBody(details,message.value),'Concert details and link copied.');
   find('[data-copy-link]').onclick=()=>copy(details.url,'Link copied.');
   find('[data-native]').onclick=async()=>{
@@ -76,6 +97,8 @@ export function createShareButton(event){
     dialog.querySelector('textarea').value=details.text;dialog.querySelector('input').value=details.url;
     dialog.querySelector('[data-details]').textContent=details.performance;
     dialog.querySelector('[data-copy-fallback]').hidden=true;
+    dialog.querySelector('#facebook-next').hidden=true;
+    dialog.querySelector('[data-copy-facebook]').setAttribute('aria-expanded','false');
     updateLinks();
     dialog.querySelector('[data-native]').hidden=typeof navigator.share!=='function';
     dialog.querySelector('[role="status"]').textContent='';dialog.showModal();

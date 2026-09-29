@@ -96,32 +96,14 @@ footer{align-items:baseline}footer span:first-child{color:var(--ink)}footer a{co
 }
 .share-help{font-size:12px;line-height:1.5;color:var(--muted);margin:14px 0 0}.share-actions a{text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
 .share-details{font-size:12px;margin:12px 0}.share-details summary{cursor:pointer}.share-details p{white-space:pre-line;line-height:1.6}[data-copy-fallback][hidden]{display:none}
-/* Stringfest motif tokens + masthead chrome (P1) */
+/* Stringfest real-logo chrome (P1b) — seal PNG, not redrawn SVG */
 .wordmark{display:inline-flex;align-items:center;gap:10px}
-.brand-mark{flex-shrink:0;width:28px;height:18px;display:block;color:var(--red)}
+.brand-mark{flex-shrink:0;width:28px;height:28px;display:block;object-fit:contain}
+.footer-brand{display:inline-flex;align-items:center;gap:8px}
+.footer-mark{width:18px;height:18px;display:block;object-fit:contain;opacity:.92}
+/* Soft red top rule only — no competing fake staff stripes over the seal */
 .masthead{position:relative;overflow:hidden}
-.masthead::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  opacity:.45;
-  background:repeating-linear-gradient(
-    -28deg,
-    transparent 0 10px,
-    color-mix(in srgb,var(--red) 22%,transparent) 10px 11px
-  );
-}
 .masthead-inner,.masthead > .wrap{position:relative;z-index:1}
-/* Optional low-opacity staff texture behind intro only — keep text contrast high */
-.intro{
-  position:relative;
-  background-image:repeating-linear-gradient(
-    -18deg,
-    transparent 0 14px,
-    color-mix(in srgb,var(--red) 5%,transparent) 14px 15px
-  );
-}
 
 /* Support page styles (deduped from support.html inline block) */
 .support-page{line-height:1.65}
@@ -171,3 +153,5 @@ footer{align-items:baseline}footer span:first-child{color:var(--ink)}footer a{co
 }
 .support-page .skip{background:var(--paper)}
 .support-page .skip:focus{top:12px}
+
+.support-brand{margin:8px 0 0}.support-brand img{display:block;width:180px;height:auto;max-width:100%}

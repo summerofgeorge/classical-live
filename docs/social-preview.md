@@ -12,4 +12,4 @@ Share actions: Email and Text message include an editable introduction, full per
 
 ## Brand accents (site chrome)
 
-Classical Watch keeps Georgia/Arial system fonts (no Aliens & Cows). Brand tokens: red `#CF3338`, ink `#3D3935`, white. Masthead and favicon use a small parallel-diagonal chevron/staff motif inspired by the Stringfest mark — subtle calendar chrome, not a full Stringfest wordmark lockup. Delivered social JPGs were not regenerated in the P1 motif pass; re-render `social-card-layout.html` if a future card should pick up the warmer ink.
+Classical Watch keeps Georgia/Arial system fonts (no Aliens & Cows). Brand tokens: red `#CF3338`, ink `#3D3935`, white. Masthead, favicon, and the default social card use the official Stringfest seal PNG (and a horizontal lockup sparingly on Support) — real logo assets, not redrawn SVG approximations. Classical Watch remains the site name; this is calendar chrome, not a Stringfest Analytics wordmark takeover. Re-render `docs/social-card-layout.html` at 1200×630 when logo assets change.

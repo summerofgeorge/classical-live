@@ -96,14 +96,33 @@ footer{align-items:baseline}footer span:first-child{color:var(--ink)}footer a{co
 }
 .share-help{font-size:12px;line-height:1.5;color:var(--muted);margin:14px 0 0}.share-actions a{text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
 .share-details{font-size:12px;margin:12px 0}.share-details summary{cursor:pointer}.share-details p{white-space:pre-line;line-height:1.6}[data-copy-fallback][hidden]{display:none}
-/* Stringfest real-logo chrome (P1b) — seal PNG, not redrawn SVG */
+/* Stringfest real-logo chrome (P1c) — seal beside wordmark; no stripe textures */
 .wordmark{display:inline-flex;align-items:center;gap:10px}
-.brand-mark{flex-shrink:0;width:28px;height:28px;display:block;object-fit:contain}
+.brand-mark{
+  flex-shrink:0;
+  height:22px;
+  width:auto;
+  max-height:28px;
+  display:block;
+  object-fit:contain;
+  object-position:center;
+}
+.brand-lockup{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
+.brand-credit{
+  margin:0;
+  padding-left:32px; /* seal 22px + wordmark gap 10px — sit under text, not seal */
+  font:11px/1.35 Arial,Helvetica,sans-serif;
+  letter-spacing:.2px;
+  color:color-mix(in srgb,var(--paper) 62%,transparent);
+}
+.brand-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.brand-credit a:hover{color:var(--paper)}
+@media(max-width:760px){
+  .brand-credit{padding-left:0} /* full-width subtle line under lockup on small screens */
+}
 .footer-brand{display:inline-flex;align-items:center;gap:8px}
-.footer-mark{width:18px;height:18px;display:block;object-fit:contain;opacity:.92}
-/* Soft red top rule only — no competing fake staff stripes over the seal */
-.masthead{position:relative;overflow:hidden}
-.masthead-inner,.masthead > .wrap{position:relative;z-index:1}
+.footer-mark{height:16px;width:auto;display:block;object-fit:contain;opacity:.92}
+/* Flat masthead: red top rule only (no ::before diagonal / intro staff stripes) */
 
 /* Support page styles (deduped from support.html inline block) */
 .support-page{line-height:1.65}

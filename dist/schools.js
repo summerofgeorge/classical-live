@@ -3,6 +3,8 @@
 const enrollment=(students,label,url,year=null)=>({students,label,url,year,checked_at:'2026-09-25'});
 const us=(region,city,count=null)=>({region:`US ${region}`,country:'United States',city,enrollment:count});
 export const schools={
+ ubc:{region:'Canada',country:'Canada',city:'Vancouver, British Columbia'},
+ vcass:{region:'Oceania',country:'Australia',city:'Melbourne, Victoria'},
  bard:us('Northeast','Annandale-on-Hudson, New York'),
  rutgers:us('Northeast','New Brunswick, New Jersey'),
  ucla:us('West','Los Angeles, California'),

@@ -41,7 +41,7 @@ export const sources=[
  {id:'boston',name:'Boston Conservatory at Berklee',url:'https://bostonconservatory.berklee.edu/events',timezone:'America/New_York'},
  {id:'oberlin',name:'Oberlin Conservatory of Music',url:'https://www.oberlin.edu/conservatory/on-stage/live-webcasts',timezone:'America/New_York'}
 ];
-// Prototype only: Kulmag access varies between GitHub runners. Excluded from scheduled collection.
+// Prototype only: Kulmag access varies between GitHub runners (flaky from Actions). Keep disabled rather than deleting; revisit after a stable live probe.
 export const candidateSources=[{id:'liechtenstein',name:'Music Academy in Liechtenstein',url:'https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',timezone:'Europe/Vaduz'}];
 export function zonedTime(local,zone){
  const m=local?.trim().match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?$/);
@@ -91,28 +91,39 @@ async function curtis(get,now){
  }
  return events;
 }
+const cancelled=text=>/\bcancelled\b|\bcanceled\b|\bpostponed\b/i.test(text);
 export function parseCim(html,url){
  const $=load(html),area=$('article.article-detail');if(!area.length||!area.find('.atc_date_start').length)throw new Error('CIM event layout changed');
- const title=clean(area.find('h1').text());if(/cancelled|canceled|postponed/i.test(title))return null;
+ const title=clean(area.find('h1').text());if(cancelled(title))return null;
  const stream=area.find('.livestream a[href]').first().attr('href');if(!stream)return null;
  const zone=clean(area.find('.atc_timezone').text());if(zone!=='America/New_York')throw new Error('Unexpected CIM time zone');
  const repertoire=area.find('h3').filter((i,x)=>/repertoire/i.test($(x).text())).next('ul').find('li').toArray().map(x=>clean($(x).text())).join('; ');
  return {title,start:zonedTime(clean(area.find('.atc_date_start').text()),zone),end:zonedTime(clean(area.find('.atc_date_end').text()),zone),program:repertoire,event_url:url,stream_url:stream,watch_kind:'direct',evidence_url:url,evidence:'Official event page provides a public Watch the performance live link.'};
 }
 async function cim(get,now){
+ // P0 scrape budget: listing teasers never advertise stream destinations. Cap detail walks
+ // and short-circuit further pages once an in-horizon page yields no public stream links
+ // (CIM often shows Livestream countdown placeholders without an href).
  let next='https://www.cim.edu/concerts-events',page=0;const seen=new Set(),events=[];
- while(next){if(++page>10)throw new Error('CIM pagination exceeded safety limit');const $=load(await get(next));const cards=$('.event-teaser');if(!cards.length&&!/no events/i.test($('main').text()))throw new Error('CIM calendar layout changed');
-  let allBeyond=cards.length>0;
+ while(next){
+  if(++page>4)throw new Error('CIM pagination exceeded safety limit');
+  const $=load(await get(next)),cards=$('.event-teaser');
+  if(!cards.length&&!/no events/i.test($('main').text()))throw new Error('CIM calendar layout changed');
+  let allBeyond=cards.length>0,pageHadStreamLink=false;
   for(const card of cards.toArray()){
-   if(/cancelled|canceled|postponed/i.test($(card).find('.event-teaser-title').text()))continue;
+   if(cancelled($(card).find('.event-teaser-title').text()))continue;
    const href=$(card).find('.event-teaser-title a').attr('href');if(!href)throw new Error('CIM event link missing');
    const url=new URL(href,next).href;if(seen.has(url))continue;seen.add(url);
-   const html=await get(url),event=parseCim(html,url);
-   const rawStart=clean(load(html)('.atc_date_start').text());
+   if(seen.size>16)throw new Error('CIM detail-page budget exceeded');
+   const html=await get(url),$detail=load(html);
+   if($detail('.livestream a[href]').length)pageHadStreamLink=true;
+   const event=parseCim(html,url);
+   const rawStart=clean($detail('.atc_date_start').text());
    if(zonedTime(rawStart,'America/New_York')<new Date(+now+45*DAY).toISOString())allBeyond=false;
    if(event)events.push(event);
   }
-  const href=$('a[rel="next"]').attr('href');next=href&&!allBeyond?new URL(href,next).href:null;
+  // Empty streaming season: no public Watch links on this page → do not walk further pages.
+  const href=$('a[rel="next"]').attr('href');next=href&&!allBeyond&&pageHadStreamLink?new URL(href,next).href:null;
  }
  return events;
 }
@@ -147,7 +158,6 @@ export function parseMsm(html){
   return {title,start:zonedTime(namedDate(date)+'T'+clock24(time),'America/New_York'),end:null,program:'',event_url:url,stream_url:url,watch_kind:'direct',evidence_url:'https://www.msmnyc.edu/livestream/',evidence:'Listed as an upcoming event on the official livestream index.'};
  }).filter(e=>!/cancelled|canceled|postponed/i.test(e.title));
 }
-const cancelled=text=>/\bcancelled\b|\bcanceled\b|\bpostponed\b/i.test(text);
 function streamLink(href,base){return href&&href.trim()&&!href.trim().startsWith('#')?safeUrl(new URL(href,base).href):null;}
 export function parseNorthwestern(html){
  const $=load(html),area=$('#upcoming-events-slider');
@@ -184,10 +194,23 @@ export function parseRice(html,url){
  const type=clean(heading.find('.event-type').text());
  return {title,type:kind(type+' '+title),start:riceStart(html),end:null,program:clean($('.field--name-field-repertoire .field__item').html()?.replace(/<br\s*\/?>/gi,'; ')),event_url:url,stream_url:stream,watch_kind:new URL(stream).hostname==='music.rice.edu'?'venue':'direct',evidence_url:url,evidence:'Official event page provides a View Livestream link and Central Time.'};
 }
+function riceListingDate(item,now){
+ // Listing day headings ("Tue, Sep 29") omit the year; pick the nearest candidate within ±180 days.
+ const heading=clean(item.closest('.divider').find('h3').first().text());
+ const m=heading.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+(\d{1,2})\b/i);
+ if(!m)return null;
+ const month=months.findIndex(v=>v.toLowerCase().startsWith(m[1].slice(0,3).toLowerCase()))+1;
+ if(!month)return null;
+ const day=m[2].padStart(2,'0'),y=now.getUTCFullYear();
+ return [y-1,y,y+1].map(year=>`${year}-${String(month).padStart(2,'0')}-${day}`)
+  .sort((a,b)=>Math.abs(Date.parse(a+'T12:00:00Z')-+now)-Math.abs(Date.parse(b+'T12:00:00Z')-+now))[0];
+}
 async function rice(get,now){
+ // P0 scrape budget: prefer listing dates + stream-icon filter; skip detail fetches past the horizon.
+ const first=dayKey(new Date(+now-DAY),'America/Chicago'),last=dayKey(new Date(+now+45*DAY),'America/Chicago');
  let next='https://music.rice.edu/events',page=0;const seen=new Set(),pages=new Set(),events=[];
  while(next){
-  if(++page>20||pages.has(next))throw new Error('Rice pagination exceeded safety limit');pages.add(next);
+  if(++page>8||pages.has(next))throw new Error('Rice pagination exceeded safety limit');pages.add(next);
   const $=load(await get(next)),area=$('.view-calendar-example.view-display-id-listing'),cards=area.find('.event-wrapper-link');
   if(!area.length||(!cards.length&&!area.find('.view-empty').length))throw new Error('Rice calendar layout changed');
   const broadcasts=cards.filter((i,card)=>$(card).find('.stream-icon').length&&!cancelled($(card).find('.event-title,.event-status').text()));
@@ -199,10 +222,19 @@ async function rice(get,now){
    // /content/ links describe festivals or several performances, not one dated concert.
    if(new URL(url).pathname.startsWith('/content/')){allBeyond=false;continue;}
    if(seen.has(url))throw new Error('Rice calendar repeated an event across pages');seen.add(url);
+   const listed=riceListingDate(item,now);
+   if(listed){
+    if(listed>last)continue;
+    if(listed<first){allBeyond=false;continue;}
+    allBeyond=false;
+   }
+   if(seen.size>24)throw new Error('Rice detail-page budget exceeded');
    // Only inspect marked broadcasts; other cards can point to undated, multi-performance landing pages.
-   const html=await get(url);if(Date.parse(riceStart(html))<+now+45*DAY)allBeyond=false;
-   if(item.find('.stream-icon').length){const event=parseRice(html,url);if(event)events.push(event);}
-
+   const html=await get(url),start=riceStart(html);
+   if(Date.parse(start)<+now+45*DAY)allBeyond=false;
+   if(dayKey(new Date(start),'America/Chicago')<first)continue;
+   if(Date.parse(start)>=+now+45*DAY)continue;
+   const event=parseRice(html,url);if(event)events.push(event);
   }
   const href=area.find('a[rel="next"]').attr('href');next=href&&!allBeyond?new URL(href,next).href:null;
  }
@@ -241,6 +273,8 @@ async function sfcm(get,now){
    const row=$(link).closest('.performance-row'),day=clean(row.find('.compact-listing__date-date').first().text()),monthName=clean(row.find('.compact-listing__date-month').first().text());
    if(!/^\d{1,2}$/.test(day)||monthName!==months[month.getUTCMonth()].slice(0,3))throw new Error('SFCM calendar row date missing');
    const date=`${month.toISOString().slice(0,7)}-${day.padStart(2,'0')}`;if(date<first||date>last||cancelled($(link).text()))continue;
+   // P0: listing rows omit livestream CTAs; bound detail fetches until a filtered feed exists.
+   if(seen.size>18)throw new Error('SFCM detail-page budget exceeded');
    const event=parseSfcm(await get(url),url);if(event)events.push(event);
 
   }
@@ -308,9 +342,10 @@ export function parseBoston(html,url){
  return {id:occurrenceId('boston',url,start),title,start,end:null,program:record.description||'',event_url:url,stream_url:stream,watch_kind:'venue',evidence_url:url,evidence:'Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.'};
 }
 async function boston(get,now){
+ // P0 scrape budget: teasers rarely expose Watch links; bound pagination and detail fetches.
  let next=bostonIndex;const pages=new Set(),seen=new Set(),events=[];
  while(next){
-  if(pages.size>=15||pages.has(next))throw new Error('Boston pagination exceeded safety limit');pages.add(next);
+  if(pages.size>=6||pages.has(next))throw new Error('Boston pagination exceeded safety limit');pages.add(next);
   const $=load(await get(next)),area=$('.view-events.view-display-id-page'),cards=area.find('.views-row .event.teaser');
   if(!area.length||(!cards.length&&!area.find('.view-empty').length))throw new Error('Boston calendar layout changed');
   let allBeyond=cards.length>0;
@@ -321,7 +356,7 @@ async function boston(get,now){
    if(!times.some(t=>t>=+now-DAY&&t<+now+45*DAY)||cancelled(item.find('.title,.field--name-field-event-instance-status').text()))continue;
    const url=streamLink(item.find('.title a').attr('href'),bostonIndex);
    if(!url||new URL(url).hostname!=='bostonconservatory.berklee.edu')throw new Error('Boston event URL changed');
-   if(seen.has(url))continue;seen.add(url);if(seen.size>80)throw new Error('Boston event budget exceeded');
+   if(seen.has(url))continue;seen.add(url);if(seen.size>24)throw new Error('Boston event budget exceeded');
    const event=parseBoston(await get(url),url);if(event)events.push(event);
   }
   const href=area.find('a[rel="next"]').attr('href');next=href&&!allBeyond?new URL(href,next).href:null;
@@ -436,7 +471,7 @@ async function weimar(get,now){
    const item=p(a),date=europeanDate(clean(item.find('.joVeranstaltungsTeaserAdresse').text()));
    if(date<first||date>last||cancelledEuropean(item.find('.joVeranstaltungsTeaserHeadline').text()))continue;
    const url=new URL(item.attr('href'),page.url).href;if(seen.has(url))continue;seen.add(url);
-   if(seen.size>80)throw new Error('Weimar event budget exceeded');
+   if(seen.size>24)throw new Error('Weimar event budget exceeded'); // P0: listing cards omit livestream cues; bound detail walks.
    const event=parseWeimar(await get(url),url);if(event)events.push(event);
   }
  }

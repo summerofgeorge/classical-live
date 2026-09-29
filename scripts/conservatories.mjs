@@ -12,7 +12,7 @@ export const conservatorySources=[
  {id:'csulb',name:'Bob Cole Conservatory of Music, CSU Long Beach',url:'https://web.csulb.edu/colleges/cota/music/events/',timezone:'America/Los_Angeles'},
  {id:'frost',name:'University of Miami Frost School of Music',url:'https://events.miami.edu/department/frost_school_of_music/calendar',timezone:east}
 ];
-// Hosted requests receive HTTP 403. Retain the parser for local reviews, not scheduled collection.
+// Hosted requests receive HTTP 403 from Actions. Parser retained for local/manual review only — do not promote onto scheduled sources until the host allows the collector (low-request streaming calendar is otherwise solid).
 export const conservatoryCandidates=[
  {id:'byu',name:'Brigham Young University School of Music',url:'https://musicstreaming.byu.edu/calendar',timezone:'America/Denver'}
 ];

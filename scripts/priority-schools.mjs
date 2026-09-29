@@ -6,7 +6,7 @@ export const prioritySources=[
  {id:'bard',name:'Bard College Conservatory of Music',url:'https://www.bard.edu/conservatory/events/',timezone:east},
  {id:'ucla',name:'UCLA Herb Alpert School of Music',url:'https://schoolofmusic.ucla.edu/calendar/',timezone:west}
 ];
-// Rutgers denies the identified collector; its public schedule is manually reviewed.
+// Rutgers denies the identified collector (HTTP block). Parser retained; keep off the scheduled source list and rely on browser-reviewed snapshots until access is permitted.
 export const priorityCandidates=[{id:'rutgers',name:'Rutgers Mason Gross School of the Arts',url:'https://www.masongross.rutgers.edu/nicholas-music-center-stream/',timezone:east}];
 export const priorityHosts=['www.bard.edu','conservatory.bard.edu','www.masongross.rutgers.edu','schoolofmusic.ucla.edu'];
 const info=Object.fromEntries([...prioritySources,...priorityCandidates].map(s=>[s.id,s]));

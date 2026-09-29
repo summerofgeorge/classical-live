@@ -29,14 +29,18 @@ test('Rice uses the visible Central date, not misleading UTC attributes or sideb
 
 test('Rice follows the list pager, ignores unmarked streams, and excludes beyond the horizon',async()=>{
  const card=(name,stream=true)=>`<a class="event-wrapper-link" href="/events/${name}"><h3 class="event-title">${name}</h3>${stream?'<div class="stream-icon">Livestream Available</div>':''}</a>`;
+ const day=(label,cards)=>`<div class="divider"><h3>${label}</h3>${cards}</div>`;
  const page=(cards,next)=>`<div class="view-calendar-example view-display-id-listing">${cards}${next?'<a rel="next" href="?page=1">Load More</a>':''}</div><a rel="next" href="/calendar/day/202610">Next month</a>`;
+ const requests=[];
  const responses=new Map([
-  ['https://music.rice.edu/events',page(card('first')+card('unmarked',false)+card('festival').replace('/events/festival','/content/festival'),true)],
-  ['https://music.rice.edu/events?page=1',page(card('winter'),false)],
+  ['https://music.rice.edu/events',page(day('Mon, Sep 28',card('first')+card('unmarked',false)+card('festival').replace('/events/festival','/content/festival')),true)],
+  ['https://music.rice.edu/events?page=1',page(day('Tue, Dec 1',card('winter')),false)],
   ['https://music.rice.edu/events/first',riceHtml()],['https://music.rice.edu/events/winter',riceHtml('Dec 1, 2026')]
  ]);
- const result=await collect(undefined,now,sources.filter(s=>s.id==='rice'),async url=>{assert.ok(responses.has(url),url);return responses.get(url);});
+ const result=await collect(undefined,now,sources.filter(s=>s.id==='rice'),async url=>{requests.push(url);assert.ok(responses.has(url),url);return responses.get(url);});
  assert.equal(result.sources[0].status,'ok');assert.equal(result.events.length,1);assert.match(result.events[0].event_url,/first$/);
+ // Listing date past the horizon must skip the winter detail fetch.
+ assert.equal(requests.includes('https://music.rice.edu/events/winter'),false);
 });
 
 test('SFCM verifies displayed Pacific dates against calendar metadata and requires public stream buttons',()=>{

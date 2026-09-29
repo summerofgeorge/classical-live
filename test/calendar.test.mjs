@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {calendar,foldLine,matches,safeUrl} from '../dist/core.js';
-import {zonedTime,parseCim,parseEastman,parseColburn,parseMsm,curtisCandidates,normalize,collect,DAY} from '../scripts/ingest.mjs';
+import {zonedTime,parseCim,parseEastman,parseColburn,parseMsm,curtisCandidates,normalize,collect,DAY,adapters} from '../scripts/ingest.mjs';
 const now=new Date('2026-09-25T12:00:00Z');
 const source={id:'test',name:'Test School',timezone:'America/New_York',url:'https://example.org/'};
 const raw={id:'test-1',title:'Bach, Brahms; & friends',start:'2026-09-26T00:00:00Z',end:null,program:'First line\nSecond line',event_url:'https://example.org/event',stream_url:'https://example.org/watch'};
@@ -97,4 +97,28 @@ test('failed sources retain recent verified events; healthy empty sources clear 
  const removed=await collect(previous,now,[source],null,{test:async()=>[]});assert.equal(removed.events.length,0);
  const stale={...event,start:'2026-10-20T12:00:00Z',last_verified_at:new Date(+now-15*DAY).toISOString()};
  assert.equal((await collect({...previous,events:[stale]},now,[source],null,{test:async()=>{throw new Error('offline');}})).events.length,0);
+});
+
+test('CIM short-circuits further pages when listings lack public stream link destinations',async()=>{
+ const detail=(start,link=false)=>`<article class="article-detail"><h1>Recital</h1><var class="atc_date_start">${start}</var><var class="atc_date_end">${start}</var><var class="atc_timezone">America/New_York</var><div class="livestream">${link?'<a href="https://vimeo.com/1">Watch</a>':'<p>Watch the performance live</p>'}</div></article>`;
+ const page=(cards,next)=>`<main>${cards}${next?'<a rel="next" href="?page=1">Next</a>':''}</main>`;
+ const card=href=>`<div class="event-teaser"><p class="event-teaser-title"><a href="${href}">Recital</a></p></div>`;
+ const calls=[];
+ const get=async url=>{calls.push(url);if(url.includes('page=1'))assert.fail('empty streaming season must not paginate');if(url.endsWith('/concerts-events/a'))return detail('2026-09-28 16:00:00');if(url.includes('concerts-events'))return page(card('/concerts-events/a'),true);assert.fail(url);};
+ assert.equal((await adapters.cim(get,now)).length,0);
+ assert.equal(calls.length,2);
+});
+test('CIM continues when a page exposes a public livestream destination',async()=>{
+ const detail=(start,link=false)=>`<article class="article-detail"><h1>Orchestra</h1><var class="atc_date_start">${start}</var><var class="atc_date_end">${start}</var><var class="atc_timezone">America/New_York</var><div class="livestream">${link?'<a href="https://vimeo.com/9">Watch</a>':'<p>Watch</p>'}</div></article>`;
+ const page=(cards,next)=>`<main>${cards}${next?'<a rel="next" href="?page=1">Next</a>':''}</main>`;
+ const card=href=>`<div class="event-teaser"><p class="event-teaser-title"><a href="${href}">Orchestra</a></p></div>`;
+ const calls=[];
+ const get=async url=>{calls.push(url);
+  if(url==='https://www.cim.edu/concerts-events')return page(card('/concerts-events/live'),true);
+  if(url.endsWith('/concerts-events/live'))return detail('2026-09-28 16:00:00',true);
+  if(url.includes('page=1'))return page(card('/concerts-events/later'),false);
+  if(url.endsWith('/concerts-events/later'))return detail('2026-12-01 16:00:00');
+  assert.fail(url);
+ };
+ const events=await adapters.cim(get,now);assert.equal(events.length,1);assert.ok(calls.some(u=>u.includes('page=1')));
 });

@@ -43,6 +43,17 @@ Calendar downloads are snapshots, not subscriptions. “Scheduled now” describ
 
 To add a school, implement an adapter in `scripts/`, register its metadata and allowed hosts, require explicit broadcast evidence, and add fixtures covering dates, cancellations, and missing or restricted streams. Run the tests and verify real source results before enabling scheduled collection.
 
+### Scrape budget and candidates
+
+Collection is capped at **600 HTTP requests** per refresh (soft warn at 80% / 10 minutes). Prefer feeds and livestream indexes over unfiltered calendar walks; adapters should early-exit past the 45-day horizon and bound detail-page fetches.
+
+Adapters may exist without being scheduled:
+
+- **Liechtenstein (Kulmag)** — coded but excluded: access from GitHub runners is flaky. Leave disabled until a stable live probe succeeds; do not delete without review.
+- **BYU** — streaming calendar parser is low-request and solid locally, but the host returns HTTP 403 to the identified collector. Remains in `conservatoryCandidates` / browser-reviewed data, not `sources`.
+- **Rutgers** — free livestream series parser is low-request, but the host denies the collector. Remains in `priorityCandidates` / browser-reviewed data, not `sources`.
+
+
 ## Analytics and public configuration
 
 The production hostname loads Google Analytics. The browser measurement ID in `dist/analytics.js` is public configuration; it does not grant access to Analytics reports. API secrets, service-account credentials, tokens, and private setup notes must never be committed. Local previews do not send analytics. Advertising personalization is disabled; the site’s About section describes analytics use.

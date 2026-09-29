@@ -89,13 +89,15 @@ export function createAudited({clean,zonedTime,clock24,namedDate,DAY}){
   return {title,start,end,program:'',event_url:url,stream_url:stream,watch_kind:'channel',watch_note:'Choose this performance on the Boyer College YouTube channel.',evidence_url:url,evidence:'Official Boyer concert is free and public and explicitly announces a livestream on the school’s YouTube channel.'};
  }
  async function temple(get,now){
+  // P0 scrape budget: listing teasers omit livestream copy; bound pages/details hard.
+  // Short-circuit further pages only when an in-window page admits zero streams.
   let next=templeIndex;const pages=new Set(),seen=new Set(),events=[];
   const first=dayKey(new Date(+now-2*DAY),'America/New_York'),last=dayKey(new Date(+now+45*DAY),'America/New_York');
   while(next){
-   if(pages.has(next)||pages.size>=6)throw new Error('Temple pagination limit reached');pages.add(next);
+   if(pages.has(next)||pages.size>=3)throw new Error('Temple pagination limit reached');pages.add(next);
    const $=load(await get(next)),list=$('main .catalog__items'),cards=list.find('.teaser__legacy-event');
    if(!list.length||(!cards.length&&!/no (?:events|results)/i.test($('main').text())))throw new Error('Temple calendar layout changed');
-   let beyond=false;
+   let beyond=false,before=events.length,inWindow=0;
    for(const card of cards.toArray()){
     const item=$(card),trackingDate=item.attr('data-gtm-event-datevalue');
     const printed=clean(item.find('.date__short').text()),dateParts=printed.match(/^([A-Za-z]+)\.? (\d{1,2}), (\d{4})\b/);
@@ -106,15 +108,18 @@ export function createAudited({clean,zonedTime,clock24,namedDate,DAY}){
     const date=namedDate(`${month} ${dateParts[2]}, ${dateParts[3]}`);
     if(date>last){beyond=true;continue;}
     if(date<first||cancelled(item.text())||outOfScope(item.find('h2').text()))continue;
+    inWindow++;
     const href=item.find('a[href]').first().attr('href');if(!href)throw new Error('Temple event link missing');
     const url=official(href,'https://now.temple.edu','/events/');if(seen.has(url))continue;seen.add(url);
-    if(seen.size>55)throw new Error('Temple event budget exceeded');
+    if(seen.size>18)throw new Error('Temple event budget exceeded');
     const event=parseTemple(await get(url),url);
     if(event&&(dayKey(new Date(event.start),'America/New_York')!==date||dayKey(new Date(event.start),'UTC')!==trackingDate))throw new Error('Temple calendar and event date disagree');
     if(event&&current(event.start,now))events.push(event);
    }
    const href=$('main a[rel="next"]').attr('href');next=href&&!beyond?official(new URL(href,next).href,'https://boyer.temple.edu','/events'):null;
    if(next&&new URL(next).pathname!=='/events')throw new Error('Unexpected Temple pagination link');
+   // Empty streaming season: an in-window page produced no admissions → stop walking.
+   if(next&&inWindow&&events.length===before)next=null;
   }return events;
  }
  return {adapters:{'ut-austin':texas,temple},parsers:{parseTexas,parseTemple}};

@@ -2,7 +2,7 @@ import {endTime} from './core.js';
 
 const siteUrl='https://classicalwatch.stringfestanalytics.com/';
 export function shareDetails(event,now=new Date()){
-  const url=new URL(siteUrl);url.searchParams.set('event',event.id);url.searchParams.set('card','4');
+  const url=new URL(siteUrl);url.searchParams.set('event',event.id);url.searchParams.set('card','5');
   const subject=`${event.title} (${event.institution})`;
   let description='',weight=0;
   for(const char of subject){weight+=char.codePointAt(0)>0x10ff?2:1;if(weight>169){description+='…';break;}description+=char;}
@@ -44,7 +44,7 @@ function setupDialog(){
     </div>
     <p class="share-help">Facebook shares the link preview automatically. Use “Copy for Facebook,” then paste the text into your post. Email and text include your message, concert details and time zone automatically.</p>
     <details class="share-details"><summary>Concert details included when sending or copying</summary><p data-details></p></details>
-    <figure class="share-preview"><img src="./social-card-v4.jpg" width="1200" height="630" alt="Classical Watch — Free classical livestreams from the world’s music schools, with the red Stringfest Analytics seal and a cello photograph."><figcaption>Link preview image. Availability and appearance vary by app.</figcaption></figure>
+    <figure class="share-preview"><img src="./social-card-v5.jpg" width="1200" height="630" alt="Classical Watch — Find free classical livestreams from the world’s music schools. A livestream guide by Stringfest Analytics, with its red seal and a cello photograph."><figcaption>Link preview image. Availability and appearance vary by app.</figcaption></figure>
     `;
   document.body.append(dialog);
   const find=selector=>dialog.querySelector(selector),message=find('#share-message'),status=find('[role="status"]');

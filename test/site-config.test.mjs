@@ -14,6 +14,13 @@ test('daily publication uses 3:15 Eastern and retains push and manual triggers',
  assert.match(workflow,/runs-on: ubuntu-latest/);
  assert.match(workflow,/timeout-minutes: 15/);
  assert.match(workflow,/retention-days: 1/);
+ const proposed=await read('docs/workflows/refresh-and-deploy.yml');
+ assert.match(proposed,/matrix:\s*\n\s*region: \[nam, europe, asia-pacific\]/);
+ assert.match(proposed,/COLLECT_REGION/);
+ assert.match(proposed,/merge-shards\.mjs/);
+ assert.match(proposed,/if: github\.event\.repository\.private == false/);
+ assert.match(proposed,/timeout-minutes: 15/);
+ assert.match(proposed,/retention-days: 1/);
  const html=await read('dist/index.html'),readme=await read('README.md');
  assert.match(html,/calendar is updated daily/);
  assert.match(readme,/daily at \*\*3:15 a\.m\. America\/New_York\*\*/);

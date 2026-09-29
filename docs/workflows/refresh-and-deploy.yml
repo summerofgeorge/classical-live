@@ -1,0 +1,161 @@
+name: Refresh and publish calendar
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dist/**'
+      - 'scripts/**'
+      - 'data/**'
+      - 'test/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/**'
+  workflow_dispatch:
+  schedule:
+    - cron: '15 3 * * *'
+      timezone: America/New_York
+permissions:
+  contents: read
+concurrency:
+  group: classical-live-production
+  cancel-in-progress: false
+jobs:
+  prepare:
+    # Keep unattended collection on the free public-repository runner path.
+    if: github.event.repository.private == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      required: ${{ steps.collection.outputs.required }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          check-latest: true
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Test parsers and calendar behavior
+        run: node --test
+      - name: Decide whether schedules need collecting
+        id: collection
+        run: node scripts/refresh-needed.mjs
+
+  collect:
+    needs: prepare
+    if: needs.prepare.outputs.required == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        region: [nam, europe, asia-pacific]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          check-latest: true
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Collect ${{ matrix.region }} shard
+        id: refresh
+        env:
+          COLLECT_REGION: ${{ matrix.region }}
+        run: node scripts/collect-region.mjs
+      - name: Stage shard for artifact upload
+        run: |
+          mkdir -p /tmp/shard-upload
+          cp "dist/shards/${{ matrix.region }}.json" "/tmp/shard-upload/${{ matrix.region }}.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shard-${{ matrix.region }}
+          path: /tmp/shard-upload/${{ matrix.region }}.json
+          retention-days: 1
+          if-no-files-found: error
+      - name: Report source failures after publishing available events
+        if: steps.refresh.outputs.degraded == 'true'
+        run: |
+          echo 'One or more ${{ matrix.region }} source adapters need attention. See the refresh summary.'
+          exit 1
+
+  publish:
+    needs: [prepare, collect]
+    if: always() && needs.prepare.result == 'success' && (needs.prepare.outputs.required != 'true' || contains(fromJSON('["success", "failure"]'), needs.collect.result))
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          check-latest: true
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Download regional shards
+        if: needs.prepare.outputs.required == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          pattern: shard-*
+          path: /tmp/regional-shards
+          merge-multiple: false
+      - name: Stage downloaded shards
+        if: needs.prepare.outputs.required == 'true'
+        run: |
+          mkdir -p dist/shards
+          for dir in /tmp/regional-shards/shard-*; do
+            [ -d "$dir" ] || continue
+            region=${dir##*/shard-}
+            file=$(find "$dir" -type f -name '*.json' | head -n 1)
+            if [ -z "$file" ]; then
+              echo "Missing JSON in $dir" >&2
+              exit 1
+            fi
+            cp "$file" "dist/shards/${region}.json"
+          done
+          ls -la dist/shards
+      - name: Merge shards into calendar
+        id: merge
+        if: needs.prepare.outputs.required == 'true'
+        run: node scripts/merge-shards.mjs
+      - name: Save refreshed event file
+        if: needs.prepare.outputs.required == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add dist/events.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh conservatory livestream calendar'
+            git push
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+          retention-days: 1
+      - name: Publish website
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Report merge degradation
+        if: steps.merge.outputs.degraded == 'true'
+        run: |
+          echo 'One or more source adapters need attention after merge. See the refresh summary.'
+          exit 1

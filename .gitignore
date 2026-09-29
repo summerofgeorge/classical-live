@@ -11,3 +11,6 @@ service-account*.json
 private/
 research-notes/
 outputs/
+
+# Ephemeral regional collection shards (merged into dist/events.json)
+dist/shards/

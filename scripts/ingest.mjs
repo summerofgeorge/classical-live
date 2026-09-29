@@ -39,10 +39,11 @@ export const sources=[
  {id:'weimar',name:'Franz Liszt University of Music Weimar',url:'https://www.hfm-weimar.de/en/visiting/events/calendar',timezone:'Europe/Berlin'},
  {id:'lawrence',name:'Lawrence University Conservatory of Music',url:'https://www.lawrence.edu/academics/ensembles-performances/performances/webcasts/',timezone:'America/Chicago'},
  {id:'boston',name:'Boston Conservatory at Berklee',url:'https://bostonconservatory.berklee.edu/events',timezone:'America/New_York'},
- {id:'oberlin',name:'Oberlin Conservatory of Music',url:'https://www.oberlin.edu/conservatory/on-stage/live-webcasts',timezone:'America/New_York'}
+ {id:'oberlin',name:'Oberlin Conservatory of Music',url:'https://www.oberlin.edu/conservatory/on-stage/live-webcasts',timezone:'America/New_York'},
+ {id:'liechtenstein',name:'Music Academy in Liechtenstein',url:'https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',timezone:'Europe/Vaduz'}
 ];
-// Prototype only: Kulmag access varies between GitHub runners (flaky from Actions). Keep disabled rather than deleting; revisit after a stable live probe.
-export const candidateSources=[{id:'liechtenstein',name:'Music Academy in Liechtenstein',url:'https://www.kulmag.live/de/Partner/2/musikakademie-in-liechtenstein',timezone:'Europe/Vaduz'}];
+// Adapters may exist without being scheduled (host blocks, flaky runners, etc.).
+export const candidateSources=[];
 export function zonedTime(local,zone){
  const m=local?.trim().match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?$/);
  if(!m)throw new Error(`Missing or ambiguous date: ${local}`);
@@ -74,7 +75,7 @@ for(const host of auditedHosts)allowedHosts.add(host);
 for(const host of conservatoryHosts)allowedHosts.add(host);
 for(const host of priorityHosts)allowedHosts.add(host);
 for(const host of pacificHosts)allowedHosts.add(host);
-export function makeFetcher(){return createFetcher({allowedHosts,pacedHosts:allowedHosts});}
+export function makeFetcher(requestLimit){return createFetcher({allowedHosts,pacedHosts:allowedHosts,requestLimit});}
 export function curtisCandidates(payload,now){
  if(payload.success!==true||!Array.isArray(payload.data))throw new Error('Curtis feed format changed');
  return payload.data.filter(e=>e.date>=new Date(+now-DAY).toISOString().slice(0,10)&&e.date<=new Date(+now+45*DAY).toISOString().slice(0,10)&&e.categories?.includes('broadcast')&&e.categories?.includes('free')&&!/cancelled|canceled|postponed/i.test(e.title));

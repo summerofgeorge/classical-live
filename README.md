@@ -21,6 +21,7 @@ Open `http://127.0.0.1:4173`. To collect current schedules, run `pnpm refresh`.
 - `dist/`: the static website and published concert data.
 - `scripts/`: official-source collectors, date validation, and refresh tooling.
 - `data/browser-reviewed.json`: dated manual observations for sources that cannot be collected reliably.
+- `docs/regional-shortlist.md`: Europe / Asia–Pacific schools scouted for free dated livestreams (24h coverage).
 - `test/`: parser fixtures and checks for dates, sharing, access requirements, and failed-source retention.
 
 The browser uses plain HTML, CSS, and JavaScript. Cheerio is the collector’s only direct dependency. No database, visitor account, paid API, or stored video is required.
@@ -31,7 +32,7 @@ The calendar refreshes daily at **3:15 a.m. America/New_York**, including daylig
 
 Changes to collectors or reviewed data trigger a refresh before deployment. Website-only edits publish the most recent collected schedule after tests pass. Documentation-only changes do not deploy the site.
 
-GitHub Pages publishes `dist/` through Actions using the repository’s built-in token. The workflow uses standard public-repository runners, a 15-minute timeout, a 600-request collection limit, and one-day artifact retention. Configure repository **Settings → Pages → Source** as **GitHub Actions**.
+GitHub Pages publishes `dist/` through Actions using the repository’s built-in token. Regional collection is implemented in scripts (`nam` / `europe` / `asia-pacific` shards → one `dist/events.json`). The Actions matrix lives in [`docs/workflows/refresh-and-deploy.yml`](docs/workflows/refresh-and-deploy.yml) until that file replaces `.github/workflows/refresh-and-deploy.yml` (pushing workflow files needs the `workflow` OAuth scope). Runners stay public, 15-minute timeouts, one-day artifact retention. Configure repository **Settings → Pages → Source** as **GitHub Actions**.
 
 ## Data quality
 
@@ -43,13 +44,22 @@ Calendar downloads are snapshots, not subscriptions. “Scheduled now” describ
 
 To add a school, implement an adapter in `scripts/`, register its metadata and allowed hosts, require explicit broadcast evidence, and add fixtures covering dates, cancellations, and missing or restricted streams. Run the tests and verify real source results before enabling scheduled collection.
 
-### Scrape budget and candidates
+### Scrape budget, regions, and candidates
 
-Collection is capped at **600 HTTP requests** per refresh (soft warn at 80% / 10 minutes). Prefer feeds and livestream indexes over unfiltered calendar walks; adapters should early-exit past the 45-day horizon and bound detail-page fetches.
+Collection runs as **three regional jobs** so North American volume cannot exhaust the budget for Europe / Asia–Pacific (24-hour coverage). Each job has its own request fuse (soft warn at 80% / 10 minutes):
+
+| Region | Job id | Request limit |
+| --- | --- | --- |
+| North America (US + Canada) | `nam` | 600 |
+| Europe | `europe` | 400 |
+| Asia–Pacific | `asia-pacific` | 300 |
+
+Shards land in `dist/shards/*.json` and merge into one calendar file. Prefer feeds and livestream indexes over unfiltered calendar walks; adapters should early-exit past the 45-day horizon and bound detail-page fetches.
+
+Research notes for expanding Europe / Asia coverage: [docs/regional-shortlist.md](docs/regional-shortlist.md).
 
 Adapters may exist without being scheduled:
 
-- **Liechtenstein (Kulmag)** — coded but excluded: access from GitHub runners is flaky. Leave disabled until a stable live probe succeeds; do not delete without review.
 - **BYU** — streaming calendar parser is low-request and solid locally, but the host returns HTTP 403 to the identified collector. Remains in `conservatoryCandidates` / browser-reviewed data, not `sources`.
 - **Rutgers** — free livestream series parser is low-request, but the host denies the collector. Remains in `priorityCandidates` / browser-reviewed data, not `sources`.
 

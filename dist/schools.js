@@ -56,6 +56,7 @@ export const schools={
  ohio:us('Midwest','Athens, Ohio'),
  unt:us('South','Denton, Texas',enrollment(1500,'more than 1,500','https://music.unt.edu/community/index.html')),
  weimar:{region:'Europe',country:'Germany',city:'Weimar'},
+ liechtenstein:{region:'Europe',country:'Liechtenstein',city:'Vaduz'},
  udk:{region:'Europe',country:'Germany',city:'Berlin'},
  bruckner:{region:'Europe',country:'Austria',city:'Linz'},
  'reina-sofia':{region:'Europe',country:'Spain',city:'Madrid',enrollment:{students:150,label:'more than 150',url:'https://www.escuelasuperiordemusicareinasofia.es/abierto-el-plazo-de-inscripcion-para-las-audiciones-del-curso-2026-2027-en-la-escuela-reina-sofia/',year:2026,checked_at:'2026-09-26'}},

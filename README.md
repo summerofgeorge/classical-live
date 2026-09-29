@@ -6,7 +6,7 @@ It displays concert times in the visitor’s time zone, links to official viewin
 
 ## Run locally
 
-Requires Node.js 22 or newer and pnpm 11.19.0.
+Requires Node.js 24.16 or newer and pnpm 11.19.0. Current time-zone data is needed for international concert times, including Vancouver's permanent UTC−7 from March 2026.
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts

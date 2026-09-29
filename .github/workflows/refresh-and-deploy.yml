@@ -41,7 +41,8 @@ jobs:
           version: 11.19.0
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
+          check-latest: true
           cache: pnpm
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Test parsers and calendar behavior

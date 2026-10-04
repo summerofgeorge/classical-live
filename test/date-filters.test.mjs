@@ -3,6 +3,17 @@ import assert from 'node:assert/strict';
 import {matches,periodRange} from '../dist/core.js';
 const timeZone='America/New_York';
 const event=start=>({start,title:'Concert',institution:'School',program:''});
+
+test('automatic listings disappear at 14 days even if the published site never refreshes',()=>{
+ const concert={...event('2026-10-20T19:00:00Z'),last_verified_at:'2026-10-01T12:00:00Z'};
+ const filter={timeZone,period:'all'};
+ for(const stale of [true,false]){
+  assert.equal(matches({...concert,stale},filter,new Date('2026-10-15T11:59:59Z')),true);
+  assert.equal(matches({...concert,stale},filter,new Date('2026-10-15T12:00:00Z')),false);
+ }
+ assert.equal(matches({...concert,last_verified_at:'bad'},filter,new Date('2026-10-04T12:00:00Z')),false);
+ assert.equal(matches({...concert,stale:true,last_verified_at:undefined},filter,new Date('2026-10-04T12:00:00Z')),false);
+});
 test('Today includes daytime and earlier concerts while Tomorrow selects only the next local day',()=>{
  const now=new Date('2026-09-28T00:30:00Z');
  assert.equal(matches(event('2026-09-27T12:00:00-04:00'),{period:'today',timeZone},now),true);

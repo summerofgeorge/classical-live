@@ -11,6 +11,19 @@ const texasUrl='https://music.utexas.edu/events/6117-butler-opera-international-
 const templeUrl='https://now.temple.edu/events/2026-10-09/mosaic-concert-0';
 const now=new Date('2026-09-28T00:00:00Z');
 
+test('Temple does not abandon later pages after an unstreamed page and supports more than 18 candidates',async()=>{
+ const base='https://boyer.temple.edu/events';
+ const card=(url,date,printed)=>`<section class="teaser__legacy-event" data-gtm-event-datevalue="${date}"><a href="${url}"><p class="date__short">${printed}</p><h2>Concert</h2></a></section>`;
+ const page=(cards,next='')=>`<main><ul class="catalog__items">${cards}</ul>${next?`<a rel="next" href="${next}">Next</a>`:''}</main>`;
+ const unstreamedUrl='https://now.temple.edu/events/2026-09-29/student-recital-shawn-garrone-oboe';
+ const get=async url=>{
+  if(url===base)return page(card(unstreamedUrl,'2026-09-29','Sep. 29, 2026 7:30 p.m.'),'?page=1');
+  if(url===base+'?page=1')return page(Array.from({length:25},(_,i)=>card(templeUrl+'-'+i,'2026-10-09','Oct. 9, 2026 7:30 p.m.')).join(''));
+  return url===unstreamedUrl?unstreamed:temple;
+ };
+ assert.equal((await audited.adapters.temple(get,now)).length,25);
+});
+
 test('UT Austin keeps event subtitles, public streaming evidence and Central time despite paid hall tickets',()=>{
  const event=parseTexas(texas,texasUrl);
  assert.equal(event.title,'Butler Opera International Competition — Finals');

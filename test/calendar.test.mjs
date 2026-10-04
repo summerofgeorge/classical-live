@@ -36,7 +36,7 @@ test('CIM stays visible after its scheduled end until the viewer’s local midni
 });
 
 test('25-hour days use calendar midnight, and an explicitly ongoing overnight concert remains available',()=>{
- const fall={...event,start:'2026-11-01T04:00:00Z',end:'2026-11-01T05:00:00Z'},zone={timeZone:'America/New_York'};
+ const fall={...event,start:'2026-11-01T04:00:00Z',end:'2026-11-01T05:00:00Z',last_verified_at:'2026-11-01T00:00:00Z'},zone={timeZone:'America/New_York'};
  assert.ok(matches(fall,zone,new Date('2026-11-02T04:59:59Z')));
  assert.equal(matches(fall,zone,new Date('2026-11-02T05:00:00Z')),false);
  const late={...event,start:'2026-09-26T03:00:00Z',end:'2026-09-26T05:00:00Z'};
@@ -99,14 +99,14 @@ test('failed sources retain recent verified events; healthy empty sources clear 
  assert.equal((await collect({...previous,events:[stale]},now,[source],null,{test:async()=>{throw new Error('offline');}})).events.length,0);
 });
 
-test('CIM short-circuits further pages when listings lack public stream link destinations',async()=>{
+test('CIM finds later broadcasts even when the first page has no public stream destinations',async()=>{
  const detail=(start,link=false)=>`<article class="article-detail"><h1>Recital</h1><var class="atc_date_start">${start}</var><var class="atc_date_end">${start}</var><var class="atc_timezone">America/New_York</var><div class="livestream">${link?'<a href="https://vimeo.com/1">Watch</a>':'<p>Watch the performance live</p>'}</div></article>`;
  const page=(cards,next)=>`<main>${cards}${next?'<a rel="next" href="?page=1">Next</a>':''}</main>`;
  const card=href=>`<div class="event-teaser"><p class="event-teaser-title"><a href="${href}">Recital</a></p></div>`;
  const calls=[];
- const get=async url=>{calls.push(url);if(url.includes('page=1'))assert.fail('empty streaming season must not paginate');if(url.endsWith('/concerts-events/a'))return detail('2026-09-28 16:00:00');if(url.includes('concerts-events'))return page(card('/concerts-events/a'),true);assert.fail(url);};
- assert.equal((await adapters.cim(get,now)).length,0);
- assert.equal(calls.length,2);
+ const get=async url=>{calls.push(url);if(url.includes('page=1'))return page(card('/concerts-events/b'),false);if(url.endsWith('/concerts-events/a'))return detail('2026-09-28 16:00:00');if(url.endsWith('/concerts-events/b'))return detail('2026-09-29 16:00:00',true);if(url.endsWith('/concerts-events'))return page(card('/concerts-events/a'),true);assert.fail(url);};
+ assert.equal((await adapters.cim(get,now)).length,1);
+ assert.equal(calls.length,4);
 });
 test('CIM continues when a page exposes a public livestream destination',async()=>{
  const detail=(start,link=false)=>`<article class="article-detail"><h1>Orchestra</h1><var class="atc_date_start">${start}</var><var class="atc_date_end">${start}</var><var class="atc_timezone">America/New_York</var><div class="livestream">${link?'<a href="https://vimeo.com/9">Watch</a>':'<p>Watch</p>'}</div></article>`;

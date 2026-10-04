@@ -89,8 +89,16 @@ export function createCampus({clean,zonedTime,clock24,namedDate,DAY}){
     if(!date)throw new Error('Stanford event date missing');
     if(namedDate(date)>dayKey(new Date(+now+45*DAY),'America/Los_Angeles')){beyond=true;break;}
     const event=parseStanford(html,url);if(!event||!current(event.start,now))continue;
-    const live=load(await get(event.stream_url)),publicLink=live('main a[href]').toArray().some(a=>/livestream/i.test(live(a).text())&&/^https:\/\/(?:vimeo\.com\/event\/\d+|www\.youtube\.com\/watch\?v=[\w-]+)/.test(live(a).attr('href')||''));
-    if(!publicLink||!clean(live('main').html()).includes(event.description)||/\bpassword|pay.to.view|subscription required/i.test(live('main').text()))throw new Error('Stanford broadcast page no longer confirms this public program');
+    const live=load(await get(event.stream_url)),publicLink=live('main a[href]').toArray().some(a=>/livestream/i.test(live(a).text())&&/^https:\/\/(?:vimeo\.com\/(?:event\/)?\d+(?:[/?#]|$)|www\.youtube\.com\/watch\?v=[\w-]+)/.test(live(a).attr('href')||''));
+    // Match the opening program sentence: later repertoire copy can contain minor
+    // corrections (the observed Chorale pages differ on Marsh/Morsh).
+    const introduction=event.description.split(/(?<=[.!?])\s+/)[0];
+    const program=clean(live('main').html());
+    const matchesProgram=program.includes(event.description)||(introduction.length>=60&&program.includes(introduction));
+    if(!matchesProgram||/\bpassword|pay.to.view|subscription required/i.test(live('main').text()))throw new Error('Stanford broadcast page no longer confirms this public program');
+    // A confirmed program may not have its public player yet. Omit that event,
+    // while continuing to collect the other broadcasts with working destinations.
+    if(!publicLink)continue;
     delete event.description;events.push(event);
    }
    const href=$('a[rel="next"]').attr('href');next=href&&!beyond?new URL(href,next).href:null;

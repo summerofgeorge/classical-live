@@ -8,6 +8,28 @@ const stanfordUrl='https://music.stanford.edu/events/philharmonia';
 const t=(date='October 08, 2026',offer='Livestream available on the')=>`<h1>Thursdays at Noon</h1><div class="o-hero-media__info-date">${date}</div><div class="o-hero-media__info-time">12:10pm - 1:00pm</div><div class="o-hero-media--event__button">Free</div><div class="l-main--event__content"><p>${offer} <a href="https://www.youtube.com/@UofTMusic">Faculty YouTube channel</a></p></div>`;
 const s=(date='Saturday November 7th, 2026',times='7:30 - 9:00pm')=>`<article class="event"><h1>Stanford Philharmonia</h1><div class="field-hs-event-date"><div class="field-label">Date and Time</div><div>${date}<br>${times}</div></div><div class="body"><p>Our Fall Concert with a guest composer.</p><ul><li>Beethoven: Symphony No. 1</li></ul><p>General admission $37. This event will be <a href="https://music.stanford.edu/philharmonia_live">livestreamed</a>.</p></div></article>`;
 const live='<main><p><a href="https://vimeo.com/event/123456">VIEW THE LIVESTREAM</a></p><p>Our Fall Concert with a guest composer.</p></main>';
+
+test('Stanford omits an announced concert without a player while retaining another confirmed stream',async()=>{
+ const base='https://music.stanford.edu/events',other='https://music.stanford.edu/events/other';
+ const pages={
+  [base]:`<div class="hb-card__title"><a href="${stanfordUrl}">One</a><a href="${other}">Two</a></div>`,
+  [stanfordUrl]:s(),[other]:s().replaceAll('philharmonia_live','other_live'),
+  'https://music.stanford.edu/philharmonia_live':'<main>Our Fall Concert with a guest composer.</main>',
+  'https://music.stanford.edu/other_live':live.replace('/event/123456','/1169395221/a640de2b1c?share=copy')
+ };
+ const events=await campus.adapters.stanford(async url=>pages[url],new Date('2026-10-04T12:00:00Z'));
+ assert.equal(events.length,1);assert.equal(events[0].event_url,other);
+});
+
+test('Stanford matches the full opening sentence despite later repertoire spelling corrections',async()=>{
+ const first='Experience the enveloping aural phenomenon of echoes in Stanford’s stunning Memorial Church.';
+ const event=s().replace('Our Fall Concert with a guest composer.',first+' Join us for Marsh and others.');
+ const player=live.replace('Our Fall Concert with a guest composer.',first+' Join us for Morsh and others.');
+ const pages={'https://music.stanford.edu/events':`<div class="hb-card__title"><a href="${stanfordUrl}">Chorale</a></div>`,[stanfordUrl]:event,'https://music.stanford.edu/philharmonia_live':player};
+ assert.equal((await campus.adapters.stanford(async url=>pages[url],new Date('2026-10-04T12:00:00Z'))).length,1);
+ pages['https://music.stanford.edu/philharmonia_live']=player.replace('echoes','singing');
+ await assert.rejects(campus.adapters.stanford(async url=>pages[url],new Date('2026-10-04T12:00:00Z')),/no longer confirms/);
+});
 test('Toronto requires event-specific free public viewing evidence and converts both Eastern offsets',()=>{
  assert.equal(parseToronto(t(),torontoUrl).start,'2026-10-08T16:10:00.000Z');
  assert.equal(parseToronto(t('November 08, 2026'),torontoUrl).end,'2026-11-08T18:00:00.000Z');

@@ -56,31 +56,28 @@ export function createExpansion({clean,zonedTime,clock24,namedDate,DAY}){
   return {title,start,end:usableEnd(start,end),program:clean(body.find('p').first().html()),event_url:url,stream_url:stream,watch_kind:'direct',evidence_url:url,evidence:'Official event provides a public YouTube livestream link and an explicit campus-local Eastern date/time. Calendar metadata is cross-checked when present.'};
  }
  async function ohioState(get,now){
-  // P0 scrape budget: cards lack livestream markers; skip past dates, bound pages/details,
-  // and stop after an in-window page that admits no public streams.
+  // Cards lack livestream markers; skip past dates and bound pages/details.
   const first=dayKey(new Date(+now-DAY),'America/New_York'),last=dayKey(new Date(+now+45*DAY),'America/New_York');
   let next='https://music.osu.edu/events';const seen=new Set(),pages=new Set(),events=[];
   while(next){
-   if(pages.size>=5||pages.has(next))throw new Error('Ohio State pagination limit reached');pages.add(next);
+   if(pages.size>=12||pages.has(next))throw new Error('Ohio State pagination limit reached');pages.add(next);
    const $=load(await get(next)),cards=$('.view-events .bux-card');
    if(!cards.length&&!/0 results found/.test($('.view-events').text()))throw new Error('Ohio State calendar changed');
-   let beyond=false,before=events.length,inWindow=0;
+   let beyond=false;
    for(const card of cards.toArray()){
     const item=$(card),dateText=clean(item.find('.event-date-single,.event-date-range').text()),year=dateText.match(/\b(\d{4})\b/)?.[1];
     if(!year)throw new Error('Ohio State calendar year missing');
     const date=namedDate(dateText,year);
     if(date>last){beyond=true;continue;}
     if(date<first||cancelled(item.find('.bux-card__heading').text()))continue;
-    inWindow++;
     const href=item.find('.bux-card__heading a').attr('href');if(!href)throw new Error('Ohio State event link missing');
     const url=new URL(href,next).href;
     // The music calendar also advertises other departments' lectures and activities.
     if(new URL(url).hostname!=='music.osu.edu'||!new URL(url).pathname.startsWith('/events/'))continue;
-    if(seen.has(url))continue;seen.add(url);if(seen.size>24)throw new Error('Ohio State event limit reached');
+    if(seen.has(url))continue;seen.add(url);if(seen.size>90)throw new Error('Ohio State event limit reached');
     const event=parseOhioState(await get(url),url);if(event)events.push(event);
    }
    const href=$('a[rel="next"]').attr('href');next=href&&!beyond?new URL(href,next).href:null;
-   if(next&&inWindow&&events.length===before)next=null;
   }
   return events;
  }

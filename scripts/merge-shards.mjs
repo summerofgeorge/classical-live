@@ -2,13 +2,13 @@ import {readdir, readFile, writeFile, rename, mkdir, stat} from 'node:fs/promise
 import {pathToFileURL} from 'node:url';
 import {applyReviewed} from './reviewed.mjs';
 import {REGIONS, regionIdForSource, sourcesForRegion} from './regions.mjs';
-import {sources} from './ingest.mjs';
+import {sources,DAY,keepForDisplay} from './ingest.mjs';
 
 const shardDir=new URL('../dist/shards/',import.meta.url);
 const eventsFile=new URL('../dist/events.json',import.meta.url);
 const distDir=new URL('../dist/',import.meta.url);
 
-export function mergeShards(shards, previous={events:[],sources:[]}, registry=sources){
+export function mergeShards(shards, previous={events:[],sources:[]}, registry=sources, now=new Date()){
  const byRegion=new Map(shards.map(s=>[s.region,s]));
  const events=[], statuses=[], collections=[];
  const covered=new Set();
@@ -29,13 +29,15 @@ export function mergeShards(shards, previous={events:[],sources:[]}, registry=so
    if(shard.collection)collections.push({region: region.id, ...shard.collection});
   }else{
    // Missing shard (job skipped/failed): retain prior verified data for that region only.
-   for(const source of previous.sources||[]){
-    if(!regionSourceIds.has(source.id)||covered.has(source.id))continue;
-    statuses.push({...source, collection_region: region.id, status: source.status==='manual'?source.status:'stale_region', error: source.error||'Region shard missing; retained prior listings'});
+   const retained=(previous.events||[]).filter(event=>{
+    const age=+now-Date.parse(event.last_verified_at);
+    return regionSourceIds.has(event.source)&&Number.isFinite(age)&&age>=0&&age<14*DAY&&keepForDisplay(event,now);
+   }).map(event=>({...event,stale:true}));
+   events.push(...retained);
+   for(const source of sourcesForRegion(registry,region.id)){
+    const old=previous.sources?.find(s=>s.id===source.id);
+    statuses.push({...source,collection_region:region.id,status:'stale_region',last_success:old?.last_success||null,count:retained.filter(e=>e.source===source.id).length,error:'Regional refresh did not complete; using unexpired prior listings'});
     covered.add(source.id);
-   }
-   for(const event of previous.events||[]){
-    if(regionSourceIds.has(event.source))events.push({...event, stale:true});
    }
   }
  }
@@ -53,7 +55,7 @@ export function mergeShards(shards, previous={events:[],sources:[]}, registry=so
  const request_limit=collections.reduce((n,c)=>n+(c.request_limit||0),0);
  return {
   schema_version:1,
-  generated_at: new Date(Math.max(0,...shards.map(s=>Date.parse(s.generated_at)||0), Date.now())).toISOString(),
+  generated_at: now.toISOString(),
   horizon_days:45,
   collection:{
    requests,

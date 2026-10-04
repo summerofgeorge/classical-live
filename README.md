@@ -32,13 +32,21 @@ The calendar refreshes daily at **3:15 a.m. America/New_York**, including daylig
 
 Changes to collectors or reviewed data trigger a refresh before deployment. Website-only edits publish the most recent collected schedule after tests pass. Documentation-only changes do not deploy the site.
 
-GitHub Pages publishes `dist/` through Actions using the repository’s built-in token. Regional collection is implemented in scripts (`nam` / `europe` / `asia-pacific` shards → one `dist/events.json`). The Actions matrix lives in [`docs/workflows/refresh-and-deploy.yml`](docs/workflows/refresh-and-deploy.yml) until that file replaces `.github/workflows/refresh-and-deploy.yml` (pushing workflow files needs the `workflow` OAuth scope). Runners stay public, 15-minute timeouts, one-day artifact retention. Configure repository **Settings → Pages → Source** as **GitHub Actions**.
+GitHub Pages publishes `dist/` through Actions using the repository’s built-in token. Three regional jobs (`nam` / `europe` / `asia-pacific`) merge into one `dist/events.json`. The active workflow is [`.github/workflows/refresh-and-deploy.yml`](.github/workflows/refresh-and-deploy.yml); the copy under `docs/workflows/` is kept in sync. Runners stay public, with 15-minute timeouts and one-day artifact retention. Configure repository **Settings → Pages → Source** as **GitHub Actions**.
+
+### Reading maintenance alerts
+
+The **Publish website and maintenance report** job writes a plain-English report only after deployment succeeds. It lists affected schools, what happened, when their schedules were last verified, and the next step. This report lives in GitHub Actions; concert browsing has no maintenance dashboard or failure counts.
+
+A single school failure retries on the next daily refresh. A repeated failure, missing region, or browser review due within three days raises a separate **School schedules need attention (website published)** alert. `data/maintenance-state.json` remembers reported problems, so unchanged problems stay in the summary without another failure email. A different problem, approaching expiry, or expired verification alerts again. Recovery clears the remembered problem. Tests, collection crashes, deployment failures, and errors saving refreshed data still fail normally.
+
+When an alert arrives, open the run and read the publish job summary. “Page limit” means a software safeguard, not a charge or billing allowance. Temporary connection failures can recover automatically; persistent parsing or access problems need a collector review. Re-running a successful refresh is not a substitute for fixing those problems. GitHub’s notification settings control delivery.
 
 ## Data quality
 
 A concert needs affirmative evidence of a public stream. Free campus admission, an undated player, or an archived video alone is insufficient. Collection covers a rolling 45-day window, subject to each school’s published schedule.
 
-Collectors validate dates with IANA time zones, bound pagination, pace requests, and restrict source and redirect hosts. Failed sources retain previously verified records for at most 14 days. Manual observations keep their original review time and expire after 14 days. Source health remains available in the Actions summary and data; routine collection diagnostics are omitted from concert browsing.
+Collectors validate dates with IANA time zones, bound pagination, pace requests, and restrict source and redirect hosts. Failed sources and missing regions retain previously verified records for at most 14 days. Manual observations keep their original review time and expire after 14 days. The browser also enforces expiry if publication stops. Source health remains available in the Actions summary and data; routine collection diagnostics are omitted from concert browsing.
 
 Calendar downloads are snapshots, not subscriptions. “Scheduled now” describes the published schedule, not verified video playback. Event details remain linked on every card.
 
@@ -55,6 +63,8 @@ Collection runs as **three regional jobs** so North American volume cannot exhau
 | Asia–Pacific | `asia-pacific` | 300 |
 
 Shards land in `dist/shards/*.json` and merge into one calendar file. Prefer feeds and livestream indexes over unfiltered calendar walks; adapters should early-exit past the 45-day horizon and bound detail-page fetches.
+
+School-specific page limits accommodate the full published window. A page with no stream links does not prove later pages have no streams. The October 4 maintenance fix restores adequate bounded walks for Temple, Ohio State, CIM, Rice, SFCM, Boston, and Weimar. Stanford requires an explicit dated broadcast and a matching program on its viewing page; a confirmed program with no public player yet is omitted without discarding other confirmed broadcasts.
 
 Research notes for expanding Europe / Asia coverage: [docs/regional-shortlist.md](docs/regional-shortlist.md).
 

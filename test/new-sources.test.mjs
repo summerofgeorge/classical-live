@@ -8,6 +8,19 @@ const north=cards=>`<div id="upcoming-events-slider">${cards}</div>`;
 const riceHtml=(date='Sep 28, 2026',title='Trombone students',stream='/live-streaming-duncan-recital-hall')=>`<div id="block-views-block-event-info-date"><div class="event-type">Class Recital</div><h1>${title}</h1></div><div class="event-sidebar"><h3 class="event-date"><time datetime="2026-09-28T19:30:00+00:00">Mon, ${date}</time></h3><div class="event-time">7:30pm</div><div class="livestream-info"><a class="stream-link" href="${stream}">View Livestream</a><div class="stream-time">7:30pm CT</div></div></div>`;
 const sfcmHtml=(title='SFCM Orchestra',stream='https://vimeo.com/event/123')=>`<article class="event"><h1>${title}</h1><div class="entity-categories">Orchestra</div><div class="event__info"><time datetime="2026-09-27T02:30:00">Saturday, September 26 2026, 7:30 PM</time></div><a class="event-cta-live-stream" href="${stream}">Livestream</a><div class="add-cal-event"><li data-addtocal-type="google"><a href="https://calendar.google.com/calendar/render?dates=20260926T193000/20260926T213000&amp;ctz=America/Los_Angeles">Google</a></li></div></article>`;
 
+test('Rice collects a busy multi-page month beyond the former 24-event and 8-page caps',async()=>{
+ let calls=0;
+ const get=async url=>{
+  calls++;
+  if(new URL(url).pathname!=='/events')return riceHtml();
+  const n=Number(new URL(url).searchParams.get('page')||0);
+  const cards=Array.from({length:4},(_,i)=>`<a class="event-wrapper-link" href="/events/recital-${n}-${i}"><h3 class="event-title">Recital</h3><div class="stream-icon">Livestream Available</div></a>`).join('');
+  return `<div class="view-calendar-example view-display-id-listing"><div class="divider"><h3>Mon, Sep 28</h3>${cards}</div>${n<9?`<a rel="next" href="?page=${n+1}">Next</a>`:''}</div>`;
+ };
+ assert.equal((await adapters.rice(get,now)).length,40);
+ assert.equal(calls,50);
+});
+
 test('Northwestern requires explicit streams, skips cancellations, and honors Central DST',()=>{
  const entries=parseNorthwestern(north(northCard('Orchestra','October 31, 2026 7:30pm CDT')+northCard('Percussion','November 6, 2026 7:30pm CST')+northCard('CANCELLED Recital','October 23, 2026 7:30pm CDT')+northCard('No stream','October 23, 2026 7:30pm CDT','#')));
  assert.deepEqual(entries.map(e=>e.start),['2026-11-01T00:30:00.000Z','2026-11-07T01:30:00.000Z']);

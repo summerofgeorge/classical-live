@@ -22,6 +22,11 @@ export function matches(event, {period='all',source='',type='',query='',region='
   const today = dayKey(now,timeZone), day = dayKey(start,timeZone);
   // A scheduled end is not a reliable signal that the stream has finished.
   if (day < today && endTime(event) <= now) return false;
+  // Expire saved schedules even when publication has stopped; no public diagnostics.
+  if (event.last_verified_at !== undefined || event.stale) {
+    const age = +now - Date.parse(event.last_verified_at);
+    if (!Number.isFinite(age) || age < 0 || age >= 14 * 86400000) return false;
+  }
   if (event.valid_until && (!Number.isFinite(Date.parse(event.valid_until)) || new Date(event.valid_until) <= now)) return false;
   if (source && event.source !== source || type && event.type !== type) return false;
   if (region && event.region !== region || country && event.country !== country || size && event.size !== size) return false;

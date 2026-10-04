@@ -43,7 +43,7 @@ test('shard merge prefers fresh regional data and retains prior events when a sh
   ],
   events:[
    {id:european.id+'-old',source:european.id,title:'Old Europe',start:'2026-10-01T18:00:00.000Z',event_url:'https://example.test/e',stream_url:'https://example.test/e'},
-   {id:nam.id+'-old',source:nam.id,title:'Old NAM',start:'2026-10-01T23:00:00.000Z',event_url:'https://example.test/n',stream_url:'https://example.test/n'}
+   {id:nam.id+'-old',source:nam.id,title:'Old NAM',start:'2026-10-01T23:00:00.000Z',last_verified_at:'2026-09-28T12:00:00Z',event_url:'https://example.test/n',stream_url:'https://example.test/n'}
   ]
  };
  const europeShard={
@@ -54,7 +54,7 @@ test('shard merge prefers fresh regional data and retains prior events when a sh
   sources:[{...european,status:'ok',count:1}],
   events:[{id:european.id+'-new',source:european.id,title:'New Europe',start:'2026-10-02T18:00:00.000Z',event_url:'https://example.test/e2',stream_url:'https://example.test/e2'}]
  };
- const merged=mergeShards([europeShard], previous);
+ const merged=mergeShards([europeShard], previous,sources,new Date('2026-09-29T12:00:00Z'));
  assert.equal(merged.events.some(e=>e.id===european.id+'-new'),true);
  assert.equal(merged.events.some(e=>e.id===european.id+'-old'),false);
  const retained=merged.events.find(e=>e.id===nam.id+'-old');
@@ -62,4 +62,21 @@ test('shard merge prefers fresh regional data and retains prior events when a sh
  assert.ok(merged.sources.some(s=>s.id===nam.id&&s.status==='stale_region'));
  assert.equal(merged.collection.regions.length,1);
  assert.equal(merged.collection.request_limit,400);
+});
+
+test('missing regions expire old, unverified, and past listings without renewing verification dates',()=>{
+ const source=sourcesForRegion(sources,'nam')[0],now=new Date('2026-10-04T12:00:00Z');
+ const event={source:source.id,start:'2026-10-15T12:00:00Z',last_verified_at:'2026-10-01T12:00:00Z'};
+ const previous={sources:[{...source,count:4,status:'ok',last_success:event.last_verified_at}],events:[
+  {...event,id:'keep'},
+  {...event,id:'expired',last_verified_at:'2026-09-20T12:00:00Z'},
+  {...event,id:'unknown',last_verified_at:undefined},
+  {...event,id:'past',start:'2026-09-29T12:00:00Z'}
+ ]};
+ const merged=mergeShards([],previous,[source],now);
+ assert.deepEqual(merged.events.map(e=>e.id),['keep']);
+ assert.equal(merged.events[0].last_verified_at,event.last_verified_at);
+ assert.equal(merged.sources[0].count,1);
+ assert.equal(merged.sources[0].status,'stale_region');
+ assert.equal(mergeShards([],undefined,[source],now).sources[0].status,'stale_region');
 });

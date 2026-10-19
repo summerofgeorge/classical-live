@@ -30,6 +30,22 @@ test('Stanford matches the full opening sentence despite later repertoire spelli
  pages['https://music.stanford.edu/philharmonia_live']=player.replace('echoes','singing');
  await assert.rejects(campus.adapters.stanford(async url=>pages[url],new Date('2026-10-04T12:00:00Z')),/no longer confirms/);
 });
+
+test('Stanford tolerates accent differences in matching program text without changing display text',async()=>{
+ // The official event spells the composer Eötvös; its viewing page uses Eötvos.
+ const description='The Stanford Philharmonia presents their 2026 Fall Concert featuring guest composer Melody Eötvös.';
+ const event=s().replace('Our Fall Concert with a guest composer.',description).replace('Beethoven: Symphony No. 1','Melody Eötvös: Red Dirt | Silver Rain');
+ const player=live.replace('Our Fall Concert with a guest composer.',description.replace('Eötvös','Eötvos'));
+ const pages={'https://music.stanford.edu/events':`<div class="hb-card__title"><a href="${stanfordUrl}">Philharmonia</a></div>`,[stanfordUrl]:event,'https://music.stanford.edu/philharmonia_live':player};
+ const get=async url=>pages[url],now=new Date('2026-10-19T12:00:00Z');
+ const events=await campus.adapters.stanford(get,now);
+ assert.equal(events.length,1);
+ assert.match(events[0].program,/Eötvös/);
+ pages['https://music.stanford.edu/philharmonia_live']=player.replace('Fall Concert','Spring Concert');
+ await assert.rejects(campus.adapters.stanford(get,now),/no longer confirms/);
+ pages['https://music.stanford.edu/philharmonia_live']=player+'<main>Password required</main>';
+ await assert.rejects(campus.adapters.stanford(get,now),/no longer confirms/);
+});
 test('Toronto requires event-specific free public viewing evidence and converts both Eastern offsets',()=>{
  assert.equal(parseToronto(t(),torontoUrl).start,'2026-10-08T16:10:00.000Z');
  assert.equal(parseToronto(t('November 08, 2026'),torontoUrl).end,'2026-11-08T18:00:00.000Z');

@@ -24,7 +24,10 @@ export function createInternational({clean,zonedTime,kind,DAY}){
  function melbourneCandidates(data,now){
   if(!Array.isArray(data)||data.length>=200)throw new Error('Melbourne feed changed or reached its complete-feed limit');
   return data.filter(e=>{
-   if(typeof e?.title!=='string'||!Array.isArray(e.event_types))throw new Error('Melbourne event schema changed');
+   if(typeof e?.title!=='string'||(e.event_types!==null&&!Array.isArray(e.event_types)))throw new Error('Melbourne event schema changed');
+   // LiveWhale returns null for uncategorized entries. They are not verified
+   // performances, but must not discard the rest of the school's schedule.
+   if(e.event_types===null)return false;
    return e.event_types.includes('Performance')&&e.tags?.some(t=>['Music','Conservatorium'].includes(t))&&/^Free$/i.test(clean(e.cost))&&!e.is_canceled&&!e.is_all_day&&!cancelled(e.title)&&inWindow(e.date_iso,now);
   }).map(e=>{
    if(!Number.isInteger(e.id)||!safeUrl(e.url)||new URL(e.url).origin!=='https://events.unimelb.edu.au'||!new URL(e.url).pathname.startsWith('/finearts-music/event/'))throw new Error('Melbourne event identity changed');

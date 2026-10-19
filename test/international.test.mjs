@@ -42,6 +42,18 @@ test('Melbourne rejects mismatched timestamps, incomplete feeds and untrusted li
  assert.throws(()=>international.melbourneCandidates(data,now),/identity/);
 });
 
+test('Melbourne null event categories do not discard other verified performances',()=>{
+ // The October 19 feed included Disintegration and a graduate showcase with
+ // event_types: null. Tags alone are not affirmative Performance membership.
+ const data=JSON.parse(feed),performance=data.find(e=>e.id===53392);
+ const uncategorized={...performance,id:56106,title:'MCM Graduate Showcase 2026: Voice and Piano',event_types:null};
+ assert.deepEqual(international.melbourneCandidates([uncategorized,...data],now),candidates);
+ assert.deepEqual(international.melbourneCandidates([uncategorized],now),[]);
+ assert.throws(()=>international.melbourneCandidates([{...uncategorized,event_types:'Performance'}],now),/schema changed/);
+ assert.throws(()=>international.melbourneCandidates([{...uncategorized,event_types:{Performance:true}}],now),/schema changed/);
+ assert.throws(()=>international.melbourneCandidates([{...uncategorized,event_types:undefined}],now),/schema changed/);
+});
+
 test('Geidai archive and ended concert never become upcoming streams',()=>{
  assert.deepEqual(international.geidaiCandidates(index,now),[]);
  const before=new Date('2026-08-28T00:00:00Z'),items=international.geidaiCandidates(index,before);

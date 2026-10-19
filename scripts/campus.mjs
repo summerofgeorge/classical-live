@@ -91,10 +91,13 @@ export function createCampus({clean,zonedTime,clock24,namedDate,DAY}){
     const event=parseStanford(html,url);if(!event||!current(event.start,now))continue;
     const live=load(await get(event.stream_url)),publicLink=live('main a[href]').toArray().some(a=>/livestream/i.test(live(a).text())&&/^https:\/\/(?:vimeo\.com\/(?:event\/)?\d+(?:[/?#]|$)|www\.youtube\.com\/watch\?v=[\w-]+)/.test(live(a).attr('href')||''));
     // Match the opening program sentence: later repertoire copy can contain minor
-    // corrections (the observed Chorale pages differ on Marsh/Morsh).
-    const introduction=event.description.split(/(?<=[.!?])\s+/)[0];
-    const program=clean(live('main').html());
-    const matchesProgram=program.includes(event.description)||(introduction.length>=60&&program.includes(introduction));
+    // corrections (the observed Chorale pages differ on Marsh/Morsh). Accent
+    // differences such as Eötvös/Eötvos are normalized only for this comparison;
+    // the dated event, matching words, public player and access checks remain.
+    const comparison=value=>value.normalize('NFD').replace(/\p{M}/gu,'');
+    const description=comparison(event.description),introduction=description.split(/(?<=[.!?])\s+/)[0];
+    const program=comparison(clean(live('main').html()));
+    const matchesProgram=program.includes(description)||(introduction.length>=60&&program.includes(introduction));
     if(!matchesProgram||/\bpassword|pay.to.view|subscription required/i.test(live('main').text()))throw new Error('Stanford broadcast page no longer confirms this public program');
     // A confirmed program may not have its public player yet. Omit that event,
     // while continuing to collect the other broadcasts with working destinations.

@@ -14,6 +14,10 @@ test('every scheduled source maps to exactly one collection region',()=>{
  assert.ok(parts.europe.includes('liechtenstein'));
  assert.ok(parts.europe.includes('weimar'));
  assert.ok(parts.europe.includes('rcm'));
+ assert.ok(parts.europe.includes('hmdk-stuttgart'));
+ assert.ok(parts.nam.includes('juilliard'));
+ assert.ok(parts.nam.includes('peabody'));
+ assert.ok(parts.nam.includes('michigan'));
  assert.ok(parts['asia-pacific'].includes('geidai'));
  assert.ok(parts['asia-pacific'].includes('melbourne'));
  assert.ok(parts.nam.includes('curtis'));

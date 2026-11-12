@@ -11,17 +11,32 @@ Source mine: [List of university and college schools of music](https://en.wikipe
 | School | Region | Notes |
 | --- | --- | --- |
 | Music Academy in Liechtenstein (Kulmag) | Europe | **Enabled in P2** after live Gratis probe (~40 dated free streams). Afternoon CET ≈ morning ET. |
+| HMDK Stuttgart — Hugo Wolf Academy competition (IHWA) | Europe | **Enabled in wiki-mine wave 1**: dated free-admission rounds with explicit internet livestream → YouTube. Afternoon CET ≈ morning ET. |
 | UdK Berlin, Weimar, Bruckner, Reina Sofía, RCM London, Moscow | Europe | Existing adapters |
 | Geidai (Tokyo), Melbourne Conservatorium, VCASS | Asia–Pacific | Existing adapters |
 | UBC, Toronto, Western | nam (Canada) | Evening ET / late afternoon coverage |
+| Juilliard, Peabody, Michigan | nam (US) | **Enabled in wiki-mine wave 1**: free dated livestream indexes (US evenings ET). |
+
+## Wave 1 adapters (2026-09-29)
+
+Affirmative free public stream evidence cleared for:
+
+| School | Region | Collector shape | ET fit |
+| --- | --- | --- | --- |
+| HMDK Stuttgart / IHWA Lied competition | Europe | `ihwa.de/event` round index + detail pages (≤10) | Afternoon CET → ~8am–noon ET |
+| Juilliard | nam | Live Streaming calendar filter + event pages (≤10) | Evenings ET |
+| Peabody | nam | Tribe JSON `search=Livestream` feed (1 req) | Evenings / noon ET |
+| Michigan SMTD | nam | Livestream viewing-options list (1 req) | Evenings ET |
+
+Promoted out of `data/browser-reviewed.json` once collectors landed.
 
 ## Priority follow-ups (Europe)
 
-Affirmative **dated free livestream** evidence not yet solid enough for a ≤10-req adapter in this PR. Revisit with a livestream index or JSON feed before coding.
+Affirmative **dated free livestream** evidence not yet solid enough for a ≤10-req adapter. Revisit with a livestream index or JSON feed before coding.
 
 | School | Why interesting | Scout notes (2026-09-29) | Morning-ET fit |
 | --- | --- | --- | --- |
-| Universität Mozarteum Salzburg | Large free concert culture; site has a `livestream` search type + `/en/api/events/get-overview-items` | Livestream search returned study-concert listings without clear public stream URLs / Gratis broadcast markers on cards. Needs event-detail proof. | Afternoon CET → ~9am–noon ET |
+| Universität Mozarteum Salzburg | Large free concert culture; site has a `livestream` search type + `/en/api/events/get-overview-items` | Livestream search returned study-concert listings without clear public stream URLs / Gratis broadcast markers on cards. Event details affirm free *admission*, not broadcast. | Afternoon CET → ~9am–noon ET |
 | mdw Wien | Major EU conservatory | Events hub present; no obvious livestream filter on first probe | Afternoon CET |
 | Royal Danish Academy of Music | Many free concerts | Calendar emphasizes free *admission*; livestream not affirmed on listing | Afternoon CET |
 | Guildhall School (London) | Free lunchtime series | Broadcasts mentioned in copy; no dated public stream index found on first pass | Late morning–afternoon London → early ET |
@@ -29,7 +44,8 @@ Affirmative **dated free livestream** evidence not yet solid enough for a ≤10-
 | HfM Nürnberg / Detmold / München | DE peer set to Weimar/UdK | YouTube present; dated free stream index not confirmed | Afternoon CET |
 | CNSMD Paris / Lyon | Flagship FR | Needs French agenda + explicit live/gratuit proof | Afternoon CET |
 | Conservatorium van Amsterdam | NL flagship | Agenda returned HTTP 403 to collector UA | Afternoon CET |
-| HMDK Stuttgart | Already in `schools.js` metadata only | No collector yet—candidate if livestream index appears | Afternoon CET |
+| Conservatorio della Svizzera italiana | Events & streaming hub | Dated concerts listed; live player currently empty (“Nessun live video”) | Afternoon CET |
+| Liszt Academy (Budapest) Online Concert Hall | Historic stream platform | Pandemic-era diploma stream page; live_streams list is archival, not a dated upcoming index | Afternoon CET |
 
 ## Priority follow-ups (Asia–Pacific)
 
@@ -41,7 +57,15 @@ Overnight / early-morning ET and late-evening local—useful for true 24h covera
 | HKAPA | Large public what’s-on | Page loads; livestream markers not affirmed | Evening HKT → morning ET |
 | Shanghai / Central Conservatory | Wikipedia Asia mine | Need official free dated stream pages (language + evidence) | China evening → morning ET |
 | Seoul National / other KR | Night concerts | `live.snu.ac.kr` unreachable on probe | Late KST → morning ET |
-| Sydney Conservatorium / ANAM | Oceania peers to Melbourne | Not probed in depth this pass | AU evening → ET morning/afternoon |
+| Sydney Conservatorium / ANAM | Oceania peers to Melbourne | Not probed in depth this pass / watch pages 404 | AU evening → ET morning/afternoon |
+
+## Still browser-reviewed only (host blocks or registration)
+
+| School | Notes |
+| --- | --- |
+| McGill Schulich | Webcast affirmed on event pages; calendar JSON/HTML 403 to collector |
+| Mannes / Schneider | Free registration livestream ($0); host 403 to collector |
+| BYU / Rutgers / Columbia Sacred Music | Parsers or observations retained; hosts deny automated collection |
 
 ## Quality gate (unchanged)
 

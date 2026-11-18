@@ -1,33 +1,33 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-17T17:43:45.295Z",
+  "generated_at": "2026-11-18T17:20:51.006Z",
   "horizon_days": 45,
   "collection": {
-    "requests": 516,
+    "requests": 519,
     "request_limit": 1300,
-    "response_bytes": 47241992,
-    "duration_ms": 435273,
+    "response_bytes": 50585014,
+    "duration_ms": 454461,
     "regions": [
       {
         "region": "nam",
-        "requests": 441,
+        "requests": 440,
         "request_limit": 600,
-        "response_bytes": 36772418,
-        "duration_ms": 435273
+        "response_bytes": 36504473,
+        "duration_ms": 454461
       },
       {
         "region": "europe",
-        "requests": 65,
+        "requests": 70,
         "request_limit": 400,
-        "response_bytes": 9387418,
-        "duration_ms": 115985
+        "response_bytes": 13142473,
+        "duration_ms": 172997
       },
       {
         "region": "asia-pacific",
-        "requests": 10,
+        "requests": 9,
         "request_limit": 300,
-        "response_bytes": 1082156,
-        "duration_ms": 10214
+        "response_bytes": 938068,
+        "duration_ms": 9302
       }
     ]
   },
@@ -39,11 +39,11 @@
       "timezone": "America/New_York",
       "status": "error",
       "last_success": "2026-10-29T14:13:58.048Z",
-      "consecutive_failures": 18,
+      "consecutive_failures": 19,
       "count": 0,
       "error": "Bard weekday disagrees with date",
       "requests": 2,
-      "duration_ms": 1771,
+      "duration_ms": 2613,
       "collection_region": "nam"
     },
     {
@@ -52,10 +52,10 @@
       "url": "https://schoolofmusic.ucla.edu/calendar/",
       "timezone": "America/Los_Angeles",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 9,
       "requests": 10,
-      "duration_ms": 10626,
+      "duration_ms": 11655,
       "collection_region": "nam"
     },
     {
@@ -64,10 +64,10 @@
       "url": "https://music.ubc.ca/events/event/",
       "timezone": "America/Vancouver",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 2,
       "requests": 4,
-      "duration_ms": 3330,
+      "duration_ms": 3343,
       "collection_region": "nam"
     },
     {
@@ -77,11 +77,11 @@
       "timezone": "America/New_York",
       "status": "error",
       "last_success": "2026-11-08T15:08:37.928Z",
-      "consecutive_failures": 9,
+      "consecutive_failures": 10,
       "count": 0,
       "error": "Published weekday and concert date disagree",
       "requests": 1,
-      "duration_ms": 486,
+      "duration_ms": 369,
       "collection_region": "nam"
     },
     {
@@ -90,10 +90,10 @@
       "url": "https://www.hartford.edu/academics/schools-colleges/hartt/performances/livestream.aspx",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 1,
       "requests": 1,
-      "duration_ms": 788,
+      "duration_ms": 985,
       "collection_region": "nam"
     },
     {
@@ -102,10 +102,10 @@
       "url": "https://www.ithaca.edu/academics/school-music-theatre-and-dance/live/webcasting-schedule",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 11,
       "requests": 1,
-      "duration_ms": 138,
+      "duration_ms": 8708,
       "collection_region": "nam"
     },
     {
@@ -114,10 +114,10 @@
       "url": "https://wfsu.org/fsumusic/",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 0,
       "requests": 1,
-      "duration_ms": 908,
+      "duration_ms": 712,
       "collection_region": "nam"
     },
     {
@@ -126,10 +126,10 @@
       "url": "https://www.potsdam.edu/academics/crane-school-music/crane-school-music-live-concert",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 1,
       "requests": 1,
-      "duration_ms": 304,
+      "duration_ms": 613,
       "collection_region": "nam"
     },
     {
@@ -138,10 +138,10 @@
       "url": "https://web.csulb.edu/colleges/cota/music/events/",
       "timezone": "America/Los_Angeles",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 15,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 14,
       "requests": 2,
-      "duration_ms": 1089,
+      "duration_ms": 1099,
       "collection_region": "nam"
     },
     {
@@ -150,10 +150,10 @@
       "url": "https://events.miami.edu/department/frost_school_of_music/calendar",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 19,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 16,
       "requests": 1,
-      "duration_ms": 1045,
+      "duration_ms": 803,
       "collection_region": "nam"
     },
     {
@@ -162,10 +162,10 @@
       "url": "https://music.utexas.edu/events?field_cofaevent_types_target_id%5B0%5D=236",
       "timezone": "America/Chicago",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 0,
-      "requests": 4,
-      "duration_ms": 3120,
+      "requests": 3,
+      "duration_ms": 2089,
       "collection_region": "nam"
     },
     {
@@ -174,10 +174,10 @@
       "url": "https://boyer.temple.edu/events",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 13,
-      "requests": 47,
-      "duration_ms": 45191,
+      "requests": 44,
+      "duration_ms": 42502,
       "collection_region": "nam"
     },
     {
@@ -186,10 +186,10 @@
       "url": "https://www.bw.edu/events/",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 8,
-      "requests": 13,
-      "duration_ms": 12109,
+      "requests": 12,
+      "duration_ms": 11089,
       "collection_region": "nam"
     },
     {
@@ -198,10 +198,10 @@
       "url": "https://www.bgsu.edu/musical-arts/events/live-streaming.html",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 10,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 9,
       "requests": 2,
-      "duration_ms": 1383,
+      "duration_ms": 1374,
       "collection_region": "nam"
     },
     {
@@ -210,10 +210,10 @@
       "url": "https://events.cmu.edu/music/",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 0,
       "requests": 1,
-      "duration_ms": 554,
+      "duration_ms": 791,
       "collection_region": "nam"
     },
     {
@@ -222,10 +222,10 @@
       "url": "https://www.duq.edu/academics/colleges-and-schools/music/iemma/iemma-broadcast-network.php",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 3,
       "requests": 1,
-      "duration_ms": 661,
+      "duration_ms": 861,
       "collection_region": "nam"
     },
     {
@@ -234,10 +234,10 @@
       "url": "https://calendar.pitt.edu/department/department_of_music",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 2,
       "requests": 1,
-      "duration_ms": 840,
+      "duration_ms": 956,
       "collection_region": "nam"
     },
     {
@@ -247,11 +247,11 @@
       "timezone": "America/New_York",
       "status": "error",
       "last_success": "2026-11-13T16:16:39.161Z",
-      "consecutive_failures": 4,
-      "count": 1,
+      "consecutive_failures": 5,
+      "count": 0,
       "error": "Unexpected Case Western event path",
       "requests": 3,
-      "duration_ms": 2085,
+      "duration_ms": 2077,
       "collection_region": "nam"
     },
     {
@@ -260,10 +260,10 @@
       "url": "https://music.utoronto.ca/events",
       "timezone": "America/Toronto",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 2,
-      "requests": 32,
-      "duration_ms": 38914,
+      "requests": 29,
+      "duration_ms": 28959,
       "collection_region": "nam"
     },
     {
@@ -272,10 +272,10 @@
       "url": "https://music.stanford.edu/events",
       "timezone": "America/Los_Angeles",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 3,
-      "requests": 31,
-      "duration_ms": 30084,
+      "requests": 32,
+      "duration_ms": 31584,
       "collection_region": "nam"
     },
     {
@@ -284,10 +284,10 @@
       "url": "https://music.yale.edu/live",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 0,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 1,
       "requests": 2,
-      "duration_ms": 1022,
+      "duration_ms": 2192,
       "collection_region": "nam"
     },
     {
@@ -297,11 +297,11 @@
       "timezone": "America/Denver",
       "status": "error",
       "last_success": "2026-11-02T18:17:14.701Z",
-      "consecutive_failures": 14,
+      "consecutive_failures": 15,
       "count": 0,
       "error": "Colorado stream date is missing or ambiguous",
       "requests": 2,
-      "duration_ms": 1120,
+      "duration_ms": 1143,
       "collection_region": "nam"
     },
     {
@@ -310,10 +310,10 @@
       "url": "https://blair.vanderbilt.edu/livestreams/",
       "timezone": "America/Chicago",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 13,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 10,
       "requests": 1,
-      "duration_ms": 2136,
+      "duration_ms": 2127,
       "collection_region": "nam"
     },
     {
@@ -322,10 +322,10 @@
       "url": "https://music.uiowa.edu/events/school-music-livestream",
       "timezone": "America/Chicago",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 5,
       "requests": 6,
-      "duration_ms": 5577,
+      "duration_ms": 6646,
       "collection_region": "nam"
     },
     {
@@ -334,10 +334,10 @@
       "url": "https://liveatjacobs.music.indiana.edu/",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 21,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 16,
       "requests": 1,
-      "duration_ms": 611,
+      "duration_ms": 561,
       "collection_region": "nam"
     },
     {
@@ -346,10 +346,10 @@
       "url": "https://music.osu.edu/events",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 5,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 6,
       "requests": 34,
-      "duration_ms": 33281,
+      "duration_ms": 33365,
       "collection_region": "nam"
     },
     {
@@ -358,10 +358,10 @@
       "url": "https://www.ohio.edu/fine-arts/music",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 5,
       "requests": 1,
-      "duration_ms": 1445,
+      "duration_ms": 1245,
       "collection_region": "nam"
     },
     {
@@ -370,10 +370,10 @@
       "url": "https://recording.music.unt.edu/webcasts",
       "timezone": "America/Chicago",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 5,
       "requests": 1,
-      "duration_ms": 1011,
+      "duration_ms": 857,
       "collection_region": "nam"
     },
     {
@@ -382,10 +382,10 @@
       "url": "https://music.uwo.ca/events/livestream/index.html",
       "timezone": "America/Toronto",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 2,
       "requests": 1,
-      "duration_ms": 278,
+      "duration_ms": 365,
       "collection_region": "nam"
     },
     {
@@ -394,10 +394,10 @@
       "url": "https://www.curtis.edu/curtis-performances/watch-listen/",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 3,
       "requests": 4,
-      "duration_ms": 3071,
+      "duration_ms": 3068,
       "collection_region": "nam"
     },
     {
@@ -406,10 +406,10 @@
       "url": "https://www.cim.edu/concerts-events",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 12,
       "requests": 71,
-      "duration_ms": 70065,
+      "duration_ms": 70595,
       "collection_region": "nam"
     },
     {
@@ -418,10 +418,10 @@
       "url": "https://www.esm.rochester.edu/live/",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 20,
       "requests": 1,
-      "duration_ms": 3173,
+      "duration_ms": 1468,
       "collection_region": "nam"
     },
     {
@@ -431,11 +431,11 @@
       "timezone": "America/Los_Angeles",
       "status": "error",
       "last_success": "2026-11-16T18:28:14.576Z",
-      "consecutive_failures": 1,
+      "consecutive_failures": 2,
       "count": 2,
       "error": "HTTP 403 from colburnschool.edu",
       "requests": 1,
-      "duration_ms": 74,
+      "duration_ms": 90,
       "collection_region": "nam"
     },
     {
@@ -444,10 +444,10 @@
       "url": "https://www.msmnyc.edu/livestream/",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 14,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 12,
       "requests": 2,
-      "duration_ms": 1083,
+      "duration_ms": 1046,
       "collection_region": "nam"
     },
     {
@@ -456,10 +456,10 @@
       "url": "https://www.music.northwestern.edu/live",
       "timezone": "America/Chicago",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 10,
       "requests": 1,
-      "duration_ms": 455,
+      "duration_ms": 646,
       "collection_region": "nam"
     },
     {
@@ -468,10 +468,10 @@
       "url": "https://music.rice.edu/events",
       "timezone": "America/Chicago",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 34,
-      "requests": 40,
-      "duration_ms": 40007,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 32,
+      "requests": 37,
+      "duration_ms": 36645,
       "collection_region": "nam"
     },
     {
@@ -480,10 +480,10 @@
       "url": "https://www.sfcm.edu/experience/performance-calendar",
       "timezone": "America/Los_Angeles",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 3,
-      "requests": 51,
-      "duration_ms": 53400,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 2,
+      "requests": 50,
+      "duration_ms": 51545,
       "collection_region": "nam"
     },
     {
@@ -492,10 +492,10 @@
       "url": "https://www.lawrence.edu/academics/ensembles-performances/performances/webcasts/",
       "timezone": "America/Chicago",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 4,
       "requests": 1,
-      "duration_ms": 208,
+      "duration_ms": 114,
       "collection_region": "nam"
     },
     {
@@ -504,10 +504,10 @@
       "url": "https://bostonconservatory.berklee.edu/events",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
-      "count": 21,
-      "requests": 33,
-      "duration_ms": 32126,
+      "last_success": "2026-11-18T17:12:52.702Z",
+      "count": 28,
+      "requests": 43,
+      "duration_ms": 50429,
       "collection_region": "nam"
     },
     {
@@ -516,10 +516,10 @@
       "url": "https://www.oberlin.edu/conservatory/on-stage/live-webcasts",
       "timezone": "America/New_York",
       "status": "ok",
-      "last_success": "2026-11-17T17:36:04.458Z",
+      "last_success": "2026-11-18T17:12:52.702Z",
       "count": 23,
       "requests": 28,
-      "duration_ms": 29702,
+      "duration_ms": 37132,
       "collection_region": "nam"
     },
     {
@@ -528,10 +528,10 @@
       "url": "https://www.mosconsv.tv/stream",
       "timezone": "Europe/Moscow",
       "status": "ok",
-      "last_success": "2026-11-17T17:35:55.522Z",
+      "last_success": "2026-11-18T17:12:49.198Z",
       "count": 0,
       "requests": 1,
-      "duration_ms": 721,
+      "duration_ms": 866,
       "collection_region": "europe"
     },
     {
@@ -540,10 +540,10 @@
       "url": "https://www.udk-berlin.de/kalender/",
       "timezone": "Europe/Berlin",
       "status": "ok",
-      "last_success": "2026-11-17T17:35:55.522Z",
+      "last_success": "2026-11-18T17:12:49.198Z",
       "count": 1,
       "requests": 6,
-      "duration_ms": 5745,
+      "duration_ms": 5717,
       "collection_region": "europe"
     },
     {
@@ -551,13 +551,11 @@
       "name": "Escuela Superior de Música Reina Sofía",
       "url": "https://www.escuelasuperiordemusicareinasofia.es/agenda/",
       "timezone": "Europe/Madrid",
-      "status": "error",
-      "last_success": "2026-11-16T18:28:16.293Z",
-      "consecutive_failures": 1,
+      "status": "ok",
+      "last_success": "2026-11-18T17:12:49.198Z",
       "count": 0,
-      "error": "fetch failed",
-      "requests": 2,
-      "duration_ms": 21979,
+      "requests": 14,
+      "duration_ms": 23894,
       "collection_region": "europe"
     },
     {
@@ -566,10 +564,10 @@
       "url": "https://www.bruckneruni.ac.at/de/besuchen/events?tx_gtncachedevents_pilistfilteredlist%5Bfilter%5D%5Barea%5D%5B%5D=112",
       "timezone": "Europe/Vienna",
       "status": "ok",
-      "last_success": "2026-11-17T17:35:55.522Z",
+      "last_success": "2026-11-18T17:12:49.198Z",
       "count": 1,
       "requests": 13,
-      "duration_ms": 26733,
+      "duration_ms": 26138,
       "collection_region": "europe"
     },
     {
@@ -578,10 +576,10 @@
       "url": "https://www.rcm.ac.uk/events/live/",
       "timezone": "Europe/London",
       "status": "ok",
-      "last_success": "2026-11-17T17:35:55.522Z",
+      "last_success": "2026-11-18T17:12:49.198Z",
       "count": 1,
       "requests": 1,
-      "duration_ms": 1077,
+      "duration_ms": 1139,
       "collection_region": "europe"
     },
     {
@@ -590,10 +588,10 @@
       "url": "https://www.hfm-weimar.de/en/visiting/events/calendar",
       "timezone": "Europe/Berlin",
       "status": "ok",
-      "last_success": "2026-11-17T17:35:55.522Z",
+      "last_success": "2026-11-18T17:12:49.198Z",
       "count": 0,
-      "requests": 36,
-      "duration_ms": 54225,
+      "requests": 34,
+      "duration_ms": 114670,
       "collection_region": "europe"
     },
     {
@@ -603,11 +601,11 @@
       "timezone": "Europe/Vaduz",
       "status": "error",
       "last_success": "2026-10-24T11:58:58.033Z",
-      "consecutive_failures": 23,
+      "consecutive_failures": 24,
       "count": 0,
-      "error": "Liechtenstein schedule disagrees with event details",
-      "requests": 6,
-      "duration_ms": 5505,
+      "error": "HTTP 403 from www.kulmag.live",
+      "requests": 1,
+      "duration_ms": 573,
       "collection_region": "europe"
     },
     {
@@ -616,10 +614,10 @@
       "url": "https://vcass.vic.edu.au/events",
       "timezone": "Australia/Melbourne",
       "status": "ok",
-      "last_success": "2026-11-17T17:35:54.894Z",
+      "last_success": "2026-11-18T17:12:50.371Z",
       "count": 0,
       "requests": 2,
-      "duration_ms": 1209,
+      "duration_ms": 1227,
       "collection_region": "asia-pacific"
     },
     {
@@ -628,10 +626,10 @@
       "url": "https://finearts-music.unimelb.edu.au/about-us/mcm/conservatorium-streamed-concerts",
       "timezone": "Australia/Melbourne",
       "status": "ok",
-      "last_success": "2026-11-17T17:35:54.894Z",
+      "last_success": "2026-11-18T17:12:50.371Z",
       "count": 0,
-      "requests": 7,
-      "duration_ms": 7797,
+      "requests": 6,
+      "duration_ms": 7010,
       "collection_region": "asia-pacific"
     },
     {
@@ -640,10 +638,10 @@
       "url": "https://gma.geidai.ac.jp/",
       "timezone": "Asia/Tokyo",
       "status": "ok",
-      "last_success": "2026-11-17T17:35:54.894Z",
+      "last_success": "2026-11-18T17:12:50.371Z",
       "count": 0,
       "requests": 1,
-      "duration_ms": 1208,
+      "duration_ms": 1065,
       "collection_region": "asia-pacific"
     },
     {
@@ -748,318 +746,6 @@
   ],
   "events": [
     {
-      "id": "frost-54427997179936-54427997185059",
-      "title": "Rachel Richards, Doctoral Classical Percussion Recital",
-      "start": "2026-11-15T19:00:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://events.miami.edu/event/rachel-richards-doctoral-classical-percussion-recital",
-      "stream_url": "https://www.youtube.com/watch?v=Q7CfgT0NqMo",
-      "watch_kind": "direct",
-      "evidence_url": "https://events.miami.edu/event/rachel-richards-doctoral-classical-percussion-recital",
-      "evidence": "Official Frost event explicitly supplies this public YouTube live URL as its online stream; physical ticket prices are separate.",
-      "source": "frost",
-      "institution": "University of Miami Frost School of Music",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "blair-101004-1794771000",
-      "title": "Student Recital: Sydney Schneider, violin",
-      "start": "2026-11-15T19:30:00.000Z",
-      "end": null,
-      "program": "Blair School of Music presents a student violin recital by Sydney Schneider, Sunday, November 15, 2026 1:30 p.m., in Choral Hall. This is a free event. ⭐ Watch the livestream: http://vu.edu/livestream",
-      "event_url": "https://events.vanderbilt.edu/blair/event/101004-student-recital-sydney-schneider-violin",
-      "stream_url": "https://blair.vanderbilt.edu/livestreams/",
-      "watch_kind": "venue",
-      "watch_note": "Select Choral Hall on Blair’s public livestream page.",
-      "evidence_url": "https://events.vanderbilt.edu/blair/event/101004-student-recital-sydney-schneider-violin",
-      "evidence": "Official LiveWhale event explicitly says free and Watch the livestream; school shortlink resolves to the public hall-player portal.",
-      "source": "blair",
-      "institution": "Vanderbilt Blair School of Music",
-      "timezone": "America/Chicago",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "indiana-2350582-1794772800",
-      "title": "“Idomeneo” by Wolfgang Amadeus Mozart",
-      "start": "2026-11-15T15:00:00-05:00",
-      "end": null,
-      "program": "Presented by IU Opera and Ballet Theater | Jacobs Mainstage Season",
-      "event_url": "https://operaballet.indiana.edu/events/idomeneo.html",
-      "stream_url": "https://liveatjacobs.music.indiana.edu/",
-      "watch_kind": "venue",
-      "watch_note": "Choose the performance on LIVE@jacobs.",
-      "evidence_url": "https://events.iu.edu/live/json/v2/events/paginate/false/group_id/56/tag_id/2752/response_fields/summary,image,location",
-      "evidence": "Included in the LIVE@jacobs schedule feed with an explicit online viewing link.",
-      "source": "indiana",
-      "institution": "Indiana University Jacobs School of Music",
-      "timezone": "America/New_York",
-      "type": "Concert",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "indiana-2428164-1794772800",
-      "title": "Doctoral Recital – Steven Slone, trombone",
-      "start": "2026-11-15T15:00:00-05:00",
-      "end": "2026-11-15T16:00:00-05:00",
-      "program": "",
-      "event_url": "https://events.iu.edu/musiciub/event/2428164-doctoral-recital-steven-slone-trombone",
-      "stream_url": "https://liveatjacobs.music.indiana.edu/",
-      "watch_kind": "venue",
-      "watch_note": "Choose the performance on LIVE@jacobs.",
-      "evidence_url": "https://events.iu.edu/live/json/v2/events/paginate/false/group_id/56/tag_id/2752/response_fields/summary,image,location",
-      "evidence": "Included in the LIVE@jacobs schedule feed with an explicit online viewing link.",
-      "source": "indiana",
-      "institution": "Indiana University Jacobs School of Music",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "blair-101005-1794774600",
-      "title": "Student Recital: Tony Kim, cello",
-      "start": "2026-11-15T20:30:00.000Z",
-      "end": null,
-      "program": "Blair School of Music presents a student cello recital by Tony Kim, Sunday, November 15, 2026, 2:30 p.m., in Turner Recital Hall. This is a free event. ⭐ Watch the livestream: http://vu.edu/livestream",
-      "event_url": "https://events.vanderbilt.edu/blair/event/101005-student-recital-tony-kim-cello",
-      "stream_url": "https://blair.vanderbilt.edu/livestreams/",
-      "watch_kind": "venue",
-      "watch_note": "Select Steve & Judy Turner Recital Hall on Blair’s public livestream page.",
-      "evidence_url": "https://events.vanderbilt.edu/blair/event/101005-student-recital-tony-kim-cello",
-      "evidence": "Official LiveWhale event explicitly says free and Watch the livestream; school shortlink resolves to the public hall-player portal.",
-      "source": "blair",
-      "institution": "Vanderbilt Blair School of Music",
-      "timezone": "America/Chicago",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "frost-53620891698602-53620891699628",
-      "title": "Serenatas y danzas | Frost Symphonic Winds",
-      "start": "2026-11-15T21:00:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://events.miami.edu/event/serenatas-y-danzas-frost-symphonic-winds",
-      "stream_url": "https://www.youtube.com/watch?v=EWnx_70832I",
-      "watch_kind": "direct",
-      "evidence_url": "https://events.miami.edu/event/serenatas-y-danzas-frost-symphonic-winds",
-      "evidence": "Official Frost event explicitly supplies this public YouTube live URL as its online stream; physical ticket prices are separate.",
-      "source": "frost",
-      "institution": "University of Miami Frost School of Music",
-      "timezone": "America/New_York",
-      "type": "Concert",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "frost-54427997256751-54427997259826",
-      "title": "Jiaming Li, Doctoral Classical Piano Recital",
-      "start": "2026-11-15T22:00:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://events.miami.edu/event/jiaming-li-doctoral-classical-piano-recital-3718",
-      "stream_url": "https://www.youtube.com/watch?v=3V3_Kpy2HVU",
-      "watch_kind": "direct",
-      "evidence_url": "https://events.miami.edu/event/jiaming-li-doctoral-classical-piano-recital-3718",
-      "evidence": "Official Frost event explicitly supplies this public YouTube live URL as its online stream; physical ticket prices are separate.",
-      "source": "frost",
-      "institution": "University of Miami Frost School of Music",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "indiana-2410959-1794780000",
-      "title": "Doctoral Recital – Hyunjoo Choo, violin",
-      "start": "2026-11-15T17:00:00-05:00",
-      "end": "2026-11-15T18:00:00-05:00",
-      "program": "",
-      "event_url": "https://events.iu.edu/musiciub/event/2410959-doctoral-recital-hyunjoo-choo-violin",
-      "stream_url": "https://liveatjacobs.music.indiana.edu/",
-      "watch_kind": "venue",
-      "watch_note": "Choose the performance on LIVE@jacobs.",
-      "evidence_url": "https://events.iu.edu/live/json/v2/events/paginate/false/group_id/56/tag_id/2752/response_fields/summary,image,location",
-      "evidence": "Included in the LIVE@jacobs schedule feed with an explicit online viewing link.",
-      "source": "indiana",
-      "institution": "Indiana University Jacobs School of Music",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "indiana-2451442-1794783600",
-      "title": "Doctoral Recital – Youjin Cho, piano",
-      "start": "2026-11-15T18:00:00-05:00",
-      "end": "2026-11-15T19:00:00-05:00",
-      "program": "",
-      "event_url": "https://events.iu.edu/musiciub/event/2451442-doctoral-recital-youjin-cho-piano",
-      "stream_url": "https://liveatjacobs.music.indiana.edu/",
-      "watch_kind": "venue",
-      "watch_note": "Choose the performance on LIVE@jacobs.",
-      "evidence_url": "https://events.iu.edu/live/json/v2/events/paginate/false/group_id/56/tag_id/2752/response_fields/summary,image,location",
-      "evidence": "Included in the LIVE@jacobs schedule feed with an explicit online viewing link.",
-      "source": "indiana",
-      "institution": "Indiana University Jacobs School of Music",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "blair-101553-1794785400",
-      "title": "Student Recital: Eric Wei, cello",
-      "start": "2026-11-15T23:30:00.000Z",
-      "end": null,
-      "program": "Blair School of Music presents a student cello recital by Eric Wei, Sunday, November 15, 2026, 5:30 p.m., in Choral Hall. This is a free event. ⭐ Watch the livestream: http://vu.edu/livestream",
-      "event_url": "https://events.vanderbilt.edu/blair/event/101553-student-recital-eric-wei-cello",
-      "stream_url": "https://blair.vanderbilt.edu/livestreams/",
-      "watch_kind": "venue",
-      "watch_note": "Select Choral Hall on Blair’s public livestream page.",
-      "evidence_url": "https://events.vanderbilt.edu/blair/event/101553-student-recital-eric-wei-cello",
-      "evidence": "Official LiveWhale event explicitly says free and Watch the livestream; school shortlink resolves to the public hall-player portal.",
-      "source": "blair",
-      "institution": "Vanderbilt Blair School of Music",
-      "timezone": "America/Chicago",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "title": "CWRU Chamber Collective | Music of Screen and Stage",
-      "start": "2026-11-16T00:00:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://case.edu/artsci/music/news-events/upcoming-concerts-events/chamber-collective-11-15-2026",
-      "stream_url": "https://case.edu/livestream/harkness",
-      "watch_kind": "venue",
-      "evidence_url": "https://case.edu/artsci/music/news-events/upcoming-concerts-events/chamber-collective-11-15-2026",
-      "evidence": "Official concert header explicitly offers free virtual admission and a Watch livestream link.",
-      "watch_note": "Use the venue’s video player on this page.",
-      "source": "case-western",
-      "institution": "Case Western Reserve University Department of Music",
-      "timezone": "America/New_York",
-      "type": "Chamber",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-13T16:16:39.161Z",
-      "stale": true,
-      "id": "case-western-9ac9975a2fc51bfa"
-    },
-    {
-      "id": "indiana-2410958-1794787200",
-      "title": "Doctoral Recital – Hyunjoo Choo, violin",
-      "start": "2026-11-15T19:00:00-05:00",
-      "end": "2026-11-15T20:00:00-05:00",
-      "program": "",
-      "event_url": "https://events.iu.edu/musiciub/event/2410958-doctoral-recital-hyunjoo-choo-violin",
-      "stream_url": "https://liveatjacobs.music.indiana.edu/",
-      "watch_kind": "venue",
-      "watch_note": "Choose the performance on LIVE@jacobs.",
-      "evidence_url": "https://events.iu.edu/live/json/v2/events/paginate/false/group_id/56/tag_id/2752/response_fields/summary,image,location",
-      "evidence": "Included in the LIVE@jacobs schedule feed with an explicit online viewing link.",
-      "source": "indiana",
-      "institution": "Indiana University Jacobs School of Music",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "indiana-2387909-1794790800",
-      "title": "“The Second Viennese School: Old Music that is still New” | Featuring Alban Berg’s Kammerkonzert",
-      "start": "2026-11-15T20:00:00-05:00",
-      "end": "2026-11-15T22:00:00-05:00",
-      "program": "Faculty/Student Chamber Music Recital – Mark Kaplan, violin; Jaekeun Song, piano; with Facutly and Students of the Jacobs School of Music",
-      "event_url": "https://events.iu.edu/musiciub/event/2387909-alban-berg-kammerkonzert",
-      "stream_url": "https://liveatjacobs.music.indiana.edu/",
-      "watch_kind": "venue",
-      "watch_note": "Choose the performance on LIVE@jacobs.",
-      "evidence_url": "https://events.iu.edu/live/json/v2/events/paginate/false/group_id/56/tag_id/2752/response_fields/summary,image,location",
-      "evidence": "Included in the LIVE@jacobs schedule feed with an explicit online viewing link.",
-      "source": "indiana",
-      "institution": "Indiana University Jacobs School of Music",
-      "timezone": "America/New_York",
-      "type": "Concert",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "indiana-2454461-1794792600",
-      "title": "Artist Diploma Recital – Shuai Zhao, viola",
-      "start": "2026-11-15T20:30:00-05:00",
-      "end": "2026-11-15T21:30:00-05:00",
-      "program": "",
-      "event_url": "https://events.iu.edu/musiciub/event/2454461-artist-diploma-recital-shuai-zhao-viola",
-      "stream_url": "https://liveatjacobs.music.indiana.edu/",
-      "watch_kind": "venue",
-      "watch_note": "Choose the performance on LIVE@jacobs.",
-      "evidence_url": "https://events.iu.edu/live/json/v2/events/paginate/false/group_id/56/tag_id/2752/response_fields/summary,image,location",
-      "evidence": "Included in the LIVE@jacobs schedule feed with an explicit online viewing link.",
-      "source": "indiana",
-      "institution": "Indiana University Jacobs School of Music",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "csulb-207a72f693cd2b97",
-      "title": "Faculty Artist Recital",
-      "start": "2026-11-16T03:30:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://web.csulb.edu/colleges/cota/music/events/",
-      "stream_url": "https://www.youtube.com/@BCCMLiveEvents",
-      "watch_kind": "channel",
-      "evidence_url": "https://web.csulb.edu/colleges/cota/music/events/",
-      "watch_note": "Select this concert on Bob Cole Conservatory’s live-events YouTube channel.",
-      "evidence": "Official school policy streams all Daniel Recital Hall concerts; event is in that exact hall. Physical admission charges do not describe online access.",
-      "source": "csulb",
-      "institution": "Bob Cole Conservatory of Music, CSU Long Beach",
-      "timezone": "America/Los_Angeles",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
       "id": "indiana-2410957-1794873600",
       "title": "Junior Recital – Kody Helbock, horn",
       "start": "2026-11-16T19:00:00-05:00",
@@ -1077,28 +763,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "crane-aebcdacc7c15dd1e",
-      "title": "Crane Brass Ensemble",
-      "start": "2026-11-17T00:30:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://www.potsdam.edu/academics/crane-school-music/crane-school-music-live-concert",
-      "stream_url": "https://www.youtube.com/playlist?list=PLtuXOQFKehOIrf2LDcTZG4ntttJ0ZnhSJ",
-      "watch_kind": "channel",
-      "evidence_url": "https://www.potsdam.edu/academics/crane-school-music/crane-school-music-live-concert",
-      "watch_note": "Open the scheduled broadcast in Crane’s YouTube livestream playlist.",
-      "evidence": "Only the explicitly named Next Live-Streamed Event is admitted; the separate general performance calendar is not evidence of streaming.",
-      "source": "crane",
-      "institution": "SUNY Potsdam Crane School of Music",
-      "timezone": "America/New_York",
-      "type": "Concert",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1118,7 +783,7 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1139,29 +804,8 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
-    },
-    {
-      "title": "Concert Band and University Band Concert",
-      "start": "2026-11-17T01:30:00.000Z",
-      "end": null,
-      "program": "This concert is free and open to the public.Concert program will be available here: https://performingarts.uiowa.edu/digital-programs/music.Concert can be viewed via livestream here: https://music.uiowa.edu/events/school-music-livestream.",
-      "event_url": "https://music.uiowa.edu/event/39066/0",
-      "stream_url": "https://music.uiowa.edu/events/school-music-livestream",
-      "watch_kind": "venue",
-      "watch_note": "The public player starts when the announced performance begins.",
-      "evidence_url": "https://music.uiowa.edu/event/39066/0",
-      "evidence": "Listed on the dedicated upcoming-livestream schedule and explicitly linked to the public player by the individual event; cancellations rechecked.",
-      "source": "iowa",
-      "institution": "University of Iowa School of Music",
-      "timezone": "America/Chicago",
-      "type": "Concert",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false,
-      "id": "iowa-a02bc3d0781ad470"
     },
     {
       "id": "lawrence-db38e2f641fa48d0",
@@ -1180,28 +824,8 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
-    },
-    {
-      "title": "Sofia Skoldberg, Violin",
-      "type": "Recital",
-      "start": "2026-11-17T18:30:00.000Z",
-      "end": null,
-      "program": "Charlie Tauber, Piano; Mozart: Violin Sonata No. 21 in E Minor, K. 304; Allegro; Tempo di MenuettoJessie Montgomery: Rhapsody No. 2 for Solo ViolinBoulanger: 2 Pieces for Violin and Piano; Nocturne; CortègeSchubert: Violin Sonata No. 4 in A Major, D. 574; Allegro moderato; Scherzo: Presto; Andantino",
-      "event_url": "https://music.rice.edu/events/sofia-skoldberg",
-      "stream_url": "https://music.rice.edu/live-streaming-duncan-recital-hall",
-      "watch_kind": "venue",
-      "evidence_url": "https://music.rice.edu/events/sofia-skoldberg",
-      "evidence": "Official event page provides a View Livestream link and Central Time.",
-      "source": "rice",
-      "institution": "Rice Shepherd School of Music",
-      "timezone": "America/Chicago",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false,
-      "id": "rice-136047cbcb0be5d8"
     },
     {
       "id": "frost-54427997341758-54427997344833",
@@ -1220,67 +844,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "boston-34ed3f30cb9e535a",
-      "title": "Student Recital: Ruby's Music Journey, Featuring Yuna Ruby Hwang, Voice",
-      "start": "2026-11-17T22:00:00.000Z",
-      "end": null,
-      "program": "Yuna Ruby Hwang (PSC '27) presents a graduate voice recital showcasing a diverse selection of classical soprano repertoire. She will be joined by collaborative pianist Ruslan Ramazanov.",
-      "event_url": "https://bostonconservatory.berklee.edu/events/student-recital-rubys-music-journey-featuring-yuna-ruby-hwang-voice",
-      "stream_url": "https://bostonconservatory.berklee.edu/studio-401",
-      "watch_kind": "venue",
-      "evidence_url": "https://bostonconservatory.berklee.edu/events/student-recital-rubys-music-journey-featuring-yuna-ruby-hwang-voice",
-      "evidence": "Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.",
-      "source": "boston",
-      "institution": "Boston Conservatory at Berklee",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "unt-1_6cd2ifan",
-      "title": "Sinfonietta",
-      "start": "2026-11-17T23:00:00.000Z",
-      "end": "2026-11-18T00:00:00.000Z",
-      "program": "",
-      "event_url": "https://recording.music.unt.edu/media/t/1_6cd2ifan",
-      "stream_url": "https://recording.music.unt.edu/media/t/1_6cd2ifan",
-      "watch_kind": "direct",
-      "evidence_url": "https://recording.music.unt.edu/webcasts",
-      "evidence": "Public North Texas Live Events page lists this webcast and its scheduled Unix timestamps.",
-      "source": "unt",
-      "institution": "University of North Texas College of Music",
-      "timezone": "America/Chicago",
-      "type": "Orchestra",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "hartt-c4a7609c367b787d",
-      "title": "Foot in the Door",
-      "start": "2026-11-18T00:30:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://www.hartford.edu/academics/schools-colleges/hartt/performances/livestream.aspx",
-      "stream_url": "https://www.youtube.com/watch?v=T_1L03MGFxo",
-      "watch_kind": "direct",
-      "evidence_url": "https://www.hartford.edu/academics/schools-colleges/hartt/performances/livestream.aspx",
-      "evidence": "Official dated broadcast card embeds this public YouTube player. Campus-local time uses America/New_York, including daylight saving.",
-      "source": "hartt",
-      "institution": "The Hartt School",
-      "timezone": "America/New_York",
-      "type": "Concert",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1300,27 +864,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "frost-53620894781894-53620894783944",
-      "title": "Violin & Piano Virtuosity | Deering Quartet",
-      "start": "2026-11-18T00:30:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://events.miami.edu/event/violin-piano-virtuosity-deering-quartet",
-      "stream_url": "https://www.youtube.com/watch?v=nV6nqViapAs",
-      "watch_kind": "direct",
-      "evidence_url": "https://events.miami.edu/event/violin-piano-virtuosity-deering-quartet",
-      "evidence": "Official Frost event explicitly supplies this public YouTube live URL as its online stream; physical ticket prices are separate.",
-      "source": "frost",
-      "institution": "University of Miami Frost School of Music",
-      "timezone": "America/New_York",
-      "type": "Chamber",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1341,48 +885,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "title": "Eastman Saxophone Project",
-      "start": "2026-11-18T00:30:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://www.esm.rochester.edu/esm-event/eastman-saxophone-project-3/",
-      "stream_url": "https://www.esm.rochester.edu/live/kilbourn/",
-      "watch_kind": "venue",
-      "evidence_url": "https://www.esm.rochester.edu/live/",
-      "evidence": "Included in the official upcoming live streamed events list.",
-      "source": "eastman",
-      "institution": "Eastman School of Music",
-      "timezone": "America/New_York",
-      "type": "Concert",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false,
-      "id": "eastman-5eabde959a8c685d"
-    },
-    {
-      "title": "Student Recital: Ryley Amos, violin",
-      "start": "2026-11-18T01:00:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://events.bgsu.edu/event/student-recital-riley-amos-violin",
-      "stream_url": "https://www.youtube.com/user/bgsumusic",
-      "watch_kind": "channel",
-      "evidence_url": "https://events.bgsu.edu/event/student-recital-riley-amos-violin",
-      "evidence": "Official College of Musical Arts event is tagged Livestream and free; the school directs livestream viewers to its public YouTube channel.",
-      "id": "bgsu-54471337734210-54471540649786",
-      "watch_note": "Choose this performance on the school’s YouTube channel.",
-      "source": "bgsu",
-      "institution": "Bowling Green State University College of Musical Arts",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1403,28 +906,8 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
-    },
-    {
-      "title": "Simon Comte, Jazz Tenor Saxophone",
-      "start": "2026-11-18T01:00:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://www.msmnyc.edu/livestream/comte-26/",
-      "stream_url": "https://www.msmnyc.edu/livestream/comte-26/",
-      "watch_kind": "direct",
-      "evidence_url": "https://www.msmnyc.edu/livestream/",
-      "evidence": "Listed as an upcoming event on the official livestream index.",
-      "source": "msm",
-      "institution": "Manhattan School of Music",
-      "timezone": "America/New_York",
-      "type": "Jazz",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false,
-      "id": "msm-4e89f5cedcac972e"
     },
     {
       "id": "ithaca-f13662e3b79c409d",
@@ -1444,7 +927,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1464,7 +947,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "iowa-d95c8807e68e5900"
     },
@@ -1486,127 +969,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "unt-1_1s2efcr9",
-      "title": "Chorale and Camerata",
-      "start": "2026-11-18T01:30:00.000Z",
-      "end": "2026-11-18T03:30:00.000Z",
-      "program": "",
-      "event_url": "https://recording.music.unt.edu/media/t/1_1s2efcr9",
-      "stream_url": "https://recording.music.unt.edu/media/t/1_1s2efcr9",
-      "watch_kind": "direct",
-      "evidence_url": "https://recording.music.unt.edu/webcasts",
-      "evidence": "Public North Texas Live Events page lists this webcast and its scheduled Unix timestamps.",
-      "source": "unt",
-      "institution": "University of North Texas College of Music",
-      "timezone": "America/Chicago",
-      "type": "Voice & choral",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "title": "Student Degree Recital – Kurt Kraovsky, jazz saxophone",
-      "start": "2026-11-18T01:30:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://www.esm.rochester.edu/esm-event/student-degree-recital-kurt-kraovsky-jazz-saxophone/",
-      "stream_url": "https://www.esm.rochester.edu/live/hatch/",
-      "watch_kind": "venue",
-      "evidence_url": "https://www.esm.rochester.edu/live/",
-      "evidence": "Included in the official upcoming live streamed events list.",
-      "source": "eastman",
-      "institution": "Eastman School of Music",
-      "timezone": "America/New_York",
-      "type": "Jazz",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false,
-      "id": "eastman-09944cf1cfcdbf2b"
-    },
-    {
-      "title": "Chamber Music for Winds",
-      "type": "Chamber",
-      "start": "2026-11-18T01:30:00.000Z",
-      "end": null,
-      "program": "Beethoven: Sextet in E-flat Major (arr. Philadelphia Wind Quintet) ; Adagio; Allegro; Andante; Menuetto; Rondo; AJ Schmidt, flute; Julianne Choe, oboe; Daniel Bain, clarinet; Xayvion Davidson, bassoon; Connor Powers, hornReicha: Wind Quintet in E-flat Major, Op.88, No. 2; Lento, Allegro moderato; Sc",
-      "event_url": "https://music.rice.edu/events/chamber-music-winds-33",
-      "stream_url": "https://music.rice.edu/live-streaming-duncan-recital-hall",
-      "watch_kind": "venue",
-      "evidence_url": "https://music.rice.edu/events/chamber-music-winds-33",
-      "evidence": "Official event page provides a View Livestream link and Central Time.",
-      "source": "rice",
-      "institution": "Rice Shepherd School of Music",
-      "timezone": "America/Chicago",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false,
-      "id": "rice-68d347453821257b"
-    },
-    {
-      "id": "unt-1_nef3b3yn",
-      "title": "Guitar Ensemble",
-      "start": "2026-11-18T02:00:00.000Z",
-      "end": "2026-11-18T04:00:00.000Z",
-      "program": "",
-      "event_url": "https://recording.music.unt.edu/media/t/1_nef3b3yn",
-      "stream_url": "https://recording.music.unt.edu/media/t/1_nef3b3yn",
-      "watch_kind": "direct",
-      "evidence_url": "https://recording.music.unt.edu/webcasts",
-      "evidence": "Public North Texas Live Events page lists this webcast and its scheduled Unix timestamps.",
-      "source": "unt",
-      "institution": "University of North Texas College of Music",
-      "timezone": "America/Chicago",
-      "type": "Concert",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "unt-1_uaplmw2q",
-      "title": "NOVA",
-      "start": "2026-11-18T02:00:00.000Z",
-      "end": "2026-11-18T03:30:00.000Z",
-      "program": "",
-      "event_url": "https://recording.music.unt.edu/media/t/1_uaplmw2q",
-      "stream_url": "https://recording.music.unt.edu/media/t/1_uaplmw2q",
-      "watch_kind": "direct",
-      "evidence_url": "https://recording.music.unt.edu/webcasts",
-      "evidence": "Public North Texas Live Events page lists this webcast and its scheduled Unix timestamps.",
-      "source": "unt",
-      "institution": "University of North Texas College of Music",
-      "timezone": "America/Chicago",
-      "type": "Concert",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "unt-1_c7v5g3qp",
-      "title": "Zebras",
-      "start": "2026-11-18T02:00:00.000Z",
-      "end": "2026-11-18T03:00:00.000Z",
-      "program": "",
-      "event_url": "https://recording.music.unt.edu/media/t/1_c7v5g3qp",
-      "stream_url": "https://recording.music.unt.edu/media/t/1_c7v5g3qp",
-      "watch_kind": "direct",
-      "evidence_url": "https://recording.music.unt.edu/webcasts",
-      "evidence": "Public North Texas Live Events page lists this webcast and its scheduled Unix timestamps.",
-      "source": "unt",
-      "institution": "University of North Texas College of Music",
-      "timezone": "America/Chicago",
-      "type": "Concert",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1627,35 +990,36 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
-      "title": "Chamber Music Tuesday featuring Dmitri Atapine and Hyeyeon Park",
+      "id": "yale-26738-1795023000000",
+      "title": "Lunchtime Chamber Music",
+      "start": "2026-11-18T17:30:00.000Z",
+      "end": null,
+      "program": "",
+      "event_url": "https://music-tickets.yale.edu/1001/27399",
+      "stream_url": "https://music.yale.edu/live",
+      "watch_kind": "venue",
+      "watch_note": "Yale’s main public player. This feed covers the next announced main broadcast.",
+      "evidence_url": "https://music-tickets.yale.edu/1001/27399",
+      "evidence": "Official next-livestream API and matching dated concert page; explicitly no purchase or registration required for online viewing.",
+      "source": "yale",
+      "institution": "Yale School of Music",
+      "timezone": "America/New_York",
       "type": "Chamber",
-      "start": "2026-11-18T03:30:00.000Z",
-      "end": "2026-11-18T05:30:00.000Z",
-      "program": "Yangfan Xu: Boya Breaking the Zither String for Guzheng, 2 violins, viola, cello, and piano (World Premiere and Hoefer Prize Winner)Mark Chen, Esther Tseng, violinErika Cho, violaConnor Adams, celloHelen Meng, pianoDaisy You, guzheng; Dmitri Shostakovich: Piano Quintet in G Minor, Op. 57 I. Prelude:",
-      "event_url": "https://www.sfcm.edu/experience/performances/chamber-music-tuesday-2-dmitri-atapine-cello-hyeyeon-park-piano/20261117",
-      "stream_url": "https://vimeo.com/event/2047379/3c5297069b",
-      "watch_kind": "direct",
-      "evidence_url": "https://www.sfcm.edu/experience/performances/chamber-music-tuesday-2-dmitri-atapine-cello-hyeyeon-park-piano/20261117",
-      "evidence": "Public event page provides a video livestream link and calendar dates.",
-      "source": "sfcm",
-      "institution": "San Francisco Conservatory of Music",
-      "timezone": "America/Los_Angeles",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false,
-      "id": "sfcm-e53691e71781be98"
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
     },
     {
       "title": "Piano students of James Palmer",
       "type": "Recital",
       "start": "2026-11-18T18:30:00.000Z",
       "end": null,
-      "program": "Scriabin: 24 Preludes, Op. 11; No. 10 in C-sharp Minor; No. 11 in B Major ; No. 12 in G-sharp Minor ; No. 13 in G-flat Major ; No. 14 in E-flat Minor ; Eileen Chen, pianBeethoven: Sonata in C Major for Cello and Piano Op. 102, No. 1; Andante – Allegro vivace; Adagio – Tempo d'andante – Allegro vivac",
+      "program": "Scriabin: 24 Preludes, Op. 11; No. 10 in C-sharp Minor; No. 11 in B Major ; No. 12 in G-sharp Minor ; No. 13 in G-flat Major ; No. 14 in E-flat Minor ; Eileen Chen, pianHaydn: Piano Sonata in E-flat Major Hob. XVI:52; Allegro; Adagio; Presto (Finale); Geoffrey Hill, pianoSaint-Saëns: Sonata for Viol",
       "event_url": "https://music.rice.edu/events/piano-students-james-palmer-0",
       "stream_url": "https://music.rice.edu/live-streaming-duncan-recital-hall",
       "watch_kind": "venue",
@@ -1666,9 +1030,29 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-f6822ffb8b67b036"
+    },
+    {
+      "id": "unt-1_st77g5yn",
+      "title": "Carter Rapp",
+      "start": "2026-11-18T20:00:00.000Z",
+      "end": "2026-11-18T21:00:00.000Z",
+      "program": "",
+      "event_url": "https://recording.music.unt.edu/media/t/1_st77g5yn",
+      "stream_url": "https://recording.music.unt.edu/media/t/1_st77g5yn",
+      "watch_kind": "direct",
+      "evidence_url": "https://recording.music.unt.edu/webcasts",
+      "evidence": "Public North Texas Live Events page lists this webcast and its scheduled Unix timestamps.",
+      "source": "unt",
+      "institution": "University of North Texas College of Music",
+      "timezone": "America/Chicago",
+      "type": "Concert",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
     },
     {
       "id": "lawrence-5623409e67d96090",
@@ -1687,7 +1071,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1707,7 +1091,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1726,7 +1110,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-c7315708f219de1b"
     },
@@ -1748,7 +1132,47 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "unt-1_yhwtcvp9",
+      "title": "John Griffin, Clarinet",
+      "start": "2026-11-18T23:00:00.000Z",
+      "end": "2026-11-19T00:00:00.000Z",
+      "program": "",
+      "event_url": "https://recording.music.unt.edu/media/t/1_yhwtcvp9",
+      "stream_url": "https://recording.music.unt.edu/media/t/1_yhwtcvp9",
+      "watch_kind": "direct",
+      "evidence_url": "https://recording.music.unt.edu/webcasts",
+      "evidence": "Public North Texas Live Events page lists this webcast and its scheduled Unix timestamps.",
+      "source": "unt",
+      "institution": "University of North Texas College of Music",
+      "timezone": "America/Chicago",
+      "type": "Concert",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "unt-1_hc9y1j9v",
+      "title": "Hunter Gross, Percussion",
+      "start": "2026-11-18T23:00:00.000Z",
+      "end": "2026-11-19T00:00:00.000Z",
+      "program": "",
+      "event_url": "https://recording.music.unt.edu/media/t/1_hc9y1j9v",
+      "stream_url": "https://recording.music.unt.edu/media/t/1_hc9y1j9v",
+      "watch_kind": "direct",
+      "evidence_url": "https://recording.music.unt.edu/webcasts",
+      "evidence": "Public North Texas Live Events page lists this webcast and its scheduled Unix timestamps.",
+      "source": "unt",
+      "institution": "University of North Texas College of Music",
+      "timezone": "America/Chicago",
+      "type": "Concert",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1767,7 +1191,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-24f14bf13d931e24"
     },
@@ -1789,7 +1213,48 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "hartt-106681e246dc491a",
+      "title": "Composers' Ensemble",
+      "start": "2026-11-19T00:30:00.000Z",
+      "end": null,
+      "program": "",
+      "event_url": "https://www.hartford.edu/academics/schools-colleges/hartt/performances/livestream.aspx",
+      "stream_url": "https://www.youtube.com/watch?v=NR-3HJd8RfA",
+      "watch_kind": "direct",
+      "evidence_url": "https://www.hartford.edu/academics/schools-colleges/hartt/performances/livestream.aspx",
+      "evidence": "Official dated broadcast card embeds this public YouTube player. Campus-local time uses America/New_York, including daylight saving.",
+      "source": "hartt",
+      "institution": "The Hartt School",
+      "timezone": "America/New_York",
+      "type": "Concert",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "crane-80e73c8f12162f99",
+      "title": "Crane Concert Band",
+      "start": "2026-11-19T00:30:00.000Z",
+      "end": null,
+      "program": "",
+      "event_url": "https://www.potsdam.edu/academics/crane-school-music/crane-school-music-live-concert",
+      "stream_url": "https://www.youtube.com/playlist?list=PLtuXOQFKehOIrf2LDcTZG4ntttJ0ZnhSJ",
+      "watch_kind": "channel",
+      "evidence_url": "https://www.potsdam.edu/academics/crane-school-music/crane-school-music-live-concert",
+      "watch_note": "Open the scheduled broadcast in Crane’s YouTube livestream playlist.",
+      "evidence": "Only the explicitly named Next Live-Streamed Event is admitted; the separate general performance calendar is not evidence of streaming.",
+      "source": "crane",
+      "institution": "SUNY Potsdam Crane School of Music",
+      "timezone": "America/New_York",
+      "type": "Concert",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1809,7 +1274,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1829,7 +1294,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-a3026fa2e387ede7"
     },
@@ -1851,7 +1316,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1870,7 +1335,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "ohio-state-d04769ff3f1f1da3"
     },
@@ -1890,7 +1355,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-ccc3077205162340"
     },
@@ -1910,7 +1375,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-c4451cdb9445f1ce"
     },
@@ -1932,7 +1397,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1952,7 +1417,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1973,7 +1438,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -1993,9 +1458,29 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "iowa-8ad811649d1f31b8"
+    },
+    {
+      "id": "unt-1_wqwfmw0s",
+      "title": "Symphony and Concert Orchestra",
+      "start": "2026-11-19T01:30:00.000Z",
+      "end": "2026-11-19T03:30:00.000Z",
+      "program": "",
+      "event_url": "https://recording.music.unt.edu/media/t/1_wqwfmw0s",
+      "stream_url": "https://recording.music.unt.edu/media/t/1_wqwfmw0s",
+      "watch_kind": "direct",
+      "evidence_url": "https://recording.music.unt.edu/webcasts",
+      "evidence": "Public North Texas Live Events page lists this webcast and its scheduled Unix timestamps.",
+      "source": "unt",
+      "institution": "University of North Texas College of Music",
+      "timezone": "America/Chicago",
+      "type": "Orchestra",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
     },
     {
       "title": "Student Degree Recital – Kai Gray, percussion",
@@ -2013,7 +1498,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-015267ba41593c91"
     },
@@ -2033,7 +1518,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "northwestern-2cc91763714cc72a"
     },
@@ -2054,7 +1539,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2075,7 +1560,7 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2095,7 +1580,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "stanford-7213cf70c8390944"
     },
@@ -2116,9 +1601,29 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "toronto-b036044ad8bae40f"
+    },
+    {
+      "id": "frost-54542941539812-54549722887761",
+      "title": "Chamber Singers Recital",
+      "start": "2026-11-19T18:15:00.000Z",
+      "end": null,
+      "program": "",
+      "event_url": "https://events.miami.edu/event/chamber-singers-recital-5364",
+      "stream_url": "https://www.youtube.com/watch?v=bUeBYNbjk2k",
+      "watch_kind": "direct",
+      "evidence_url": "https://events.miami.edu/event/chamber-singers-recital-5364",
+      "evidence": "Official Frost event explicitly supplies this public YouTube live URL as its online stream; physical ticket prices are separate.",
+      "source": "frost",
+      "institution": "University of Miami Frost School of Music",
+      "timezone": "America/New_York",
+      "type": "Chamber",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
     },
     {
       "title": "Performance Forum",
@@ -2157,7 +1662,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:35:55.522Z",
+      "last_verified_at": "2026-11-18T17:12:49.198Z",
       "stale": false
     },
     {
@@ -2177,7 +1682,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2196,7 +1701,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-17a180b093cdf5a2"
     },
@@ -2217,7 +1722,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2236,7 +1741,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-3ff94883427c58eb"
     },
@@ -2258,7 +1763,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2279,7 +1784,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2299,7 +1804,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-488c3e188778e748"
     },
@@ -2321,7 +1826,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2342,7 +1847,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2361,7 +1866,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "ohio-state-8bf54b936a0f8d90"
     },
@@ -2381,7 +1886,7 @@
       "type": "Voice & choral",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-8d202b29626de3e7"
     },
@@ -2401,7 +1906,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-415e4a87660c35f7"
     },
@@ -2422,7 +1927,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2443,7 +1948,27 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "unt-1_aq4m76q8",
+      "title": "Wind Symphony and Wind Orchestra",
+      "start": "2026-11-20T01:30:00.000Z",
+      "end": "2026-11-20T03:30:00.000Z",
+      "program": "",
+      "event_url": "https://recording.music.unt.edu/media/t/1_aq4m76q8",
+      "stream_url": "https://recording.music.unt.edu/media/t/1_aq4m76q8",
+      "watch_kind": "direct",
+      "evidence_url": "https://recording.music.unt.edu/webcasts",
+      "evidence": "Public North Texas Live Events page lists this webcast and its scheduled Unix timestamps.",
+      "source": "unt",
+      "institution": "University of North Texas College of Music",
+      "timezone": "America/Chicago",
+      "type": "Orchestra",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2462,7 +1987,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-f80b31ef4d5f7754"
     },
@@ -2482,7 +2007,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-8a9e5b9287d4016e"
     },
@@ -2504,7 +2029,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2525,7 +2050,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2545,7 +2070,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2565,7 +2090,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2585,7 +2110,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2606,7 +2131,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2625,7 +2150,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-27a01c06a36f17d9"
     },
@@ -2646,7 +2171,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "iowa-53f20cf05d2aec66"
     },
@@ -2668,7 +2193,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2688,7 +2213,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2708,7 +2233,7 @@
       "timezone": "America/New_York",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2727,7 +2252,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-67939572f8161ece"
     },
@@ -2747,7 +2272,7 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-9a0ff5df0c2b8757"
     },
@@ -2768,7 +2293,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2788,7 +2313,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2807,7 +2332,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-d07c1097b2511ac0"
     },
@@ -2827,7 +2352,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-ab29d4fbfb076a1e"
     },
@@ -2848,7 +2373,27 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "boston-602fb0a6c4b3d533",
+      "title": "contraBAND Presents: Song After Song",
+      "start": "2026-11-21T01:00:00.000Z",
+      "end": null,
+      "program": "Boston Conservatory’s new music ensemble, contraBAND, performs works by Pauline Oliveros, Henry Purcell, Morton Feldman, Kurt Rohde, Luciano Berio, and composition faculty member Marti Epstein. They will be joined by voice professor Kerry Deal.",
+      "event_url": "https://bostonconservatory.berklee.edu/events/contraband-presents-song-after-song",
+      "stream_url": "https://bostonconservatory.berklee.edu/studio-401",
+      "watch_kind": "venue",
+      "evidence_url": "https://bostonconservatory.berklee.edu/events/contraband-presents-song-after-song",
+      "evidence": "Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.",
+      "source": "boston",
+      "institution": "Boston Conservatory at Berklee",
+      "timezone": "America/New_York",
+      "type": "Concert",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2868,7 +2413,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "iowa-b2d3cde9d79ab6f8"
     },
@@ -2888,7 +2433,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "northwestern-238b8bb9623d3e7e"
     },
@@ -2908,7 +2453,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "northwestern-96aeeeba638a2aca"
     },
@@ -2928,7 +2473,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-8824884fddbd02b7"
     },
@@ -2949,7 +2494,7 @@
       "timezone": "America/Vancouver",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "ubc-a5227f61392d89ff"
     },
@@ -2971,7 +2516,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -2990,7 +2535,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-2f768878659dc8e4"
     },
@@ -3010,7 +2555,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-e75dcc5149fc00cd"
     },
@@ -3031,7 +2576,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3050,7 +2595,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-4bc30871d1e30ce7"
     },
@@ -3070,7 +2615,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-4f8ce565cff3c84b"
     },
@@ -3090,7 +2635,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-4c873fa8c418e523"
     },
@@ -3111,7 +2656,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3131,7 +2676,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3151,7 +2696,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3171,7 +2716,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3190,7 +2735,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-27a9316f6d50e54a"
     },
@@ -3210,7 +2755,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-ff8ed32351c588d0"
     },
@@ -3230,7 +2775,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-50787611108fcb47"
     },
@@ -3250,7 +2795,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-118f643c9a6fdc9f"
     },
@@ -3271,7 +2816,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3291,7 +2836,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3311,7 +2856,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3332,7 +2877,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3352,7 +2897,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3372,7 +2917,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3391,7 +2936,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-70efe9a0f329996e"
     },
@@ -3412,7 +2957,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3431,7 +2976,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-ac244c85d6bf8b28"
     },
@@ -3451,7 +2996,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-7f156c73d5972c6b"
     },
@@ -3473,8 +3018,28 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
+    },
+    {
+      "title": "Composition Studio Recital",
+      "start": "2026-11-22T00:30:00.000Z",
+      "end": "2026-11-22T02:00:00.000Z",
+      "program": "The composition studio presents a recital of original works by students of Professors Tina Tallon, Brian Harnetty and Treya Nash.",
+      "event_url": "https://music.osu.edu/events/composition-studio-recital-112126",
+      "stream_url": "https://youtube.com/live/bJyWcCIvQds?feature=share",
+      "watch_kind": "direct",
+      "evidence_url": "https://music.osu.edu/events/composition-studio-recital-112126",
+      "evidence": "Official event provides a public YouTube livestream link and an explicit campus-local Eastern date/time. Calendar metadata is cross-checked when present.",
+      "source": "ohio-state",
+      "institution": "Ohio State University School of Music",
+      "timezone": "America/New_York",
+      "type": "Recital",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false,
+      "id": "ohio-state-3d694ae5b9d8868b"
     },
     {
       "title": "Brass Soloist Night",
@@ -3492,7 +3057,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-7cd9256fb031e0ad"
     },
@@ -3512,29 +3077,9 @@
       "type": "Voice & choral",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-02223e05c245a6a7"
-    },
-    {
-      "id": "oberlin-f87332d4f37e8990",
-      "title": "Faculty Recital: Chamber Music with Guitar",
-      "start": "2026-11-22T00:30:00.000Z",
-      "end": null,
-      "program": "Jesse Jones Dark Is Yonder Town (Gadelica) (2018) Atanas Ourkouzounov Quatre Légendes (2007) Daniel Akiva Jewish-Spanish Song Cycle (1999) Mathias Duplessy Sonate pour guitare et violoncelle Daniel Asia Sacred Songs (Traditional)",
-      "event_url": "https://calendar.oberlin.edu/event/faculty-recital-chamber-music-with-guitar",
-      "stream_url": "https://www.oberlin.edu/livestream/kulas",
-      "watch_kind": "venue",
-      "evidence_url": "https://calendar.oberlin.edu/event/faculty-recital-chamber-music-with-guitar",
-      "evidence": "Official event provides an affirmative Watch the webcast link to an Oberlin venue player. Date-only end metadata is not treated as an end time.",
-      "source": "oberlin",
-      "institution": "Oberlin Conservatory of Music",
-      "timezone": "America/New_York",
-      "type": "Chamber",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
     },
     {
       "id": "oberlin-f82ddaedda7aa3a8",
@@ -3553,7 +3098,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3573,7 +3118,27 @@
       "type": "Voice & choral",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "oberlin-f87332d4f37e8990",
+      "title": "Faculty Recital: Chamber Music with Guitar",
+      "start": "2026-11-22T00:30:00.000Z",
+      "end": null,
+      "program": "Jesse Jones Dark Is Yonder Town (2018) Atanas Ourkouzounov Quatre Légendes (2007) Daniel Akiva Jewish-Spanish Song Cycle (1999) Mathias Duplessy Sonate pour guitare et violoncelle en quartre reves Daniel Asia Sacred Songs",
+      "event_url": "https://calendar.oberlin.edu/event/faculty-recital-chamber-music-with-guitar",
+      "stream_url": "https://www.oberlin.edu/livestream/kulas",
+      "watch_kind": "venue",
+      "evidence_url": "https://calendar.oberlin.edu/event/faculty-recital-chamber-music-with-guitar",
+      "evidence": "Official event provides an affirmative Watch the webcast link to an Oberlin venue player. Date-only end metadata is not treated as an end time.",
+      "source": "oberlin",
+      "institution": "Oberlin Conservatory of Music",
+      "timezone": "America/New_York",
+      "type": "Chamber",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3594,7 +3159,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3619,7 +3184,7 @@
     },
     {
       "id": "boston-b4fa59de32da69ca",
-      "title": "Studio Recital: William Cotten, Musical Theater Voice",
+      "title": "Studio Recital: Patty Thom and Frank Kelley, Musical Theater Voice",
       "start": "2026-11-22T01:00:00.000Z",
       "end": null,
       "program": "The musical theater voice students from William Cotten's studio present a recital featuring selections from musical theater, jazz, and pop.",
@@ -3634,7 +3199,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3653,7 +3218,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-60f5cefac21de12d"
     },
@@ -3673,7 +3238,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "northwestern-0c427b9732a8e9ad"
     },
@@ -3693,7 +3258,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-3cdbec6e8e2376d6"
     },
@@ -3714,7 +3279,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "stanford-9540258b90ed2e62"
     },
@@ -3734,7 +3299,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-9cedef85991560e1"
     },
@@ -3754,7 +3319,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "eastman-7e653fa9e14e7209"
     },
@@ -3776,27 +3341,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false
-    },
-    {
-      "id": "oberlin-fe0ac533e99f41fc",
-      "title": "Junior Recital: Sophia Stehlik, percussion",
-      "start": "2026-11-22T17:30:00.000Z",
-      "end": null,
-      "program": "Sophia Stehlik Two Miniatures for Vibraphone (world premiere) Bruno Giner Études de peaux: No. 2, “Satz” Jason Eckardt Transience (1999) Henry Gloege Five and … IV (world premiere) Sophia Stehlik In Still Light (world premiere) José Manuel López López Cálculo secreto",
-      "event_url": "https://calendar.oberlin.edu/event/junior-recital-sophia-stehlik-percussion",
-      "stream_url": "https://www.oberlin.edu/livestream/warner",
-      "watch_kind": "venue",
-      "evidence_url": "https://calendar.oberlin.edu/event/junior-recital-sophia-stehlik-percussion",
-      "evidence": "Official event provides an affirmative Watch the webcast link to an Oberlin venue player. Date-only end metadata is not treated as an end time.",
-      "source": "oberlin",
-      "institution": "Oberlin Conservatory of Music",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3816,7 +3361,27 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "oberlin-fe0ac533e99f41fc",
+      "title": "Junior Recital: Sophia Stehlik, percussion",
+      "start": "2026-11-22T17:30:00.000Z",
+      "end": null,
+      "program": "Sophia Stehlik Two Miniatures for Vibraphone (world premiere) Bruno Giner Études de peaux: No. 2, “Satz” Jason Eckardt Transience (1999) Henry Gloege Five and … IV (world premiere) Sophia Stehlik In Still Light (world premiere) José Manuel López López Cálculo secreto (1995)",
+      "event_url": "https://calendar.oberlin.edu/event/junior-recital-sophia-stehlik-percussion",
+      "stream_url": "https://www.oberlin.edu/livestream/warner",
+      "watch_kind": "venue",
+      "evidence_url": "https://calendar.oberlin.edu/event/junior-recital-sophia-stehlik-percussion",
+      "evidence": "Official event provides an affirmative Watch the webcast link to an Oberlin venue player. Date-only end metadata is not treated as an end time.",
+      "source": "oberlin",
+      "institution": "Oberlin Conservatory of Music",
+      "timezone": "America/New_York",
+      "type": "Recital",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3836,7 +3401,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3855,7 +3420,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-d20b0229e6407c8f"
     },
@@ -3877,7 +3442,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3896,7 +3461,7 @@
       "type": "Voice & choral",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-c5f9e030693d015f"
     },
@@ -3917,7 +3482,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3936,7 +3501,7 @@
       "type": "Voice & choral",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "ohio-state-b2b841a490a7d4dc"
     },
@@ -3957,7 +3522,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3965,7 +3530,7 @@
       "title": "Concert: Oberlin Horn Ensemble",
       "start": "2026-11-22T19:30:00.000Z",
       "end": null,
-      "program": "Willem de Koch/ arr. Noah Young Unburdened Aoife O’Donovan/ arr. Noah Young B61 Eric Ewazen Bridge of Dreams",
+      "program": "Willem de Koch/ arr. Noah Cruz Young Unburdened Aoife O’Donovan/ arr. Noah Cruz Young B61 Eric Ewazen Bridge of Dreams",
       "event_url": "https://calendar.oberlin.edu/event/concert-oberlin-horn-ensemble-3132",
       "stream_url": "https://www.oberlin.edu/livestream/warner",
       "watch_kind": "venue",
@@ -3977,7 +3542,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -3996,9 +3561,29 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-abd8b63f2679fc7e"
+    },
+    {
+      "title": "Eastman Chorale",
+      "start": "2026-11-22T20:30:00.000Z",
+      "end": null,
+      "program": "",
+      "event_url": "https://www.esm.rochester.edu/esm-event/chorale-2/",
+      "stream_url": "https://www.esm.rochester.edu/live/kilbourn/",
+      "watch_kind": "venue",
+      "evidence_url": "https://www.esm.rochester.edu/live/",
+      "evidence": "Included in the official upcoming live streamed events list.",
+      "source": "eastman",
+      "institution": "Eastman School of Music",
+      "timezone": "America/New_York",
+      "type": "Voice & choral",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false,
+      "id": "eastman-5133d61ca685635a"
     },
     {
       "title": "Voice students coached by Thomas Jaber",
@@ -4016,7 +3601,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-a9f015f2eba47c54"
     },
@@ -4038,7 +3623,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4057,7 +3642,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "northwestern-ad9e1022f3d63dca"
     },
@@ -4078,7 +3663,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4098,7 +3683,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4106,7 +3691,7 @@
       "title": "Faculty Recital: Alexa Still, flute & Tatiana Lokhina, piano",
       "start": "2026-11-22T21:30:00.000Z",
       "end": null,
-      "program": "Mykola Lysenko Fantasy on Two Ukrainian Themes Edison Denisov Sonata (1960) Sofia Gubaidulina Klänge des waldes (Sounds of the Forest) Sofia Gubaidulina Allegro rustico (1963) Sergei Prokofiev Sonata for flute and piano, Op. 94",
+      "program": "Mykola Lysenko Fantasy on Two Ukrainian Themes Edison Denisov Sonata for flute and piano (1960) Sofia Gubaidulina Klänge des waldes (Sounds of the Forest) (1978) Sofia Gubaidulina Allegro rustico (1963/1993) Sergei Prokofiev Sonata for flute and piano, Op. 94",
       "event_url": "https://calendar.oberlin.edu/event/faculty-recital-alexa-still-flute-tatiana-lokhina-piano-7513",
       "stream_url": "https://www.oberlin.edu/livestream/kulas",
       "watch_kind": "venue",
@@ -4118,7 +3703,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4137,7 +3722,7 @@
       "type": "Voice & choral",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "ohio-state-f3317934367509c8"
     },
@@ -4157,7 +3742,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-c9cd798252b214c4"
     },
@@ -4177,7 +3762,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-00c4b7639e3d4a70"
     },
@@ -4197,7 +3782,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-4d423f709ce221c9"
     },
@@ -4218,7 +3803,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4238,7 +3823,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4259,7 +3844,7 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4280,7 +3865,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4299,7 +3884,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "northwestern-ae02efb08cc5d1b4"
     },
@@ -4319,9 +3904,29 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-de204ee85d4f3161"
+    },
+    {
+      "title": "Student Degree Recital – Zhouyi Zuo, collaborative piano",
+      "start": "2026-11-22T23:30:00.000Z",
+      "end": null,
+      "program": "",
+      "event_url": "https://www.esm.rochester.edu/esm-event/student-degree-recital-zhouyi-zuo-collaborative-piano/",
+      "stream_url": "https://www.esm.rochester.edu/live/hatch/",
+      "watch_kind": "venue",
+      "evidence_url": "https://www.esm.rochester.edu/live/",
+      "evidence": "Included in the official upcoming live streamed events list.",
+      "source": "eastman",
+      "institution": "Eastman School of Music",
+      "timezone": "America/New_York",
+      "type": "Recital",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false,
+      "id": "eastman-54bc355433fd95cc"
     },
     {
       "title": "MSM’s Fifth Annual Founder’s Day Concert",
@@ -4339,7 +3944,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-65b075852e36df67"
     },
@@ -4360,7 +3965,7 @@
       "type": "Voice & choral",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4379,7 +3984,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-3a4a3f1609c80c49"
     },
@@ -4399,7 +4004,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-717eb05fe6847a63"
     },
@@ -4420,7 +4025,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4440,7 +4045,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4461,7 +4066,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4481,7 +4086,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4500,7 +4105,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-3113f8b6cc98b534"
     },
@@ -4520,7 +4125,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-3c74b9ee8cfebaa2"
     },
@@ -4541,7 +4146,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4560,7 +4165,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-94532f2e446818a9"
     },
@@ -4582,7 +4187,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4603,7 +4208,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4622,7 +4227,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-adcaba5b60b4eb43"
     },
@@ -4642,7 +4247,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-c3b33f9c6333cb57"
     },
@@ -4662,7 +4267,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-06d98689688f8164"
     },
@@ -4682,7 +4287,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-9b9ebc1cd3af739a"
     },
@@ -4704,7 +4309,7 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4724,7 +4329,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4745,7 +4350,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4764,7 +4369,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-17946060b4de1199"
     },
@@ -4784,7 +4389,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-70b8dab99c87d2d4"
     },
@@ -4804,7 +4409,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-d289531be6a70796"
     },
@@ -4825,7 +4430,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4845,7 +4450,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-9d4c85ad50cdb1fc"
     },
@@ -4867,7 +4472,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4886,7 +4491,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-90a3815239b2effc"
     },
@@ -4906,7 +4511,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-bc87d2072a6a2c68"
     },
@@ -4927,7 +4532,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4947,7 +4552,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -4967,7 +4572,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-7fe4253e41e0de8e"
     },
@@ -4975,7 +4580,7 @@
       "title": "Campus Orchestra",
       "start": "2026-12-01T00:30:00.000Z",
       "end": "2026-12-01T02:00:00.000Z",
-      "program": "Campus Orchestra offers non-majors throughout the university, as well as music majors playing a secondary instrument, opportunities to perform within a full orchestral setting without committing to a formal musical degree. Heather Lofdahl, conductor.",
+      "program": "Campus Orchestra offers non-majors throughout the university, as well as music majors playing a secondary instrument, opportunities to perform within a full orchestral setting without committing to a formal musical degree. Heather Lofdahl, conductor; Daniel Jacobs, graduate student conductor.",
       "event_url": "https://music.osu.edu/events/campus-orchestra-113026",
       "stream_url": "https://youtube.com/live/ElMo5asXLuU?feature=share",
       "watch_kind": "direct",
@@ -4987,7 +4592,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "ohio-state-2dbdc549528624e8"
     },
@@ -5007,7 +4612,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "cim-97af92b5eecc9c9d"
     },
@@ -5027,7 +4632,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-4462c60a76f6c81a"
     },
@@ -5049,7 +4654,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5070,7 +4675,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5091,7 +4696,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5111,7 +4716,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5131,7 +4736,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5151,7 +4756,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5170,29 +4775,9 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-246f67d95146533d"
-    },
-    {
-      "title": "[Mikowsky Student Recital Template] Student Name, instrument",
-      "start": "2026-12-02T00:00:00.000Z",
-      "end": null,
-      "program": "",
-      "event_url": "https://www.msmnyc.edu/livestream/student-name-2-2/",
-      "stream_url": "https://www.msmnyc.edu/livestream/student-name-2-2/",
-      "watch_kind": "direct",
-      "evidence_url": "https://www.msmnyc.edu/livestream/",
-      "evidence": "Listed as an upcoming event on the official livestream index.",
-      "source": "msm",
-      "institution": "Manhattan School of Music",
-      "timezone": "America/New_York",
-      "type": "Recital",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false,
-      "id": "msm-417165449943a630"
     },
     {
       "id": "frost-54427998050531-54427998054630",
@@ -5211,7 +4796,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5231,7 +4816,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5251,7 +4836,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-abf5955f8da9c174"
     },
@@ -5272,7 +4857,7 @@
       "type": "Voice & choral",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5293,7 +4878,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5313,7 +4898,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5333,7 +4918,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5353,7 +4938,7 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5374,7 +4959,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5395,28 +4980,8 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
-    },
-    {
-      "title": "Antoinette Pompe van Meerdervoort, Mezzo-Soprano",
-      "type": "Recital",
-      "start": "2026-12-02T01:30:00.000Z",
-      "end": null,
-      "program": "Program information coming soon",
-      "event_url": "https://music.rice.edu/events/antoinette-pompe-van-meerdervoort-1",
-      "stream_url": "https://music.rice.edu/live-streaming-duncan-recital-hall",
-      "watch_kind": "venue",
-      "evidence_url": "https://music.rice.edu/events/antoinette-pompe-van-meerdervoort-1",
-      "evidence": "Official event page provides a View Livestream link and Central Time.",
-      "source": "rice",
-      "institution": "Rice Shepherd School of Music",
-      "timezone": "America/Chicago",
-      "free": true,
-      "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
-      "stale": false,
-      "id": "rice-ccfe89661f230be6"
     },
     {
       "title": "Chamber Music for Percussion",
@@ -5434,9 +4999,29 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-5d209999e44601e6"
+    },
+    {
+      "title": "Antoinette Pompe van Meerdervoort, Mezzo-Soprano",
+      "type": "Recital",
+      "start": "2026-12-02T01:30:00.000Z",
+      "end": null,
+      "program": "Program information coming soon",
+      "event_url": "https://music.rice.edu/events/antoinette-pompe-van-meerdervoort-1",
+      "stream_url": "https://music.rice.edu/live-streaming-duncan-recital-hall",
+      "watch_kind": "venue",
+      "evidence_url": "https://music.rice.edu/events/antoinette-pompe-van-meerdervoort-1",
+      "evidence": "Official event page provides a View Livestream link and Central Time.",
+      "source": "rice",
+      "institution": "Rice Shepherd School of Music",
+      "timezone": "America/Chicago",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false,
+      "id": "rice-ccfe89661f230be6"
     },
     {
       "id": "ucla-ed80064c88850ecf",
@@ -5456,7 +5041,7 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5477,7 +5062,7 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5496,7 +5081,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-2cafd82cd0d741d8"
     },
@@ -5517,7 +5102,7 @@
       "timezone": "Europe/Berlin",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:35:55.522Z",
+      "last_verified_at": "2026-11-18T17:12:49.198Z",
       "stale": false,
       "id": "udk-a0ec2bda2685a9c9"
     },
@@ -5537,7 +5122,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-9f67ef7a7195da84"
     },
@@ -5559,7 +5144,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5579,9 +5164,30 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-a6149b4a6b8f2404"
+    },
+    {
+      "id": "indiana-2387891-1796257800",
+      "title": "Baroque Orchestra – Ingrid Matthews, director",
+      "start": "2026-12-02T19:30:00-05:00",
+      "end": "2026-12-02T21:30:00-05:00",
+      "program": "Presented by the Historical Performance Institute",
+      "event_url": "https://events.iu.edu/musiciub/event/2387891-baroque-orchestra-ingrid-matthews-director",
+      "stream_url": "https://liveatjacobs.music.indiana.edu/",
+      "watch_kind": "venue",
+      "watch_note": "Choose the performance on LIVE@jacobs.",
+      "evidence_url": "https://events.iu.edu/live/json/v2/events/paginate/false/group_id/56/tag_id/2752/response_fields/summary,image,location",
+      "evidence": "Included in the LIVE@jacobs schedule feed with an explicit online viewing link.",
+      "source": "indiana",
+      "institution": "Indiana University Jacobs School of Music",
+      "timezone": "America/New_York",
+      "type": "Orchestra",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
     },
     {
       "title": "University of Pittsburgh Symphony Orchestra III",
@@ -5601,7 +5207,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5621,7 +5227,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5641,7 +5247,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5661,8 +5267,29 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
+    },
+    {
+      "title": "Recital: Omar H. Elmusa, Trombone",
+      "start": "2026-12-03T01:30:00.000Z",
+      "end": null,
+      "program": "This concert is free and open to the public.Concert can be viewed via livestream here: https://music.uiowa.edu/events/school-music-livestream",
+      "event_url": "https://music.uiowa.edu/event/39154/0",
+      "stream_url": "https://music.uiowa.edu/events/school-music-livestream",
+      "watch_kind": "venue",
+      "watch_note": "The public player starts when the announced performance begins.",
+      "evidence_url": "https://music.uiowa.edu/event/39154/0",
+      "evidence": "Listed on the dedicated upcoming-livestream schedule and explicitly linked to the public player by the individual event; cancellations rechecked.",
+      "source": "iowa",
+      "institution": "University of Iowa School of Music",
+      "timezone": "America/Chicago",
+      "type": "Recital",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false,
+      "id": "iowa-9a88f7cb5f859e0d"
     },
     {
       "title": "Early Music Singers – Angels Singing: An Early Music Christmas",
@@ -5681,13 +5308,13 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "stanford-5c89baf9cfed558a"
     },
     {
-      "id": "ucla-19bd9a60642261a3",
-      "title": "Wind Ensemble & Symphonic Band, Fall Concert",
+      "id": "ucla-fef3060efc251fc3",
+      "title": "From Latin America to France: Wind Ensemble & Symphonic Band",
       "start": "2026-12-03T04:00:00.000Z",
       "end": "2026-12-03T05:30:00.000Z",
       "program": "",
@@ -5703,7 +5330,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5722,7 +5349,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-898f3515926d8763"
     },
@@ -5743,7 +5370,28 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "indiana-2410952-1796335200",
+      "title": "Master’s Recital – Minjeong Lee, piano",
+      "start": "2026-12-03T17:00:00-05:00",
+      "end": "2026-12-03T18:00:00-05:00",
+      "program": "",
+      "event_url": "https://events.iu.edu/musiciub/event/2410952-masters-recital-minjeong-lee-piano",
+      "stream_url": "https://liveatjacobs.music.indiana.edu/",
+      "watch_kind": "venue",
+      "watch_note": "Choose the performance on LIVE@jacobs.",
+      "evidence_url": "https://events.iu.edu/live/json/v2/events/paginate/false/group_id/56/tag_id/2752/response_fields/summary,image,location",
+      "evidence": "Included in the LIVE@jacobs schedule feed with an explicit online viewing link.",
+      "source": "indiana",
+      "institution": "Indiana University Jacobs School of Music",
+      "timezone": "America/New_York",
+      "type": "Recital",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5762,7 +5410,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-43e1d214f7645220"
     },
@@ -5783,7 +5431,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5803,7 +5451,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-e14707f21964d3ed"
     },
@@ -5825,7 +5473,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5845,7 +5493,27 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "boston-6d9d7fec7429ef74",
+      "title": "Boston Conservatory Conductors Orchestra",
+      "start": "2026-12-04T01:00:00.000Z",
+      "end": null,
+      "program": "Boston Conservatory Conductors Orchestra presents a concert featuring student conductors.",
+      "event_url": "https://bostonconservatory.berklee.edu/events/boston-conservatory-conductors-orchestra-12-03",
+      "stream_url": "https://bostonconservatory.berklee.edu/ip106",
+      "watch_kind": "venue",
+      "evidence_url": "https://bostonconservatory.berklee.edu/events/boston-conservatory-conductors-orchestra-12-03",
+      "evidence": "Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.",
+      "source": "boston",
+      "institution": "Boston Conservatory at Berklee",
+      "timezone": "America/New_York",
+      "type": "Orchestra",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5866,7 +5534,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5885,7 +5553,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "northwestern-1d8d27451d00c402"
     },
@@ -5905,7 +5573,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "northwestern-b16b51f5d3c0d49d"
     },
@@ -5925,7 +5593,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-c9ba7e895df14a63"
     },
@@ -5945,9 +5613,29 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-aa30dfc244c09f93"
+    },
+    {
+      "id": "boston-2280c5b9ae5a9756",
+      "title": "Chamber Music Recital",
+      "start": "2026-12-04T16:00:00.000Z",
+      "end": null,
+      "program": "Boston Conservatory at Berklee students perform chamber music works from all periods.",
+      "event_url": "https://bostonconservatory.berklee.edu/events/chamber-music-recital-12-04-26",
+      "stream_url": "https://bostonconservatory.berklee.edu/seully-hall",
+      "watch_kind": "venue",
+      "evidence_url": "https://bostonconservatory.berklee.edu/events/chamber-music-recital-12-04-26",
+      "evidence": "Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.",
+      "source": "boston",
+      "institution": "Boston Conservatory at Berklee",
+      "timezone": "America/New_York",
+      "type": "Chamber",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
     },
     {
       "id": "western-2026-12-04",
@@ -5967,7 +5655,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -5987,7 +5675,7 @@
       "timezone": "Europe/Vienna",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:35:55.522Z",
+      "last_verified_at": "2026-11-18T17:12:49.198Z",
       "stale": false,
       "id": "bruckner-b3f50af1c3749052"
     },
@@ -6008,7 +5696,7 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6028,7 +5716,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-fcbe93298451e1c6"
     },
@@ -6050,7 +5738,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6070,7 +5758,7 @@
       "timezone": "America/New_York",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6090,7 +5778,67 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "boston-18d3523c18173fb8",
+      "title": "Chamber Music Recital",
+      "start": "2026-12-05T01:00:00.000Z",
+      "end": null,
+      "program": "Boston Conservatory at Berklee students perform chamber music works from all periods.",
+      "event_url": "https://bostonconservatory.berklee.edu/events/chamber-music-recital-12-04",
+      "stream_url": "https://bostonconservatory.berklee.edu/houston-hall",
+      "watch_kind": "venue",
+      "evidence_url": "https://bostonconservatory.berklee.edu/events/chamber-music-recital-12-04",
+      "evidence": "Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.",
+      "source": "boston",
+      "institution": "Boston Conservatory at Berklee",
+      "timezone": "America/New_York",
+      "type": "Chamber",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "boston-de806c13a489e62d",
+      "title": "MFA Musical Theater Vocal Pedagogy Showcase",
+      "start": "2026-12-05T01:00:00.000Z",
+      "end": null,
+      "program": "Join the MFA Musical Theatre Vocal Pedagogy students for their fall 2026 showcase, with stage direction by Danny Pelzig and music direction by Scott Nicholas.",
+      "event_url": "https://bostonconservatory.berklee.edu/events/mfa-musical-theater-vocal-pedagogy-showcase",
+      "stream_url": "https://bostonconservatory.berklee.edu/studio-401",
+      "watch_kind": "venue",
+      "evidence_url": "https://bostonconservatory.berklee.edu/events/mfa-musical-theater-vocal-pedagogy-showcase",
+      "evidence": "Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.",
+      "source": "boston",
+      "institution": "Boston Conservatory at Berklee",
+      "timezone": "America/New_York",
+      "type": "Concert",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
+    },
+    {
+      "id": "boston-50917a4eb86cb7a7",
+      "title": "Student Recital: Lily Cooper, Percussion",
+      "start": "2026-12-05T01:00:00.000Z",
+      "end": null,
+      "program": "Lily Cooper (BM '28) presents a percussion recital.",
+      "event_url": "https://bostonconservatory.berklee.edu/events/student-recital-lily-cooper-percussion",
+      "stream_url": "https://bostonconservatory.berklee.edu/ip106",
+      "watch_kind": "venue",
+      "evidence_url": "https://bostonconservatory.berklee.edu/events/student-recital-lily-cooper-percussion",
+      "evidence": "Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.",
+      "source": "boston",
+      "institution": "Boston Conservatory at Berklee",
+      "timezone": "America/New_York",
+      "type": "Recital",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6109,7 +5857,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "northwestern-9fcc1053693afe63"
     },
@@ -6129,7 +5877,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-9f984e48bd921509"
     },
@@ -6151,7 +5899,7 @@
       "type": "Chamber",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6172,7 +5920,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6192,7 +5940,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6212,9 +5960,29 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-4f777aebcb4c50e3"
+    },
+    {
+      "id": "boston-3c00a889b1141de4",
+      "title": "Studio Recital: Michael Lewin, Piano",
+      "start": "2026-12-06T01:00:00.000Z",
+      "end": null,
+      "program": "The studio of Professor Michael Lewin presents a piano recital.",
+      "event_url": "https://bostonconservatory.berklee.edu/events/studio-recital-michael-lewin-piano",
+      "stream_url": "https://bostonconservatory.berklee.edu/seully-hall",
+      "watch_kind": "venue",
+      "evidence_url": "https://bostonconservatory.berklee.edu/events/studio-recital-michael-lewin-piano",
+      "evidence": "Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.",
+      "source": "boston",
+      "institution": "Boston Conservatory at Berklee",
+      "timezone": "America/New_York",
+      "type": "Recital",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
     },
     {
       "id": "blair-106903-1796520600",
@@ -6234,7 +6002,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6253,7 +6021,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "northwestern-da40c632329bc0c0"
     },
@@ -6274,7 +6042,7 @@
       "timezone": "America/Vancouver",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "ubc-79a94552744a5867"
     },
@@ -6296,7 +6064,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6317,7 +6085,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6337,7 +6105,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6357,7 +6125,7 @@
       "type": "Masterclass",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "toronto-800589953a6a562d"
     },
@@ -6379,7 +6147,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6400,7 +6168,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6420,7 +6188,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "duquesne-9082a1613f1bb30e"
     },
@@ -6442,7 +6210,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6462,7 +6230,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-1efa5c60b9540c8a"
     },
@@ -6482,7 +6250,7 @@
       "type": "Jazz",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-9cae5f80c207cc00"
     },
@@ -6504,7 +6272,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6525,7 +6293,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6544,7 +6312,7 @@
       "timezone": "America/Los_Angeles",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "sfcm-9f11c6bf14d39463"
     },
@@ -6566,7 +6334,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6585,7 +6353,7 @@
       "timezone": "America/Los_Angeles",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "sfcm-a82a56184889fd2e"
     },
@@ -6605,7 +6373,7 @@
       "timezone": "America/Chicago",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "rice-e3dbb49856699789"
     },
@@ -6626,7 +6394,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6646,9 +6414,29 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "duquesne-ed9b23c6d29a506b"
+    },
+    {
+      "id": "boston-acb2cfdfb056f8ee",
+      "title": "Chamber Music Recital",
+      "start": "2026-12-10T01:00:00.000Z",
+      "end": null,
+      "program": "Boston Conservatory at Berklee students perform chamber music works from all periods.",
+      "event_url": "https://bostonconservatory.berklee.edu/events/chamber-music-recital-12-09",
+      "stream_url": "https://bostonconservatory.berklee.edu/ip106",
+      "watch_kind": "venue",
+      "evidence_url": "https://bostonconservatory.berklee.edu/events/chamber-music-recital-12-09",
+      "evidence": "Official free Music event has a Watch link matching its virtual-location metadata and a single dated performance.",
+      "source": "boston",
+      "institution": "Boston Conservatory at Berklee",
+      "timezone": "America/New_York",
+      "type": "Chamber",
+      "free": true,
+      "replay": "unknown",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
+      "stale": false
     },
     {
       "title": "Take One - The Studio Sessions LIVE!",
@@ -6667,7 +6455,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "duquesne-7500c069efb22d4e"
     },
@@ -6689,7 +6477,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6709,7 +6497,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6729,7 +6517,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-f67da75f6c119aec"
     },
@@ -6751,7 +6539,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6772,7 +6560,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6792,7 +6580,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-f1085aec448129f8"
     },
@@ -6813,7 +6601,7 @@
       "timezone": "America/New_York",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6832,7 +6620,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "msm-13c43a2e2e089f1e"
     },
@@ -6854,7 +6642,7 @@
       "type": "Concert",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6875,7 +6663,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6896,7 +6684,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6917,7 +6705,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     },
     {
@@ -6937,7 +6725,7 @@
       "type": "Orchestra",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false,
       "id": "temple-b3c3cac496f22f11"
     },
@@ -6959,7 +6747,7 @@
       "type": "Recital",
       "free": true,
       "replay": "unknown",
-      "last_verified_at": "2026-11-17T17:36:04.458Z",
+      "last_verified_at": "2026-11-18T17:12:52.702Z",
       "stale": false
     }
   ]

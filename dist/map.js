@@ -44,7 +44,7 @@ function markerIcon(school) {
 function fitSchools() {
   if(!map) return;
   const points=visible.filter(s=>s.location).map(s=>[s.location.lat,s.location.lon]);
-  if(points.length) map.fitBounds(points,{padding:[45,45],maxZoom:6,animate:!reducedMotion});
+  if(points.length) map.fitBounds(points,{padding:[45,45],maxZoom:6,animate:false});
 }
 function selectSchool(id,{locate=false,focus=false,updateUrl=true}={}) {
   const school=visible.find(s=>s.id===id);if(!school) return;
@@ -55,7 +55,13 @@ function selectSchool(id,{locate=false,focus=false,updateUrl=true}={}) {
   for(const button of $('school-directory').querySelectorAll('button')) button.setAttribute('aria-current',String(button.dataset.school===id));
   if(updateUrl){const url=new URL(location.href);url.searchParams.set('school',id);history.replaceState(null,'',url);}
   const marker=markers.get(id);
-  if(locate && marker && clusters) clusters.zoomToShowLayer(marker,()=>marker.openTooltip());
+  if(locate && marker && clusters){
+    // Keep regional context around a city marker instead of jumping to street level.
+    map.setView(marker.getLatLng(),7,{animate:false});
+    const parent=clusters.getVisibleParent(marker);
+    if(parent && parent!==marker)parent.spiderfy();
+    marker.openTooltip();
+  }
   else if(focus && marker)marker.openTooltip();
   if(focus){
     $('selected-school-name').focus({preventScroll:true});
@@ -146,22 +152,36 @@ function render({fit=false}={}) {
 async function initializeMap() {
   try{
     if(!window.L?.markerClusterGroup)throw new Error('Map library unavailable');
-    const response=await fetch('./world.json');if(!response.ok)throw new Error('Map geography unavailable');
-    const world=await response.json();
-    map=L.map('school-map',{minZoom:.5,maxZoom:6,zoomSnap:.25,scrollWheelZoom:false,zoomAnimation:!reducedMotion,fadeAnimation:!reducedMotion,markerZoomAnimation:!reducedMotion,maxBounds:[[-65,-200],[85,200]],maxBoundsViscosity:.8}).setView([25,5],2);
+    map=L.map('school-map',{minZoom:.5,maxZoom:14,zoomSnap:.25,scrollWheelZoom:false,zoomAnimation:!reducedMotion,fadeAnimation:!reducedMotion,markerZoomAnimation:!reducedMotion,maxBounds:[[-65,-200],[85,200]],maxBoundsViscosity:.8}).setView([25,5],2);
     map.attributionControl.setPrefix('<a href="https://leafletjs.com/">Leaflet</a>');
-    L.geoJSON(world,{style:{color:'#c4c9c6',weight:1,fillColor:'#eef0ef',fillOpacity:1},onEachFeature:(feature,layer)=>layer.bindTooltip(el('span',feature.properties.name),{sticky:true})}).addTo(map);
-    // Geographic paths are decorative context; named school markers carry the semantics.
-    map.getPanes().overlayPane.setAttribute('aria-hidden','true');
-    clusters=L.markerClusterGroup({maxClusterRadius:35,showCoverageOnHover:false,animate:!reducedMotion,spiderfyOnMaxZoom:true,spiderfyDistanceMultiplier:1.6,spiderLegPolylineOptions:{color:'#777b79',weight:1.5,opacity:.7},iconCreateFunction:cluster=>{
+    const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      maxZoom:14,maxNativeZoom:19,noWrap:true,updateWhenIdle:true,keepBuffer:1,
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    // Honor normal browser caching/referrers; only load tiles for the current view.
+    const failedTiles=new Set();
+    const tileStatus=()=>{$('basemap-status').hidden=failedTiles.size===0;};
+    tiles.on('tileerror',event=>{failedTiles.add(event.tile);tileStatus();});
+    tiles.on('tileload tileunload',event=>{failedTiles.delete(event.tile);tileStatus();});
+    tiles.addTo(map);
+    // The bundled outline is an optional underlay if a detailed tile cannot load.
+    const fallback=map.createPane('basemap-fallback');fallback.style.zIndex=150;
+    fallback.style.pointerEvents='none';fallback.setAttribute('aria-hidden','true');
+    const activeMap=map;
+    fetch('./world.json').then(response=>response.ok?response.json():null).then(world=>{
+      if(world && map===activeMap)L.geoJSON(world,{pane:'basemap-fallback',interactive:false,style:{color:'#c4c9c6',weight:1,fillColor:'#eef0ef',fillOpacity:1}}).addTo(activeMap);
+    }).catch(()=>{});
+    L.control.scale({imperial:false,maxWidth:100}).addTo(map);
+    clusters=L.markerClusterGroup({maxClusterRadius:35,showCoverageOnHover:false,animate:false,spiderfyOnMaxZoom:true,spiderfyDistanceMultiplier:1.6,spiderLegPolylineOptions:{color:'#777b79',weight:1.5,opacity:.7},iconCreateFunction:cluster=>{
       const count=cluster.getChildCount(),hasConcert=cluster.getAllChildMarkers().some(m=>m.options.hasConcert);
       return L.divIcon({className:`school-cluster${hasConcert?' has-concert':''}`,html:`<span aria-label="${count} schools. Select to zoom in or separate markers.">${count}</span>`,iconSize:[38,38]});
     }}).addTo(map);
     clusters.on('clustermouseover',event=>event.layer.bindTooltip(`${event.layer.getChildCount()} schools. Select to explore.`,{direction:'top'}).openTooltip());
     clusters.on('clustermouseout',event=>event.layer.closeTooltip());
     $('map-message').hidden=true;$('reset-map-view').disabled=false;
-    renderMarkers();fitSchools();
+    renderMarkers();
     if(new URLSearchParams(location.search).get('school')===selectedId)selectSchool(selectedId,{locate:true,updateUrl:false});
+    else fitSchools();
   }catch(error){
     if(map){map.remove();map=null;clusters=null;}
     $('map-message').textContent='The map could not load. You can still choose a school or browse the list below.';

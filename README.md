@@ -44,7 +44,7 @@ When an alert arrives, open the run and read the publish job summary. “Page li
 
 ## Data quality
 
-The [interactive school map](https://classicalwatch.stringfestanalytics.com/map.html) shows the next listed concert, city, time zone and sourced music enrollment for each school. It uses the same daily calendar, with locally hosted map assets and no API key. See [map sources, licenses and maintenance notes](docs/school-map.md).
+The [interactive school map](https://classicalwatch.stringfestanalytics.com/map.html) shows the next listed concert, city, time zone and sourced music enrollment for each school. It uses the same daily calendar, locally hosted map software and detailed OpenStreetMap geography, with no API key. See [map sources, licenses and maintenance notes](docs/school-map.md).
 
 A concert needs affirmative evidence of a public stream. Free campus admission, an undated player, or an archived video alone is insufficient. Collection covers a rolling 45-day window, subject to each school’s published schedule.
 

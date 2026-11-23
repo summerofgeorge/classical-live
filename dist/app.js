@@ -10,6 +10,7 @@ const sharedEventId=new URLSearchParams(location.search).get('event');
 const format=(date,options,zone=timeZone)=>new Intl.DateTimeFormat(undefined,{...options,timeZone:zone}).format(new Date(date));
 function el(tag,text,className){const node=document.createElement(tag);if(text)node.textContent=text;if(className)node.className=className;return node;}
 function link(text,url,className){const node=el('a',text,className);node.href=safeUrl(url)||'#';node.target='_blank';node.rel='noopener noreferrer';return node;}
+function schoolLink(name,id){const node=el('a',name,'school-name-link');node.href=`./map.html?school=${encodeURIComponent(id)}#school-detail`;node.title=`Explore ${name} on the school map`;return node;}
 function download(events){const url=URL.createObjectURL(new Blob([calendar(events)],{type:'text/calendar;charset=utf-8'}));const a=el('a');a.href=url;a.download=events.length===1?`${events[0].id}.ics`:'classical-live.ics';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
 function reset(){state.period='all';filterIds.forEach(id=>{state[id]='';$(id).value='';});render();}
 function render(){
@@ -38,7 +39,9 @@ function render(){
       time.append(el('small',format(event.start,{timeZoneName:'short'}).split(' ').pop()));
       if(new Date(event.start)<=now && endTime(event)>now)time.append(el('span','Scheduled now','now'));
       else if(new Date(event.start)<=now)time.append(el('span','Started earlier','earlier'));
-      const info=el('div',null,'concert-info');if(event.id===sharedEventId)info.append(el('p','Shared performance','shared-label'));info.append(el('p',event.institution,'institution'),el('h3',event.title));
+      const info=el('div',null,'concert-info');if(event.id===sharedEventId)info.append(el('p','Shared performance','shared-label'));
+      const institution=el('p',null,'institution'),title=el('h3'),titleLink=link(event.title,event.stream_url,'event-title-link');
+      institution.append(schoolLink(event.institution,event.source));titleLink.title='Open livestream page in a new tab';title.append(titleLink);info.append(institution,title);
       if(event.program)info.append(el('p',event.program,'program'));
       const meta=el('div',null,'metadata');meta.append(el('span',event.type,'performance-tag'));
       info.append(meta);
@@ -62,7 +65,7 @@ async function load(){
     for(const source of [...data.sources].sort((a,b)=>a.name.localeCompare(b.name))){
       const option=el('option',source.name);option.value=source.id;$('source').append(option);
       const school=schoolInfo(source.id),li=el('li'),details=el('span',` — ${[school.city,school.country].filter(Boolean).join(', ')}. Music enrollment: `);
-      li.append(link(source.name,source.url),details);
+      li.append(schoolLink(source.name,source.id),details);
       if(school.enrollment)li.append(link(`${school.enrollment.label}${school.enrollment.year?' ('+school.enrollment.year+')':''}`,school.enrollment.url));else li.append(el('span','Not listed'));
       $('source-status').append(li);
     }

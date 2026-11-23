@@ -148,10 +148,12 @@ export function parseColburn(html){
  });
 }
 export function parseMsm(html){
- const $=load(html),heading=$('.browseCollection_list > h3').filter((i,h)=>clean($(h).text())==='Upcoming Events').first();
- if(!heading.length)throw new Error('MSM upcoming livestream list missing');
- return heading.nextUntil('h3','.newsBlock').toArray().map(block=>{
-  const item=$(block),title=clean(item.find('h2').html()?.replace(/<br\s*\/?>/gi,' — ')),date=clean(item.find('date').text()),time=clean(item.find('time').text()),url=item.find('h2 a').attr('href');
+ const $=load(html),section=$('.livestream-section[data-list="upcoming"]'),heading=$('.browseCollection_list > h3').filter((i,h)=>clean($(h).text())==='Upcoming Events').first();
+ if(!section.length&&!heading.length)throw new Error('MSM upcoming livestream list missing');
+ const items=section.length?section.find('.livestream-grid > .livestream-item'):heading.nextUntil('h3','.newsBlock');
+ if(section.length&&(!section.find('.livestream-grid').length||(!items.length&&!/no upcoming events/i.test(section.text()))))throw new Error('MSM upcoming livestream layout changed');
+ return items.toArray().map(block=>{
+  const item=$(block),title=clean(item.find('h2').html()?.replace(/<br\s*\/?>/gi,' — ')),date=clean(item.find('date').text()),time=clean(item.find('time').text()),url=item.find('a.livestream-item-link,h2 a').first().attr('href');
   if(!/\b20\d\d\b/.test(date)||!title||!url)throw new Error('MSM event fields missing');
   // The site prints EST year-round; its published New York wall clock is authoritative.
   return {title,start:zonedTime(namedDate(date)+'T'+clock24(time),'America/New_York'),end:null,program:'',event_url:url,stream_url:url,watch_kind:'direct',evidence_url:'https://www.msmnyc.edu/livestream/',evidence:'Listed as an upcoming event on the official livestream index.'};

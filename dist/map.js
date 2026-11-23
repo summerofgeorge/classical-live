@@ -107,6 +107,11 @@ function renderMarkers() {
     marker.on('add',()=>{
       const element=marker.getElement();
       element.setAttribute('aria-label',`${school.name}, ${school.city}. ${school.next?'Next concert: '+concertTime(school.next):'No upcoming concert listed'}. Select for details.`);
+      element.onkeydown=event=>{
+        if(event.key==='Enter'||event.key===' '){
+          event.preventDefault();event.stopPropagation();selectSchool(school.id,{focus:true});
+        }
+      };
     });
     markers.set(school.id,marker);clusters.addLayer(marker);
   }

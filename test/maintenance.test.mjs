@@ -65,6 +65,8 @@ test('maintenance alerts follow confirmed deployment and do not replace real wor
  assert.ok(workflow.indexOf('uses: actions/deploy-pages@v5.0.1')<workflow.indexOf('run: node scripts/maintenance.mjs --published'));
  assert.match(workflow,/needs\.publish\.result == 'success' && needs\.publish\.outputs\.attention == 'true'/);
  assert.doesNotMatch(workflow,/continue-on-error|Report merge degradation|Report source failures after publishing/);
- assert.match(workflow,/git add dist\/events\.json data\/maintenance-state\.json/);
+ assert.match(workflow,/node scripts\/save-calendar\.mjs/);
+ assert.match(workflow,/name: github-pages-\$\{\{ github\.run_attempt \}\}/);
+ assert.match(workflow,/artifact_name: github-pages-\$\{\{ github\.run_attempt \}\}/);
  assert.equal(workflow,await readFile(new URL('../docs/workflows/refresh-and-deploy.yml',import.meta.url),'utf8'));
 });

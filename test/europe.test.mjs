@@ -34,6 +34,15 @@ test('Weimar requires an affirmative broadcast announcement with a public link',
  assert.throws(()=>parseWeimar('<div>Unavailable</div>',weimarUrl));
 });
 
+test('Liechtenstein ignores discretionary soft hyphens while still rejecting different event titles',()=>{
+ const candidate=liechtensteinCandidates(list)[0];
+ // The November source page used Rheinber\u00adger in the detail title only.
+ const soft=detail.replaceAll('Beethoven','Beet\u00adhoven');
+ assert.equal(parseLiechtenstein(soft,candidate).title,candidate.title);
+ assert.equal(liechtensteinCandidates(list.replaceAll('Beethoven','Beet\u00adhoven'))[0].title,candidate.title);
+ assert.throws(()=>parseLiechtenstein(detail.replaceAll('Beethoven','Brahms'),candidate),/schedule disagrees/);
+});
+
 test('Europe and Eastern dates convert correctly through the different autumn clock changes',()=>{
  const eastern=iso=>new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date(iso));
  assert.equal(eastern(zonedTime('2026-10-06T19:00','Europe/Vaduz')),'13:00');

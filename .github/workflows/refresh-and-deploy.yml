@@ -28,13 +28,13 @@ jobs:
     outputs:
       required: ${{ steps.collection.outputs.required }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 2
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6.1.1
         with:
           version: 11.19.0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: '24'
           check-latest: true
@@ -56,11 +56,11 @@ jobs:
       matrix:
         region: [nam, europe, asia-pacific]
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: pnpm/action-setup@v6.1.1
         with:
           version: 11.19.0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: '24'
           check-latest: true
@@ -75,7 +75,7 @@ jobs:
         run: |
           mkdir -p /tmp/shard-upload
           cp "dist/shards/${{ matrix.region }}.json" "/tmp/shard-upload/${{ matrix.region }}.json"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: shard-${{ matrix.region }}
           path: /tmp/shard-upload/${{ matrix.region }}.json
@@ -98,11 +98,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: pnpm/action-setup@v6.1.1
         with:
           version: 11.19.0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: '24'
           check-latest: true
@@ -110,7 +110,7 @@ jobs:
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Download regional shards
         if: needs.prepare.outputs.required == 'true'
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8.0.2
         with:
           pattern: shard-*
           path: /tmp/regional-shards
@@ -134,14 +134,14 @@ jobs:
         id: merge
         if: needs.prepare.outputs.required == 'true'
         run: node scripts/merge-shards.mjs
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6.0.0
+      - uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: dist
           retention-days: 1
       - name: Publish website
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5.0.1
       - name: Write plain-English maintenance report
         id: maintenance
         if: needs.prepare.outputs.required == 'true'

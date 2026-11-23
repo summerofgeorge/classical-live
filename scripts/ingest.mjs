@@ -148,10 +148,12 @@ export function parseColburn(html){
  });
 }
 export function parseMsm(html){
- const $=load(html),heading=$('.browseCollection_list > h3').filter((i,h)=>clean($(h).text())==='Upcoming Events').first();
- if(!heading.length)throw new Error('MSM upcoming livestream list missing');
- return heading.nextUntil('h3','.newsBlock').toArray().map(block=>{
-  const item=$(block),title=clean(item.find('h2').html()?.replace(/<br\s*\/?>/gi,' — ')),date=clean(item.find('date').text()),time=clean(item.find('time').text()),url=item.find('h2 a').attr('href');
+ const $=load(html),section=$('.livestream-section[data-list="upcoming"]'),heading=$('.browseCollection_list > h3').filter((i,h)=>clean($(h).text())==='Upcoming Events').first();
+ if(!section.length&&!heading.length)throw new Error('MSM upcoming livestream list missing');
+ const items=section.length?section.find('.livestream-grid > .livestream-item'):heading.nextUntil('h3','.newsBlock');
+ if(section.length&&(!section.find('.livestream-grid').length||(!items.length&&!/no upcoming events/i.test(section.text()))))throw new Error('MSM upcoming livestream layout changed');
+ return items.toArray().map(block=>{
+  const item=$(block),title=clean(item.find('h2').html()?.replace(/<br\s*\/?>/gi,' — ')),date=clean(item.find('date').text()),time=clean(item.find('time').text()),url=item.find('a.livestream-item-link,h2 a').first().attr('href');
   if(!/\b20\d\d\b/.test(date)||!title||!url)throw new Error('MSM event fields missing');
   // The site prints EST year-round; its published New York wall clock is authoritative.
   return {title,start:zonedTime(namedDate(date)+'T'+clock24(time),'America/New_York'),end:null,program:'',event_url:url,stream_url:url,watch_kind:'direct',evidence_url:'https://www.msmnyc.edu/livestream/',evidence:'Listed as an upcoming event on the official livestream index.'};
@@ -406,7 +408,7 @@ export function liechtensteinCandidates(html){
  const cards=area.find('a[id*="_repKonzerte_aLink_"]');
  const germanMonths=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
  return cards.toArray().flatMap(card=>{
-  const item=$(card),title=clean(item.find('.titel').text());
+  const item=$(card),title=clean(item.find('.titel').text()).replaceAll('\u00ad','');
   if(cancelledEuropean(title)||clean(item.find('[id*="_spanFree_"]').text())!=='Gratis')return [];
   const date=clean(item.find('.datum').text()),m=date.match(/^(\d{1,2})\.\s*([A-Za-zÄä]+)\s+(\d{4})/),month=m&&germanMonths.indexOf(m[2])+1;
   if(!title||!month)throw new Error('Liechtenstein event fields missing');
@@ -416,7 +418,7 @@ export function liechtensteinCandidates(html){
  });
 }
 export function parseLiechtenstein(html,candidate){
- const $=load(html),title=clean($('#body_divTitel').text());
+ const $=load(html),title=clean($('#body_divTitel').text()).replaceAll('\u00ad','');
  if(!title||!$('#body_divKonzert').length)throw new Error('Liechtenstein event layout changed');
  if(cancelledEuropean(title))return null;
  // Verify the event belongs to the academy; other Kulmag partners have separate schedules.

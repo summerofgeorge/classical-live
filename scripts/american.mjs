@@ -78,7 +78,10 @@ export function createAmerican({clean,zonedTime,clock24,namedDate,DAY}){
    const matching=offers.filter(o=>{
     const d=new Date(o.validFrom);if(!Number.isFinite(+d))return false;
     const date=new Intl.DateTimeFormat('en-US',{timeZone:'America/Denver',month:'short',day:'numeric',year:'numeric'}).format(d);
-    return date.replaceAll('.','')===printed.replaceAll('.','').replace(/^Sept\b/,'Sep')&&o.validFrom.slice(11,19)===clock;
+    const week=printed.match(/^(Sun|Mon|Tue|Wed|Thu|Fri|Sat),\s*/)?.[1];
+    const printedDate=printed.replace(/^(Sun|Mon|Tue|Wed|Thu|Fri|Sat),\s*/,'').replaceAll('.','').replace(/^Sept\b/,'Sep');
+    const weekday=new Intl.DateTimeFormat('en-US',{timeZone:'America/Denver',weekday:'short'}).format(d);
+    return date.replaceAll('.','')===printedDate&&(!week||week===weekday)&&o.validFrom.slice(11,19)===clock;
    });
    const stamps=[...new Set(matching.map(o=>o.validFrom))];
    if(stamps.length!==1)throw new Error('Colorado stream date is missing or ambiguous');

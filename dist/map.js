@@ -1,5 +1,6 @@
 import {calendar, safeUrl} from './core.js';
 import {filterSchools, schoolSummaries} from './map-data.js';
+import {addPoliticalBasemap} from './political-map.js';
 
 const $ = id => document.getElementById(id);
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
@@ -121,6 +122,7 @@ function renderMarkers() {
     });
     markers.set(school.id,marker);clusters.addLayer(marker);
   }
+  map.fire('schoolmarkerschange');
 }
 function render({fit=false}={}) {
   schools=schoolSummaries(data);visible=filterSchools(schools,filters);
@@ -152,25 +154,9 @@ function render({fit=false}={}) {
 async function initializeMap() {
   try{
     if(!window.L?.markerClusterGroup)throw new Error('Map library unavailable');
-    map=L.map('school-map',{minZoom:.5,maxZoom:14,zoomSnap:.25,scrollWheelZoom:false,zoomAnimation:!reducedMotion,fadeAnimation:!reducedMotion,markerZoomAnimation:!reducedMotion,maxBounds:[[-65,-200],[85,200]],maxBoundsViscosity:.8}).setView([25,5],2);
+    map=L.map('school-map',{minZoom:.5,maxZoom:8,zoomSnap:.25,scrollWheelZoom:false,zoomAnimation:!reducedMotion,fadeAnimation:!reducedMotion,markerZoomAnimation:!reducedMotion,maxBounds:[[-65,-200],[85,200]],maxBoundsViscosity:.8}).setView([25,5],2);
     map.attributionControl.setPrefix('<a href="https://leafletjs.com/">Leaflet</a>');
-    const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
-      maxZoom:14,maxNativeZoom:19,noWrap:true,updateWhenIdle:true,keepBuffer:1,
-      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-    // Honor normal browser caching/referrers; only load tiles for the current view.
-    const failedTiles=new Set();
-    const tileStatus=()=>{$('basemap-status').hidden=failedTiles.size===0;};
-    tiles.on('tileerror',event=>{failedTiles.add(event.tile);tileStatus();});
-    tiles.on('tileload tileunload',event=>{failedTiles.delete(event.tile);tileStatus();});
-    tiles.addTo(map);
-    // The bundled outline is an optional underlay if a detailed tile cannot load.
-    const fallback=map.createPane('basemap-fallback');fallback.style.zIndex=150;
-    fallback.style.pointerEvents='none';fallback.setAttribute('aria-hidden','true');
-    const activeMap=map;
-    fetch('./world.json').then(response=>response.ok?response.json():null).then(world=>{
-      if(world && map===activeMap)L.geoJSON(world,{pane:'basemap-fallback',interactive:false,style:{color:'#c4c9c6',weight:1,fillColor:'#eef0ef',fillOpacity:1}}).addTo(activeMap);
-    }).catch(()=>{});
+    await addPoliticalBasemap(map);
     L.control.scale({imperial:false,maxWidth:100}).addTo(map);
     clusters=L.markerClusterGroup({maxClusterRadius:35,showCoverageOnHover:false,animate:false,spiderfyOnMaxZoom:true,spiderfyDistanceMultiplier:1.6,spiderLegPolylineOptions:{color:'#777b79',weight:1.5,opacity:.7},iconCreateFunction:cluster=>{
       const count=cluster.getChildCount(),hasConcert=cluster.getAllChildMarkers().some(m=>m.options.hasConcert);
@@ -178,6 +164,7 @@ async function initializeMap() {
     }}).addTo(map);
     clusters.on('clustermouseover',event=>event.layer.bindTooltip(`${event.layer.getChildCount()} schools. Select to explore.`,{direction:'top'}).openTooltip());
     clusters.on('clustermouseout',event=>event.layer.closeTooltip());
+    clusters.on('spiderfied unspiderfied',()=>map.fire('schoolmarkerschange'));
     $('map-message').hidden=true;$('reset-map-view').disabled=false;
     renderMarkers();
     if(new URLSearchParams(location.search).get('school')===selectedId)selectSchool(selectedId,{locate:true,updateUrl:false});

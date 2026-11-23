@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explore the schools — Classical Watch</title>
+  <meta name="description" content="Explore music schools around the world on an interactive map. Find the next listed livestream, school facts, and concert times in your time zone.">
+  <meta name="theme-color" content="#1f2120">
+  <link rel="icon" href="./favicon.png" type="image/png" sizes="64x64">
+  <link rel="stylesheet" href="./vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="./vendor/cluster/MarkerCluster.css">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./map.css">
+  <script defer src="./analytics.js"></script>
+</head>
+<body class="map-page">
+  <a class="skip" href="#school-picker">Skip to school picker</a>
+  <header class="masthead"><div class="wrap masthead-inner"><div class="brand-lockup"><a class="wordmark" href="./"><img class="brand-mark" src="./logo-seal.png" width="22" height="22" alt="" decoding="async">Classical <em>Watch</em></a><p class="brand-credit">a livestream guide by <a href="https://stringfestanalytics.com/" target="_blank" rel="noopener noreferrer">Stringfest Analytics</a></p></div><span>THE CLASSICAL LIVESTREAM CALENDAR</span></div></header>
+  <main class="wrap">
+    <div class="intro"><div><p class="eyebrow">A world of music, a school at a time.</p><h1>Explore the schools.</h1><p>Find your next concert somewhere new.</p></div><div class="time-note"><span>Your concert times</span><strong id="timezone">Local time</strong><span id="updated">Loading calendar…</span></div></div>
+    <nav class="view-tabs" aria-label="Browse Classical Watch"><a href="./">Concert list</a><a href="./map.html" aria-current="page">School map</a></nav>
+    <section class="map-filters" aria-label="Find a school">
+      <label class="map-search">Search schools or places<input id="map-query" type="search" placeholder="Try Cleveland, London, or Curtis" autocomplete="off"></label>
+      <label>Region<select id="map-region"><option value="">Around the world</option><option>North America</option><option>Europe</option><option value="Asia-Pacific">Asia–Pacific</option></select></label>
+      <label class="map-checkbox"><input id="scheduled-only" type="checkbox">With upcoming concerts</label>
+      <button id="clear-map-filters" type="button" class="text-button" hidden>Clear filters</button>
+    </section>
+    <div class="map-heading"><p id="map-count" role="status">Loading schools…</p><div class="map-legend" aria-label="Map legend"><span><i class="legend-dot scheduled-dot" aria-hidden="true"></i>Concert listed</span><span><i class="legend-dot" aria-hidden="true"></i>None listed</span><span><i class="legend-cluster" aria-hidden="true">3</i>Schools grouped</span></div></div>
+    <div id="load-error" class="notice" role="alert" hidden></div>
+    <div class="map-layout" id="map-content" aria-busy="true">
+      <section class="map-column" aria-label="School locations">
+        <div class="map-frame"><div id="school-map" aria-label="Interactive school map. Use arrow keys to pan, plus and minus to zoom, or the school picker for a list." aria-describedby="map-help"></div><p id="map-message" class="map-message">Loading the map…</p></div>
+        <div class="map-toolbar"><p id="map-help">Hover or focus for a preview. Select a school for details. Select a numbered group to zoom in.</p><button type="button" id="reset-map-view" class="calendar-button" disabled>Fit schools</button></div>
+        <p class="map-caption">Markers show each school's city, not concert venues. Schools in the same city separate when you zoom in. <a href="./coverage.html">About our coverage</a>.</p>
+      </section>
+      <aside class="school-panel" aria-label="School details">
+        <label for="school-picker">Choose a school</label><select id="school-picker" disabled><option value="">Loading schools…</option></select>
+        <div id="school-detail"><p class="school-placeholder">Select a school to see its next concert and details.</p></div>
+      </aside>
+    </div>
+    <details class="map-directory"><summary id="directory-summary">Browse schools as a list</summary><div id="school-directory" class="school-directory"></div></details>
+    <p class="map-source-note">Concert listings come from the same daily-updated calendar. “Scheduled now” describes the published schedule, not verified video playback. A school without an upcoming listing may still have other performances.</p>
+    <p class="map-credits">Map software: <a href="https://leafletjs.com/">Leaflet</a> and <a href="https://github.com/Leaflet/Leaflet.markercluster">MarkerCluster</a>. Geography: <a href="https://www.naturalearthdata.com/">Natural Earth</a> (public domain). City locations: <a href="https://www.geonames.org/">GeoNames</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), rounded for display. <a href="https://github.com/summerofgeorge/classical-live/blob/main/docs/school-map.md">Sources and map notes</a>.</p>
+    <noscript><p>This map needs JavaScript. You can visit the <a href="https://www.curtis.edu/curtis-performances/watch-listen/">Curtis broadcasts</a> or <a href="https://www.cim.edu/concerts-events">CIM calendar</a> directly.</p></noscript>
+  </main>
+  <footer class="wrap"><span class="footer-brand"><img class="footer-mark" src="./logo-seal.png" width="16" height="16" alt="" decoding="async">Classical Watch</span><span><a href="./coverage.html">Coverage &amp; methodology</a> · <a href="./support.html">Support Classical Watch</a></span><span>A project by <a href="https://stringfestanalytics.com/" target="_blank" rel="noopener noreferrer">George Mount and Stringfest Analytics</a>.</span></footer>
+  <script src="./vendor/leaflet/leaflet.js"></script>
+  <script src="./vendor/cluster/leaflet.markercluster.js"></script>
+  <script type="module" src="./map.js"></script>
+</body>
+</html>

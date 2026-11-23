@@ -68,6 +68,8 @@ async function load(){
     }
     for(const type of [...new Set(data.events.map(e=>e.type))].sort()){const option=el('option',type);option.value=type;$('type').append(option);}
     for(const key of ['region','country'])for(const value of [...new Set(data.sources.map(s=>schoolInfo(s.id)[key]).filter(Boolean))].sort()){const option=el('option',value);option.value=value;$(key).append(option);}
+    const linkedSchool=new URLSearchParams(location.search).get('school');
+    if(!sharedEventId && data.sources.some(source=>source.id===linkedSchool)){state.source=linkedSchool;$('source').value=linkedSchool;}
     $('events').setAttribute('aria-busy','false');render();
     if(sharedEventId){
       const sharedCard=$(`concert-${sharedEventId}`);

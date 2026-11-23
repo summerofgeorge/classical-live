@@ -71,7 +71,8 @@ function selectSchool(id,{locate=false,focus=false,updateUrl=true}={}) {
 }
 function renderDetail(school) {
   const detail=$('school-detail');detail.replaceChildren();
-  const heading=el('h2',school.name);heading.id='selected-school-name';heading.tabIndex=-1;
+  const heading=el('h2'),schoolLink=external(school.name,school.url,'school-name-link');
+  schoolLink.title='Open the official school concert page in a new tab';heading.append(schoolLink);heading.id='selected-school-name';heading.tabIndex=-1;
   detail.append(heading,el('p',`${school.city || 'Location not listed'}, ${school.country || ''}`,'school-place'));
   const next=el('section',null,'next-concert');
   if(school.next){
@@ -79,7 +80,8 @@ function renderDetail(school) {
     next.append(el('p',ongoing?'Scheduled now':'Next listed concert','eyebrow'));
     const time=el('time',concertTime(event),'next-date');time.dateTime=event.start;next.append(time);
     if(event.timezone && event.timezone!==timeZone)next.append(el('p',`At the school: ${concertTime(event,event.timezone)}`,'school-local-time'));
-    next.append(el('h3',event.title));
+    const title=el('h3'),titleLink=external(event.title,event.stream_url,'event-title-link');
+    titleLink.title='Open livestream page in a new tab';title.append(titleLink);next.append(title);
     if(event.type)next.append(el('span',event.type,'performance-tag'));
     next.append(external(event.watch_kind==='channel'?'Watch channel':event.watch_kind==='registration'?'Register to watch':'Watch stream',event.stream_url,'watch'));
     const links=el('div',null,'map-event-links'), save=el('button','Add to calendar','calendar-button');
@@ -183,6 +185,9 @@ async function load() {
     data=calendar;
     $('updated').textContent=`Checked ${format(data.generated_at,{hour:'numeric',minute:'2-digit'})}`;
     render();if(!map)await initializeMap();
+    if(location.hash==='#school-detail' && selectedId){
+      $('selected-school-name').scrollIntoView({block:'start'});$('selected-school-name').focus({preventScroll:true});
+    }
   }catch(error){
     $('updated').textContent='Calendar unavailable';$('map-count').textContent='Schools could not be loaded';
     const notice=$('load-error'),retry=el('button','Try again','calendar-button');retry.type='button';retry.onclick=load;

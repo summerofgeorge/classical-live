@@ -177,4 +177,8 @@ footer{align-items:baseline}footer span:first-child{color:var(--ink)}footer a{co
 .support-brand{margin:8px 0 0}.support-brand img{display:block;width:180px;height:auto;max-width:100%}
 
 /* Shared navigation between concert browsing and the school map. */
+.event-title-link,.school-name-link{color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent);text-decoration-thickness:1px;text-underline-offset:3px}
+.event-title-link:hover,.school-name-link:hover{color:#a9272c;text-decoration-color:currentColor}
+.event-title-link:focus-visible,.school-name-link:focus-visible{outline:3px solid var(--red);outline-offset:4px;border-radius:2px}
+#school-detail{scroll-margin-top:20px}
 .view-tabs{display:flex;gap:24px;border-bottom:1px solid var(--line);margin:0 0 24px}.view-tabs a{display:block;min-height:44px;padding:12px 2px;border-bottom:3px solid transparent;font-size:14px;font-weight:bold;text-decoration:none;color:var(--muted)}.view-tabs a[aria-current=page]{color:#a9272c;border-bottom-color:var(--red)}.view-tabs a:hover{color:var(--ink)}

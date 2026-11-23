@@ -408,7 +408,7 @@ export function liechtensteinCandidates(html){
  const cards=area.find('a[id*="_repKonzerte_aLink_"]');
  const germanMonths=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
  return cards.toArray().flatMap(card=>{
-  const item=$(card),title=clean(item.find('.titel').text());
+  const item=$(card),title=clean(item.find('.titel').text()).replaceAll('\u00ad','');
   if(cancelledEuropean(title)||clean(item.find('[id*="_spanFree_"]').text())!=='Gratis')return [];
   const date=clean(item.find('.datum').text()),m=date.match(/^(\d{1,2})\.\s*([A-Za-zÄä]+)\s+(\d{4})/),month=m&&germanMonths.indexOf(m[2])+1;
   if(!title||!month)throw new Error('Liechtenstein event fields missing');
@@ -418,7 +418,7 @@ export function liechtensteinCandidates(html){
  });
 }
 export function parseLiechtenstein(html,candidate){
- const $=load(html),title=clean($('#body_divTitel').text());
+ const $=load(html),title=clean($('#body_divTitel').text()).replaceAll('\u00ad','');
  if(!title||!$('#body_divKonzert').length)throw new Error('Liechtenstein event layout changed');
  if(cancelledEuropean(title))return null;
  // Verify the event belongs to the academy; other Kulmag partners have separate schedules.
